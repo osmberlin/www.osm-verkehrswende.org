@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+    <link
+      rel="shortcut icon"
+      href="{{ '/images/favicon.png' | relative_url }}"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% feed_meta %} {% if page.noindex %}
+    <meta name="robots" content="noindex" />
+    {% endif %} {% if page.canonical_url %}
+    <link rel="canonical" href="{{ page.canonical_url }}" />
+    {% endif %} {% include social_sharing.html %}
+
+    <script>
+      /*
+      Toggle 'hidden' to Show/Hide content
+      Trigger Element: `data-show-hide-trigger='navi'`
+      Target Element: `data-show-hide-target='navi'`
+    */
+      document.addEventListener("DOMContentLoaded", function () {
+        const triggers = document.querySelectorAll("[data-show-hide-trigger]");
+        triggers.forEach((trigger) => {
+          const triggerTarget = trigger.dataset.showHideTrigger;
+          const target = document.querySelector(
+            `[data-show-hide-target=${triggerTarget}]`
+          );
+          trigger.addEventListener("click", () => {
+            target.classList.toggle("hidden");
+            // In case we need this later:
+            // If we change the map-container size, we also need to tell Leaflet to recalculate the avaliable space for tiles
+            // map.invalidateSize()
+            // e.preventDefault()
+          });
+        });
+      });
+    </script>
+
+    <link href="{{ '/css/tailwind.css' | relative_url }}" rel="stylesheet" />
+  </head>
+
+  <body class="relative">
+    <div
+      class="flex flex-col lg:flex-row lg:gap-5"
+    >
+      {% include menu.html %}
+
+      <section class="my-6 xl:mt-0 flex-1 rounded bg-white/10 p-6 md:ml-60">
+        {{ content }}
+      </section>
+    </div>
+  </body>
+</html>

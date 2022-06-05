@@ -17,6 +17,14 @@
   }
   ready(openDetailsByBreakpoint);
 </script>
+{% comment %} EXPERIMENT SCROLLSPY
+<script src="{{ '/javascript/scrollspy/scrollspy.js' | relative_url }}"></script>
+<script>
+  var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+    target: "#toc_with_scrollspy",
+  });
+</script>
+{% endcomment %}
 <nav
   class="prose prose-blue z-50 flex w-full px-4 pt-5 leading-tight print:hidden xl:prose-gray xl:fixed xl:top-6 xl:right-6 xl:w-96 xl:px-1 xl:pt-0 xl:text-gray-500 xl:prose-a:text-gray-500 xl:prose-a:hover:text-gray-900"
 >

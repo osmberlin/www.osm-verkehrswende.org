@@ -26,20 +26,22 @@
 </script>
 {% endcomment %}
 <nav
-  class="prose prose-blue z-50 flex w-full px-4 pt-5 leading-tight print:hidden xl:prose-gray xl:fixed xl:top-6 xl:right-6 xl:w-96 xl:px-1 xl:pt-0 xl:text-gray-500 xl:prose-a:text-gray-500 xl:prose-a:hover:text-gray-900"
+  class="prose prose-lg prose-teal z-50 px-4 leading-tight print:hidden md:fixed md:top-0 lg:px-0 xl:prose-gray xl:top-6 xl:right-6 xl:ml-0 xl:w-80 xl:px-1 xl:pt-0 xl:text-gray-500 xl:prose-a:text-gray-500 xl:prose-a:hover:text-gray-900"
 >
   <details
-    class="inline-block rounded-b-sm bg-blue-50 px-2 ring-1 ring-white drop-shadow-lg xl:block xl:rounded xl:bg-gray-50 xl:p-3 xl:pl-2 xl:shadow-inner xl:drop-shadow-none"
+    class="inline-block w-full rounded-b-sm bg-blue-50 px-2 ring-1 ring-white drop-shadow-lg xl:block xl:rounded xl:bg-gray-50 xl:p-3 xl:pl-2 xl:shadow-inner xl:drop-shadow-none"
   >
     <summary
-      class="font-semibold text-blue-600 xl:list-none xl:pl-2 xl:uppercase xl:text-gray-600"
+      class="py-2 px-3 font-semibold text-blue-600 xl:list-none xl:pl-2 xl:uppercase xl:text-gray-600"
     >
       Inhaltsverzeichnis
     </summary>
     <!-- https://github.com/allejo/jekyll-toc -->
-    {% include toc_generator.html html=content h_min=2 h_max=2
-    class='list-group' id="toc_with_scrollspy" anchor_class='list-group-item
-    list-group-item-action' %}
+    <div class="mb-4 mr-4">
+      {% include toc_generator.html html=content h_min=2 h_max=2
+      class='list-group' id="toc_with_scrollspy" anchor_class='list-group-item
+      list-group-item-action' %}
+    </div>
   </details>
 </nav>
 {% endif %}

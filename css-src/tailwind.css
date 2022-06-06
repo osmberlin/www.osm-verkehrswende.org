@@ -33,7 +33,8 @@
 
   /* Single class so we can toggle it easily in JS. */
   .menu-active {
-    @apply bg-blue-600 text-blue-50 hover:!bg-blue-600;
+    /* @apply bg-teal-600 text-teal-50 hover:!bg-teal-600; */
+    @apply border-teal-600 bg-emerald-50 hover:!bg-emerald-50;
     @apply cursor-text;
   }
 

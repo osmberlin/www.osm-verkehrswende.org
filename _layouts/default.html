@@ -52,7 +52,9 @@
     >
       {% include menu.html %}
 
-      <section class="my-6 xl:mt-0 flex-1 rounded bg-white/10 p-6 md:ml-60">
+      {% comment %} EXPERIMENT BACKGROUND
+      <section class="my-6 xl:mt-0 flex-1 rounded bg-white/10 p-6 md:ml-60"> {% endcomment %}
+      <section class="my-6 xl:mt-0 flex-1 md:ml-60">
         {{ content }}
       </section>
     </div>

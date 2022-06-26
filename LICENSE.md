@@ -2,20 +2,13 @@
 
 All OSM Data used in this Project are licenced under ODbL as described at [openstreetmap.org/copyright](https://www.openstreetmap.org/copyright).
 
-# Map Straßenraumkarte, Parkraumkarte (including Screenshots)
+# Projects under the umbrella of osm-verkehrswende.org
 
-Boths unterlying maps are generated using two datasets. The Licence can be found at the bottom right of the map. It needs to be visible on screenshots and such as well.
-
-> © OpenStreetMap-Mitwirkende, Bordsteinkanten: OpenStreetMap und Geoportal Berlin / ALKIS.
-> https://www.openstreetmap.org/copyright
+Please consult the github repositories of the corresponding project for more details on their licence.
 
 # Licence of Content (Blogposts, Report)
 
 All text based content on this website, especially the report and blogpost are licenced as [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/). This includes images and screenshots as long as there is no other licence given.
-
-# Data
-
-The [external datasets](https://supaplexosm.github.io/strassenraumkarte-neukoelln/parkraumkarte/data) have their own licences.
 
 # Source Code
 
@@ -23,4 +16,4 @@ The source code of this project, especially this website and the scripts are lic
 
 # Contact
 
-[supaplexosm.github.io/strassenraumkarte-neukoelln/contact](https://supaplexosm.github.io/strassenraumkarte-neukoelln/contact)
+[www.osm-verkehrswende.org/contact](https://www.osm-verkehrswende.org/contact)

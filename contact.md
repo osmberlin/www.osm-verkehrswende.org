@@ -19,7 +19,7 @@ Alle Informationen zur OSM Verkehrswende Gruppe findest du im Wiki:
 
 <hr class="!border-white !my-6">
 
-Feature-Request und Bug-Reports zu dieser Webseite gerne als [GitHub Issues erstellen](https://github.com/tordans/www.osm-verkehrswende.org/).
+Feature-Request und Bug-Reports zu dieser Webseite gerne als [GitHub Issues erstellen](https://github.com/osmberlin/www.osm-verkehrswende.org/).
 
 <hr class="!border-white !my-6">
 
@@ -29,7 +29,7 @@ Das Projekt wird gepflegt im Rahmen der ehrenamtlichen Aktivitäten der [Berline
 
 # Lizenz
 
-Die unterschiedlichen Daten dieses Projekten verwenden unterschiedliche Lizenzen. [Mehr zu den Lizenzen für die Karten, OSM-Daten, Texte und Skripte/Code](https://github.com/tordans/www.osm-verkehrswende.org/blob/main/LICENSE.md).
+Die unterschiedlichen Daten dieses Projekten verwenden unterschiedliche Lizenzen. [Mehr zu den Lizenzen für die Karten, OSM-Daten, Texte und Skripte/Code](https://github.com/osmberlin/www.osm-verkehrswende.org/blob/main/LICENSE.md).
 
 # Datenschutzerklärung
 

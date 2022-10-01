@@ -1,5 +1,5 @@
 ---
-title: Parkplatzzählung und Parkraumanalysen mit OpenStreetMap
+title: 'Vortrag: Mit OpenStreetMap die Verkehrswende begleiten – Tagging, Tools und Analysen'
 date: 2022-10-01 10:30:00 +0100
 author: Tobias Jordans @tordans
 layout: post

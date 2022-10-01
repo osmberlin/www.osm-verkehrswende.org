@@ -1,0 +1,39 @@
+{% assign relevant_posts = site.posts | where: "in_menu", "true" %}
+
+<h2 class="my-2 text-xl font-semibold">
+  <a
+    href="{{ '/posts' | relative_url }}"
+    class="{% if page.menu_highlight == 'posts' %}{% else %}hover:text-blue-500{% endif %} text-black"
+  >
+    Neuigkeiten <span class="text-gray-500">({{ relevant_posts.size }})</span>
+  </a>
+</h2>
+<div
+  class="mb-7 flex flex-col overflow-hidden rounded border border-b-0 border-gray-200"
+  x-data="{ expanded: false }"
+>
+  {% if relevant_posts.size > 4 %}
+  <div x-show="expanded" x-collapse.min.125px>
+    {% endif %} {% for post in relevant_posts %}
+    <a
+      href="{{ post.url | relative_url }}"
+      class="{% if page.url == post.url %}menu-active{% else %}hover:bg-blue-50{% endif %} flex items-center border-b border-gray-200 py-2 pl-4 leading-tight"
+    >
+      <span
+        class="mr-1 -ml-1.5 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500"
+        >{{ post.date | date: "%Y/%m" }}</span
+      >
+      {{ post.menu_title }}
+    </a>
+    {% endfor -%} {% if relevant_posts.size> 4 %}
+  </div>
+  {% endif %} {% if relevant_posts.size > 4 %}
+  <button
+    @click="expanded = ! expanded"
+    class="text-blayk mt-2 bg-gray-300 hover:bg-blue-400 hover:text-white"
+    x-show="expanded === false"
+  >
+    Mehr…
+  </button>
+  {% endif %}
+</div>

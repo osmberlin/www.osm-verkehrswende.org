@@ -1523,7 +1523,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.aspect-\[16\/9\] {
+.aspect-video {
   aspect-ratio: 16 / 9;
 }
 

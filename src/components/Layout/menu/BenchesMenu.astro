@@ -1,0 +1,10 @@
+---
+import MenuItem from '../menuItem/MenuItem.astro'
+import MenuItemWrapper from '../menuItem/MenuItemWrapper.astro'
+
+const menuItems = [{ href: '/benches', label: 'Über das Projekt' }]
+---
+
+<MenuItemWrapper>
+  {menuItems.map(({ href, label }) => <MenuItem href={href}>{label}</MenuItem>)}
+</MenuItemWrapper>

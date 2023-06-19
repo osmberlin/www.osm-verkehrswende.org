@@ -1,0 +1,35 @@
+---
+type Props = {
+  src: string
+  alt: string
+  caption?: string
+  map_url?: string
+  osm_url?: string
+  osm_urls?: string[]
+  mapillary_url?: string
+}
+
+const { src, alt, caption, map_url, osm_url, osm_urls, mapillary_url } = Astro.props
+---
+
+<figure
+  class="overflow-clip rounded bg-neutral-700 shadow-lg ring-1 ring-neutral-700 ring-offset-2 prose-a:tracking-wide prose-a:text-white"
+>
+  <img src={src} alt={alt} class="mb-0" />
+
+  {
+    (caption || map_url || osm_url || mapillary_url) && (
+      <figcaption class="m-0 border-t border-white p-2 text-white">
+        {caption}
+        <div class="space-x-2">
+          {map_url && <a href={map_url}>Straßenraumkarte</a>}
+          {osm_url && <a href={osm_url}>OSM</a>}
+          {osm_urls?.map((osmUrl) => (
+            <a href={osmUrl}>OSM {osmUrl.replace('https://www.openstreetmap.org/', '')}</a>
+          ))}
+          {mapillary_url && <a href={mapillary_url}>Mapillary</a>}
+        </div>
+      </figcaption>
+    )
+  }
+</figure>

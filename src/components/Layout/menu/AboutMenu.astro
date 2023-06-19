@@ -1,0 +1,17 @@
+---
+import MenuItem from '../menuItem/MenuItem.astro'
+import MenuItemHeadline from '../menuItem/MenuItemHeadline.astro'
+import MenuItemWrapper from '../menuItem/MenuItemWrapper.astro'
+import { projectToNavigation } from '../projectToNavigation'
+
+const menuItems = Object.entries(projectToNavigation).filter(([_key, value]) => value.label)
+---
+
+<MenuItemWrapper>
+  <MenuItem href="/">Übersicht</MenuItem>
+</MenuItemWrapper>
+
+<MenuItemHeadline>Projekte</MenuItemHeadline>
+<MenuItemWrapper>
+  {menuItems.map(([key, { label }]) => <MenuItem href={`/${key}`}>{label}</MenuItem>)}
+</MenuItemWrapper>

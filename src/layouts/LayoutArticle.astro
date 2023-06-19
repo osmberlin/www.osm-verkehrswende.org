@@ -1,0 +1,26 @@
+---
+import Navigation from '@components/Layout/Navigation.astro'
+import ScriptLinkifyHeadlines from '@components/scripts/ScriptLinkifyHeadlines.astro'
+import Layout from './Layout.astro'
+import { pickProject } from './utils/pickProject'
+
+type Props = {
+  title: string
+  menuHighlight?: string | undefined
+  noindex?: boolean | undefined
+}
+
+const { title, menuHighlight, noindex } = Astro.props
+const project = pickProject(Astro.request.url)
+---
+
+<Layout title={title} noindex={noindex}>
+  <div class="flex flex-col text-gray-900 lg:flex-row lg:gap-3">
+    <Navigation layoutType="article" project={project} menuHighlight={menuHighlight} />
+    <main class="flex-1">
+      <slot />
+    </main>
+  </div>
+</Layout>
+
+<ScriptLinkifyHeadlines />

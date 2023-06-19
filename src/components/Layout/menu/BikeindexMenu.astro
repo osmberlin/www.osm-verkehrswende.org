@@ -1,0 +1,13 @@
+---
+import MenuItem from '../menuItem/MenuItem.astro'
+import MenuItemWrapper from '../menuItem/MenuItemWrapper.astro'
+
+const menuItems = [
+  { href: '/bikeindex', label: 'Über das Projekt' },
+  { href: '/bikeindex/participate', label: 'Mitmachen' },
+]
+---
+
+<MenuItemWrapper>
+  {menuItems.map(({ href, label }) => <MenuItem href={href}>{label}</MenuItem>)}
+</MenuItemWrapper>

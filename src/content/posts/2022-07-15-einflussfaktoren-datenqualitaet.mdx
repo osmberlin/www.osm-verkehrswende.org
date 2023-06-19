@@ -1,0 +1,666 @@
+---
+title: Was muss ich mappen, um möglichst genaue OSM-Parkraumdaten zu erhalten?
+project: parking
+pubDate: 2022-07-15 12:00:00 +0100
+author: Alex Seidel @Supaplex030
+menuTitle: Einflussfaktoren auf die Datenqualität
+#canonicalUrl:
+inMenu: true
+showToc: true
+---
+
+import ImageWrapper from '../../components/ImageWrapper.astro'
+import Notice from '../../components/Notice.astro'
+
+<Notice colorClass="bg-yellow-100" className="mb-12">
+
+## Einflussfaktoren auf die Datenqualität von OSM-Parkraumanalysen mit dem „Subtraktiven Modell“
+
+OpenStreetMap (OSM)-Daten ermöglichen die **Berechnung von Parkplätzen im Straßenraum**, wenn Parkstreifen und einige andere räumliche Features erfasst sind.
+
+Die **Genauigkeit solcher Berechnungen** hängt davon ab, wie vollständig und detailliert die Parkstreifen und räumlichen Features erfasst sind.
+
+Mit **Modellrechnungen** zeigen wir am Beispiel des Berliner Ortsteils Neukölln, dass bereits eine eher grob differenzierte Parkraumkartierung ausreicht, um Ergebnisse im Bereich von **5-10 Prozent Genauigkeit** zu erhalten. Dazu gehört die Erfassung längerer Parkstreifenwechsel oder Parkverbote ab einer Länge von etwa 25 Metern, sowie die Erfassung der wichtigsten räumlichen Features, vor allem Einfahrten, Bushaltestellen und Parkbuchten.
+
+Bei Bedarf gibt es darüber hinaus aber zahlreiche weitere Stellschrauben, die vergleichsweise arbeitsaufwendig sind, aber das Ergebnis perfektionieren.
+
+</Notice>
+
+## Einführung
+
+Im März 2021 haben wir gezeigt, wie man [Parkplatzzählungen und Parkraumanalysen auf Basis von OSM-Daten](https://parkraum.osm-verkehrswende.org/posts/2021-03-12-parkraumanalyse) durchführen kann. Daten über Parkplätze im öffentlichen Raum sind eine wichtige Grundlage für die Verkehrs- und Stadtplanung – gerade angesichts der aktuellen Verkehrswende. Sie sind aber nur an sehr wenigen Orten verfügbar. Mit OSM-Daten könnte sich das ändern.
+
+Bei der Erarbeitung unserer Methode haben wir festgestellt, dass sie sehr genaue Ergebnisse liefern kann, wenn die Datengrundlagen präzise kartiert sind. Zu den notwendigen Daten gehören in erster Linie die Parkstreifen im öffentlichen Straßenraum – also ob entlang einer Straße Fahrzeuge parken dürfen und falls ja, in welche Richtung sie parken (z.B. parallel oder schräg zur Straße).
+
+Die von uns entwickelte Methode – das sogenannte „Subtraktive Modell“ – benutzt diese Daten, um die Anzahl der verfügbaren Stellplätze aus der Straßengeometrie abzuleiten. In der Realität gibt es jedoch viele Umstände, die das Parken entlang einer Straße einschränken: Nicht nur Kreuzungen, sondern z.B. auch Bushaltestellen, Ampeln oder Einfahrten. Auch solche Faktoren können in OSM kartographisch erfasst werden. Unser Subtraktives Modell bezieht diese Daten mit ein und zieht entsprechende Bereiche, in denen nicht geparkt werden kann, von den Daten ab.
+
+Vor diesem Hintergrund haben wir uns schon lange die Frage gestellt, welche Faktoren das Ergebnis der Parkplatzzählung am stärksten beeinflussen. Was muss ich also mappen, um am Ende zuverlässige Stellplatzzahlen berechnen zu können? Welche Daten sind am wichtigsten, um eine hohe Genauigkeit zu erreichen und welche Daten sind vielleicht eher verzichtbar? Mit welcher Abweichung muss ich im Vergleich zur Realität rechnen?
+
+## Methodisches Vorgehen
+
+Um diese Fragen zu beantworten, haben wir in einem gut kartierten Testgebiet mit über 27.000 Stellplätzen einige Modellrechnungen angestellt und die Zahlen miteinander verglichen. Ideal geeignet ist dafür der Berliner Ortsteil Neukölln, den wir während der Entwicklung unserer Methode detailliert kartiert und die berechneten Ergebnisse durch Zählungen vor Ort mit der Realität abgeglichen haben (siehe auch [Methodenbericht zur Neuköllner Parkraumanalyse](https://parkraum.osm-verkehrswende.org/project-prototype-neukoelln/report)). Die Datenberechnung ist in QGIS über ein [Python-Script](https://github.com/osmberlin/parkraum.osm-verkehrswende.org/tree/main/project-prototype-neukoelln/scripts/parking_lanes) möglich: Wenn wir einzelne Elemente in diesem Script verändern oder weglassen, lässt sich also ihr Einfluss auf das Ergebnis bestimmen.
+
+Ein einfaches Beispiel: Wie würde sich das Ergebnis verändern, wenn wir keine Einfahrten kartiert hätten? Statt vor jeder Einfahrt einen vier Meter großen Bereich freizuhalten, überspringen wir diesen Rechenschritt und erhalten ein Ergebnis ohne Einfahrten, das wir mit dem „echten“ Ergebnis vergleichen können. Die Abweichung zwischen beiden Ergebnissen entspricht dem Einfluss von Einfahrten auf das Gesamtergebnis.
+
+## Berücksichtigte Faktoren
+
+Zu den untersuchten Faktoren gehören die wichtigsten **baulichen Merkmale („räumliche Features“)**, die das Parken (entsprechend der deutschen Straßenverkehrsordnung) auf folgende Art und Weise beeinflussen:
+
+- Einfahrten (vor Einfahrten muss ein Bereich zum Ein- und Ausfahren freigehalten werden).
+
+- Ampeln bzw. an Haltelinien in OSM separat erfasste individuelle Ampelstandorte (je nach Auslegung der Straßenverkehrsordnung müssen zehn Meter vor einer Ampel freigehalten werden, um die Sicht auf die Ampel nicht zu beeinträchtigen).
+
+- Zebrastreifen und Fußgängerampeln (auf und vor markierten Querungsstellen darf nicht geparkt werden, um das Queren und Sicht auf Fußgänger nicht zu beeinträchtigen).
+
+- baulich angelegte Querungsstellen (Gehwegvorstreckungen, randseitige Markierungen oder andere Schutzelemente können das Parken an Querungsstellen einschränken, um die Verkehrssicherheit zu erhöhen).
+
+- Bushaltestellen (15 Meter vor und hinter einem Bushaltestellenschild darf nicht geparkt werden, um die Zufahrt zur Haltestelle zu ermöglichen).
+
+- Anlagen im Fahrbahnbereich (in Berlin werden zunehmend Fahrradständer oder auch Parklets auf früheren Parkstreifen errichtet, um die Verkehrssicherheit oder Aufenthaltsqualität zu erhöhen).
+
+Darüber hinaus wurde der Einfluss von bestimmten **Mapping-Praktiken und -Szenarien** ermittelt:
+
+**(a)** Welchen Einfluss hat es, ob Parkbuchten als separate Geometrien erfasst werden oder schlicht an der Straßenlinie? Da Parkbuchten baulich oft etwas kleinteiliger differenziert sind – z.B. durch Zwischenräume für Straßenbäume – können ihre Geometrien mit der separaten Kartierweise detaillierter abgebildet werden.
+
+**(b)** Wie verändert sich das Ergebnis in Abhängigkeit vom Detailgrad der erfassten Parkstreifen, also ob die Parkstreifen sehr kleinteilig differenziert, eher grob oder nur sehr oberflächlich kartiert sind? Dafür wurde der in hoher Genauigkeit vorliegende Parkstreifendatensatz im Testgebiet manuell in zwei Stufen „vereinfacht“, um in Modellrechnungen mögliche Mapping-Praktiken widerzuspiegeln (siehe beispielhaft die untenstehende Abbildung):
+
+- Bei nicht differenzierten Parkstreifen ist entlang eines Straßenabschnitts (z.B. zwischen zwei Kreuzungen) nur die vorherrschende Parkform erfasst. Vorübergehende Ausrichtungswechsel, Parkverbote etc. entlang dieses Abschnitts werden ignoriert. Diese Form der Erfassung ist relativ zügig beispielsweise über Luftbilder möglich. Die Straßenlinien müssen dafür in OSM nur selten aufgetrennt werden.
+
+- Grob differenzierte Parkstreifen berücksichtigen signifikante Wechsel in der Parkform (ab einer Länge von etwa 25 Metern entlang eines Straßenabschnitts), z.B. Park- oder Halteverbote oder vorübergehende Änderungen in der Ausrichtung oder Position der Fahrzeuge. Auch das ist oft über Luftbilder möglich, eine gute Unterstützung bieten aber auch Straßenfotos oder Vor-Ort-Erhebungen. In OSM ist es dafür regelmäßig das Auftrennen der Straßenlinie am Ort des Wechsels nötig.
+
+- Kleinteilig differenzierte Parkstreifen enthalten darüber hinaus auch recht kurze Wechsel in der Parkform, die im Einzelnen nur wenige Fahrzeuge betreffen bzw. sich nur auf einen kurzen Bereich erstrecken (etwa 5 – 25 Meter). Diese Form der Erfassung ist zuverlässig nur vor Ort oder durch 360-Grad-Straßenfotos möglich. Die Straßenlinien müssen oft aufgetrennt werden, was Nachteile in der späteren Datenpflege mit sich bringen kann.
+
+<ImageWrapper src="/images/posts/parking_lane_mapping_quality.gif" alt="Mapping Details" />
+
+**(c)** Darauf aufbauend: Mit welcher Ergebnisgenauigkeit ist insgesamt bei geringer, mittlerer oder hoher Datenqualität zu rechnen? Dafür wurden Mapping-Szenarien mit bestimmten Annahmen aufgestellt:
+
+- Keine Daten vorhanden: Es gibt keine Daten zu Parkstreifen, diese werden einfach durch die Annahme ersetzt, dass beidseitig einer Straße parallel geparkt werden kann. Außerdem sind alle oben genannten räumlichen Features nicht erfasst.
+
+- Geringe Datenqualität: Die Parkstreifen sind entlang aller Straßen sehr oberflächlich erfasst, die räumlichen Features sind jedoch nicht kartiert.
+
+- Mittlere Datenqualität: Die Parkstreifen sind grob differenziert erfasst und die wichtigsten räumlichen Features (Zebrastreifen, Ampeln, Bushaltestellen, die Hälfte aller Einfahrten) sind vorhanden.
+
+- Hohe Datenqualität: Die Parkstreifen sind grob differenziert erfasst und alle räumlichen Features sind vorhanden.
+
+- Ein Szenario sehr hoher Datenqualität (mit kleinteilig differenzierten Parkstreifen und nahezu allen räumlichen Features) entspricht dem Kartierungsstand im Testgebiet und diente als Bewertungs-Referenz.
+
+Schließlich wurde noch der Einfluss einzelner **Attribute an Straßen oder Parkflächen** untersucht:
+
+- genau erfasste Fahrbahnbreite einer Straße (beeinflusst z.B. die Lage von Bordsteinkanten und deren Schnittpunkten im Kreuzungsbereich),
+
+- Breite von Einfahrten, insbesondere bei überbreiten Einfahrten (beeinflusst die Länge des freigehaltenen Bereichs vor einer Einfahrt),
+
+- Fahrzeugausrichtung und Stellplatzkapazität von separat kartierten Parkbuchten (wenn diese Attribute explizit erfasst sind, müssen sie nicht aus der Geometrie interpoliert werden).
+
+## Ergebnisse
+
+Aus den Modellrechnungen ergeben sich die folgenden wichtigsten Aussagen (vgl. im Einzelnen die nachfolgende Tabelle):
+
+- Kleinteilig differenziert kartierte Parkstreifen, die einen recht hohen Kartierungsaufwand bedeuten und mit einer hohen Fragmentierung (und damit verbundenen Nachteilen in der Datenpflege) von Straßensegmenten in der OSM-Datenbank einhergehen, bringen insgesamt nur eine kleine Verbesserung von etwa drei Prozent des Ergebnisses – wenn man davon ausgeht, dass andere räumliche Features in hoher Genauigkeit und Vollständigkeit erfasst sind. Für allgemeine Grundaussagen zu Stellplatzzahlen ist eine grobe Differenzierung der Parkstreifen also ausreichend, wobei die systematische Überschätzung des Ergebnisses berücksichtigt und ggf. abgezogen werden sollte (siehe unten).
+
+- Insbesondere bei Straßenabschnitten mit Schräg- oder Querparken – bei denen vergleichsweise viele Fahrzeuge pro Länge eines Straßensegments parken – kann sich aber eine feinere Differenzierung lohnen[^1] und sollte auch auf die möglichst vollständige Erfassung räumlicher Features Wert gelegt werden, um Fehler entlang dieser Segmente zu vermeiden.
+
+- Als wichtigste räumliche Features, die den größten Einfluss auf die Genauigkeit der Ergebnisse haben, haben sich Einfahrten (über 5 %) und Bushaltestellen (etwa 1 %) herausgestellt. Da Bushaltestellen wohl meist bereits gut erfasst sind, sollten also vor allem Einfahrten im Fokus von Mapping-Kampagnen zur Durchführung von Parkraumanalysen stehen.
+
+- Alle anderen räumlichen Features haben – jeweils für sich gesehen – nur einen kleinen Einfluss auf das Ergebnis (< 1 %). In der Summe dieser Features (außer Einfahrten und Bushaltestellen) ergibt sich lediglich eine Abweichung von etwa drei Prozent. Je nach ortsüblicher baulicher Situation bzw. realen Häufigkeit solcher Features können diese anderenorts aber auch relevanter sein (siehe unten).
+
+- Die separate Erfassung von Parkbuchten verbessert das Ergebnis signifikant. Vor allem in Gebieten, in denen Parkbuchten häufiger vorkommen und sich durch bauliche Differenzierung (z.B. Zwischenräume für Straßenbäume) auszeichnen, sollten diese separat erfasst werden, um das Ergebnis nicht zu verfälschen.
+
+### Tabelle: Einflussfaktoren auf die Datenqualität von OSM-Parkraumanalysen mit dem „Subtraktiven Modell“
+
+_Daten: Ortsteil Neuk&ouml;lln, Scriptversion 25.6.2022_
+
+Als Referenz für die Berechnung wurden die detailliert gemappten OSM-Daten in Neukölln herangezogen sowie die Berechnung des <code>parking_lanes</code>-Scripts[^3]. Für das zugrunde liegende Testgebiet kann eine "sehr hohe Datenqualität" (vgl. Gruppe "Mapping-Szenarien") und "kleinteilig differenzierte Parkstreifen" (vgl. Gruppe "Parkstreifen­genauigkeit") angenommen werden.
+
+Die Spalten _Parallel-, Schräg-, Querparken_ erlaubt eine Bewertung, welchen Einfluss die Faktoren auf die Parkausrichtung haben. Die Spalten sind immer eine Untermenge von "alle Stellplätze".
+
+<div class="-mx-4 mb-10 mt-10 overflow-scroll md:-mr-[8rem] md:overflow-clip md:rounded-md md:border lg:-ml-[13rem] xl:-mr-[13rem] 2xl:-mr-[18rem]">
+  <table class="md:mt-0">
+    <thead>
+      <tr class="sr-only">
+        <th class="py-2 leading-tight"></th>
+        <th class="py-2 leading-tight">Anzahl</th>
+        <th class="py-2 text-xs font-normal leading-4">Abwei&shy;chung</th>
+        <th class="py-2 leading-tight">Anzahl</th>
+        <th class="py-2 text-xs font-normal leading-4">Abwei&shy;chung</th>
+        <th class="py-2 leading-tight">Anzahl</th>
+        <th class="py-2 text-xs font-normal leading-4">Abwei&shy;chung</th>
+        <th class="py-2 leading-tight">Anzahl</th>
+        <th class="py-2 text-xs font-normal leading-4">Abwei&shy;chung</th>
+        <th class="py-2 leading-tight"></th>
+      </tr>
+      <tr class="bg-emerald-100">
+        <th class="py-3 leading-tight"></th>
+        <th class="py-3 leading-tight" colspan="2">
+          alle Stellpl&auml;tze
+        </th>
+        <th class="py-3 leading-tight" colspan="2">
+          Parallelparken
+        </th>
+        <th class="py-3 leading-tight" colspan="2">
+          Schr&auml;gparken
+        </th>
+        <th class="py-3 leading-tight" colspan="2">
+          Querparken
+        </th>
+        <th class="py-3 leading-tight">Beschreibung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          Ergebnis <code>parking_lanes</code>-Script
+        </th>
+        <td class="text-right">27.676</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">21.945</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">3.364</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">2.367</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="align-baseline text-xs leading-tight">
+          Ergebnis des Scripts unter Annahme aller Einflussfaktoren.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Ergebnis Parkraumkarte</th>
+        <td class="text-right">27.103</td>
+        <td class="text-left">-2,1%</td>
+        <td class="text-right">21.387</td>
+        <td class="text-left">-2,5%</td>
+        <td class="text-right">3.311</td>
+        <td class="text-left">-1,6%</td>
+        <td class="text-right">2.405</td>
+        <td class="text-left">+1,6%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Manuell nachbearbeitete Parkstreifendaten; das entspricht der höchsten Genauigkeit, die
+          uns vorliegt.
+        </td>
+      </tr>
+      <tr class="border-b-0">
+        <th class="bg-emerald-50 py-2 pl-3 pt-6 leading-tight" colspan="10">
+          Einfluss einzelner Faktoren:
+          <strong class="underline">R&auml;umliche Features</strong>
+        </th>
+      </tr>
+      <tr class="bg-emerald-50">
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          alle Stellpl&auml;tze
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Parallelparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Schr&auml;gparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Querparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Einfahrten</th>
+        <td class="text-right">29.239</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+5,6%</strong>
+        </td>
+        <td class="text-right">23.341</td>
+        <td class="text-left">+6,4%</td>
+        <td class="text-right">3.472</td>
+        <td class="text-left">+3,2%</td>
+        <td class="text-right">2.426</td>
+        <td class="text-left">+2,5%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Grundst&uuml;cks- und Geb&auml;udezufahrten (<code>service=driveway</code>).
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Ampeln an Haltelinien</th>
+        <td class="text-right">27.830</td>
+        <td class="text-left text-stone-300">+0,6%</td>
+        <td class="text-right">22.090</td>
+        <td class="text-left text-stone-300">+0,7%</td>
+        <td class="text-right">3.370</td>
+        <td class="text-left text-stone-300">+0,2%</td>
+        <td class="text-right">2.370</td>
+        <td class="text-left text-stone-300">+0,1%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Ampeln separat an der Haltelinie erfasst. (Anmerkung: Halteverbot vor Ampeln rechtlich
+          unscharf.)
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Querungsstellen, prim&auml;r</th>
+        <td class="text-right">27.769</td>
+        <td class="text-left text-stone-300">+0,3%</td>
+        <td class="text-right">22.032</td>
+        <td class="text-left text-stone-300">+0,4%</td>
+        <td class="text-right">3.364</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right">2.373</td>
+        <td class="text-left text-stone-300">+0,3%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Markierte Querungsstellen wie Zebrastreifen und Ampelkreuzungen.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Querungsstellen, sekund&auml;r</th>
+        <td class="text-right">27.868</td>
+        <td class="text-left text-stone-300">+0,7%</td>
+        <td class="text-right">22.069</td>
+        <td class="text-left text-stone-300">+0,6%</td>
+        <td class="text-right">3.416</td>
+        <td class="text-left">+1,5%</td>
+        <td class="text-right">2.383</td>
+        <td class="text-left text-stone-300">+0,7%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Unmarkierte Querungsstellen mit baulichen Merkmalen (z.B. Gehwegvorstreckungen).
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Bushaltestellen</th>
+        <td class="text-right">27.943</td>
+        <td class="text-left">+1,0%</td>
+        <td class="text-right">22.213</td>
+        <td class="text-left">+1,2%</td>
+        <td class="text-right">3.364</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right">2.366</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Ein separater Knoten f&uuml;r jede indiviudelle Bushaltestelle bzw. jedes
+          Bushaltestellenzeichen.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">Anlagen im Fahrbahnbereich</th>
+        <td class="text-right">27.882</td>
+        <td class="text-left text-stone-300">+0,7%</td>
+        <td class="text-right">22.095</td>
+        <td class="text-left text-stone-300">+0,7%</td>
+        <td class="text-right">3.401</td>
+        <td class="text-left">+1,1%</td>
+        <td class="text-right">2.386</td>
+        <td class="text-left text-stone-300">+0,8%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Abstellanlagen f&uuml;r Fahrr&auml;der oder Elektrokleinstfahrzeuge mit
+          <code>*:position=lane</code>-Tag, Parklets.
+        </td>
+      </tr>
+      <tr class="bg-stone-50">
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          alle oben genannten
+          <span class="rounded bg-stone-100 px-1 py-0 font-mono font-semibold">1</span>
+        </th>
+        <td class="text-right">30.313</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+9,5%</strong>
+        </td>
+        <td class="text-right">24.261</td>
+        <td class="text-left">+10,6%</td>
+        <td class="text-right">3.582</td>
+        <td class="text-left">+6,5%</td>
+        <td class="text-right">2.470</td>
+        <td class="text-left">+4,4%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Einfluss aller r&auml;umlichen Features gemeinsam
+        </td>
+      </tr>
+      <tr class="bg-stone-50">
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          alle oben genannten außer Einfahrten + Bushaltestellen
+        </th>
+        <td class="text-right">28.433</td>
+        <td class="text-left">+2,7%</td>
+        <td class="text-right">22.559</td>
+        <td class="text-left">+2,8%</td>
+        <td class="text-right">3.466</td>
+        <td class="text-left">+3,0%</td>
+        <td class="text-right">2.408</td>
+        <td class="text-left">+1,7%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Einfluss aller r&auml;umlichen Features au&szlig;er Einfahrten und Bushaltestellen.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          separat gemappte Parkbuchten
+          <span class="rounded bg-stone-100 px-1 py-0 font-mono font-semibold">2</span>
+        </th>
+        <td class="text-right">28.102</td>
+        <td class="text-left">+1,5%</td>
+        <td class="text-right">22.039</td>
+        <td class="text-left text-stone-300">+0,4%</td>
+        <td class="text-right">3.392</td>
+        <td class="text-left text-stone-300">+0,8%</td>
+        <td class="text-right">2.671</td>
+        <td class="text-left">+12,8%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Parkbuchten sind als separate Fl&auml;chen gemappt und dadurch r&auml;umlich pr&auml;ziser
+          auswertbar.
+        </td>
+      </tr>
+      <tr class="border-b-0">
+        <th class="bg-emerald-50 py-2 pl-3 pt-6 leading-tight" colspan="10">
+          Einfluss einzelner Faktoren:
+          <strong class="underline">Parkstreifen&shy;genauigkeit</strong>
+        </th>
+      </tr>
+      <tr class="bg-emerald-50">
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          alle Stellpl&auml;tze
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Parallelparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Schr&auml;gparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Querparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          &uuml;berall beidseitig Parallelparken
+        </th>
+        <td class="text-right">30.542</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+10,4%</strong>
+        </td>
+        <td class="text-right">30.542</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="align-baseline text-xs leading-tight">
+          Entlang aller Stra&szlig;en wird beidseitiges Parallelparken angenommen.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">nicht differenzierte Parkstreifen</th>
+        <td class="text-right">29.000</td>
+        <td class="text-left">+4,8%</td>
+        <td class="text-right">22.778</td>
+        <td class="text-left">+3,8%</td>
+        <td class="text-right">3.647</td>
+        <td class="text-left">+8,4%</td>
+        <td class="text-right">2.575</td>
+        <td class="text-left">+8,8%</td>
+        <td class="align-baseline text-xs leading-tight">
+          An langen Stra&szlig;enabschnitten ist nur die &uuml;berwiegend vorherrschende Art des
+          Parkens erfasst.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">grob differenzierte Parkstreifen</th>
+        <td class="text-right">28.386</td>
+        <td class="text-left">+2,6%</td>
+        <td class="text-right">22.435</td>
+        <td class="text-left">+2,2%</td>
+        <td class="text-right">3.486</td>
+        <td class="text-left">+3,6%</td>
+        <td class="text-right">2.465</td>
+        <td class="text-left">+4,1%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Signifikante Parkstreifenwechsel (von einer L&auml;nge von mindestens etwa 100 Metern)
+          sind erfasst.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          kleinteilig differenzierte Parkstreifen
+        </th>
+        <td class="text-right">27.676</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">21.945</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">3.364</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">2.367</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="align-baseline text-xs leading-tight">
+          Parkstreifen sind detailliert und kleinteilig erfasst (auch kurze Wechsel oder Verbote).
+        </td>
+      </tr>
+      <tr class="border-b-0">
+        <th class="bg-emerald-50 py-2 pl-3 pt-6 leading-tight" colspan="10">
+          Einfluss einzelner Faktoren:
+          <strong class="underline">Attribute</strong>
+        </th>
+      </tr>
+      <tr class="bg-emerald-50">
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          alle Stellpl&auml;tze
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Parallelparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Schr&auml;gparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Querparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 leading-tight">
+          Fahrbahnbreite
+          <span class="rounded bg-stone-100 px-1 py-0 font-mono font-semibold">3</span>
+        </th>
+        <td class="text-right">27.560</td>
+        <td class="text-left text-stone-300">-0,4%</td>
+        <td class="text-right">21.835</td>
+        <td class="text-left text-stone-300">-0,5%</td>
+        <td class="text-right">3.360</td>
+        <td class="text-left text-stone-300">-0,1%</td>
+        <td class="text-right">2.365</td>
+        <td class="text-left text-stone-300">-0,1%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Die Fahrbahnen sind mit einem Attribut f&uuml;r ihre Breite ausgestattet.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          Breite von Einfahrten
+          <span class="rounded bg-stone-100 px-1 py-0 font-mono font-semibold">4</span>
+        </th>
+        <td class="text-right">27.689</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right">21.959</td>
+        <td class="text-left text-stone-300">+0,1%</td>
+        <td class="text-right">3.363</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="text-right">2.367</td>
+        <td class="text-left text-stone-300">+0,0%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Einfahrten, insbesondere mit &Uuml;berbreite, sind mit einer Breiteninformation
+          ausgestattet.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">
+          <code>parking:orientation</code>, capacity
+          <span class="rounded bg-stone-100 px-1 py-0 font-mono font-semibold">5</span>
+        </th>
+        <td class="text-right">27.546</td>
+        <td class="text-left text-stone-300">-0,5%</td>
+        <td class="text-right">21.997</td>
+        <td class="text-left text-stone-300">+0,2%</td>
+        <td class="text-right">3.395</td>
+        <td class="text-left text-stone-300">+0,9%</td>
+        <td class="text-right">2.154</td>
+        <td class="text-left">-9,0%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Fahrzeugausrichtung separat gemappter Parkstreifen vorhanden (muss nicht gesch&auml;tzt
+          werden).
+        </td>
+      </tr>
+      <tr class="border-b-0">
+        <th class="bg-emerald-50 py-2 pl-3 pt-6 leading-tight" colspan="10">
+          Einfluss einzelner Faktoren:
+          <strong class="underline">Mapping-Szenarien</strong>
+        </th>
+      </tr>
+      <tr class="bg-emerald-50">
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          alle Stellpl&auml;tze
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Parallelparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Schr&auml;gparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight" colspan="2">
+          Querparken
+        </th>
+        <th class="py-1 text-center text-xs font-semibold leading-tight"></th>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">keine Daten</th>
+        <td class="text-right">34.383</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+24,2%</strong>
+        </td>
+        <td class="text-right">34.383</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="text-right text-stone-300">-</td>
+        <td class="align-baseline text-xs leading-tight">
+          Keine Parkstreifen (Annahme: &uuml;berall beidseitig Parallelparken), keine
+          r&auml;umlichen Features.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">geringe Datenqualit&auml;t</th>
+        <td class="text-right">32.253</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+16,5%</strong>
+        </td>
+        <td class="text-right">25.591</td>
+        <td class="text-left">+16,6%</td>
+        <td class="text-right">3.944</td>
+        <td class="text-left">+17,2%</td>
+        <td class="text-right">2.718</td>
+        <td class="text-left">+14,8%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Nicht differenzierte Parkstreifen, keine r&auml;umlichen Features.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">mittlere Datenqualit&auml;t</th>
+        <td class="text-right">29.679</td>
+        <td class="bg-stone-100 text-left">
+          <strong>+7,2%</strong>
+        </td>
+        <td class="text-right">23.461</td>
+        <td class="text-left">+6,9%</td>
+        <td class="text-right">3.663</td>
+        <td class="text-left">+8,9%</td>
+        <td class="text-right">2.555</td>
+        <td class="text-left">+7,9%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Grob differenzierte Parkstreifen, 50% Einfahrten, prim&auml;re, aber keine sekund&auml;ren
+          Querungsstellen, keine Anlagen im Fahrbahnbereich.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">hohe Datenqualit&auml;t</th>
+        <td class="text-right">28.386</td>
+        <td class="text-left">+2,6%</td>
+        <td class="text-right">22.435</td>
+        <td class="text-left">+2,2%</td>
+        <td class="text-right">3.486</td>
+        <td class="text-left">+3,6%</td>
+        <td class="text-right">2.465</td>
+        <td class="text-left">+4,1%</td>
+        <td class="align-baseline text-xs leading-tight">
+          Grob differenzierte Parkstreifen, (nahezu) alle r&auml;umlichen Features.
+        </td>
+      </tr>
+      <tr>
+        <th class="py-2 pl-3 align-baseline leading-tight">sehr hohe Datenqualit&auml;t</th>
+        <td class="text-right">27.676</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">21.945</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">3.364</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="text-right">2.367</td>
+        <td class="text-right text-xs text-stone-500">
+          <em>Referenz</em>
+        </td>
+        <td class="align-baseline text-xs leading-tight">
+          Kleinteilig differenzierte Parkstreifen, (nahezu) alle r&auml;umlichen Features.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+- <strong class="rounded bg-stone-200 px-1 py-0 font-mono font-semibold">1</strong> Diese Abweichung
+  ist größer als die Summe der Abweichungen der einzelnen Features, da ein durch ein bestimmtes Feature
+  vom Parken „freigehaltener“ Bereich auch von anderen Features umfasst sein kann.
+- <strong class="rounded bg-stone-200 px-1 py-0 font-mono font-semibold">2</strong> Werden nur die separat
+  gemappten Linienabschnitte allein betrachtet, würde ohne separate Kartierweise eine Überschätzung von
+  32% der Stellplätze entstehen (1.312 Stellplätze mit, 1.738 ohne separates Mapping).
+- <strong class="rounded bg-stone-200 px-1 py-0 font-mono font-semibold">3</strong> Straßenbreiten sind
+  zum Testzeitpunkt nur an 40 Prozent des Straßennetzes im Testgebiet gemappt. Werden nur die Straßen
+  mit gemappter Breite verglichen, wird die Stellplatzzahl um etwa 1 Prozent unterschätzt.
+- <strong class="rounded bg-stone-200 px-1 py-0 font-mono font-semibold">4</strong> Breite von Einfahrten
+  ist im Testgebiet nur an wenigen Einfahrten gemappt (insbesondere an überbreiten Einfahrten), der Einfluss
+  kann wahrscheinlich dennoch als sehr gering eingeschätzt werden.
+- <strong class="rounded bg-stone-200 px-1 py-0 font-mono font-semibold">5</strong> Nur auf die separat
+  gemappten Parkflächen allein bezogen entsteht eine Abweichung von 11,2% (1.180 Stellplätze mit interpolierten
+  Werten, 1.312 mit getaggten Werten, Scriptversion 25.6.2022).
+
+## Wie repräsentativ sind diese Testergebnisse?
+
+Üblicherweise führen fehlende oder ungenaue Daten mit der Methode des Subtraktiven Modells **zu einer Erhöhung** der interpolierten Stellplatzzahlen (“Überschätzung”), da Bereiche, in denen nicht geparkt werden kann, dann nicht subtrahiert werden. Je nach Datenqualität kann man diesen systematischen Fehler abschätzen (oder stichprobenhaft prüfen) und dies bei der Ergebnisbewertung berücksichtigen. Wird mit dem Subtraktiven Modell auf Basis einer „mittleren Datenqualität“ (vgl. Tabelle) beispielsweise eine bestimmte Stellplatzzahl für einen Stadtteil ermittelt, wird die tatsächliche Stellplatzzahl wahrscheinlich etwa in einer Größenordnung von 10% darunter liegen. Selbst bei sehr präziser Datenqualität bleibt stets eine Ungenauigkeit, die sich bei Tests in Neukölln im Bereich von unter einem bis zwei Prozent[^2] beläuft – was jedoch, zumindest in Berlin, weit unterhalb der „realen Abweichungen“ z.B. durch Falschparker oder Baustellen liegt (vgl. auch den [Methodenbericht zur Parkraumanalyse](https://parkraum.osm-verkehrswende.org/project-prototype-neukoelln/report)).
+
+Generell ist zu beachten, dass sich die genannten Aussagen zur Datengenauigkeit auf die mittleren Abweichungen innerhalb eines (größeren) Gebiets beziehen. Aussagen über Stellplätze z.B. in einem Stadtteil sind also relativ zuverlässig möglich, bei Einzelfallaussagen (z.B. Stellplätze entlang eines Straßensegments) können hingegen – je nach Bedingungen vor Ort und Qualität der Daten (z.B. Schräg- oder Querparken, nicht exakt erfasste Wechsel von Parkstreifeneigenschaften, ungenau erfasste Parkbuchten…) – möglicherweise größere Abweichungen zur Realität entstehen.
+
+## Zusammengefasst lässt sich festhalten:
+
+Ein sehr detailliertes, aufwendiges Parkstreifenmapping ist nicht notwendig, um aussagekräftige Stellplatzzahlen zu ermitteln, solange signifikante Parkstreifenänderungen erfasst werden und die systematische Unsicherheit in der Interpretation der Ergebnisse berücksichtigt wird. Abseits der Parkstreifen sollte versucht werden, ortsübliche/ charakteristische bauliche Merkmale möglichst vollständig und genau zu erfassen – im Testgebiet zählen dazu vor allem Einfahrten, in einigen Quartieren aber auch Parkbuchten oder häufige Gehwegvorstreckungen. An anderen Orten können andere Faktoren maßgeblichen Einfluss auf die Ergebnisqualität haben, beispielsweise häufige Hindernisse auf Parkstreifenflächen oder beim Gehwegparken (wie Bäume oder Straßenlaternen), die das Modell bisher (noch) nicht automatisiert verarbeiten kann.
+
+---
+
+## Fußnoten
+
+[^1]: Eine genaue Erfassung von Parkbeschränkungen (temporäre Parkverbote, Ladezonen, Stellplätze für mobilitätseingeschränkte Personen etc.) sind ohne kleinteilig differenzierte Parkstreifen ebenfalls oft schwer umzusetzen.
+[^3]: Die Ergebnissen wären jedoch ähnlich, wenn die Berechnungen stattdessen auf Grundlage der manuell erzeugten, künstlich "verschlechterten", grob differenzierten Parkstreifen basieren würden.
+[^2]: Vergleichsgrundlage ist stets die nicht-ordnungswidrige Parksituation, also die Anzahl der Stellplätze, die es an einem Ort gibt, wenn alle juristischen Vorgaben (insbesondere die Straßenverkehrsordnung) eingehalten werden (würden). Allein bei der Auslegung dieser Regeln gibt es signifikante Grauzonen und Unsicherheiten.

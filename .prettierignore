@@ -1,1 +1,2 @@
-_posts/*.md
+public/javascript/**/*
+public/css/*.css

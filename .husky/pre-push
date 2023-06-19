@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# npm run type-check # Too many Errors ATM
+# npm run lint # Too many Errors ATM
+npm run format
+npm run build

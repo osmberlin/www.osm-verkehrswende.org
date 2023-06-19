@@ -1,0 +1,15 @@
+---
+import MenuItem from '../menuItem/MenuItem.astro'
+import MenuItemWrapper from '../menuItem/MenuItemWrapper.astro'
+
+const menuItems = [
+  { href: '/parking', label: 'Über das Projekt' },
+  { href: '/parking/project-prototype-neukoelln/report', label: 'Methodenbericht' },
+  { href: '/parking/participate', label: 'Mitmachen' },
+  { href: '/parking/faq', label: 'FAQ' },
+]
+---
+
+<MenuItemWrapper>
+  {menuItems.map(({ href, label }) => <MenuItem href={href}>{label}</MenuItem>)}
+</MenuItemWrapper>

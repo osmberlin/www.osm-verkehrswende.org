@@ -1,0 +1,22 @@
+---
+import { pickProject } from '@layouts/utils/pickProject'
+import NavigationFooter from './NavigationFooter.astro'
+import { type NavigationProjects, projectToNavigation } from './projectToNavigation'
+
+interface Props {
+  project: NavigationProjects
+  menuHighlight?: string | undefined
+}
+
+const { project, menuHighlight } = Astro.props
+---
+
+{projectToNavigation[project]?.menu?.map((NavComp) => <NavComp menuHighlight={menuHighlight} />)}
+
+{
+  !projectToNavigation[project]?.menu && (
+    <p class="hidden">`project` `{pickProject(Astro.request.url)}` für Navigation nicht erkannt.</p>
+  )
+}
+
+<NavigationFooter menuHighlight={menuHighlight} />

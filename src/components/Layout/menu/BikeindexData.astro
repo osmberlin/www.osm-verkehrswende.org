@@ -1,0 +1,17 @@
+---
+import MenuItem from '../menuItem/MenuItem.astro'
+import MenuItemHeadline from '../menuItem/MenuItemHeadline.astro'
+import MenuItemWrapper from '../menuItem/MenuItemWrapper.astro'
+
+const menuItems = [
+  { href: '/bikeindex/data/category', label: 'Führungsform' },
+  { href: '/bikeindex/data/width', label: 'Breite' },
+  { href: '/bikeindex/data/surfacequality', label: 'Oberfläche' },
+  { href: '/bikeindex/data/separation', label: 'Schutz' },
+]
+---
+
+<MenuItemHeadline>Datensätze</MenuItemHeadline>
+<MenuItemWrapper>
+  {menuItems.map(({ href, label }) => <MenuItem href={href}>{label}</MenuItem>)}
+</MenuItemWrapper>

@@ -1,0 +1,12 @@
+---
+import { projectToNavigation, type NavigationProjects } from './projectToNavigation'
+
+interface Props {
+  project: NavigationProjects
+}
+
+const { project } = Astro.props
+const HeaderComp = projectToNavigation[project]?.header
+---
+
+{HeaderComp && <HeaderComp />}

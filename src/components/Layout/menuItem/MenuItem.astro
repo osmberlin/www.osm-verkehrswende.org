@@ -1,0 +1,23 @@
+---
+import { menuActiveClasses } from '@layouts/baseStyles'
+import { twMerge } from 'tailwind-merge'
+
+type Props = {
+  href: string
+  highlightExactMatch?: boolean
+}
+
+const { href, highlightExactMatch } = Astro.props
+const { pathname: currentPathname } = Astro.url
+const active = highlightExactMatch ? currentPathname === href : currentPathname.startsWith(href)
+---
+
+<a
+  href={href}
+  class={twMerge(
+    active ? menuActiveClasses : 'hover:bg-blue-50',
+    'flex items-center border-b border-gray-200 py-2 pl-4 leading-tight'
+  )}
+>
+  <slot />
+</a>

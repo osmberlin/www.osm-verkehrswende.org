@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content'
+import MenuItem from './menuItem/MenuItem.astro'
+import MenuItemHeadline from './menuItem/MenuItemHeadline.astro'
+import MenuItemWrapper from './menuItem/MenuItemWrapper.astro'
+import { pickProject } from '@layouts/utils/pickProject'
+
+const project = pickProject(Astro.request.url)
+const allPosts = await getCollection('posts')
+const sortedPosts = allPosts.sort(
+  (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf()
+)
+const relevantPosts = sortedPosts
+  .filter((post) => post.data.project === project)
+  .filter((post) => post.data.inMenu === true)
+---
+
+<MenuItemHeadline href="/posts" highlightExactMatch>
+  Neuigkeiten <span class="text-gray-500">({relevantPosts.length})</span>
+</MenuItemHeadline>
+<MenuItemWrapper>
+  {
+    relevantPosts.map((post) => (
+      <MenuItem href={`/${project}/posts/${post.slug}`}>
+        <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
+          {[
+            new Date(post.data.pubDate).getFullYear(),
+            new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
+          ].join('/')}
+        </span>
+        {post.data.menuTitle}
+      </MenuItem>
+    ))
+  }
+</MenuItemWrapper>

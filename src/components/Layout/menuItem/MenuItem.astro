@@ -18,6 +18,7 @@ const active = highlightExactMatch ? currentPathname === href : currentPathname.
     active ? menuActiveClasses : 'hover:bg-blue-50',
     'flex items-center border-b border-gray-200 py-2 pl-4 leading-tight',
   )}
+  data-item-active-debugger={active}
 >
   <slot />
 </a>

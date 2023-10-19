@@ -15,21 +15,30 @@ const relevantPosts = sortedPosts
   .filter((post) => post.data.inMenu === true)
 ---
 
-<MenuItemHeadline href="/posts" highlightExactMatch>
-  Neuigkeiten <span class="text-gray-500">({relevantPosts.length})</span>
-</MenuItemHeadline>
-<MenuItemWrapper>
-  {
-    relevantPosts.map((post) => (
-      <MenuItem href={`/${project}/posts/${post.slug}`}>
-        <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
-          {[
-            new Date(post.data.pubDate).getFullYear(),
-            new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
-          ].join('/')}
-        </span>
-        {post.data.menuTitle}
-      </MenuItem>
-    ))
-  }
-</MenuItemWrapper>
+{
+  relevantPosts.length ? (
+    <>
+      <MenuItemHeadline href="/posts" highlightExactMatch>
+        Neuigkeiten{' '}
+        {relevantPosts.length > 0 && <span class="text-gray-500">({relevantPosts.length})</span>}
+      </MenuItemHeadline>
+      <MenuItemWrapper>
+        {relevantPosts.map((post) => (
+          <MenuItem href={`/${project}/posts/${post.slug}`}>
+            <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
+              {[
+                new Date(post.data.pubDate).getFullYear(),
+                new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
+              ].join('/')}
+            </span>
+            {post.data.menuTitle}
+          </MenuItem>
+        ))}
+      </MenuItemWrapper>
+    </>
+  ) : (
+    <div class="mb-16">
+      <slot />
+    </div>
+  )
+}

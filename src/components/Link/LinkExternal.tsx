@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { twMerge } from 'tailwind-merge'
 import { buttonStyles, linkStyles } from './Link'
 
 type Props = {
@@ -19,7 +19,7 @@ export const LinkExternal: React.FC<Props> = ({
 }) => {
   return (
     <a
-      className={classNames(button ? buttonStyles : linkStyles, className)}
+      className={twMerge(button ? buttonStyles : linkStyles, className)}
       rel="noopener noreferrer"
       {...{ target: blank ? '_blank' : undefined }}
       {...props}

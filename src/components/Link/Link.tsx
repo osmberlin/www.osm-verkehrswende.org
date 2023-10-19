@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { twMerge } from 'tailwind-merge'
 
 const baseStyles = 'text-rs8-pink hover:text-rs8-blue'
 export const linkStyles = `${baseStyles} underline`
@@ -25,7 +25,7 @@ export const Link: React.FC<Props> = ({
   return (
     <a
       href={to}
-      className={classNames(button ? buttonStyles : linkStyles, className)}
+      className={twMerge(button ? buttonStyles : linkStyles, className)}
       {...{ target: blank ? '_blank' : undefined }}
       {...props}
     >

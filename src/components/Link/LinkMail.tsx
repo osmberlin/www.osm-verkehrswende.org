@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { twMerge } from 'tailwind-merge'
 import { buttonStyles, linkStyles } from './Link'
 
 type Props = {
@@ -14,7 +14,7 @@ export const LinkMail: React.FC<Props> = ({ className, mailto, button, children,
   return (
     <a
       href={`mailto:${mailto || children}`}
-      className={classNames(button ? buttonStyles : linkStyles, className)}
+      className={twMerge(button ? buttonStyles : linkStyles, className)}
       rel="noopener noreferrer"
       {...props}
     >

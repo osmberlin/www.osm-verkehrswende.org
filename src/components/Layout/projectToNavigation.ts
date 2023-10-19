@@ -80,7 +80,13 @@ export const projectToNavigation = {
     label: 'Mapillary',
     header: { name: 'Mapillary Missing Images', link: '/mapillary' },
     menus: [
-      { label: null, items: [{ href: '/bicycle-parking', label: 'Über das Projekt' }] },
+      {
+        label: null,
+        items: [
+          { href: '/mapillary', label: 'Über das Projekt' },
+          { href: '/mapillary/map', label: 'Karte' },
+        ],
+      },
       NavigationNews,
     ],
   },

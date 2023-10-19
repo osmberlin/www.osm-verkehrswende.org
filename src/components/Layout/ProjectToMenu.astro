@@ -1,7 +1,11 @@
 ---
 import { pickProject } from '@layouts/utils/pickProject'
 import NavigationFooter from './NavigationFooter.astro'
-import { type NavigationProjects, projectToNavigation } from './projectToNavigation'
+import MenuItem from './menuItem/MenuItem.astro'
+import MenuItemHeadline from './menuItem/MenuItemHeadline.astro'
+// TODO: Replace the wrapper for <MenuItem> with <MenuItemWrapper> which does not work ATM.
+// import MenuItemWrapper from './menuItem/MenuItemWrapper.astro'
+import { projectToNavigation, type NavigationProjects } from './projectToNavigation'
 
 interface Props {
   project: NavigationProjects
@@ -9,12 +13,32 @@ interface Props {
 }
 
 const { project, menuHighlight } = Astro.props
+const { menus } = projectToNavigation[project]
 ---
 
-{projectToNavigation[project]?.menu?.map((NavComp) => <NavComp menuHighlight={menuHighlight} />)}
+{
+  menus?.map((menu) => {
+    if (typeof menu === 'function') {
+      const NavComp = menu
+      return <NavComp menuHighlight={menuHighlight} />
+    }
+
+    return (
+      <Fragment>
+        {menu.label ?? <MenuItemHeadline>Datensätze</MenuItemHeadline>}
+
+        <div class="mb-7 mt-5 flex flex-col overflow-hidden rounded border border-b-0 border-gray-200 sm:mt-0">
+          {menu.items.map(({ href, label }) => (
+            <MenuItem href={href}>{label}</MenuItem>
+          ))}
+        </div>
+      </Fragment>
+    )
+  })
+}
 
 {
-  !projectToNavigation[project]?.menu && (
+  !menus && (
     <p class="hidden">`project` `{pickProject(Astro.request.url)}` für Navigation nicht erkannt.</p>
   )
 }

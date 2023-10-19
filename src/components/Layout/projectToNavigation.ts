@@ -1,11 +1,6 @@
 import NavigationNews from './NavigationNews.astro'
 import AboutHeader from './menu/AboutHeader.astro'
 import AboutMenu from './menu/AboutMenu.astro'
-import BenchesMenu from './menu/BenchesMenu.astro'
-import BicycleParkingMenu from './menu/BicycleParkingMenu.astro'
-import BikeindexData from './menu/BikeindexData.astro'
-import BikeindexMenu from './menu/BikeindexMenu.astro'
-import ParkingMenu from './menu/ParkingMenu.astro'
 
 export type NavigationProjects = keyof typeof projectToNavigation
 
@@ -28,19 +23,70 @@ export const projectToNavigation = {
   },
   bikeindex: {
     label: 'BikeIndex',
-    menu: [BikeindexMenu, BikeindexData, NavigationNews],
     header: { name: 'Bikeindex Project', link: '/bikeindex' },
+    menus: [
+      {
+        label: null,
+        items: [
+          { href: '/bikeindex', label: 'Über das Projekt' },
+          { href: '/bikeindex/participate', label: 'Mitmachen' },
+        ],
+      },
+      {
+        label: 'Datensätze',
+        items: [
+          { href: '/bikeindex/data/category', label: 'Führungsform' },
+          { href: '/bikeindex/data/width', label: 'Breite' },
+          { href: '/bikeindex/data/surfacequality', label: 'Oberfläche' },
+          { href: '/bikeindex/data/separation', label: 'Schutz' },
+        ],
+      },
+      NavigationNews,
+    ],
   },
-  parking: { label: 'Parkraum', header: ParkingHeader, menu: [ParkingMenu, NavigationNews] },
+  parking: {
+    label: 'Parkraum',
+    header: { name: 'Parkraumanalyse', link: '/parking' },
+    menus: [
+      {
+        label: null,
+        items: [
+          { href: '/parking', label: 'Über das Projekt' },
+          { href: '/parking/project-prototype-neukoelln/report', label: 'Methodenbericht' },
+          { href: '/parking/participate', label: 'Mitmachen' },
+          { href: '/parking/faq', label: 'FAQ' },
+        ],
+      },
+      NavigationNews,
+    ],
+  },
   'bicycle-parking': {
     label: 'Fahrradstellplätze',
-    menu: [BicycleParkingMenu, NavigationNews],
     header: { name: 'Fahrradstellplätze', link: '/bicycle-parking' },
+    menus: [
+      { label: null, items: [{ href: '/bicycle-parking', label: 'Über das Projekt' }] },
+      NavigationNews,
+    ],
+  },
   benches: {
     label: 'Bänke',
     header: { name: 'Bänke', link: '/benches' },
-    menu: [BenchesMenu, NavigationNews],
+    menus: [
+      { label: null, items: [{ href: '/benches', label: 'Über das Projekt' }] },
+      NavigationNews,
+    ],
   },
+  mapillary: {
+    label: 'Mapillary',
+    header: { name: 'Mapillary Missing Images', link: '/mapillary' },
+    menus: [
+      { label: null, items: [{ href: '/bicycle-parking', label: 'Über das Projekt' }] },
+      NavigationNews,
+    ],
   },
-  unknown: { label: null, header: AboutHeader, menu: undefined },
+  unknown: {
+    label: null,
+    header: AboutHeader,
+    menus: undefined,
+  },
 }

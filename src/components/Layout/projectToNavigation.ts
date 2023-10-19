@@ -1,14 +1,10 @@
 import NavigationNews from './NavigationNews.astro'
 import AboutHeader from './menu/AboutHeader.astro'
 import AboutMenu from './menu/AboutMenu.astro'
-import BenchesHeader from './menu/BenchesHeader.astro'
 import BenchesMenu from './menu/BenchesMenu.astro'
-import BicycleParkingHeader from './menu/BicycleParkingHeader.astro'
 import BicycleParkingMenu from './menu/BicycleParkingMenu.astro'
 import BikeindexData from './menu/BikeindexData.astro'
-import BikeindexHeader from './menu/BikeindexHeader.astro'
 import BikeindexMenu from './menu/BikeindexMenu.astro'
-import ParkingHeader from './menu/ParkingHeader.astro'
 import ParkingMenu from './menu/ParkingMenu.astro'
 
 export type NavigationProjects = keyof typeof projectToNavigation
@@ -25,18 +21,26 @@ export const navigationProjects = [
 ] as const
 
 export const projectToNavigation = {
-  about: { label: null, header: AboutHeader, menu: [AboutMenu, NavigationNews] },
+  about: {
+    label: null,
+    header: AboutHeader,
+    menus: [AboutMenu, NavigationNews],
+  },
   bikeindex: {
     label: 'BikeIndex',
-    header: BikeindexHeader,
     menu: [BikeindexMenu, BikeindexData, NavigationNews],
+    header: { name: 'Bikeindex Project', link: '/bikeindex' },
   },
   parking: { label: 'Parkraum', header: ParkingHeader, menu: [ParkingMenu, NavigationNews] },
   'bicycle-parking': {
     label: 'Fahrradstellplätze',
-    header: BicycleParkingHeader,
     menu: [BicycleParkingMenu, NavigationNews],
+    header: { name: 'Fahrradstellplätze', link: '/bicycle-parking' },
+  benches: {
+    label: 'Bänke',
+    header: { name: 'Bänke', link: '/benches' },
+    menu: [BenchesMenu, NavigationNews],
   },
-  benches: { label: 'Bänke', header: BenchesHeader, menu: [BenchesMenu, NavigationNews] },
+  },
   unknown: { label: null, header: AboutHeader, menu: undefined },
 }

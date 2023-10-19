@@ -1,11 +1,12 @@
 ---
-
+const { link, name } = Astro.props
 ---
 
-<a href="/bikeindex"
-  ><h1 class="text-xl font-semibold !leading-[1.8rem] lg:text-2xl">
+<a href={link}>
+  <h1 class="text-xl font-semibold !leading-[1.8rem] lg:text-2xl">
     <span class="hidden lg:inline">OpenStreetMap</span>
-    <span class="lg:hidden">OSM</span> Bikeindex Projekt
+    <span class="lg:hidden">OSM</span>{' '}
+    {name}
   </h1>
 </a>
 <p class="text-sm text-gray-400 lg:mb-5">

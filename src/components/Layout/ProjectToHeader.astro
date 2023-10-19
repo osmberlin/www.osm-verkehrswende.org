@@ -1,4 +1,5 @@
 ---
+import Header from './menu/Header.astro'
 import { projectToNavigation, type NavigationProjects } from './projectToNavigation'
 
 interface Props {
@@ -6,7 +7,8 @@ interface Props {
 }
 
 const { project } = Astro.props
-const HeaderComp = projectToNavigation[project]?.header
+const { header } = projectToNavigation[project]
+const HeaderComp = typeof header === 'function' && header
 ---
 
-{HeaderComp && <HeaderComp />}
+{HeaderComp ? <HeaderComp /> : <Header name={header.name} link={header.link} />}

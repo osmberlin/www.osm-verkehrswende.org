@@ -9,10 +9,8 @@ import remarkToc from 'remark-toc'
 export default defineConfig({
   integrations: [
     tailwind({
-      config: {
-        // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#configapplybasestyles
-        applyBaseStyles: false,
-      },
+      // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#applybasestyles
+      applyBaseStyles: false,
     }),
     react(),
     mdx(),
@@ -24,7 +22,6 @@ export default defineConfig({
     remarkPlugins: [remarkToc],
   },
   site: 'https://www.osm-verkehrswende.org/',
-  experimental: { redirects: true },
   redirects: {
     // '/from': '/to',
   },

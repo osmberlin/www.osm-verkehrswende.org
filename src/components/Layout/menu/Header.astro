@@ -2,13 +2,13 @@
 const { link, name } = Astro.props
 ---
 
-<a href={link}>
+<a href="/" class="text-sm text-gray-300 group-hover/navi:text-gray-400 block hover:text-blue-500"
+  >← Projektübersicht</a
+>
+<a href={link} class="mb-10 lg:mb-10 block -mx-3 px-3 hover:bg-blue-50">
   <h1 class="text-xl font-semibold !leading-[1.8rem] lg:text-2xl">
     <span class="hidden lg:inline">OpenStreetMap</span>
     <span class="lg:hidden">OSM</span>{' '}
     {name}
   </h1>
 </a>
-<p class="text-sm text-gray-400 lg:mb-5">
-  <a href="/" class="hover:text-blue-500">OpenStreetMap Verkehrswende</a>
-</p>

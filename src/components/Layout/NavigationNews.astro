@@ -8,7 +8,7 @@ import { pickProject } from '@layouts/utils/pickProject'
 const project = pickProject(Astro.request.url)
 const allPosts = await getCollection('posts')
 const sortedPosts = allPosts.sort(
-  (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf()
+  (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf(),
 )
 const relevantPosts = sortedPosts
   .filter((post) => post.data.project === project)

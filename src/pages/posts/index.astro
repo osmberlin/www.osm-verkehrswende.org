@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content'
 
 const allPosts = await getCollection('posts')
 const sortedPosts = allPosts.sort(
-  (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf()
+  (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf(),
 )
 ---
 

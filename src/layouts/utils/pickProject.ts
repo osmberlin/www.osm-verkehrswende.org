@@ -4,7 +4,7 @@ export const pickProject = (astroUrl: string) => {
   const pathname = new URL(astroUrl).pathname
 
   const knownProjectFromPath = Object.keys(projectToNavigation).find(
-    (item) => item === pathname.split('/').at(1)
+    (item) => item === pathname.split('/').at(1),
   )
 
   const project = (

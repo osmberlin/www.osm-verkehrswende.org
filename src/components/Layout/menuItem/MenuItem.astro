@@ -16,7 +16,7 @@ const active = highlightExactMatch ? currentPathname === href : currentPathname.
   href={href}
   class={twMerge(
     active ? menuActiveClasses : 'hover:bg-blue-50',
-    'flex items-center border-b border-gray-200 py-2 pl-4 leading-tight'
+    'flex items-center border-b border-gray-200 py-2 pl-4 leading-tight',
   )}
 >
   <slot />

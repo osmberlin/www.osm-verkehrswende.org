@@ -16,10 +16,11 @@ export type NavigationProjects = keyof typeof projectToNavigation
 // This dupliation is required to get `src/content/config.ts` going
 export const navigationProjects = [
   'about',
-  'bikeindex',
-  'parking',
-  'bicycle-parking',
   'benches',
+  'bicycle-parking',
+  'bikeindex',
+  'mapillary',
+  'parking',
   'unkown',
 ] as const
 

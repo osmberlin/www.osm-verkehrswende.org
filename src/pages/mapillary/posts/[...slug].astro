@@ -1,0 +1,23 @@
+---
+import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const project = 'mapillary' // REMINDER: this needs to be change for each project and added to `navigationProjects`
+  const posts = await getCollection('posts')
+  return posts
+    .filter((post) => post.data.project === project)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: post,
+    }))
+}
+type Props = CollectionEntry<'posts'>
+
+const post = Astro.props
+const { Content } = await post.render()
+---
+
+<LayoutArticlePost {...post.data}>
+  <Content />
+</LayoutArticlePost>

@@ -3,7 +3,7 @@ import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const project = 'about' // REMINDER: this needs to be change for each project
+  const project = 'about' // REMINDER: this needs to be change for each project and added to `projectToNavigation.ts`
   const posts = await getCollection('posts')
   return posts
     .filter((post) => post.data.project === project)

@@ -78,7 +78,7 @@ export const projectToNavigation = {
   },
   mapillary: {
     label: 'Mapillary',
-    header: { name: 'Mapillary Missing Images', link: '/mapillary' },
+    header: { name: 'Mapillary Missing Streets', link: '/mapillary' },
     menus: [
       {
         label: null,

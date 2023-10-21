@@ -1,10 +1,17 @@
-import { navigationProjects } from '@layouts/Navigation/projectToNavigation.const'
 import { defineCollection, z } from 'astro:content'
 
 const postCollection = defineCollection({
   schema: z.object({
     title: z.string(),
-    project: z.enum(navigationProjects),
+    project: z.enum([
+      'about',
+      'benches',
+      'bicycle-parking',
+      'bikeindex',
+      'mapillary',
+      'parking',
+      'unkown',
+    ]),
     pubDate: z
       .string()
       .or(z.date())

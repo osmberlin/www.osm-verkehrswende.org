@@ -4,16 +4,9 @@ import PageAboutMenu from './page_about/PageAboutMenu.astro'
 
 export type NavigationProjects = keyof typeof projectToNavigation
 
-// This dupliation is required to get `src/content/config.ts` going
-export const navigationProjects = [
-  'about',
-  'benches',
-  'bicycle-parking',
-  'bikeindex',
-  'mapillary',
-  'parking',
-  'unkown',
-] as const
+// ATTENTION:
+// Whenever we add a new project, we need to also add it to
+// `src/content/config.ts` which enables adding posts for this project.
 
 export const projectToNavigation = {
   about: {

@@ -1,7 +1,9 @@
 ---
+import { projectToNavigation } from './Navigation/projectToNavigation.const'
 import TailwindResponsiveHelper from './TailwindResponsiveHelper.astro'
 import './base.css'
 import type { LayoutLanguage } from './types'
+import { pickProject } from './utils/pickProject'
 
 type Props = {
   title: string
@@ -13,12 +15,14 @@ type Props = {
   imageAlt?: string
 }
 
+const project = pickProject(Astro.request.url)
+
 const defaults = {
-  title: 'Parkraum Projekt — OpenStreetMap Verkehrswende',
-  language: 'de',
-  description: 'Spezialkarten für Neukölln zum Straßenraum und zur Parkplatzdichte.',
-  imagePath: '/social-sharing.png',
-  imageAlt: 'Daten zu Parkplätzen, berechnet auf Basis von OpenStreetMap Daten.',
+  title: projectToNavigation[project].meta.title,
+  language: projectToNavigation[project].meta.language,
+  description: projectToNavigation[project].meta.description,
+  imagePath: projectToNavigation[project].meta.imagePath,
+  imageAlt: projectToNavigation[project].meta.imageAlt,
 }
 
 const { title, noindex, canonicalUrl, language, description, imagePath, imageAlt } = Astro.props

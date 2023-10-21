@@ -2,20 +2,9 @@
 
 ## TODOs Migration
 
-- Social Sharing
+- URL Recirects…
 
   ```
-  title: OpenStreetMap Verkehrswende
-  description: OSM kann die Verkehrswende begleiten und beschleunigen mit Tagging, Tools und Analysen.
-  author: Tobias Jordans
-  logo: /images/openstreetmap-osm-logo.png
-  image:
-    path: /images/social-sharing.png
-    alt: Daten zu Parkplätzen, berechnet auf Basis von OpenStreetMap Daten.
-  twitter:
-    username: "@osmberlin"
-    card: summary_large_image
-
   # Build settings
   permalink: /posts/:year-:month-:day-:title
   ```

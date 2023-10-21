@@ -13,6 +13,14 @@ export const projectToNavigation = {
     label: null,
     header: PageAboutHeader,
     menus: [PageAboutMenu, NavigationNews],
+    meta: {
+      title: 'OpenStreetMap Verkehrswende',
+      description:
+        'OSM kann die Verkehrswende begleiten und beschleunigen mit Tagging, Tools und Analysen.',
+      imagePath: '/social-sharing.png',
+      imageAlt: undefined,
+      language: 'de',
+    },
   },
   bikeindex: {
     label: 'BikeIndex',
@@ -36,6 +44,13 @@ export const projectToNavigation = {
       },
       NavigationNews,
     ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
   },
   parking: {
     label: 'Parkraum',
@@ -52,6 +67,13 @@ export const projectToNavigation = {
       },
       NavigationNews,
     ],
+    meta: {
+      title: 'Parkraum Projekt — OpenStreetMap Verkehrswende',
+      description: 'Spezialkarten für Neukölln zum Straßenraum und zur Parkplatzdichte.',
+      imagePath: '/social-sharing.png', // TODO
+      imageAlt: 'Daten zu Parkplätzen, berechnet auf Basis von OpenStreetMap Daten.',
+      language: 'de',
+    },
   },
   'bicycle-parking': {
     label: 'Fahrradstellplätze',
@@ -60,6 +82,13 @@ export const projectToNavigation = {
       { label: null, items: [{ href: '/bicycle-parking', label: 'Über das Projekt' }] },
       NavigationNews,
     ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
   },
   benches: {
     label: 'Bänke',
@@ -68,6 +97,13 @@ export const projectToNavigation = {
       { label: null, items: [{ href: '/benches', label: 'Über das Projekt' }] },
       NavigationNews,
     ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
   },
   mapillary: {
     label: 'Mapillary',
@@ -82,10 +118,24 @@ export const projectToNavigation = {
       },
       NavigationNews,
     ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
   },
   unknown: {
     label: null,
     header: PageAboutHeader,
     menus: undefined,
+    meta: {
+      title: 'OpenStreetMap Verkehrswende',
+      description: null,
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
   },
 }

@@ -1,0 +1,46 @@
+{% if page.showToc %}
+<script>
+  // Responsive helper: Set the details element `open`
+  // Starting at Tailwind CSS 'xl' breakpoint.
+  //   https://tailwindcss.com/docs/screens#custom-media-queries
+  function ready(fn) {
+    if (document.readyState != 'loading') {
+      fn()
+    } else {
+      document.addEventListener('DOMContentLoaded', fn)
+    }
+  }
+  function openDetailsByBreakpoint() {
+    if (window.innerWidth >= 1280) {
+      document.querySelector('details').setAttribute('open', '')
+    }
+  }
+  ready(openDetailsByBreakpoint)
+</script>
+{% comment %} EXPERIMENT SCROLLSPY
+<script src="{{ '/javascript/scrollspy/scrollspy.js' | relative_url }}"></script>
+<script>
+  var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+    target: '#toc_with_scrollspy',
+  })
+</script>
+{% endcomment %}
+<nav
+  class="prose prose-lg prose-teal z-50 px-4 leading-tight print:hidden md:fixed md:top-0 lg:px-0 xl:prose-gray xl:top-6 xl:right-6 xl:ml-0 xl:w-80 xl:px-1 xl:pt-0 xl:text-gray-500 xl:prose-a:text-gray-500 xl:prose-a:hover:text-gray-900"
+>
+  <details
+    class="inline-block w-full rounded-b-sm bg-blue-50 px-2 ring-1 ring-white drop-shadow-lg xl:block xl:rounded xl:bg-gray-50 xl:p-3 xl:pl-2 xl:shadow-inner xl:drop-shadow-none"
+  >
+    <summary
+      class="py-2 px-3 font-semibold text-blue-600 xl:list-none xl:pl-2 xl:uppercase xl:text-gray-600"
+    >
+      Inhaltsverzeichnis
+    </summary>
+    <!-- https://github.com/allejo/jekyll-toc -->
+    <div class="mb-4 mr-4">
+      {% include toc_generator.html html=content h_min=2 h_max=2 class='list-group'
+      id="toc_with_scrollspy" anchor_class='list-group-item list-group-item-action' %}
+    </div>
+  </details>
+</nav>
+{% endif %}

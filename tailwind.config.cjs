@@ -24,8 +24,5 @@ module.exports = {
     textOpacity: false, // The text-opacity utilities like text-opacity-50},
     // 'opacity': true,	// The opacity utilities like opacity-50
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    // require('@tailwindcss/forms'),
-  ],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 }

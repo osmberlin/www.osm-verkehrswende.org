@@ -54,16 +54,24 @@ export const FilterStats = () => {
 
   // console.log('Stats:', stats, params.anzeige)
   return (
-    <dl className="mt-5 overflow-hidden rounded-lg bg-white shadow">
-      <div className="px-4 py-5 sm:p-6">
-        <dt className="text-base font-normal text-gray-900">Vollständigkeit im Kartenausschnitt</dt>
-        <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+    <dl className="overflow-hidden rounded-b-md">
+      <div className="px-2 pt-4 pb-2">
+        <dt className="text-sm font-normal leading-tight text-gray-900">
+          Vollständigkeit <br />
+          im Kartenausschnitt
+        </dt>
+        <dd
+          className={twJoin(
+            'mt-1 flex min-h-[3em]',
+            mapLoaded ? 'items-baseline justify-between' : 'items-center justify-center',
+          )}
+        >
           {mapLoaded ? (
             <>
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+              <div className="flex items-baseline text-2xl font-semibold text-emerald-600">
                 {stats[params.anzeige]?.toFixed(precision)}
                 <span className="ml-2 text-sm font-medium text-gray-500">
-                  von {stats.sum?.toFixed(precision)}&thinsp;km
+                  / {stats.sum?.toFixed(precision)}&thinsp;km
                 </span>
               </div>
               <div

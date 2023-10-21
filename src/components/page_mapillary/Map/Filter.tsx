@@ -1,57 +1,93 @@
 import { $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { FilterStats } from './FilterStats'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
+import { RadioGroup } from '@headlessui/react'
+
+const buttons: { name: string; key: SearchParamsMapillaryMap['anzeige'] }[] = [
+  { key: 'complete', name: 'Alle Foots' },
+  { key: 'completeFresh', name: 'Aktuelle Fotos' },
+  { key: 'completePano', name: 'Alle Panorama-Fotos' },
+  { key: 'completeFreshPano', name: 'Aktuelle Panorama-Fotos' },
+]
 
 export const Filter = () => {
   const params = useStore($searchParams)
   // TODO: I really don't get why we need this but something prevents the rerendering of the buttons so the active state is wrong. Did not find any AstroJS Docs on this. And we are doing what we are supposed to do with nanostores.
-  const [selected, setSelected] = useState<SearchParamsMapillaryMap['anzeige']>('complete')
+  const [localSelected, setLocalSelected] =
+    useState<SearchParamsMapillaryMap['anzeige']>('complete')
+
+  const setSelected = (value: string) => {
+    $searchParams.open({ ...params, ...{ anzeige: value } })
+    setLocalSelected(value as SearchParamsMapillaryMap['anzeige'])
+  }
 
   // Initialize URL with filter=none
   useEffect(() => {
-    $searchParams.open({ ...params, ...{ anzeige: params?.anzeige || 'complete' } })
-    setSelected((params?.anzeige as SearchParamsMapillaryMap['anzeige']) || 'complete')
+    setSelected(params.anzeige || 'complete')
   }, [])
 
-  const buttons: { name: string; key: SearchParamsMapillaryMap['anzeige'] }[] = [
-    { name: 'Alle Foots', key: 'complete' },
-    { name: 'Aktuele Fotos', key: 'completeFresh' },
-    { name: 'Alle Panorama-Fotos', key: 'completePano' },
-    { name: 'Aktuell Panorama-Fotos', key: 'completeFreshPano' },
-  ]
+  const handleChange = (value: SearchParamsMapillaryMap['anzeige']) => {
+    setSelected(value)
+  }
 
   return (
-    <nav className="absolute bottom-10 inset-x-0 items-center justify-center flex">
+    <nav className="absolute bottom-10 right-2.5 flex flex-col shadow bg-white rounded-md">
+      <RadioGroup value={localSelected} onChange={handleChange}>
+        <RadioGroup.Label className="sr-only">Filterung der Karte ändern</RadioGroup.Label>
+        {buttons.map(({ key, name }, buttonIdx) => (
+          <RadioGroup.Option
+            key={key}
+            value={key}
+            className={({ checked }) =>
+              twJoin(
+                buttonIdx === 0 ? 'rounded-tl-md rounded-tr-md' : '-mt-px',
+                // buttonIdx === buttons.length - 1 ? 'rounded-bl-md rounded-br-md' : '',
+                checked ? 'z-10 border-emerald-200 bg-emerald-50' : 'border-gray-200',
+                'relative w-full flex cursor-pointer border py-2.5 px-4 focus:outline-none hover:bg-blue-50 min-w-[19em]',
+              )
+            }
+          >
+            {({ active, checked }) => (
+              <>
+                <span
+                  className={twJoin(
+                    checked ? 'bg-emerald-600 border-transparent' : 'bg-white border-gray-300',
+                    active ? 'ring-2 ring-offset-2 ring-emerald-600' : '',
+                    'mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-full border flex items-center justify-center  ',
+                  )}
+                  aria-hidden="true"
+                >
+                  <span className="rounded-full bg-white w-1.5 h-1.5" />
+                </span>
+                <span className="ml-3 flex flex-col">
+                  <RadioGroup.Label
+                    as="div"
+                    className={twJoin(
+                      checked ? 'text-emerald-900 font-medium' : 'text-gray-900 font-normal',
+                      'text-sm',
+                    )}
+                  >
+                    {name}
+                  </RadioGroup.Label>
+                  {/* <RadioGroup.Description
+                      as="span"
+                      className={twJoin(
+                        checked ? 'text-emerald-700' : 'text-gray-500',
+                        'block text-sm',
+                      )}
+                    >
+                      {setting.description}
+                    </RadioGroup.Description> */}
+                </span>
+              </>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </RadioGroup>
       <FilterStats />
-      <dl className="grid grid-cols-1 divide-y divide-gray-200 rounded-lg bg-white shadow md:grid-cols-4 md:divide-x md:divide-y-0">
-        {buttons.map((button) => {
-          return (
-            <button
-              key={button.name}
-              className={twJoin(
-                'px-4 py-5 sm:p-6 text-left w-30 relative first:rounded-l-lg last:rounded-r-lg shadow-inner items-start justify-end flex flex-col',
-                selected === button.key
-                  ? 'bg-gray-200 shadow-gray-300'
-                  : 'cursor-pointer hover:bg-gray-50',
-              )}
-              onClick={() => {
-                $searchParams.open({ ...params, ...{ anzeige: button.key } })
-                setSelected(button.key)
-              }}
-            >
-              {selected === button.key && (
-                <div className="absolute -top-3 right-1/2 translate-y-1/2 border-8 border-t-0 border-transparent border-b-gray-300">
-                  {/* Arrow */}
-                </div>
-              )}
-              <dt className="text-base font-normal text-gray-900 leading-tight">{button.name}</dt>
-            </button>
-          )
-        })}
-      </dl>
     </nav>
   )
 }

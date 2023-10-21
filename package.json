@@ -12,7 +12,7 @@
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\" --write",
     "check": "npm run type-check && npm run format && npm run lint",
-    "update": "npx npm-check-updates -u",
+    "update": "npx taze major --write",
     "prepare": "husky install"
   },
   "dependencies": {

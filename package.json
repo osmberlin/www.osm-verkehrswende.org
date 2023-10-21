@@ -22,6 +22,7 @@
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.2",
     "@astrojs/tailwind": "^5.0.2",
+    "@astrojs/ts-plugin": "^1.2.0",
     "@headlessui/react": "^1.7.17",
     "@nanostores/react": "^0.7.1",
     "@nanostores/router": "^0.11.0",

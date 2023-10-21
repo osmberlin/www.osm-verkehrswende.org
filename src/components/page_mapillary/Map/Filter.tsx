@@ -34,7 +34,7 @@ export const Filter = () => {
   }
 
   return (
-    <nav className="absolute bottom-10 right-2.5 flex flex-col shadow bg-white rounded-md">
+    <nav className="absolute left-6 top-6 flex flex-col shadow bg-white rounded-md">
       <RadioGroup value={localSelected} onChange={handleChange}>
         <RadioGroup.Label className="sr-only">Filterung der Karte ändern</RadioGroup.Label>
         {buttons.map(({ key, name }, buttonIdx) => (

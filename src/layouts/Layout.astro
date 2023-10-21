@@ -1,12 +1,13 @@
 ---
-import './base.css'
 import TailwindResponsiveHelper from '@components/Layout/TailwindResponsiveHelper.astro'
+import './base.css'
+import type { LayoutLanguage } from './types'
 
 type Props = {
   title: string
   noindex?: boolean | undefined
   canonicalUrl?: string
-  language?: 'en' | 'de'
+  language?: LayoutLanguage | undefined
   description?: string
   imagePath?: string
   imageAlt?: string

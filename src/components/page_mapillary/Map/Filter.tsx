@@ -1,10 +1,10 @@
 import { $searchParams } from '@components/BaseMap/store'
+import { RadioGroup } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { FilterStats } from './FilterStats'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
-import { RadioGroup } from '@headlessui/react'
 
 const buttons: { name: string; key: SearchParamsMapillaryMap['anzeige'] }[] = [
   { key: 'complete', name: 'Alle Foots' },

@@ -1,11 +1,11 @@
 ---
-import { pickProject } from '@layouts/utils/pickProject'
-import NavigationFooter from './NavigationFooter.astro'
-import MenuItem from './menuItem/MenuItem.astro'
-import MenuItemHeadline from './menuItem/MenuItemHeadline.astro'
 // TODO: Replace the wrapper for <MenuItem> with <MenuItemWrapper> which does not work ATM.
-// import MenuItemWrapper from './menuItem/MenuItemWrapper.astro'
-import { projectToNavigation, type NavigationProjects } from './projectToNavigation'
+// import MenuItemWrapper from './MenuItem/MenuItemWrapper.astro'
+import { pickProject } from '@layouts/utils/pickProject'
+import MenuItem from './MenuItem/MenuItem.astro'
+import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
+import NavigationFooter from './NavigationFooter.astro'
+import { projectToNavigation, type NavigationProjects } from './projectToNavigation.const'
 
 interface Props {
   project: NavigationProjects

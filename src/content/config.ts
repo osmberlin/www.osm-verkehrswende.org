@@ -1,4 +1,4 @@
-import { navigationProjects } from '@components/Layout/projectToNavigation'
+import { navigationProjects } from '@layouts/Navigation/projectToNavigation.const'
 import { defineCollection, z } from 'astro:content'
 
 const postCollection = defineCollection({

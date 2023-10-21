@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
-import MenuItem from './menuItem/MenuItem.astro'
-import MenuItemHeadline from './menuItem/MenuItemHeadline.astro'
-import MenuItemWrapper from './menuItem/MenuItemWrapper.astro'
 import { pickProject } from '@layouts/utils/pickProject'
+import { getCollection } from 'astro:content'
+import MenuItem from './MenuItem/MenuItem.astro'
+import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
+import MenuItemWrapper from './MenuItem/MenuItemWrapper.astro'
 
 const project = pickProject(Astro.request.url)
 const allPosts = await getCollection('posts')

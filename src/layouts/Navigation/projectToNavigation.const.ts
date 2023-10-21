@@ -1,6 +1,6 @@
 import NavigationNews from './NavigationNews.astro'
-import AboutHeader from './menu/AboutHeader.astro'
-import AboutMenu from './menu/AboutMenu.astro'
+import PageAboutHeader from './page_about/PageAboutHeader.astro'
+import PageAboutMenu from './page_about/PageAboutMenu.astro'
 
 export type NavigationProjects = keyof typeof projectToNavigation
 
@@ -18,8 +18,8 @@ export const navigationProjects = [
 export const projectToNavigation = {
   about: {
     label: null,
-    header: AboutHeader,
-    menus: [AboutMenu, NavigationNews],
+    header: PageAboutHeader,
+    menus: [PageAboutMenu, NavigationNews],
   },
   bikeindex: {
     label: 'BikeIndex',
@@ -92,7 +92,7 @@ export const projectToNavigation = {
   },
   unknown: {
     label: null,
-    header: AboutHeader,
+    header: PageAboutHeader,
     menus: undefined,
   },
 }

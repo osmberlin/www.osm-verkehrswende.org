@@ -1,4 +1,7 @@
-import { NavigationProjects, projectToNavigation } from '@components/Layout/projectToNavigation'
+import {
+  projectToNavigation,
+  type NavigationProjects,
+} from '@layouts/Navigation/projectToNavigation.const'
 
 export const pickProject = (astroUrl: string) => {
   const pathname = new URL(astroUrl).pathname

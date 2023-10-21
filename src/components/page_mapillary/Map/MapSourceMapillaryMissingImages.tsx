@@ -66,11 +66,17 @@ export const MapSourceMapillaryMissingImages = () => {
         return (
           <Layer
             key={layer.id}
-            {...(layer as any)}
+            id={layer.id}
+            type="line"
+            paint={{
+              ...layer.paint,
+              'line-opacity': visible ? 1 : 0,
+            }}
+            filter={filter}
             source="mapillary-missing-images"
             source-layer="default"
-            filter={filter}
-            layout={{ visibility: visible ? 'visible' : 'none' }}
+            // We cannot use layout.visibilty because our FilterStat need to calculate all stats at once, which it can't when the layer is hidden. We hide it by opacity instead.
+            // layout={{ visibility: visible ? 'visible' : 'none' }}
           />
         )
       })}

@@ -184,10 +184,10 @@ import LayoutArticlePage from '@layouts/LayoutArticlePage.astro'
     <h3>Aus OSM-Sicht</h3>
 
     <p>
-      Das <code>parking:lane</code>-Schema existiert schon länger, aber ist wenig verbreitet in
-      seiner Nutzung und auch im Support bei Editoren oder in der Verwendung bei Analysen. Bisher
-      fehlten Lösungen, die Genauigkeit der Daten zu erhöhen ohne die Straße so zu zerstückeln, dass
-      die Wartbarkeit der Daten darunter leidet.
+      Das <code>parking</code>-Schema existiert schon länger, aber ist wenig verbreitet in seiner
+      Nutzung und auch im Support bei Editoren oder in der Verwendung bei Analysen. Bisher fehlten
+      Lösungen, die Genauigkeit der Daten zu erhöhen ohne die Straße so zu zerstückeln, dass die
+      Wartbarkeit der Daten darunter leidet.
     </p>
 
     <h3>Aus Sicht der Verkehrswende</h3>
@@ -212,40 +212,57 @@ import LayoutArticlePage from '@layouts/LayoutArticlePage.astro'
 
     <ul>
       <li>
-        <strong>Datenprozessierung:</strong> Alex Seidel hat im Berliner Ortsteil Neukölln ein
+        <strong>Proof Of Concept:</strong> Alex Seidel hat im Berliner Ortsteil Neukölln ein
         “subtraktives Modell” erprobt, das sehr präzise Parkraumanalysen erlaubt. Dafür wird zuerst
-        konsequent mit dem
-        <code>parking:lane</code>-Schema gemapped. Anschließend werden zusätzliche Daten erfasst,
-        die durch Subtraktion von Bereichen, in denen nicht geparkt werden kann, helfen die
-        Datenqualität zu erhöhen (z.B. Kreuzungen, Gehwegübergänge, Einfahrten, Bushaltestellen…;
-        vgl.
+        konsequent mit dem <code>parking</code>-Schema gemapped. Anschließend werden zusätzliche
+        Daten erfasst, die durch Subtraktion von Bereichen, in denen nicht geparkt werden kann,
+        helfen die Datenqualität zu erhöhen (z.B. Kreuzungen, Gehwegübergänge, Einfahrten,
+        Bushaltestellen…; vgl.
         <a href="https://parkraum.osm-verkehrswende.org/posts/2021-06-08-vortrag-fossgis">
           Vortrag FOSSGIS 2021: “Parkplatzzählung und Parkraumanalysen auf OSM-Basis”
-        </a>).
-      </li>
-      <li>
-        <strong>Prototyp:</strong> Beispielhaft dafür haben wir eine Parkraumkarte für die Berliner
-        Stadtteil Neukölln entwickelt, die pro Zoomstufe Details zum Parkraum übersichtlich
-        präsentiert (siehe
+        </a>). Um das Ergebnis dieser Teilmanuellen Prozessierung zu zeigen, haben wir eine
+        Parkraumkarte für die Berliner Stadtteil Neukölln entwickelt, die pro Zoomstufe Details zum
+        Parkraum übersichtlich präsentiert (siehe
         <a href="https://parkraum.osm-verkehrswende.org/project-prototype-neukoelln/"
           >parkraum.osm-verkehrswende.org/project-prototype-neukoelln/</a
         >).
       </li>
       <li>
-        <strong>Kooperation:</strong> Mit dem Bezirksamt Friedrichshain-Kreuzberg läuft
+        <strong>Prototype Fund:</strong> Ende 2022 wurden wir <a
+          href="https://parkraum.osm-verkehrswende.org/posts/2022-09-01-prototype-fund/"
+          >im Rahmen des Protoype Fund gefördert</a
+        >. Im diesem Rahmen haben wir die Prozessierung des Proof Of Concept technologisch
+        vollständig überarbeitet. Das <a href="https://github.com/osmberlin/osm-parking-processing"
+          >Ergebnis ist OpenSource</a
+        > und erlaubt über 10 Regionen ihre Parkraumdaten auf unsere Website zu visualisieren und
+        exportieren. Dafür haben wir in Kooperation mit dem Radverkehrsatlas-Projekt von <a
+          href="https://www.fixmycity.de/">FixMyCity</a
+        > eine interaktive Karte mit Analyse- und Summierungsfunktion gebaut.
+      </li>
+      <li>
+        <strong>Kooperation:</strong> 2022 haben wir mit dem Bezirksamt Friedrichshain-Kreuzberg
         <a href="https://fixmyberlin.de/parkraum/friedrichshain-kreuzberg">ein Modellprojekt</a>
          (<a
           href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Parkraum/Mapping_Kampagne_Xhain"
           >Wikisseite</a
-        >) um den Parkraum im Bezirk anhand dieses Vorgehens zu erfassen und auszuwerten. Die Daten
-        werden in diesem Rahmen formal geprüft und dann für die interne Verwendung freigegeben.
+        >) durchgeführt um den Parkraum im Bezirk anhand dieses Vorgehens zu erfassen und
+        auszuwerten. Die Daten werden wurden diesem Rahmen formal geprüft und stehen jetzt offiziell
+        im Datenportal von Friedrichshain-Kreuzberg als OpenData bereit.
       </li>
       <li>
-        <strong>Tagging:</strong> Wir haben den
+        <strong>Tagging:</strong> 2020 haben wir den
         <a href="https://wiki.openstreetmap.org/wiki/Proposed_features/parking%3Dstreet_side"
           >Tag <code>parking=street_side</code> offiziell eingeführt (Proposal)</a
         >
          um die Daten von separat gemappten Parkbuchten zu verbessern.
+      </li>
+      <li>
+        <strong>Tagging:</strong> 2022 haben wir <a
+          href="https://wiki.openstreetmap.org/wiki/Proposal:Street_parking_revision"
+          >das <code>parking</code>
+           Schema offiziell überarbeitet (Proposal)</a
+        >
+         und es damit modernisiert, mehr Sonderfälle abgedeckt und stark vereinfacht.
       </li>
       <li>
         <strong>Editor:</strong> Für die Mapping-”Kampagne” in Berlin haben wir den Spezial-Editor
@@ -260,6 +277,10 @@ import LayoutArticlePage from '@layouts/LayoutArticlePage.astro'
         <strong>Kampagnenunterstützung und Datenabgleich:</strong> Für die Mapping-”Kampagne” in
         Berlin haben wir Tools zum Datenabgleich und zur Koordination von Mapper:innen evaluiert und
         exemplarisch angewendet.
+      </li>
+      <li>
+        <strong>OpenData-Kooperation:</strong> In Berlin stehen wir in Kontakt mit anderen Stellen,
+        die OpenData zum Parken von KfZ erstellen, vor allem dem dem eUVM Projekt der SenUMVK.
       </li>
     </ul>
 

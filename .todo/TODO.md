@@ -1,5 +1,9 @@
 # TODOs
 
+## Texte
+
+Entscheiden, was wir mit den Homepage Text machen. Die müssten aktualisiert werden. Oder ganz verschoben auf die Projekte…
+
 ## TODOs Migration
 
 - URL Recirects…

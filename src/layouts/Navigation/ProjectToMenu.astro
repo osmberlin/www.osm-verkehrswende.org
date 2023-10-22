@@ -25,7 +25,7 @@ const { menus } = projectsConfig[project]
 
     return (
       <Fragment>
-        {menu.label && <MenuItemHeadline>{menu.label}</MenuItemHeadline>}
+        {typeof menu.label === 'string' && <MenuItemHeadline>{menu.label}</MenuItemHeadline>}
 
         <div class="mb-7 mt-5 flex flex-col overflow-hidden rounded border border-b-0 border-gray-200 sm:mt-0">
           {menu.items.map(({ href, label }) => (

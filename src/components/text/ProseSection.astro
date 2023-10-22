@@ -1,0 +1,21 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+type Props = {
+  highlight?: boolean | undefined
+  classes?: string | undefined
+}
+
+const { highlight, classes } = Astro.props
+---
+
+<section
+  class={twMerge(
+    'prose-lg max-w-prose mb-20',
+    'prose-headings:text-sky-700 prose-headings:mb-1',
+    highlight ? 'notice bg-emerald-100' : '',
+    classes,
+  )}
+>
+  <slot />
+</section>

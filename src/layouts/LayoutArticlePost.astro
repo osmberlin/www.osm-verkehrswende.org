@@ -2,6 +2,7 @@
 import { type CollectionEntry } from 'astro:content'
 import { twJoin } from 'tailwind-merge'
 import LayoutArticle from './LayoutArticle.astro'
+import { proseBase, proseHeadings } from './baseStyles'
 
 export type Props = CollectionEntry<'posts'>['data']
 
@@ -12,20 +13,12 @@ const { title, menuHighlight, noindex, language, pubDate, updatedDate, author } 
   <!-- {% if page.showToc %}prose-h1:mt-10 {% endif %} -->
 
   <article
-    class={twJoin(
-      'prose prose-blue',
-      'max-w-xl',
-      'py-6 px-4 lg:px-0 lg:pl-5',
-      '[--tw-prose-bullets:_gray]',
-      'prose-headings:scroll-mt-10 prose-h1:text-sky-700 prose-h1:mb-3 prose-h1:mt-0 prose-h2:mt-14 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-4',
-      'prose-blockquote:bg-gray-100 prose-blockquote:p-4 prose-blockquote:pb-2',
-      'prose-code:rounded prose-code:bg-neutral-100 prose-code:box-decoration-clone prose-code:py-1 prose-code:px-1.5 prose-code:text-neutral-800 prose-code:before:content-none prose-code:after:content-none',
-    )}
+    class={twJoin(proseBase, 'max-w-prose', proseHeadings)}
     lang={language}
     itemscope
     itemtype="http://schema.org/BlogPosting"
   >
-    <header class="mb-4">
+    <header class="mb-14">
       <h1 itemprop="name headline">{title}</h1>
       <p class="text-gray-400">
         <time datetime={pubDate.toISOString()} itemprop="datePublished">

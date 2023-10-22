@@ -1,31 +1,28 @@
 ---
+import ProjectHeadline from '@components/text/ProjectHeadline.astro'
+import ProseSection from '@components/text/ProseSection.astro'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
-import { proseSection } from '@layouts/baseStyles'
 ---
 
 <LayoutArticle
   title="Mapillary Missing Streets — A project of the OpenStreetMap Verkehrswende-Group"
   language="en"
 >
-  <h1
-    class="bg-gradient-to-br from-teal-500 to-emerald-400 bg-clip-text pb-2 text-4xl font-extrabold leading-8 text-transparent md:text-6xl md:leading-[3.25rem]"
-  >
-    Mapillary Missing Streets
-  </h1>
-  <p class="text-3xl font-bold text-sky-700 mb-20">
-    Find the streets for your next Mapillary trip…
-  </p>
+  <ProjectHeadline
+    title="Mapillary Missing Streets"
+    subtitle="Find the streets for your next Mapillary trip…"
+  />
 
-  <section class={proseSection}>
+  <ProseSection highlight>
     <h2 id="about">About</h2>
 
     <p>
       Street level imagery is a great way to update OpenStreetMap. We where looking for an easy way
       to find those streets, that require an update.
     </p>
-  </section>
+  </ProseSection>
 
-  <section class={proseSection}>
+  <ProseSection>
     <h2 id="processing">Processing</h2>
 
     <p>
@@ -35,9 +32,9 @@ import { proseSection } from '@layouts/baseStyles'
       >. This is where you will find the default settings used to generate the data used on this
       page.
     </p>
-  </section>
+  </ProseSection>
 
-  <section class={proseSection}>
+  <ProseSection>
     <h2 id="map">Map</h2>
 
     <p>
@@ -47,5 +44,5 @@ import { proseSection } from '@layouts/baseStyles'
         >github.com/osmberlin/www.osm-verkehrswende.org</a
       >.
     </p>
-  </section>
+  </ProseSection>
 </LayoutArticle>

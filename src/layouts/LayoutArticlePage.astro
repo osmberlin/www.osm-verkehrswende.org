@@ -1,29 +1,21 @@
 ---
 import { twJoin } from 'tailwind-merge'
 import LayoutArticle from './LayoutArticle.astro'
-import { proseBase } from './baseStyles'
+import { proseBase, proseHeadings } from './baseStyles'
 
 type Props = {
   title: string
   menuHighlight?: string | undefined
   noindex?: boolean | undefined
-  maxWidthClass?: string | undefined
   language?: 'en' | 'de' | undefined
 }
 export type LayoutArticleProps = Props
 
-const { title, menuHighlight, noindex, maxWidthClass, language } = Astro.props
+const { title, menuHighlight, noindex, language } = Astro.props
 ---
 
 <LayoutArticle title={title} menuHighlight={menuHighlight} noindex={noindex}>
-  <article
-    class={twJoin(
-      proseBase,
-      maxWidthClass || 'max-w-prose',
-      'prose-headings:scroll-mt-10 prose-h1:text-sky-700 prose-h1:mb-3 prose-h1:mt-0 prose-h2:mt-16 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-4',
-    )}
-    lang={language}
-  >
+  <article class={twJoin(proseBase, 'max-w-prose', proseHeadings)} lang={language}>
     <slot />
   </article>
 </LayoutArticle>

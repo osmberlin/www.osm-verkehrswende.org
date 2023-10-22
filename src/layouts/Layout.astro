@@ -16,6 +16,7 @@ type Props = {
 }
 
 const project = pickProject(Astro.request.url)
+const projectConfig = projectsConfig[project]
 
 const defaults = {
   title: projectsConfig[project].meta.title,
@@ -25,7 +26,16 @@ const defaults = {
   imageAlt: projectsConfig[project].meta.imageAlt,
 }
 
-const { title, noindex, canonicalUrl, language, description, imagePath, imageAlt } = Astro.props
+const {
+  title,
+  noindex: contentNoindex,
+  canonicalUrl,
+  language,
+  description,
+  imagePath,
+  imageAlt,
+} = Astro.props
+const noindex = projectConfig.enabled !== true || contentNoindex
 ---
 
 <!doctype html>

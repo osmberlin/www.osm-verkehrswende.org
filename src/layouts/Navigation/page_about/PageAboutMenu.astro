@@ -4,7 +4,9 @@ import MenuItemHeadline from '../MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from '../MenuItem/MenuItemWrapper.astro'
 import { projectsConfig } from 'src/projectsConfig.const'
 
-const MenuItems = Object.entries(projectsConfig).filter(([_key, value]) => value.label)
+const enabledProjects = Object.entries(projectsConfig)
+  .filter(([_key, value]) => value.enabled)
+  .filter(([_key, value]) => value.label)
 ---
 
 <MenuItemWrapper>
@@ -13,5 +15,5 @@ const MenuItems = Object.entries(projectsConfig).filter(([_key, value]) => value
 
 <MenuItemHeadline>Projekte</MenuItemHeadline>
 <MenuItemWrapper>
-  {MenuItems.map(([key, { label }]) => <MenuItem href={`/${key}`}>{label}</MenuItem>)}
+  {enabledProjects.map(([key, { label }]) => <MenuItem href={`/${key}`}>{label}</MenuItem>)}
 </MenuItemWrapper>

@@ -10,6 +10,7 @@ export type NavigationProjects = keyof typeof projectsConfig
 
 export const projectsConfig = {
   about: {
+    enabled: true,
     label: null,
     header: PageAboutHeader,
     menus: [PageAboutMenu, NavigationNews],
@@ -23,6 +24,7 @@ export const projectsConfig = {
     },
   },
   bikeindex: {
+    enabled: false,
     label: 'BikeIndex',
     header: { name: 'Bikeindex Project', link: '/bikeindex' },
     menus: [
@@ -53,6 +55,7 @@ export const projectsConfig = {
     },
   },
   parking: {
+    enabled: true,
     label: 'Parkraum',
     header: { name: 'Parkraumanalyse', link: '/parking' },
     menus: [
@@ -76,6 +79,7 @@ export const projectsConfig = {
     },
   },
   'bicycle-parking': {
+    enabled: true,
     label: 'Fahrradstellplätze',
     header: { name: 'Fahrradstellplätze', link: '/bicycle-parking' },
     menus: [
@@ -91,6 +95,7 @@ export const projectsConfig = {
     },
   },
   benches: {
+    enabled: false,
     label: 'Bänke',
     header: { name: 'Bänke', link: '/benches' },
     menus: [
@@ -106,11 +111,12 @@ export const projectsConfig = {
     },
   },
   mapillary: {
+    enabled: true,
     label: 'Mapillary',
     header: { name: 'Mapillary Missing Streets', link: '/mapillary' },
     menus: [
       {
-        label: null,
+        label: true,
         items: [
           { href: '/mapillary', label: 'Über das Projekt' },
           { href: '/mapillary/map', label: 'Karte' },
@@ -127,6 +133,7 @@ export const projectsConfig = {
     },
   },
   unknown: {
+    enabled: false,
     label: null,
     header: PageAboutHeader,
     menus: undefined,

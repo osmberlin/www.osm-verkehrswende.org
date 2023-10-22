@@ -1,14 +1,14 @@
-import NavigationNews from './NavigationNews.astro'
-import PageAboutHeader from './page_about/PageAboutHeader.astro'
-import PageAboutMenu from './page_about/PageAboutMenu.astro'
+import NavigationNews from './layouts/Navigation/NavigationNews.astro'
+import PageAboutHeader from './layouts/Navigation/page_about/PageAboutHeader.astro'
+import PageAboutMenu from './layouts/Navigation/page_about/PageAboutMenu.astro'
 
-export type NavigationProjects = keyof typeof projectToNavigation
+export type NavigationProjects = keyof typeof projectsConfig
 
 // ATTENTION:
 // Whenever we add a new project, we need to also add it to
 // `src/content/config.ts` which enables adding posts for this project.
 
-export const projectToNavigation = {
+export const projectsConfig = {
   about: {
     label: null,
     header: PageAboutHeader,

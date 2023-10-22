@@ -1,12 +1,9 @@
-import {
-  projectToNavigation,
-  type NavigationProjects,
-} from '@layouts/Navigation/projectToNavigation.const'
+import { projectsConfig, type NavigationProjects } from 'src/projectsConfig.const'
 
 export const pickProject = (astroUrl: string) => {
   const pathname = new URL(astroUrl).pathname
 
-  const knownProjectFromPath = Object.keys(projectToNavigation).find(
+  const knownProjectFromPath = Object.keys(projectsConfig).find(
     (item) => item === pathname.split('/').at(1),
   )
 

@@ -2,9 +2,9 @@
 import MenuItem from '../MenuItem/MenuItem.astro'
 import MenuItemHeadline from '../MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from '../MenuItem/MenuItemWrapper.astro'
-import { projectToNavigation } from '../projectToNavigation.const'
+import { projectsConfig } from 'src/projectsConfig.const'
 
-const MenuItems = Object.entries(projectToNavigation).filter(([_key, value]) => value.label)
+const MenuItems = Object.entries(projectsConfig).filter(([_key, value]) => value.label)
 ---
 
 <MenuItemWrapper>

@@ -1,5 +1,5 @@
 ---
-import { projectToNavigation } from './Navigation/projectToNavigation.const'
+import { projectsConfig } from 'src/projectsConfig.const'
 import TailwindResponsiveHelper from './TailwindResponsiveHelper.astro'
 import './base.css'
 import type { LayoutLanguage } from './types'
@@ -18,11 +18,11 @@ type Props = {
 const project = pickProject(Astro.request.url)
 
 const defaults = {
-  title: projectToNavigation[project].meta.title,
-  language: projectToNavigation[project].meta.language,
-  description: projectToNavigation[project].meta.description,
-  imagePath: projectToNavigation[project].meta.imagePath,
-  imageAlt: projectToNavigation[project].meta.imageAlt,
+  title: projectsConfig[project].meta.title,
+  language: projectsConfig[project].meta.language,
+  description: projectsConfig[project].meta.description,
+  imagePath: projectsConfig[project].meta.imagePath,
+  imageAlt: projectsConfig[project].meta.imageAlt,
 }
 
 const { title, noindex, canonicalUrl, language, description, imagePath, imageAlt } = Astro.props

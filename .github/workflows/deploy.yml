@@ -20,12 +20,12 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
-      - name: Install, build, and upload your site
-        uses: withastro/action@v0
-        with:
-          package-manager: bun # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-          node-version: 18.16.1 # `nvm list current` # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
-          #   path: ./berlin-bikenetwork-monitoring # The root location of your Astro project inside the repository. (optional)
+      - name: Install, build, and upload your site output
+        uses: withastro/action@v1
+        # with:
+        #   path: . # The root location of your Astro project inside the repository. (optional)
+        #   node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
+        #   package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
   deploy:
     needs: build

@@ -10,14 +10,48 @@ import LayoutArticle from '@layouts/LayoutArticle.astro'
   <ProjectHeadline title="Fahrradstellplätze aus OSM" subtitle="Tagging, Tools und Analysen" />
 
   <ProseSection highlight>
-    <h2 class="sr-only" id="video">Datenabgleich</h2>
-
-    <p class="pt-4">Foo</p>
+    <p>
+      Fahrradstellplätze sind ein wichtiger Bestandteil der Verkehrswende. Wenn sie strategisch
+      eingesetzt werden, machen sie nicht nur den Radverkehr im Straßenraum sichtbar und schaffen
+      sicher(ere) Abstelloptionen, sondern können zusätzlich Sichtachsen für Rad- und Fußverkehr
+      schützen.
+    </p>
+    <p>
+      In OpenStreetMap haben wir den besten, deutschlandweiten Datensatz für Fahrradstellplätze. Und
+      gemeinsam können wir ihn noch besser machen.
+    </p>
   </ProseSection>
 
   <ProseSection>
-    <h2 id="verkehrswende-osm">H2</h2>
+    <h2 id="datenabgleich">Datenabgleich</h2>
 
-    <p>Foo</p>
+    <p>
+      Eine zentrale Fragen bei allen Datensätze ist, wie vollständig sie sind. Um das für OSM zu
+      beantworten, hat Christopher eine Software gebaut, die offene Datensätze zu Fahrradstellplätze
+      mit OpenStreetMap abgleicht: <a href="https://bikeparking.lorenz.lu/index"
+        >bikeparking.lorenz.lu</a
+      >.
+    </p>
+    <p>
+      Mit diesem Tool können wir für alle Orte, die offene Daten zu ihren Fahrradstellplätze
+      verfügbar machen, prüfen, ob diese in OSM existieren. Perspektiven können auch die Attribute
+      der kartierten Anlagen abgeglichen werden.
+    </p>
+    <p><strong>Mitmachen:</strong> Bitte hilf mit und trage die Daten in OpenStreetMap ein.</p>
+  </ProseSection>
+
+  <ProseSection>
+    <h2 id="map">Karte</h2>
+
+    <p>
+      Unter <a href="https://bikeparking.lorenz.lu/parkingmap">bikeparking.lorenz.lu/parkingmap</a>
+       gibt es eine Karte alle Fahrradstellplätze weltweit.
+    </p>
+
+    <p>
+      <strong>Ausblick:</strong> Wir arbeiten daran, einen aufbereiteten Datensatz im <a
+        href="https://radverkehrsatlas.de/">radverkehrsatlas.de</a
+      > bereitzustellen.
+    </p>
   </ProseSection>
 </LayoutArticle>

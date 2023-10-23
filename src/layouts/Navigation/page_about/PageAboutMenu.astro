@@ -10,7 +10,7 @@ const enabledProjects = Object.entries(projectsConfig)
 ---
 
 <MenuItemWrapper>
-  <MenuItem href="/">Übersicht</MenuItem>
+  <MenuItem href="/" highlightExactMatch>Übersicht</MenuItem>
 </MenuItemWrapper>
 
 <MenuItemHeadline>Projekte</MenuItemHeadline>
@@ -24,6 +24,7 @@ const enabledProjects = Object.entries(projectsConfig)
           </MenuItem>
         )
       }
+
       return <MenuItem href={`/${key}`}>{project.label}</MenuItem>
     })
   }

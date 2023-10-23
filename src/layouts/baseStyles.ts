@@ -17,7 +17,7 @@ export const proseHeadings = twJoin(
   // <h#> anchor position
   'prose-headings:scroll-mt-10',
   // <h1>
-  'prose-h1:text-sky-700 prose-h1:mb-3 prose-h1:mt-0',
+  'prose-h1:text-sky-700 prose-h1:mt-16 prose-h1:mb-3 first:prose-h1:mt-0',
   // <h2>
   'prose-h2:mt-16 prose-h2:mb-4',
   // <h3>

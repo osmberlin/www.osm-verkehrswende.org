@@ -23,37 +23,6 @@ export const projectsConfig = {
       language: 'de',
     },
   },
-  bikeindex: {
-    enabled: false,
-    label: 'BikeIndex',
-    header: { name: 'Bikeindex Project', link: '/bikeindex' },
-    menus: [
-      {
-        label: null,
-        items: [
-          { href: '/bikeindex', label: 'Über das Projekt' },
-          { href: '/bikeindex/participate', label: 'Mitmachen' },
-        ],
-      },
-      {
-        label: 'Datensätze',
-        items: [
-          { href: '/bikeindex/data/category', label: 'Führungsform' },
-          { href: '/bikeindex/data/width', label: 'Breite' },
-          { href: '/bikeindex/data/surfacequality', label: 'Oberfläche' },
-          { href: '/bikeindex/data/separation', label: 'Schutz' },
-        ],
-      },
-      NavigationNews,
-    ],
-    meta: {
-      title: 'TODO META',
-      description: 'TODO META',
-      imagePath: '/social-sharing.png',
-      imageAlt: '/social-sharing.png',
-      language: 'de',
-    },
-  },
   parking: {
     enabled: true,
     label: 'Parkraum',
@@ -100,6 +69,37 @@ export const projectsConfig = {
     header: { name: 'Bänke', link: '/benches' },
     menus: [
       { label: null, items: [{ href: '/benches', label: 'Über das Projekt' }] },
+      NavigationNews,
+    ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
+  },
+  bikeindex: {
+    enabled: false,
+    label: 'BikeIndex',
+    header: { name: 'Bikeindex Project', link: '/bikeindex' },
+    menus: [
+      {
+        label: null,
+        items: [
+          { href: '/bikeindex', label: 'Über das Projekt' },
+          { href: '/bikeindex/participate', label: 'Mitmachen' },
+        ],
+      },
+      {
+        label: 'Datensätze',
+        items: [
+          { href: '/bikeindex/data/category', label: 'Führungsform' },
+          { href: '/bikeindex/data/width', label: 'Breite' },
+          { href: '/bikeindex/data/surfacequality', label: 'Oberfläche' },
+          { href: '/bikeindex/data/separation', label: 'Schutz' },
+        ],
+      },
       NavigationNews,
     ],
     meta: {

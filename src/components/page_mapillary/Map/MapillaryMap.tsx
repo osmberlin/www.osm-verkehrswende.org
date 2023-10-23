@@ -4,7 +4,7 @@ import { BaseMap } from '../../BaseMap/BaseMap'
 import { MapInspector } from './MapInspector'
 import { MapSourceBoundaries } from './MapSourceBoundaries'
 import { MapSourceMapillaryMissingImages } from './MapSourceMapillaryMissingImages'
-import { Filter } from './Filter'
+import { Overlay } from './Overlay'
 
 export const MapillaryMap = () => {
   return (
@@ -19,7 +19,7 @@ export const MapillaryMap = () => {
       <MapSourceMapillaryMissingImages />
       <NavigationControl showCompass={false} position="top-right" />
       <MapInspector />
-      <Filter />
+      <Overlay />
     </BaseMap>
   )
 }

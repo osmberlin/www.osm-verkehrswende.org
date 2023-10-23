@@ -7,7 +7,7 @@ import { useMap } from 'react-map-gl/maplibre'
 import { twJoin } from 'tailwind-merge'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
-export const FilterStats = () => {
+export const OverlayStats = () => {
   const { current: mainMap } = useMap()
   const mapLoaded = useStore($mapLoaded)
   const params = useStore($searchParams) as SearchParamsMapillaryMap

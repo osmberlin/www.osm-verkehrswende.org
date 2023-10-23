@@ -15,5 +15,16 @@ const enabledProjects = Object.entries(projectsConfig)
 
 <MenuItemHeadline>Projekte</MenuItemHeadline>
 <MenuItemWrapper>
-  {enabledProjects.map(([key, { label }]) => <MenuItem href={`/${key}`}>{label}</MenuItem>)}
+  {
+    enabledProjects.map(([key, project]) => {
+      if ('externalUrl' in project) {
+        return (
+          <MenuItem href={project.externalUrl} external>
+            {project.label}
+          </MenuItem>
+        )
+      }
+      return <MenuItem href={`/${key}`}>{project.label}</MenuItem>
+    })
+  }
 </MenuItemWrapper>

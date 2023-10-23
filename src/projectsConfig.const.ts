@@ -26,26 +26,29 @@ export const projectsConfig = {
   parking: {
     enabled: true,
     label: 'Parkraum',
-    header: { name: 'Parkraumanalyse', link: '/parking' },
-    menus: [
-      {
-        label: null,
-        items: [
-          { href: '/parking', label: 'Über das Projekt' },
-          { href: '/parking/project-prototype-neukoelln/report', label: 'Methodenbericht' },
-          { href: '/parking/participate', label: 'Mitmachen' },
-          { href: '/parking/faq', label: 'FAQ' },
-        ],
-      },
-      NavigationNews,
-    ],
-    meta: {
-      title: 'Parkraum Projekt — OpenStreetMap Verkehrswende',
-      description: 'Spezialkarten für Neukölln zum Straßenraum und zur Parkplatzdichte.',
-      imagePath: '/social-sharing.png', // TODO
-      imageAlt: 'Daten zu Parkplätzen, berechnet auf Basis von OpenStreetMap Daten.',
-      language: 'de',
-    },
+    externalUrl: 'https://parkraum.osm-verkehrswende.org/',
+    header: undefined,
+    menus: undefined,
+    meta: undefined,
+    // menus: [
+    //   {
+    //     label: null,
+    //     items: [
+    //       { href: '/parking', label: 'Über das Projekt' },
+    //       { href: '/parking/project-prototype-neukoelln/report', label: 'Methodenbericht' },
+    //       { href: '/parking/participate', label: 'Mitmachen' },
+    //       { href: '/parking/faq', label: 'FAQ' },
+    //     ],
+    //   },
+    //   NavigationNews,
+    // ],
+    // meta: {
+    //   title: 'Parkraum Projekt — OpenStreetMap Verkehrswende',
+    //   description: 'Spezialkarten für Neukölln zum Straßenraum und zur Parkplatzdichte.',
+    //   imagePath: '/social-sharing.png', // TODO
+    //   imageAlt: 'Daten zu Parkplätzen, berechnet auf Basis von OpenStreetMap Daten.',
+    //   language: 'de',
+    // },
   },
   'bicycle-parking': {
     enabled: true,

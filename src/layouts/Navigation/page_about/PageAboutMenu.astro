@@ -2,11 +2,11 @@
 import MenuItem from '../MenuItem/MenuItem.astro'
 import MenuItemHeadline from '../MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from '../MenuItem/MenuItemWrapper.astro'
-import { projectsConfig } from 'src/projectsConfig.const'
+import { projectConfigs } from 'src/projectConfigs.const'
 
-const enabledProjects = Object.entries(projectsConfig)
+const enabledProjectConfigs = Object.entries(projectConfigs)
   .filter(([_key, value]) => value.enabled)
-  .filter(([_key, value]) => value.label)
+  .filter(([_key, value]) => value.name)
 ---
 
 <MenuItemWrapper>
@@ -16,16 +16,8 @@ const enabledProjects = Object.entries(projectsConfig)
 <MenuItemHeadline>Projekte</MenuItemHeadline>
 <MenuItemWrapper>
   {
-    enabledProjects.map(([key, project]) => {
-      if ('externalUrl' in project) {
-        return (
-          <MenuItem href={project.externalUrl} external>
-            {project.label}
-          </MenuItem>
-        )
-      }
-
-      return <MenuItem href={`/${key}`}>{project.label}</MenuItem>
+    enabledProjectConfigs.map(([_, { name, root }]) => {
+      return <MenuItem href={root}>{name}</MenuItem>
     })
   }
 </MenuItemWrapper>

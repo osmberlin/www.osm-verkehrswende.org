@@ -2,17 +2,18 @@ import NavigationNews from './layouts/Navigation/NavigationNews.astro'
 import PageAboutHeader from './layouts/Navigation/page_about/PageAboutHeader.astro'
 import PageAboutMenu from './layouts/Navigation/page_about/PageAboutMenu.astro'
 
-export type NavigationProjects = keyof typeof projectsConfig
+export type NavigationProjects = keyof typeof projectConfigs
 
 // ATTENTION:
 // Whenever we add a new project, we need to also add it to
 // `src/content/config.ts` which enables adding posts for this project.
 
-export const projectsConfig = {
+export const projectConfigs = {
   about: {
     enabled: true,
-    label: null,
-    header: PageAboutHeader,
+    name: null,
+    root: '/',
+    customHeader: PageAboutHeader,
     menus: [PageAboutMenu, NavigationNews],
     meta: {
       title: 'OpenStreetMap Verkehrswende',
@@ -25,9 +26,8 @@ export const projectsConfig = {
   },
   parking: {
     enabled: true,
-    label: 'Parkraum',
-    externalUrl: 'https://parkraum.osm-verkehrswende.org/',
-    header: undefined,
+    name: 'Parkraum',
+    root: 'https://parkraum.osm-verkehrswende.org/',
     menus: undefined,
     meta: undefined,
     // menus: [
@@ -52,8 +52,8 @@ export const projectsConfig = {
   },
   'bicycle-parking': {
     enabled: true,
-    label: 'Fahrradstellplätze',
-    header: { name: 'Fahrradstellplätze', link: '/bicycle-parking' },
+    name: 'Fahrradstellplätze',
+    root: '/bicycle-parking',
     menus: [
       {
         label: null,
@@ -75,8 +75,8 @@ export const projectsConfig = {
   },
   benches: {
     enabled: false,
-    label: 'Bänke',
-    header: { name: 'Bänke', link: '/benches' },
+    name: 'Bänke',
+    root: '/benches',
     menus: [
       { label: null, items: [{ href: '/benches', label: 'Über das Projekt' }] },
       NavigationNews,
@@ -91,8 +91,8 @@ export const projectsConfig = {
   },
   bikeindex: {
     enabled: false,
-    label: 'BikeIndex',
-    header: { name: 'Bikeindex Project', link: '/bikeindex' },
+    name: 'BikeIndex',
+    root: '/bikeindex',
     menus: [
       {
         label: null,
@@ -122,8 +122,8 @@ export const projectsConfig = {
   },
   mapillary: {
     enabled: true,
-    label: 'Mapillary',
-    header: { name: 'Mapillary Missing Streets', link: '/mapillary' },
+    name: 'Mapillary Missing Streets',
+    root: '/mapillary',
     menus: [
       {
         label: true,
@@ -144,8 +144,9 @@ export const projectsConfig = {
   },
   unknown: {
     enabled: false,
-    label: null,
-    header: PageAboutHeader,
+    name: null,
+    root: '/',
+    customHeader: PageAboutHeader,
     menus: undefined,
     meta: {
       title: 'OpenStreetMap Verkehrswende',

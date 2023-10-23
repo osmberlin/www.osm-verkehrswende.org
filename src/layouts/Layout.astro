@@ -1,5 +1,5 @@
 ---
-import { projectsConfig } from 'src/projectsConfig.const'
+import { projectConfigs } from 'src/projectConfigs.const'
 import TailwindResponsiveHelper from './TailwindResponsiveHelper.astro'
 import './base.css'
 import type { LayoutLanguage } from './types'
@@ -16,14 +16,14 @@ type Props = {
 }
 
 const project = pickProject(Astro.request.url)
-const projectConfig = projectsConfig[project]
+const projectConfig = projectConfigs[project]
 
 const defaults = {
-  title: projectsConfig[project].meta.title,
-  language: projectsConfig[project].meta.language,
-  description: projectsConfig[project].meta.description,
-  imagePath: projectsConfig[project].meta.imagePath,
-  imageAlt: projectsConfig[project].meta.imageAlt,
+  title: projectConfig.meta?.title,
+  language: projectConfig.meta?.language,
+  description: projectConfig.meta?.description,
+  imagePath: projectConfig.meta?.imagePath,
+  imageAlt: projectConfig.meta?.imageAlt,
 }
 
 const {
@@ -92,3 +92,4 @@ const noindex = projectConfig.enabled !== true || contentNoindex
   </body>
   <TailwindResponsiveHelper />
 </html>
+ src/projectConfigs.const

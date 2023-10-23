@@ -1,9 +1,9 @@
-import { projectsConfig, type NavigationProjects } from 'src/projectsConfig.const'
+import { projectConfigs, type NavigationProjects } from 'src/projectConfigs.const'
 
 export const pickProject = (astroUrl: string) => {
   const pathname = new URL(astroUrl).pathname
 
-  const knownProjectFromPath = Object.keys(projectsConfig).find(
+  const knownProjectFromPath = Object.keys(projectConfigs).find(
     (item) => item === pathname.split('/').at(1),
   )
 

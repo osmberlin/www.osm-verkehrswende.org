@@ -1,14 +1,23 @@
 ---
 import Header from './NavigationHeaderProject.astro'
-import { projectsConfig, type NavigationProjects } from 'src/projectsConfig.const'
+import { projectConfigs, type NavigationProjects } from 'src/projectConfigs.const'
 
 interface Props {
   project: NavigationProjects
 }
 
 const { project } = Astro.props
-const { header } = projectsConfig[project]
-const HeaderComp = typeof header === 'function' && header
+const projectConfig = projectConfigs[project]
+const CustomHeaderComp =
+  'customHeader' in projectConfig && typeof projectConfig.customHeader === 'function'
+    ? projectConfig.customHeader
+    : undefined
 ---
 
-{HeaderComp ? <HeaderComp /> : <Header name={header.name} link={header.link} />}
+{
+  CustomHeaderComp ? (
+    <CustomHeaderComp />
+  ) : (
+    <Header name={projectConfig.name} link={projectConfig.root} />
+  )
+}

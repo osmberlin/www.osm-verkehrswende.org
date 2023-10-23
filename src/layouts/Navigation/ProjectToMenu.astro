@@ -5,7 +5,7 @@ import { pickProject } from '@layouts/utils/pickProject'
 import MenuItem from './MenuItem/MenuItem.astro'
 import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
 import NavigationFooter from './NavigationFooter.astro'
-import { projectsConfig, type NavigationProjects } from 'src/projectsConfig.const'
+import { projectConfigs, type NavigationProjects } from 'src/projectConfigs.const'
 
 interface Props {
   project: NavigationProjects
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { project, menuHighlight } = Astro.props
-const { menus } = projectsConfig[project]
+const { menus } = projectConfigs[project]
 ---
 
 {

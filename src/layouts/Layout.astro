@@ -65,7 +65,7 @@ const noindex = projectConfig.enabled !== true || contentNoindex
     <meta name="twitter:site" content="@osmberlin" />
 
     <meta name="theme-color" content="#7D5197" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="generator" content={Astro.generator} data-generated-at={new Date().toISOString()} />
 
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml" />
 

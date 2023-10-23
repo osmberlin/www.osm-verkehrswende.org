@@ -50,7 +50,7 @@ export const OverlayStats = () => {
     fetchOrUpdateStats()
   }, [mapLoaded, params.map])
 
-  console.log('Stats:', stats, params.anzeige)
+  // console.log('Stats:', stats, params.anzeige)
   return (
     <dl className="overflow-hidden rounded-b-md">
       <div className="px-2 pt-4 pb-2">

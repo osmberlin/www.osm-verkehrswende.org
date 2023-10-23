@@ -12,7 +12,8 @@ export const OverlayStats = () => {
   const mapLoaded = useStore($mapLoaded)
   const params = useStore($searchParams) as SearchParamsMapillaryMap
 
-  const [stats, setStats] = useState<Record<string, number>>({})
+  type Stat = { km: number; percent: number }
+  const [stats, setStats] = useState<Record<string, Stat>>({})
 
   const fetchOrUpdateStats = () => {
     if (!mainMap) return
@@ -31,12 +32,16 @@ export const OverlayStats = () => {
     // console.log('Stats Feature Example:', features?.at(0), params.anzeige)
 
     const lengthByGroup: typeof stats = {}
-    features?.forEach((feature) => {
-      lengthByGroup[feature.layer.id] ||= 0
-      lengthByGroup[feature.layer.id] += length(feature, { units: 'kilometers' })
-      lengthByGroup.sum ||= 0
-      lengthByGroup.sum += length(feature)
-    })
+    for (const feature of features) {
+      lengthByGroup[feature.layer.id] ||= { km: 0, percent: 0 }
+      lengthByGroup[feature.layer.id]!.km += length(feature, { units: 'kilometers' })
+      lengthByGroup.sum ||= { km: 0, percent: 0 }
+      lengthByGroup.sum.km += length(feature, { units: 'kilometers' })
+    }
+
+    for (const groupKey of Object.keys(lengthByGroup)) {
+      lengthByGroup[groupKey]!.percent = lengthByGroup[groupKey]!.km / lengthByGroup.sum!.km
+    }
 
     setStats(lengthByGroup)
   }
@@ -45,14 +50,7 @@ export const OverlayStats = () => {
     fetchOrUpdateStats()
   }, [mapLoaded, params.map])
 
-  let percent = 0
-  let precision = 0
-  if (stats.sum) {
-    percent = (stats[params.anzeige] || 0) / stats.sum
-    precision = stats.sum < 100 ? 1 : 0
-  }
-
-  // console.log('Stats:', stats, params.anzeige)
+  console.log('Stats:', stats, params.anzeige)
   return (
     <dl className="overflow-hidden rounded-b-md">
       <div className="px-2 pt-4 pb-2">
@@ -69,19 +67,21 @@ export const OverlayStats = () => {
           {mapLoaded ? (
             <>
               <div className="flex items-baseline text-2xl font-semibold text-emerald-600">
-                {stats[params.anzeige]?.toFixed(precision)}
+                {stats[params.anzeige]?.km.toFixed((stats[params.anzeige]?.km || 0) < 100 ? 1 : 0)}
                 <span className="ml-2 text-sm font-medium text-gray-500">
-                  / {stats.sum?.toFixed(precision)}&thinsp;km
+                  / {stats.sum?.km.toFixed(stats.sum.km < 100 ? 1 : 0)}&thinsp;km
                 </span>
               </div>
               <div
                 className={twJoin(
-                  percent > 0.6 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
+                  (stats[params.anzeige]?.percent || 0) > 0.6
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800',
                   'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0',
                 )}
               >
                 <span className="sr-only">Es fehlen</span>
-                {percent.toLocaleString('DE', { style: 'percent' })}
+                {stats[params.anzeige]?.percent.toLocaleString('DE', { style: 'percent' })}
               </div>
             </>
           ) : (

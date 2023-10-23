@@ -34,10 +34,10 @@ export const projectConfigs = {
     //   {
     //     label: null,
     //     items: [
-    //       { href: '/parking', label: 'Über das Projekt' },
-    //       { href: '/parking/project-prototype-neukoelln/report', label: 'Methodenbericht' },
-    //       { href: '/parking/participate', label: 'Mitmachen' },
-    //       { href: '/parking/faq', label: 'FAQ' },
+    //       { href: '/parking/', label: 'Über das Projekt' },
+    //       { href: '/parking/project-prototype-neukoelln/report/', label: 'Methodenbericht' },
+    //       { href: '/parking/participate/', label: 'Mitmachen' },
+    //       { href: '/parking/faq/', label: 'FAQ' },
     //     ],
     //   },
     //   NavigationNews,
@@ -58,9 +58,9 @@ export const projectConfigs = {
       {
         label: null,
         items: [
-          { href: '/bicycle-parking', label: 'Über das Projekt' },
-          { href: 'https://bikeparking.lorenz.lu/missingmap/Berlin', label: 'Datenabgleich' },
-          { href: 'https://bikeparking.lorenz.lu/parkingmap', label: 'Karte' },
+          { href: '/bicycle-parking/', label: 'Über das Projekt' },
+          { href: 'https://bikeparking.lorenz.lu/missingmap/Berlin/', label: 'Datenabgleich' },
+          { href: 'https://bikeparking.lorenz.lu/parkingmap/', label: 'Karte' },
         ],
       },
       NavigationNews,
@@ -78,7 +78,7 @@ export const projectConfigs = {
     name: 'Bänke',
     root: '/benches',
     menus: [
-      { label: null, items: [{ href: '/benches', label: 'Über das Projekt' }] },
+      { label: null, items: [{ href: '/benches/', label: 'Über das Projekt' }] },
       NavigationNews,
     ],
     meta: {
@@ -97,17 +97,17 @@ export const projectConfigs = {
       {
         label: null,
         items: [
-          { href: '/bikeindex', label: 'Über das Projekt' },
-          { href: '/bikeindex/participate', label: 'Mitmachen' },
+          { href: '/bikeindex/', label: 'Über das Projekt' },
+          { href: '/bikeindex/participate/', label: 'Mitmachen' },
         ],
       },
       {
         label: 'Datensätze',
         items: [
-          { href: '/bikeindex/data/category', label: 'Führungsform' },
-          { href: '/bikeindex/data/width', label: 'Breite' },
-          { href: '/bikeindex/data/surfacequality', label: 'Oberfläche' },
-          { href: '/bikeindex/data/separation', label: 'Schutz' },
+          { href: '/bikeindex/data/category/', label: 'Führungsform' },
+          { href: '/bikeindex/data/width/', label: 'Breite' },
+          { href: '/bikeindex/data/surfacequality/', label: 'Oberfläche' },
+          { href: '/bikeindex/data/separation/', label: 'Schutz' },
         ],
       },
       NavigationNews,
@@ -128,8 +128,8 @@ export const projectConfigs = {
       {
         label: true,
         items: [
-          { href: '/mapillary', label: 'Über das Projekt' },
-          { href: '/mapillary/map', label: 'Karte' },
+          { href: '/mapillary/', label: 'Über das Projekt' },
+          { href: '/mapillary/map/', label: 'Karte' },
         ],
       },
       NavigationNews,

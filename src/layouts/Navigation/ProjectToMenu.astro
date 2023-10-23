@@ -28,11 +28,13 @@ const { menus } = projectConfigs[project]
         {typeof menu.label === 'string' && <MenuItemHeadline>{menu.label}</MenuItemHeadline>}
 
         <div class="mb-7 mt-5 flex flex-col overflow-hidden rounded border border-b-0 border-gray-200 sm:mt-0">
-          {menu.items.map(({ href, label }) => (
-            <MenuItem href={href} highlightExactMatch={true}>
-              {label}
-            </MenuItem>
-          ))}
+          {menu.items.map(({ href, label }) => {
+            return (
+              <MenuItem href={href} highlightExactMatch={true}>
+                {label}
+              </MenuItem>
+            )
+          })}
         </div>
       </Fragment>
     )

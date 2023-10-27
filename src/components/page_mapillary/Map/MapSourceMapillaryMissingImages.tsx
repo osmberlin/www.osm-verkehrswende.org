@@ -13,7 +13,7 @@ export const MapSourceMapillaryMissingImages = () => {
     <Source
       id="mapillary-missing-images"
       type="vector"
-      url="pmtiles://https://atlas-tiles.s3.eu-central-1.amazonaws.com/matchedRoads.pmtiles"
+      url="pmtiles://https://atlas-tiles.s3.eu-central-1.amazonaws.com/roadsMatched.pmtiles"
       attribution="© Mapillary, © OpenStreetMap"
     >
       <Layer

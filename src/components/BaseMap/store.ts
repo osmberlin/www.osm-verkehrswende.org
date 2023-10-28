@@ -1,6 +1,6 @@
 import { createSearchParams } from '@nanostores/router'
 import { atom } from 'nanostores'
-import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
+import type { LngLatBoundsLike, MapGeoJSONFeature, PaddingOptions } from 'react-map-gl/maplibre'
 
 export const $mapLoaded = atom(false)
 export const $clickedMapData = atom<MapGeoJSONFeature[] | undefined>(undefined)
@@ -8,7 +8,17 @@ export const $clickedMapData = atom<MapGeoJSONFeature[] | undefined>(undefined)
 export type SearchParamBaseMap = {
   map: string
 }
-export type MapSearchParam = { longitude: number; latitude: number; zoom: number }
+export type MapSearchParam = {
+  longitude: number
+  latitude: number
+  zoom: number
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setmaxbounds
+  maxBounds?: LngLatBoundsLike
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setminzoom
+  minZoom?: number
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setmaxzoom
+  maxZoom?: number
+}
 
 export const $searchParams = createSearchParams()
 

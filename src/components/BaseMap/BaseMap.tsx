@@ -58,6 +58,7 @@ export const BaseMap = ({ initialViewState, children }: Props) => {
   return (
     <Map
       initialViewState={{
+        ...initialViewState,
         zoom: latLngZoom.zoom || initialViewState.zoom,
         latitude: latLngZoom.latitude || initialViewState.latitude,
         longitude: latLngZoom.longitude || initialViewState.longitude,

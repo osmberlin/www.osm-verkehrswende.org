@@ -27,7 +27,13 @@ export const OverlayStats = () => {
     // 1. toggle the layer visibility by line-opacity, so all are queriable here
     // 2. alway calculate the stats for all 'anzeige' filter but only show the current one
     const features = mainMap.getMap().queryRenderedFeatures({
-      layers: ['complete', 'completePano', 'completeFresh', 'completeFreshPano'],
+      layers: [
+        'clicktargetAndStatsTotal',
+        'complete',
+        'completePano',
+        'completeFresh',
+        'completeFreshPano',
+      ],
     })
     // console.log('Stats Feature Example:', features?.at(0), params.anzeige)
 
@@ -35,12 +41,11 @@ export const OverlayStats = () => {
     for (const feature of features) {
       lengthByGroup[feature.layer.id] ||= { km: 0, percent: 0 }
       lengthByGroup[feature.layer.id]!.km += length(feature, { units: 'kilometers' })
-      lengthByGroup.sum ||= { km: 0, percent: 0 }
-      lengthByGroup.sum.km += length(feature, { units: 'kilometers' })
     }
 
     for (const groupKey of Object.keys(lengthByGroup)) {
-      lengthByGroup[groupKey]!.percent = lengthByGroup[groupKey]!.km / lengthByGroup.sum!.km
+      lengthByGroup[groupKey]!.percent =
+        lengthByGroup[groupKey]!.km / lengthByGroup.clicktargetAndStatsTotal!.km
     }
 
     setStats(lengthByGroup)
@@ -69,7 +74,11 @@ export const OverlayStats = () => {
               <div className="flex items-baseline text-2xl font-semibold text-emerald-600">
                 {stats[params.anzeige]?.km.toFixed((stats[params.anzeige]?.km || 0) < 100 ? 1 : 0)}
                 <span className="ml-2 text-sm font-medium text-gray-500">
-                  / {stats.sum?.km.toFixed(stats.sum.km < 100 ? 1 : 0)}&thinsp;km
+                  /{' '}
+                  {stats.clicktargetAndStatsTotal?.km.toFixed(
+                    stats.clicktargetAndStatsTotal.km < 100 ? 1 : 0,
+                  )}
+                  &thinsp;km
                 </span>
               </div>
               <div

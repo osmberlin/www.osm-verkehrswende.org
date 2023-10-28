@@ -17,8 +17,10 @@ export const MapSourceMapillaryMissingImages = () => {
       attribution="© Mapillary, © OpenStreetMap"
     >
       <Layer
-        key="clicktarget"
-        id="clicktarget"
+        // We use this layer in <OverlayStats> to calculate the total length
+        // This is also our `interactiveLayer` (update manually!)
+        key="clicktargetAndStatsTotal"
+        id="clicktargetAndStatsTotal"
         source="mapillary-missing-images"
         source-layer="default"
         type="line"

@@ -1,4 +1,4 @@
-export const interactiveLayerIds = ['clicktarget']
+export const interactiveLayerIds = ['clicktargetAndStatsTotal']
 
 export const layers = [
   {

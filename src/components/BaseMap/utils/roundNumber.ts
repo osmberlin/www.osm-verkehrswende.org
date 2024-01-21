@@ -1,5 +1,3 @@
-'use client'
-
 import type { MapSearchParam } from '../store'
 
 export const roundNumber = (number: number | string, precision?: number) => {

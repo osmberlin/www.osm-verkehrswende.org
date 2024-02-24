@@ -17,7 +17,7 @@ const { layoutType, project, menuHighlight } = Astro.props
 <nav
   data-navigation-project={project}
   class={twJoin(
-    layoutType === 'app' ? 'overflow-y-scroll bg-white' : 'mb-10',
+    layoutType === 'app' ? 'overflow-y-auto bg-white' : 'mb-10',
     'relative z-[1001] w-full px-3 py-3 shadow-xl lg:z-auto lg:w-64 lg:py-6 lg:shadow-none sm:mb-0 flex-none',
     'group/navi',
   )}

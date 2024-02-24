@@ -50,6 +50,33 @@ export const projectConfigs = {
     //   language: 'de',
     // },
   },
+  mapswipe: {
+    enabled: false,
+    name: 'Mapswipe',
+    root: '/mapswipe',
+    menus: [
+      {
+        label: null,
+        items: [{ href: '/mapswipe/', label: 'Über das Projekt' }],
+      },
+      {
+        label: 'Phase 1',
+        items: [{ href: '/mapswipe/phase1', label: 'Vollständigkeit markieren' }],
+      },
+      {
+        label: 'Phase 2 (später)',
+        items: [{ href: '/mapswipe/phase2', label: 'Gebäude aktualisieren' }],
+      },
+      NavigationNews,
+    ],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
+  },
   'bicycle-parking': {
     enabled: true,
     name: 'Fahrradstellplätze',

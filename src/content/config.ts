@@ -8,7 +8,7 @@ const postCollection = defineCollection({
       'mapswipe',
       'benches',
       'bicycle-parking',
-      'bikeindex',
+      'cqi',
       'mapillary',
       'parking',
       'unkown',

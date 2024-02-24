@@ -12,6 +12,9 @@
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\" --write",
     "check": "npm run type-check && npm run format && npm run lint",
+    "updateCqi": "npm run updateCqi:createGeojson && npm run updateCqi:createPmtiles && npm run updateCqi:upload && github",
+    "updateCqi:createPmtiles": "node ./scripts/cqi/createPmtiles.js",
+    "updateCqi:upload": "node ./scripts/cqi/upload.js",
     "updatePackages": "npx taze major --write",
     "prepare": "husky install"
   },
@@ -23,6 +26,7 @@
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/ts-plugin": "^1.4.0",
+    "@aws-sdk/client-s3": "^3.521.0",
     "@headlessui/react": "^1.7.18",
     "@nanostores/react": "^0.7.1",
     "@nanostores/router": "^0.13.0",

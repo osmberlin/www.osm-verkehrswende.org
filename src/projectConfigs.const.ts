@@ -116,27 +116,28 @@ export const projectConfigs = {
       language: 'de',
     },
   },
-  bikeindex: {
-    enabled: false,
-    name: 'BikeIndex',
-    root: '/bikeindex',
+  cqi: {
+    enabled: true,
+    name: 'Cycling Quality Index',
+    root: '/cqi',
     menus: [
       {
         label: null,
         items: [
-          { href: '/bikeindex/', label: 'Über das Projekt' },
-          { href: '/bikeindex/participate/', label: 'Mitmachen' },
+          { href: '/cqi/', label: 'Über das Projekt' },
+          { href: '/cqi/map/', label: 'Karte' },
+          // { href: '/cqi/participate/', label: 'Mitmachen' },
         ],
       },
-      {
-        label: 'Datensätze',
-        items: [
-          { href: '/bikeindex/data/category/', label: 'Führungsform' },
-          { href: '/bikeindex/data/width/', label: 'Breite' },
-          { href: '/bikeindex/data/surfacequality/', label: 'Oberfläche' },
-          { href: '/bikeindex/data/separation/', label: 'Schutz' },
-        ],
-      },
+      // {
+      //   label: 'Datensätze',
+      //   items: [
+      //     { href: '/cqi/data/category/', label: 'Führungsform' },
+      //     { href: '/cqi/data/width/', label: 'Breite' },
+      //     { href: '/cqi/data/surfacequality/', label: 'Oberfläche' },
+      //     { href: '/cqi/data/separation/', label: 'Schutz' },
+      //   ],
+      // },
       NavigationNews,
     ],
     meta: {
@@ -162,8 +163,8 @@ export const projectConfigs = {
       NavigationNews,
     ],
     meta: {
-      title: 'TODO META',
-      description: 'TODO META',
+      title: 'Mapillary Missing Streets',
+      description: 'Easily find out which streets in Berlin require fresh 360° images',
       imagePath: '/social-sharing.png',
       imageAlt: '/social-sharing.png',
       language: 'de',

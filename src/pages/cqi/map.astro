@@ -1,0 +1,24 @@
+---
+import { CqiMap } from '@components/page_cqi/Map/CqiMap'
+import LayoutApp from '@layouts/LayoutApp.astro'
+import * as turf from '@turf/turf'
+import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
+
+// const berlinInnenstadtBbox = [13.2823206, 52.4648758, 13.4757235, 52.5497578] satisfies ReturnType<
+//   typeof turf.bbox
+// >
+const cqiTest = [13.3885922, 52.4481862, 13.4991212, 52.503372599999985] satisfies ReturnType<
+  typeof turf.bbox
+>
+const maxBounds = turf.bbox(
+  turf.buffer(turf.bboxPolygon(cqiTest), 250, {
+    units: 'meters',
+  }),
+) as LngLatBoundsLike
+
+const minZoom = 12
+---
+
+<LayoutApp title="Mapillary Missing Streets — Ein Projekt der OpenStreetMap Verkehrswende-Gruppe">
+  <CqiMap client:load maxBounds={maxBounds} minZoom={minZoom} />
+</LayoutApp>

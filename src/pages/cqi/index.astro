@@ -1,0 +1,76 @@
+---
+import ProjectHeadline from '@components/text/ProjectHeadline.astro'
+import ProseSection from '@components/text/ProseSection.astro'
+import LayoutArticle from '@layouts/LayoutArticle.astro'
+---
+
+<LayoutArticle
+  title="Cycling Quality Index auf Basis von OpenStreetMap — Ein Projekt der OpenStreetMap Verkehrswende-Gruppe"
+>
+  <ProjectHeadline
+    title="Cycling Quality Index"
+    subtitle="Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes"
+  />
+
+  <ProseSection highlight>
+    <p>
+      Mit einem OSM-basierten Radverkehrs-Qualitätsindex möchten wir eine niedrigschwellige Methode
+      zur Analyse von Radnetzen bereitstellen. Auf dieser Projektseite geben wir Einblicke in den
+      Proof Of Concept aus Berlin, wo wir detaillierte OSM-Daten zur Bewertung der Radinfrastruktur
+      erhoben und ausgewertet haben. Ein solcher Index macht Lücken im Netz und somit
+      Handlungsbedarf für die Verkehrsplanung sichtbar und zeigt, wie klein der Bewegungsradius für
+      vulnerable Gruppen wie Kinder auf dem Fahrrad zum Teil ist.
+    </p>
+  </ProseSection>
+
+  <ProseSection>
+    <h2 id="qualitaet">Radnetz-Qualität mit OpenStreetMap-Daten auswerten</h2>
+
+    <p>
+      Die Eignung von Straßen und Wegen für den Radverkehr rückt im Zuge der Verkehrswende immer
+      weiter in den Fokus von Stadtentwicklung und Verkehrsplanung. Und auch in OpenStreetMap hat
+      sich in den vergangenen Jahren in Punkto Radverkehr viel getan: Vielerorts werden immer mehr
+      und zunehmend vollständige Daten zum Radverkehr erfasst und die Standardisierung
+      entsprechender Tagging-Schemata ist spürbar vorangeschritten.
+    </p>
+
+    <p>
+      In der Verkehrsplanung, der Wissenschaft und der GIS-Praxis finden sich eine Vielzahl von
+      Fahrrad-Qualitäts-Indizes, die Daten zum Radverkehr mit unterschiedlichen methodischen
+      Ansätzen analysieren. Für viele werden inzwischen OSM-Daten herangezogen: Entweder, um
+      fahrradfreundliche Strukturen und Umweltfaktoren abzuleiten oder das Wegenetz hinsichtlich
+      vorhandener Radinfrastruktur zu bewerten. Letzteres bietet jedoch meist nur ein
+      eingeschränktes Bild: Denn was sagt es aus, ob es einen physisch separierten Radweg gibt, wenn
+      man nicht einschätzen kann, wie schmal und holperig er vielleicht ist?
+    </p>
+
+    <p>
+      OSM bietet jedoch eine optimale Datenbank, um auch detaillierte Radwegattribute systematisch
+      und vergleichbar zu erfassen und damit weitergehende Infrastrukturanalysen zu ermöglichen.
+      Während in der Vergangenheit vor allem die Existenz von Radwegen erfasst wurde, geraten
+      zunehmend physische Details wie Breiten, Oberflächen oder Charakteristika der Trennung zu
+      anderen Verkehrsarten in den Fokus. Ein gestiegenes Bewusstsein für den Mehrwert solcher Daten
+      und neue Tools unterstützen diese Tendenz.
+    </p>
+
+    <p>
+      Diese Fortschritte haben wir zum Anlass genommen, die Entwicklung eines detaillieren,
+      OSM-basierten Radverkehrs-Qualitätsindex zu starten. Damit lassen sich Radnetze vergleichbar
+      analysieren, Lücken im Radverkehrsnetz identifizieren oder anschaulich zeigen, wie klein der
+      Bewegungsradius für vulnerable Gruppen wie Kinder oder ältere Menschen auf Fahrrädern
+      vielerorts noch immer ist. Solche Daten verfügbar zu machen kann einen großen Mehrwert für
+      Planungsprozesse bieten, um gezielte Planungsmaßnahmen mit einer Perspektive auf komplette
+      Netze statt einer Aneinanderreihung von Einzelmaßnahmen zu unterstützen.
+    </p>
+
+    <p>
+      Alex Seidel wird in <a href="/cqi/posts/2024-01-01-cqi-fossgis-2024"
+        >seinem Vortrag auf der FOSSGIS Konferenz 2024</a
+      > seine Überlegungen und ersten Ergebnisse für diesen Index vor, den wir in unserer Modellregion
+      Berlin-Neukölln entwickelt, getestet und visualisiert haben. Dieser kann ein Aufschlag sein, um
+      gemeinsam mit der Community einen offenen Index bereitstellen zu können, der sich – entsprechend
+      gut gemappte OSM-Daten vorrausgesetzt – weltweit frei, niedrigschwellig und individuell anpassbar
+      anwenden lässt.
+    </p>
+  </ProseSection>
+</LayoutArticle>

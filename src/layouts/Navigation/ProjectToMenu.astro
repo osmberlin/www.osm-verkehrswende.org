@@ -12,6 +12,7 @@ interface Props {
   menuHighlight?: string | undefined
 }
 
+const isDev = import.meta.env.DEV
 const { project, menuHighlight } = Astro.props
 const { menus } = projectConfigs[project]
 ---
@@ -42,8 +43,10 @@ const { menus } = projectConfigs[project]
 }
 
 {
-  !menus && (
-    <p class="hidden">`project` `{pickProject(Astro.request.url)}` für Navigation nicht erkannt.</p>
+  !menus && isDev && (
+    <p class="text-red-500">
+      `project` `{pickProject(Astro.request.url)}` für Navigation nicht erkannt.
+    </p>
   )
 }
 

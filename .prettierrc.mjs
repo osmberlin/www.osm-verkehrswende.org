@@ -4,7 +4,7 @@ export default {
   singleQuote: true,
   arrowParens: 'always',
   printWidth: 100,
-  plugins: ['prettier-plugin-astro'],
+  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   overrides: [
     {
       files: '*.astro',

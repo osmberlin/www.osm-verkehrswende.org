@@ -1,15 +1,15 @@
 export const OverlayLegend = () => {
   return (
-    <ul className="px-2 py-4 text-sm font-normal leading-4 text-gray-900 space-y-2">
-      <li className="flex gap-2 items-top">
-        <div className="rounded-full mt-1 w-7 h-2" style={{ backgroundColor: '#1e40af' }} />
+    <ul className="space-y-2 px-2 py-4 text-sm font-normal leading-4 text-gray-900">
+      <li className="items-top flex gap-2">
+        <div className="mt-1 h-2 w-7 rounded-full" style={{ backgroundColor: '#1e40af' }} />
         <span>
           Straßensegmente mit <br />
           ausreichend Fotos
         </span>
       </li>
-      <li className="flex gap-2 items-top">
-        <div className="rounded-full mt-1 w-7 h-2" style={{ backgroundColor: '#db2777' }} />
+      <li className="items-top flex gap-2">
+        <div className="mt-1 h-2 w-7 rounded-full" style={{ backgroundColor: '#db2777' }} />
         <span>Hier fehlen Fotos</span>
       </li>
     </ul>

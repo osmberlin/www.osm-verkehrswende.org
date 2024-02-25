@@ -19,7 +19,7 @@ const project = pickProject(Astro.request.url)
 <Layout title={title} noindex={noindex} language={language}>
   <div class="flex flex-col text-gray-900 lg:flex-row lg:gap-3">
     <Navigation layoutType="article" project={project} menuHighlight={menuHighlight} />
-    <main class="flex-1 py-6 px-4 lg:px-0 lg:pl-5">
+    <main class="flex-1 px-4 py-6 lg:px-0 lg:pl-5">
       <slot />
     </main>
   </div>

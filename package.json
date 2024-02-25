@@ -48,6 +48,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0"
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.11"
   }
 }

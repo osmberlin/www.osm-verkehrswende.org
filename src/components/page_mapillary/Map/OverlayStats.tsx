@@ -58,7 +58,7 @@ export const OverlayStats = () => {
   // console.log('Stats:', stats, params.anzeige)
   return (
     <dl className="overflow-hidden rounded-b-md">
-      <div className="px-2 pt-4 pb-2">
+      <div className="px-2 pb-2 pt-4">
         <dt className="text-sm font-normal leading-tight text-gray-900">
           Vollständigkeit <br />
           im Kartenausschnitt

@@ -9,7 +9,7 @@ export const NavigationMobile = ({ children }: Props) => {
   return (
     <div className="lg:hidden">
       <Popover as="div" className="inline-block text-left">
-        <Popover.Button className="inline-flex w-full justify-center rounded-md bg-white pl-4 pr-2 py-2 font-medium hover:bg-blue-50 focus:outline-none border border-white-100 focus-visible:ring-2 focus-visible:ring-white/75 items-center gap-2">
+        <Popover.Button className="border-white-100 inline-flex w-full items-center justify-center gap-2 rounded-md border bg-white py-2 pl-4 pr-2 font-medium hover:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
           Menu
           {/* https://fontawesome.com/v5.15/icons/bars?style=solid */}
           <svg
@@ -33,7 +33,7 @@ export const NavigationMobile = ({ children }: Props) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Popover.Panel className="absolute p-3 right-0 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ">
+          <Popover.Panel className="absolute right-0 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white p-3 shadow-lg ring-1 ring-black/5 focus:outline-none ">
             {children}
           </Popover.Panel>
         </Transition>

@@ -1,6 +1,6 @@
 import { createSearchParams } from '@nanostores/router'
 import { atom } from 'nanostores'
-import type { LngLatBoundsLike, MapGeoJSONFeature, PaddingOptions } from 'react-map-gl/maplibre'
+import type { LngLatBoundsLike, MapGeoJSONFeature } from 'react-map-gl/maplibre'
 
 export const $mapLoaded = atom(false)
 export const $clickedMapData = atom<MapGeoJSONFeature[] | undefined>(undefined)

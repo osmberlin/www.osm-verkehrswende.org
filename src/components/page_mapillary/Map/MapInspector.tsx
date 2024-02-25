@@ -8,16 +8,16 @@ export const MapInspector: React.FC = () => {
   if (!clickedMapData || !clickedMapData.length) return null
 
   return (
-    <section className="absolute sm:inset-x-auto sm:inset-y-2.5 sm:right-2.5 sm:w-96 rounded-lg shadow-xl overflow-y-auto bg-blue-900 p-4 z-50 text-blue-50 inset-x-1 bottom-1">
+    <section className="absolute inset-x-1 bottom-1 z-50 overflow-y-auto rounded-lg bg-blue-900 p-4 text-blue-50 shadow-xl sm:inset-x-auto sm:inset-y-2.5 sm:right-2.5 sm:w-96">
       <button
         onClick={() => $clickedMapData.set(undefined)}
-        className="absolute text-blue-900 z-10 top-2.5 right-2.5 bg-white rounded-full p-1.5 hover:shadow-lg hover:bg-blue-50"
+        className="absolute right-2.5 top-2.5 z-10 rounded-full bg-white p-1.5 text-blue-900 hover:bg-blue-50 hover:shadow-lg"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="w-5 h-5"
+          className="h-5 w-5"
         >
           <path
             fillRule="evenodd"
@@ -41,7 +41,7 @@ export const MapInspector: React.FC = () => {
                     return (
                       <tr key={key}>
                         <th className="text-left">{key}</th>
-                        <td className="flex justify-between items-center">
+                        <td className="flex items-center justify-between">
                           <span>{typeof value === 'boolean' ? JSON.stringify(value) : value}</span>
                           {typeof value === 'string' && value.includes('way/') && (
                             <span className="prose prose-sm font-sans">

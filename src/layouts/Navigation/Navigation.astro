@@ -1,8 +1,9 @@
 ---
+import type { NavigationProjects } from 'src/projectConfigs.const'
 import { twJoin } from 'tailwind-merge'
+import { NavigationMobile } from './NavigationMobile.tsx'
 import ProjectToHeader from './ProjectToHeader.astro'
 import ProjectToMenu from './ProjectToMenu.astro'
-import type { NavigationProjects } from 'src/projectConfigs.const'
 
 export interface Props {
   /** @desc switches the navigation to scroll in itself ("app") vs. with the "article" */
@@ -17,26 +18,17 @@ const { layoutType, project, menuHighlight } = Astro.props
 <nav
   data-navigation-project={project}
   class={twJoin(
-    layoutType === 'app' ? 'overflow-y-auto bg-white' : 'mb-10',
-    'relative z-[1001] w-full px-3 py-3 shadow-xl lg:z-auto lg:w-64 lg:py-6 lg:shadow-none sm:mb-0 flex-none',
+    layoutType === 'app' ? 'bg-white' : 'mb-10 lg:mb-0',
+    'flex lg:block justify-between lg:relative z-[1001] w-full px-3 py-3 shadow-xl lg:z-auto lg:w-64 lg:py-6 lg:shadow-none flex-none',
     'group/navi',
   )}
   lang="de"
 >
   <ProjectToHeader project={project} />
 
-  <button
-    type="button"
-    class="absolute right-5 top-5 block rounded-sm border border-blue-500 bg-blue-200 text-blue-500 print:hidden lg:hidden"
-  >
-    <!-- https://fontawesome.com/v5.15/icons/bars?style=solid -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-8 w-8" viewBox="0 0 16 16">
-      <path
-        fill-rule="evenodd"
-        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-      ></path>
-    </svg>
-  </button>
+  <NavigationMobile client:load>
+    <ProjectToMenu project={project} menuHighlight={menuHighlight} />
+  </NavigationMobile>
 
   <div class="z-[2000] hidden transition-all duration-150 lg:block">
     <ProjectToMenu project={project} menuHighlight={menuHighlight} />

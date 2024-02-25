@@ -8,9 +8,7 @@ export interface Props {
 const { menuHighlight } = Astro.props
 ---
 
-<ul
-  class="prose prose-sm grid grid-cols-3 gap-3 leading-snug lg:mb-4 lg:ml-3 lg:block lg:gap-0 lg:space-y-3"
->
+<ul class="prose prose-sm leading-snug mb-4 ml-3 block space-y-3">
   <li>
     <a
       class={(twJoin(menuHighlight === 'contact' ? 'text-black text-bold' : 'hover:text-gray-500'),

@@ -14,10 +14,12 @@ const CustomHeaderComp =
     : undefined
 ---
 
-{
-  CustomHeaderComp ? (
-    <CustomHeaderComp />
-  ) : (
-    <Header name={projectConfig.name} link={projectConfig.root} />
-  )
-}
+<div>
+  {
+    CustomHeaderComp ? (
+      <CustomHeaderComp />
+    ) : (
+      <Header name={projectConfig.name} link={projectConfig.root} />
+    )
+  }
+</div>

@@ -11,7 +11,10 @@ type Props = {
 const { href, external: _external, highlightExactMatch } = Astro.props
 const { pathname: currentPathname } = Astro.url
 const external = _external === undefined ? href.startsWith('http') : _external
-const active = highlightExactMatch ? currentPathname === href : currentPathname.startsWith(href)
+const active = highlightExactMatch
+  ? // First condition for pages, last condition for homepage
+    `${currentPathname}/` === href || currentPathname === href
+  : currentPathname.startsWith(href)
 ---
 
 <a

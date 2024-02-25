@@ -1,0 +1,43 @@
+import { Popover, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+
+type Props = {
+  children: React.ReactNode
+}
+
+export const NavigationMobile = ({ children }: Props) => {
+  return (
+    <div className="lg:hidden">
+      <Popover as="div" className="inline-block text-left">
+        <Popover.Button className="inline-flex w-full justify-center rounded-md bg-white pl-4 pr-2 py-2 font-medium hover:bg-blue-50 focus:outline-none border border-white-100 focus-visible:ring-2 focus-visible:ring-white/75 items-center gap-2">
+          Menu
+          {/* https://fontawesome.com/v5.15/icons/bars?style=solid */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            className="h-8 w-8"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+            />
+          </svg>
+        </Popover.Button>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Popover.Panel className="absolute p-3 right-0 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ">
+            {children}
+          </Popover.Panel>
+        </Transition>
+      </Popover>
+    </div>
+  )
+}

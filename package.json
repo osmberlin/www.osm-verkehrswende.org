@@ -12,7 +12,7 @@
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\" --write",
     "check": "npm run type-check && npm run format && npm run lint",
-    "updateCqi": "npm run updateCqi:createGeojson && npm run updateCqi:createPmtiles && npm run updateCqi:upload && github",
+    "updateCqi": "npm run updateCqi:createPmtiles && npm run updateCqi:upload && github",
     "updateCqi:createPmtiles": "node ./scripts/cqi/createPmtiles.js",
     "updateCqi:upload": "node ./scripts/cqi/upload.js",
     "updatePackages": "npx taze major --write",

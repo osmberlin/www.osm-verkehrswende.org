@@ -1,6 +1,7 @@
 import { $clickedMapData } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import React from 'react'
+import { translationTagValues, translationsKey, skipInspectorKeys } from './translations.const'
 
 export const MapInspector: React.FC = () => {
   const clickedMapData = useStore($clickedMapData)
@@ -32,23 +33,64 @@ export const MapInspector: React.FC = () => {
       {clickedMapData.map((feature) => {
         return (
           <div key={feature.properties.id} className="mt-8">
-            <h2 className="text-lg">{feature.properties.strassenname}</h2>
-            <table className="w-full font-mono">
+            <h2 className="text-lg">{feature.properties.name || feature.properties.id}</h2>
+            <table className="w-full">
               <tbody>
-                {Object.entries(feature.properties)
-                  // .filter((entry) => !['id'].includes(entry[0]))
+                {Object.entries(feature.properties as Record<string, string | number>)
+                  .filter(([key, _]) => !skipInspectorKeys.includes(key))
                   .map(([key, value]) => {
+                    const multipleValues = typeof value === 'string' && value.includes(';')
+                    let translationTag = `${key}=${value}`
                     return (
-                      <tr key={key}>
-                        <th className="text-left">{key}</th>
-                        <td className="flex items-center justify-between">
-                          <span>{typeof value === 'boolean' ? JSON.stringify(value) : value}</span>
-                          {typeof value === 'string' && value.includes('way/') && (
-                            <span className="prose prose-sm font-sans">
-                              <a href={`https://osm.org/${value}`} target="_blank">
-                                OSM
-                              </a>
+                      <tr key={key} className="border-b border-blue-800">
+                        <th className="py-1 text-left leading-tight">
+                          {translationsKey[key] || <code>{key}</code>}
+                        </th>
+                        <td className="py-1 leading-tight">
+                          {typeof value === 'number' ? (
+                            <span>{value.toLocaleString()}</span>
+                          ) : multipleValues ? (
+                            <ul className="ml-3 list-disc">
+                              {value.split(';').map((singleValue) => {
+                                translationTag = `${key}=${singleValue}`
+                                return (
+                                  <li>
+                                    {translationTagValues[translationTag] ? (
+                                      <span data-key={translationTag}>
+                                        {translationTagValues[translationTag]}
+                                      </span>
+                                    ) : (
+                                      <code>
+                                        <span>
+                                          {typeof singleValue === 'boolean'
+                                            ? JSON.stringify(singleValue)
+                                            : singleValue}
+                                        </span>
+                                      </code>
+                                    )}
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          ) : translationTagValues[translationTag] ? (
+                            <span data-key={translationTag}>
+                              {translationTagValues[translationTag]}
                             </span>
+                          ) : (
+                            <div className="flex w-full items-center justify-between">
+                              <code>
+                                {typeof value === 'boolean' ? JSON.stringify(value) : value}
+                              </code>
+                              {typeof value === 'string' && value.includes('way/') && (
+                                <a
+                                  href={`https://osm.org/${value}`}
+                                  target="_blank"
+                                  className="underline hover:decoration-2"
+                                >
+                                  OSM
+                                </a>
+                              )}
+                            </div>
                           )}
                         </td>
                       </tr>

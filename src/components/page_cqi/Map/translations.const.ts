@@ -10,6 +10,9 @@ export const skipInspectorKeys = [
   'proc_traffic_mode_right',
   'fac_3',
   'data_incompleteness',
+  //
+  'layer',
+  'path',
 ]
 
 export const translationsKey: Record<string, string> = {

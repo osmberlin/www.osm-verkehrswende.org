@@ -46,7 +46,7 @@ export const MapInspector: React.FC = () => {
                         <th className="py-1 text-left leading-tight">
                           {translationsKey[key] || <code>{key}</code>}
                         </th>
-                        <td className="py-1 leading-tight">
+                        <td className="w-full break-all py-1 pl-2 leading-tight">
                           {typeof value === 'number' ? (
                             <span>{value.toLocaleString()}</span>
                           ) : multipleValues ? (

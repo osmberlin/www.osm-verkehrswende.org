@@ -1,9 +1,9 @@
+import { useStore } from '@nanostores/react'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import * as pmtiles from 'pmtiles'
 import { useEffect, useState } from 'react'
 import { Map, type ViewStateChangeEvent } from 'react-map-gl/maplibre'
-import { interactiveLayerIds } from '../page_mapillary/Map/layers'
 import {
   $clickedMapData,
   $mapLoaded,
@@ -14,14 +14,14 @@ import {
   type SearchParamBaseMap,
 } from './store'
 import { roundPositionForURL } from './utils/roundNumber'
-import { useStore } from '@nanostores/react'
 
 type Props = {
   initialViewState: MapSearchParam
+  interactiveLayerIds: string[]
   children: React.ReactNode
 }
 
-export const BaseMap = ({ initialViewState, children }: Props) => {
+export const BaseMap = ({ initialViewState, interactiveLayerIds, children }: Props) => {
   useEffect(() => {
     const protocol = new pmtiles.Protocol()
     maplibregl.addProtocol('pmtiles', protocol.tile)

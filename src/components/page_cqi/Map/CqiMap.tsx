@@ -1,9 +1,9 @@
 import { BaseMap } from '@components/BaseMap/BaseMap'
-import type { MapSearchParam } from '@components/BaseMap/store'
+import { type MapSearchParam } from '@components/BaseMap/store'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
-import { MapSourceCqi } from './MapSourceCqi'
 import { MapInspector } from './MapInspector'
+import { MapSourceCqi } from './MapSourceCqi'
 
 type Props = {
   maxBounds: MapSearchParam['maxBounds']
@@ -24,6 +24,7 @@ export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}
+      interactiveLayerIds={['index_casing']}
     >
       <MapSourceCqi />
       <NavigationControl showCompass={false} position="top-right" />

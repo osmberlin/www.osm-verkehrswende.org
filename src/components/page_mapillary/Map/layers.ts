@@ -1,5 +1,3 @@
-export const interactiveLayerIds = ['clicktargetAndStatsTotal']
-
 export const layers = [
   {
     id: 'complete',

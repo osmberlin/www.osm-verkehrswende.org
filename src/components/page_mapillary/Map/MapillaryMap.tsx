@@ -26,6 +26,7 @@ export const MapillaryMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}
+      interactiveLayerIds={['clicktargetAndStatsTotal']}
     >
       <MapSourceBoundaries />
       <MapSourceMapillaryMissingImages />

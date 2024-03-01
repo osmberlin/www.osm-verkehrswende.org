@@ -1,14 +1,31 @@
 ---
+import type { ProjectConfigItem } from 'src/projectConfigs.const'
 import { twJoin } from 'tailwind-merge'
 
 export interface Props {
   menuHighlight: string | undefined
+  additionalLinks: ProjectConfigItem['additionalFooterLinks']
 }
 
-const { menuHighlight } = Astro.props
+const { menuHighlight, additionalLinks } = Astro.props
 ---
 
 <ul class="prose prose-sm mb-4 ml-3 block space-y-3 leading-snug">
+  {
+    additionalLinks.map((link) => (
+      <li>
+        <a
+          class={
+            (twJoin(menuHighlight === link.href ? 'text-bold text-black' : 'hover:text-gray-500'),
+            'underline')
+          }
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
   <li>
     <a
       class={(twJoin(menuHighlight === 'contact' ? 'text-black text-bold' : 'hover:text-gray-500'),

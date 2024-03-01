@@ -8,6 +8,33 @@ export type NavigationProjects = keyof typeof projectConfigs
 // Whenever we add a new project, we need to also add it to
 // `src/content/config.ts` which enables adding posts for this project.
 
+type AstroComponentFunction = (_props: Record<string, any>) => any
+export type ProjectConfigItem = {
+  enabled: boolean
+  name: string | null
+  root: string
+  customHeader?: AstroComponentFunction
+  menus:
+    | null
+    | (
+        | {
+            label: null | string
+            items: { href: string; label: string }[]
+          }
+        | AstroComponentFunction
+      )[]
+  additionalFooterLinks: { href: string; label: string }[]
+  meta: null | {
+    title: string
+    description: string | null
+    imagePath: string
+    imageAlt: string | null
+    language: 'de' | 'en'
+  }
+}
+
+type ProjectConfig = Record<string, ProjectConfigItem>
+
 export const projectConfigs = {
   about: {
     enabled: true,
@@ -15,12 +42,13 @@ export const projectConfigs = {
     root: '/',
     customHeader: PageAboutHeader,
     menus: [PageAboutMenu, NavigationNews],
+    additionalFooterLinks: [],
     meta: {
       title: 'OpenStreetMap Verkehrswende',
       description:
         'OSM kann die Verkehrswende begleiten und beschleunigen mit Tagging, Tools und Analysen.',
       imagePath: '/social-sharing.png',
-      imageAlt: undefined,
+      imageAlt: null,
       language: 'de',
     },
   },
@@ -28,8 +56,9 @@ export const projectConfigs = {
     enabled: true,
     name: 'Parkraum',
     root: 'https://parkraum.osm-verkehrswende.org/',
-    menus: undefined,
-    meta: undefined,
+    menus: null,
+    additionalFooterLinks: [],
+    meta: null,
     // menus: [
     //   {
     //     label: null,
@@ -42,6 +71,7 @@ export const projectConfigs = {
     //   },
     //   NavigationNews,
     // ],
+    // additionalFooterLinks: [],
     // meta: {
     //   title: 'Parkraum Projekt — OpenStreetMap Verkehrswende',
     //   description: 'Spezialkarten für Neukölln zum Straßenraum und zur Parkplatzdichte.',
@@ -69,6 +99,7 @@ export const projectConfigs = {
       },
       NavigationNews,
     ],
+    additionalFooterLinks: [],
     meta: {
       title: 'TODO META',
       description: 'TODO META',
@@ -92,6 +123,7 @@ export const projectConfigs = {
       },
       NavigationNews,
     ],
+    additionalFooterLinks: [],
     meta: {
       title: 'TODO META',
       description: 'TODO META',
@@ -108,6 +140,7 @@ export const projectConfigs = {
       { label: null, items: [{ href: '/benches/', label: 'Über das Projekt' }] },
       NavigationNews,
     ],
+    additionalFooterLinks: [],
     meta: {
       title: 'TODO META',
       description: 'TODO META',
@@ -140,6 +173,16 @@ export const projectConfigs = {
       // },
       NavigationNews,
     ],
+    additionalFooterLinks: [
+      {
+        href: 'https://github.com/SupaplexOSM/OSM-Cycling-Quality-Index',
+        label: 'Github: Code für den Index',
+      },
+      {
+        href: 'https://github.com/osmberlin/www.osm-verkehrswende.org',
+        label: 'Github: Code für die Website',
+      },
+    ],
     meta: {
       title: 'TODO META',
       description: 'TODO META',
@@ -154,7 +197,7 @@ export const projectConfigs = {
     root: '/mapillary',
     menus: [
       {
-        label: true,
+        label: null,
         items: [
           { href: '/mapillary/', label: 'Über das Projekt' },
           { href: '/mapillary/map/', label: 'Karte' },
@@ -162,6 +205,7 @@ export const projectConfigs = {
       },
       NavigationNews,
     ],
+    additionalFooterLinks: [],
     meta: {
       title: 'Mapillary Missing Streets',
       description: 'Easily find out which streets in Berlin require fresh 360° images',
@@ -175,7 +219,8 @@ export const projectConfigs = {
     name: null,
     root: '/',
     customHeader: PageAboutHeader,
-    menus: undefined,
+    menus: null,
+    additionalFooterLinks: [],
     meta: {
       title: 'OpenStreetMap Verkehrswende',
       description: null,
@@ -184,4 +229,4 @@ export const projectConfigs = {
       language: 'de',
     },
   },
-}
+} satisfies ProjectConfig

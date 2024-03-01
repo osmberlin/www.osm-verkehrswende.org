@@ -50,4 +50,7 @@ const { menus } = projectConfigs[project]
   )
 }
 
-<NavigationFooter menuHighlight={menuHighlight} />
+<NavigationFooter
+  menuHighlight={menuHighlight}
+  additionalLinks={projectConfigs[project].additionalFooterLinks}
+/>

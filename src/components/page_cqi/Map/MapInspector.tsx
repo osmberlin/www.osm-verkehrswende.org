@@ -54,7 +54,7 @@ export const MapInspector: React.FC = () => {
                               {value.split(';').map((singleValue) => {
                                 translationTag = `${key}=${singleValue}`
                                 return (
-                                  <li>
+                                  <li key={translationTag}>
                                     {translationTagValues[translationTag] ? (
                                       <span data-key={translationTag}>
                                         {translationTagValues[translationTag]}

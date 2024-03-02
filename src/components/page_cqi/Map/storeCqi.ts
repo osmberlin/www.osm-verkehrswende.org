@@ -1,5 +1,8 @@
 import type { SearchParamBaseMap } from '@components/BaseMap/store'
 
 export type SearchParamsCqiMap = SearchParamBaseMap & {
-  anzeige: 'complete' | 'completePano' | 'completeFresh' | 'completeFreshPano'
+  anzeige:
+    | '1to100'
+    | 'lts' // Level of Traffic Stress
+    | 'incompleteness'
 }

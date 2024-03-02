@@ -1,11 +1,12 @@
-import { $clickedMapData } from '@components/BaseMap/store'
+import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
-import { layers, layersSelected } from './layers'
+import { layerByGroups, layersSelected } from './layers/layers'
+import type { SearchParamsCqiMap } from './storeCqi'
 
 export const MapSourceCqi = () => {
-  // const params = useStore($searchParams) as SearchParamsCqiMap
+  const params = useStore($searchParams) as SearchParamsCqiMap
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
 
@@ -40,26 +41,26 @@ export const MapSourceCqi = () => {
         )
       })}
 
-      {layers.map((layer) => {
-        // LATER:
-        // const visible = layer.id === params?.anzeige
-        // const anzeigeFilter = params?.anzeige ? ['==', ['get', params?.anzeige], true] : undefined
-        // const filter = ['all', layer.filter, anzeigeFilter].filter(Boolean) as any
-        return (
-          <Layer
-            key={layer.id}
-            id={layer.id}
-            source="cqi"
-            source-layer="default"
-            type={layer.type}
-            paint={layer.paint}
-            layout={layer.layout}
-            // LATER:
-            // layout={{ visibility: visible ? 'visible' : 'none' }}
-            // filter={filter}
-            filter={layer.filter || ['all']}
-          />
-        )
+      {Object.entries(layerByGroups).map(([groupkey, groupLayers]) => {
+        return groupLayers.map((layer) => {
+          const visible = params?.anzeige === groupkey
+          // LATER:
+          // const anzeigeFilter = params?.anzeige ? ['==', ['get', params?.anzeige], true] : undefined
+          // const filter = ['all', layer.filter, anzeigeFilter].filter(Boolean) as any
+          return (
+            <Layer
+              key={layer.id}
+              id={layer.id}
+              source="cqi"
+              source-layer="default"
+              type={layer.type}
+              paint={layer.paint}
+              layout={{ visibility: visible ? 'visible' : 'none' }}
+              // filter={filter}
+              filter={layer.filter || ['all']}
+            />
+          )
+        })
       })}
     </Source>
   )

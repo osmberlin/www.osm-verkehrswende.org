@@ -1,50 +1,6 @@
-import { cleanupMapboxLayerJson } from './utils/cleanupMapboxLayerJson'
+import { cleanupMapboxLayerJson } from '../utils/cleanupMapboxLayerJson'
 
-export const layersSelected = [
-  cleanupMapboxLayerJson('index_casing_selected', [
-    {
-      layout: {
-        'line-cap': 'square',
-        'line-sort-key': [
-          'case',
-          ['match', ['get', 'proc_mandatory'], ['use_sidepath', 'optional_sidepath'], true, false],
-          0,
-          [
-            'match',
-            ['get', 'way_type'],
-            ['bicycle road', 'shared bus lane', 'shared traffic lane', 'shared road'],
-            true,
-            false,
-          ],
-          2,
-          1,
-        ],
-        visibility: 'none',
-      },
-      type: 'line',
-      source: 'composite',
-      id: 'index_casing_selected',
-      paint: {
-        'line-width': ['interpolate', ['linear'], ['zoom'], 0, 2.8, 10, 2.8, 22, 32],
-        'line-offset': [
-          'interpolate',
-          ['linear'],
-          ['zoom'],
-          0,
-          ['match', ['get', 'side'], ['right'], 1, ['left'], -1, 0],
-          10,
-          ['match', ['get', 'side'], ['right'], 1, ['left'], -1, 0],
-          22,
-          ['match', ['get', 'side'], ['right'], 12, ['left'], -12, 0],
-        ],
-        'line-color': 'rgb(41, 103, 118)',
-      },
-      'source-layer': 'cycling_quality_index_epsg432-4roq5v',
-    },
-  ]),
-]
-
-export const layers = [
+export const layers1to100 = [
   cleanupMapboxLayerJson('index_casing', [
     {
       layout: {
@@ -391,4 +347,17 @@ export const layers = [
       ],
     },
   ]),
+]
+
+export const legend1to100 = [
+  { color: '#9b0909', label: 'Einstufung 10 – am Schlechtesten' },
+  { color: '#c83911', label: 'Einstufung 20' },
+  { color: '#e9671b', label: 'Einstufung 30' },
+  { color: '#f89229', label: 'Einstufung 40' },
+  { color: '#f9ba34', label: 'Einstufung 50' },
+  { color: '#f3e330', label: 'Einstufung 60' },
+  { color: '#87e6aa', label: 'Einstufung 70' },
+  { color: '#24d2d0', label: 'Einstufung 80' },
+  { color: '#3199ed', label: 'Einstufung 90' },
+  { color: 'rgb(28, 59, 180)', label: 'Einstufung 100 – am Besten' },
 ]

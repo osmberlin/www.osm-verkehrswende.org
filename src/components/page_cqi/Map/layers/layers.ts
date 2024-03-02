@@ -54,7 +54,14 @@ export const layerByGroups: Record<SearchParamsCqiMap['anzeige'], Record<string,
   incompleteness: layersIncompletness,
 }
 
-export const legendByGroups: Record<SearchParamsCqiMap['anzeige'], typeof legendIncompletness> = {
+export type FilterConfig = { key: string; rule: string; value: string | number }
+type Legend = {
+  color: string
+  label: string
+  filterConfig: null | FilterConfig
+}
+
+export const legendByGroups: Record<SearchParamsCqiMap['anzeige'], Legend[]> = {
   '1to100': legend1to100,
   lts: legendLts,
   incompleteness: legendIncompletness,

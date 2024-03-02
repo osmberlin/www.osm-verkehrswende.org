@@ -1,12 +1,14 @@
 import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import type { FilterSpecification } from 'maplibre-gl'
-import { Layer, Source } from 'react-map-gl/maplibre'
+import { Layer, Source, useMap } from 'react-map-gl/maplibre'
 import { layerByGroups, layersSelected } from './layers/layers'
-import type { SearchParamsCqiMap } from './storeCqi'
+import { $focus, type SearchParamsCqiMap } from './storeCqi'
+import { wrapFilterWithAll } from './utils/wrapFilterWithAll'
 
 export const MapSourceCqi = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap
+  const focus = useStore($focus)
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
 
@@ -14,6 +16,8 @@ export const MapSourceCqi = () => {
   // console.log(mapDataIds)
   // const map = useMap()
   // console.log(map.current?.getStyle())
+
+  const focusFilter = focus ? [focus.rule, focus.key, focus.value] : null
 
   return (
     <Source
@@ -33,9 +37,11 @@ export const MapSourceCqi = () => {
             paint={layer.paint}
             layout={layer.layout}
             filter={
-              ['all', layer.filter, ['in', 'id', ...mapDataIds]].filter(
-                Boolean,
-              ) as FilterSpecification
+              wrapFilterWithAll([
+                ...(layer.filter ? layer.filter : []),
+                focusFilter,
+                ['in', 'id', ...mapDataIds],
+              ]) as FilterSpecification
             }
           />
         )
@@ -44,9 +50,7 @@ export const MapSourceCqi = () => {
       {Object.entries(layerByGroups).map(([groupkey, groupLayers]) => {
         return groupLayers.map((layer) => {
           const visible = params?.anzeige === groupkey
-          // LATER:
-          // const anzeigeFilter = params?.anzeige ? ['==', ['get', params?.anzeige], true] : undefined
-          // const filter = ['all', layer.filter, anzeigeFilter].filter(Boolean) as any
+
           return (
             <Layer
               key={layer.id}
@@ -56,8 +60,12 @@ export const MapSourceCqi = () => {
               type={layer.type}
               paint={layer.paint}
               layout={{ visibility: visible ? 'visible' : 'none' }}
-              // filter={filter}
-              filter={layer.filter || ['all']}
+              filter={
+                wrapFilterWithAll([
+                  ...(layer.filter ? layer.filter : []),
+                  focusFilter,
+                ]) as FilterSpecification
+              }
             />
           )
         })

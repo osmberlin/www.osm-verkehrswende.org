@@ -3,7 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
-import type { SearchParamsCqiMap } from './storeCqi'
+import { $focus, type SearchParamsCqiMap } from './storeCqi'
 
 const buttons: { key: SearchParamsCqiMap['anzeige']; name: string; description: null | string }[] =
   [
@@ -12,13 +12,14 @@ const buttons: { key: SearchParamsCqiMap['anzeige']; name: string; description: 
     { key: 'incompleteness', name: 'Datenlücken', description: null },
   ]
 
-export const OverlayFilter = () => {
+export const OverlayLayerSelection = () => {
   const params = useStore($searchParams)
   // TODO: I really don't get why we need this but something prevents the rerendering of the buttons so the active state is wrong. Did not find any AstroJS Docs on this. And we are doing what we are supposed to do with nanostores.
   const [localSelected, setLocalSelected] = useState<SearchParamsCqiMap['anzeige']>('1to100')
 
   const setSelected = (value: string) => {
     $searchParams.open({ ...params, ...{ anzeige: value } })
+    $focus.set(null)
     setLocalSelected(value as SearchParamsCqiMap['anzeige'])
   }
 

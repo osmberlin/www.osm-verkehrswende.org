@@ -185,14 +185,54 @@ export const layersIncompletness = [
 ]
 
 export const legendIncompletness = [
-  { color: '#fafafa', label: 'Vollständigkeitsindex 0' },
-  { color: '#dfdfdf', label: 'Vollständigkeitsindex 10' },
-  { color: '#c4c4c4', label: 'Vollständigkeitsindex 20' },
-  { color: '#a8a8a8', label: 'Vollständigkeitsindex 30' },
-  { color: '#8d8d8d', label: 'Vollständigkeitsindex 40' },
-  { color: '#727272', label: 'Vollständigkeitsindex 50' },
-  { color: '#575757', label: 'Vollständigkeitsindex 60' },
-  { color: '#3b3b3b', label: 'Vollständigkeitsindex 70' },
-  { color: '#202020', label: 'Vollständigkeitsindex 80' },
-  { color: '#000000', label: 'Vollständigkeitsindex 90' },
+  {
+    color: '#fafafa',
+    label: 'Vollständig',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 0 },
+  },
+  {
+    color: '#dfdfdf',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 10 },
+  },
+  {
+    color: '#c4c4c4',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 20 },
+  },
+  {
+    color: '#a8a8a8',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 30 },
+  },
+  {
+    color: '#8d8d8d',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 40 },
+  },
+  {
+    color: '#727272',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 50 },
+  },
+  {
+    color: '#575757',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 60 },
+  },
+  {
+    color: '#3b3b3b',
+    label: 'Einige Daten fehlen',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 70 },
+  },
+  {
+    color: '#202020',
+    label: 'Unvollständig',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 80 },
+  },
+  {
+    color: '#000000',
+    label: 'Sehr unvollständig',
+    filterConfig: { key: 'data_incompleteness', rule: '==', value: 90 },
+  },
 ]

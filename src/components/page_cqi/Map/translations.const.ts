@@ -26,7 +26,7 @@ export const translationsKey: Record<string, string> = {
   proc_highway: 'Anliegende Straßenklasse',
   proc_maxspeed: 'Anliegende Geschwindigkeitsbegrenzung',
   index: 'Indexwert',
-  data_missing: 'Fehlende Daten',
+  data_missing: 'Datenlücken',
   proc_separation_left: 'Abgrenzung links',
   proc_separation_right: 'Abgrenzung rechts',
   proc_buffer_left: 'Pufferabstand links',

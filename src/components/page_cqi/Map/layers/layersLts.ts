@@ -100,7 +100,7 @@ export const layersLts = [
       layout: {
         'line-sort-key': [
           'step',
-          ['get', 'index'],
+          ['get', 'index2stresslevel'],
           3,
           10,
           10,
@@ -158,8 +158,24 @@ export const layersLts = [
 ]
 
 export const legendLts = [
-  { color: '#ab1b04', label: 'LTS 1 (Kampfradler)' },
-  { color: '#f5a038', label: 'LTS 2' },
-  { color: '#f3cf33', label: 'LTS 3' },
-  { color: '#a7c878', label: 'LTS 4 (Kindertauglich)' },
+  {
+    color: '#ab1b04',
+    label: 'LTS 1 (Kampfradler)',
+    filterConfig: { key: 'index2stresslevel', rule: '==', value: 1 },
+  },
+  {
+    color: '#f5a038',
+    label: 'LTS 2',
+    filterConfig: { key: 'index2stresslevel', rule: '==', value: 2 },
+  },
+  {
+    color: '#f3cf33',
+    label: 'LTS 3',
+    filterConfig: { key: 'index2stresslevel', rule: '==', value: 3 },
+  },
+  {
+    color: '#a7c878',
+    label: 'LTS 4 (Kindertauglich)',
+    filterConfig: { key: 'index2stresslevel', rule: '==', value: 4 },
+  },
 ]

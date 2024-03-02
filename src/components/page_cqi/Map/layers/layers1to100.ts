@@ -350,14 +350,14 @@ export const layers1to100 = [
 ]
 
 export const legend1to100 = [
-  { color: '#9b0909', label: 'Einstufung 10 – am Schlechtesten' },
-  { color: '#c83911', label: 'Einstufung 20' },
-  { color: '#e9671b', label: 'Einstufung 30' },
-  { color: '#f89229', label: 'Einstufung 40' },
-  { color: '#f9ba34', label: 'Einstufung 50' },
-  { color: '#f3e330', label: 'Einstufung 60' },
-  { color: '#87e6aa', label: 'Einstufung 70' },
-  { color: '#24d2d0', label: 'Einstufung 80' },
-  { color: '#3199ed', label: 'Einstufung 90' },
-  { color: 'rgb(28, 59, 180)', label: 'Einstufung 100 – am Besten' },
+  { color: '#9b0909', label: 'Einstufung 10 – am Schlechtesten', filterConfig: null },
+  { color: '#c83911', label: 'Einstufung 20', filterConfig: null },
+  { color: '#e9671b', label: 'Einstufung 30', filterConfig: null },
+  { color: '#f89229', label: 'Einstufung 40', filterConfig: null },
+  { color: '#f9ba34', label: 'Einstufung 50', filterConfig: null },
+  { color: '#f3e330', label: 'Einstufung 60', filterConfig: null },
+  { color: '#87e6aa', label: 'Einstufung 70', filterConfig: null },
+  { color: '#24d2d0', label: 'Einstufung 80', filterConfig: null },
+  { color: '#3199ed', label: 'Einstufung 90', filterConfig: null },
+  { color: 'rgb(28, 59, 180)', label: 'Einstufung 100 – am Besten', filterConfig: null },
 ]

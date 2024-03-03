@@ -3,14 +3,8 @@ import { RadioGroup } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
+import { layerSelection } from './layers/layers'
 import { $focus, type SearchParamsCqiMap } from './storeCqi'
-
-const buttons: { key: SearchParamsCqiMap['anzeige']; name: string; description: null | string }[] =
-  [
-    { key: '1to100', name: 'Standard-Klassifizierung', description: '1-100' },
-    { key: 'lts', name: 'LTS', description: 'Level of traffic stress 1-4' },
-    { key: 'incompleteness', name: 'Datenlücken', description: null },
-  ]
 
 export const OverlayLayerSelection = () => {
   const params = useStore($searchParams)
@@ -35,7 +29,7 @@ export const OverlayLayerSelection = () => {
   return (
     <RadioGroup value={localSelected} onChange={handleChange}>
       <RadioGroup.Label className="sr-only">Filterung der Karte ändern</RadioGroup.Label>
-      {buttons.map(({ key, name, description }, _buttonIdx) => (
+      {layerSelection.map(({ key, name, description }) => (
         <RadioGroup.Option
           key={key}
           value={key}

@@ -4,7 +4,7 @@ import LayoutApp from '@layouts/LayoutApp.astro'
 import * as turf from '@turf/turf'
 import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 
-const berlinInnenstadtBbox = [13.2495555, 52.4332834, 13.5120213, 52.5720857] satisfies ReturnType<
+const berlinInnenstadtBbox = [13.0749783, 52.3362065, 13.7524916, 52.6768501] satisfies ReturnType<
   typeof turf.bbox
 >
 const maxBounds = turf.bbox(
@@ -13,12 +13,12 @@ const maxBounds = turf.bbox(
   }),
 ) as LngLatBoundsLike
 
-const minZoom = 12
+const minZoom = 10
 ---
 
 <LayoutApp title="Cycling Quality Index Map (ALPHA-Version)">
   <CqiMap client:load maxBounds={maxBounds} minZoom={minZoom} />
   <div class="absolute bottom-3 left-3 rounded bg-white/80 px-1 py-0.5 text-xs">
-    Datenstand: 28.02.2024
+    Datenstand: 02.03.2024
   </div>
 </LayoutApp>

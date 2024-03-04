@@ -1,10 +1,10 @@
 import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import type { FilterSpecification } from 'maplibre-gl'
-import { Layer, Source, useMap } from 'react-map-gl/maplibre'
+import { Layer, Source } from 'react-map-gl/maplibre'
+import { wrapFilterWithAll } from '../../BaseMap/utils/wrapFilterWithAll'
 import { layerByGroups, layersSelected } from './layers/layers'
 import { $focus, type SearchParamsCqiMap } from './storeCqi'
-import { wrapFilterWithAll } from './utils/wrapFilterWithAll'
 
 export const MapSourceCqi = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap

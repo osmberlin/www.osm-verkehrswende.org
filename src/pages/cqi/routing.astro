@@ -1,0 +1,25 @@
+---
+import { CqiRoutingMap } from '@components/project_cqi/page_routing/CqiRoutingMap'
+import LayoutApp from '@layouts/LayoutApp.astro'
+import * as turf from '@turf/turf'
+import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
+
+const berlinInnenstadtBbox = [13.0749783, 52.3362065, 13.7524916, 52.6768501] satisfies ReturnType<
+  typeof turf.bbox
+>
+const maxBounds = turf.bbox(
+  turf.buffer(turf.bboxPolygon(berlinInnenstadtBbox), 250, {
+    units: 'meters',
+  }),
+) as LngLatBoundsLike
+
+const minZoom = 10
+---
+
+<LayoutApp title="Cycling Quality Index Routing (PRE-ALPHA-Version)">
+  <CqiRoutingMap client:load maxBounds={maxBounds} minZoom={minZoom} />
+  <div class="absolute bottom-3 left-3 rounded bg-white/80 px-1 py-0.5 text-xs">
+    Datenstand: 02.03.2024
+  </div>
+</LayoutApp>
+@components/page_cqi/page_cgi_map/CqiMap @components/project_cqi/page_routing/CqiRoutingMap

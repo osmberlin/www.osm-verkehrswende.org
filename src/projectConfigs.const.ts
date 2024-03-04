@@ -151,14 +151,15 @@ export const projectConfigs = {
   },
   cqi: {
     enabled: true,
-    name: 'Cycling Quality Index',
+    name: 'Cycling Quality Index (BETA)',
     root: '/cqi',
     menus: [
       {
         label: null,
         items: [
           { href: '/cqi/', label: 'Über das Projekt' },
-          { href: '/cqi/map/', label: 'Karte' },
+          { href: '/cqi/map/', label: 'Karte (BETA)' },
+          { href: '/cqi/routing/', label: 'Routing (ALPHA)' },
           // { href: '/cqi/participate/', label: 'Mitmachen' },
         ],
       },

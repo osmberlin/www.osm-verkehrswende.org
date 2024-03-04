@@ -1,4 +1,4 @@
-import { cleanupMapboxLayerJson } from '../utils/cleanupMapboxLayerJson'
+import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
 
 export const layersLts = [
   cleanupMapboxLayerJson('lts_casing', [

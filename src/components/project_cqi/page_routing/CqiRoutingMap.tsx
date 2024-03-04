@@ -1,13 +1,9 @@
 import { BaseMap } from '@components/BaseMap/BaseMap'
-import { $searchParams, type MapSearchParam } from '@components/BaseMap/store'
-import { Overlay } from '@components/page_cqi/Map/Overlay'
-import { useStore } from '@nanostores/react'
+import { type MapSearchParam } from '@components/BaseMap/store'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
-import { MapInspector } from './MapInspector'
 import { MapSourceCqi } from './MapSourceCqi'
-import type { SearchParamsCqiMap } from './storeCqi'
-import { interactiveLayerIdsByGroup } from './layers/layers'
+import { interactiveLayerIds } from './layers'
 
 type Props = {
   maxBounds: MapSearchParam['maxBounds']
@@ -15,9 +11,7 @@ type Props = {
   maxZoom?: MapSearchParam['maxZoom']
 }
 
-export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
-  const params = useStore($searchParams) as SearchParamsCqiMap
-
+export const CqiRoutingMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
   return (
     <BaseMap
       initialViewState={{
@@ -30,12 +24,12 @@ export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}
-      interactiveLayerIds={interactiveLayerIdsByGroup[params?.anzeige] || []}
+      interactiveLayerIds={interactiveLayerIds}
     >
       <MapSourceCqi />
       <NavigationControl showCompass={false} position="top-right" />
-      <MapInspector />
-      <Overlay />
+      {/* <MapInspector /> */}
+      {/* <Overlay /> */}
     </BaseMap>
   )
 }

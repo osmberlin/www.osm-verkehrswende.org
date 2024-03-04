@@ -1,8 +1,8 @@
 ---
-import { MapillaryMap } from '@components/page_mapillary/Map/MapillaryMap'
 import LayoutApp from '@layouts/LayoutApp.astro'
 import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 import * as turf from '@turf/turf'
+import { MapillaryMap } from '@components/project_mapillary/page_map/MapillaryMap'
 
 const berlinInnenstadtBbox = [13.2823206, 52.4648758, 13.4757235, 52.5497578] satisfies ReturnType<
   typeof turf.bbox
@@ -19,3 +19,4 @@ const minZoom = 12
 <LayoutApp title="Mapillary Missing Streets — Ein Projekt der OpenStreetMap Verkehrswende-Gruppe">
   <MapillaryMap client:load maxBounds={maxBounds} minZoom={minZoom} />
 </LayoutApp>
+@components/project_mapillary/page_map/MapillaryMap

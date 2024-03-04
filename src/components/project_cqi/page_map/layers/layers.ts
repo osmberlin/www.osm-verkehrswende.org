@@ -1,5 +1,5 @@
 import type { SearchParamsCqiMap } from '../storeCqi'
-import { cleanupMapboxLayerJson } from '../utils/cleanupMapboxLayerJson'
+import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
 import { layers1to100, legend1to100 } from './layers1to100'
 import { layersIncompletness, legendIncompletness } from './layersIncompletness'
 // import { layersLts, legendLts } from './layersLts'

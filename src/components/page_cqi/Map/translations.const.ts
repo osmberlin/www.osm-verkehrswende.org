@@ -1,4 +1,5 @@
 export const skipInspectorKeys = [
+  'index_10',
   'offset',
   'side',
   'base_index',
@@ -10,9 +11,8 @@ export const skipInspectorKeys = [
   'proc_traffic_mode_right',
   'fac_3',
   'data_incompleteness',
-  //
-  'layer',
-  'path',
+  'filter_way_type',
+  'filter_usable',
 ]
 
 export const translationsKey: Record<string, string> = {
@@ -26,6 +26,7 @@ export const translationsKey: Record<string, string> = {
   proc_highway: 'Anliegende Straßenklasse',
   proc_maxspeed: 'Anliegende Geschwindigkeitsbegrenzung',
   index: 'Indexwert',
+  stress_level: 'Level of Traffic Stress',
   data_missing: 'Datenlücken',
   proc_separation_left: 'Abgrenzung links',
   proc_separation_right: 'Abgrenzung rechts',
@@ -178,4 +179,10 @@ export const translationTagValues: Record<string, string> = {
   'data_malus=insufficient dooring buffer':
     'Nicht ausreichender Sicherheitsabstand zu parkenden Fahrzeugen',
   'data_malus=cycling not intended': 'Radverkehr nicht vorgesehen',
+  'filter_way_type=separated': 'Physisch separierte Wege',
+  'filter_way_type=cycle lanes': 'Fahrradspuren auf der Fahrbahn',
+  'filter_way_type=bicycle road': 'Fahrradstraßen',
+  'filter_way_type=shared traffic': 'Gemeinsame Führung mit Kfz',
+  'filter_usable=0': 'für Radverkehr nicht nutzbar',
+  'filter_usable=1': 'für Radverkehr nutzbar',
 }

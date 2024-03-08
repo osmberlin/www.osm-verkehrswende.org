@@ -6,7 +6,7 @@ console.log('START')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const inputFile = path.resolve(__dirname, './geojson/cycling_quality_index.geojson')
+const inputFile = path.resolve(__dirname, './geojson/cycling_quality_index_epsg4326.geojson')
 const outputFile = path.resolve(__dirname, './pmtiles/cycling_quality_index.pmtiles')
 
 console.log('Tippecanoe for', inputFile)

@@ -4,9 +4,7 @@ import LayoutApp from '@layouts/LayoutApp.astro'
 import * as turf from '@turf/turf'
 import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 
-const berlinInnenstadtBbox = [13.0749783, 52.3362065, 13.7524916, 52.6768501] satisfies ReturnType<
-  typeof turf.bbox
->
+const berlinInnenstadtBbox = [13.08, 52.336, 13.76, 52.676] satisfies ReturnType<typeof turf.bbox>
 const maxBounds = turf.bbox(
   turf.buffer(turf.bboxPolygon(berlinInnenstadtBbox), 250, {
     units: 'meters',

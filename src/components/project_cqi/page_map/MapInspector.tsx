@@ -16,14 +16,14 @@ function MapInspectorPrimaryIndex({ properties }: { properties: GeoJSON.Feature[
     const color = legend1to100.find((l) => l.key === `index_${properties.index_10}`)?.color
     return (
       <div className="my-2 flex items-center justify-center gap-1">
-        1…
+        {properties.index != 1 && <>1…</>}
         <span
           className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full bg-gray-500 text-xl font-bold leading-tight text-gray-950"
           style={{ backgroundColor: color }}
         >
           {String(properties.index)}
         </span>
-        …100
+        {properties.index != 100 && <>…100</>}
       </div>
     )
   }

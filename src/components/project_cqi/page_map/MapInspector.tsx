@@ -1,5 +1,7 @@
 import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
+import { twJoin } from 'tailwind-merge'
+import { legendLts } from './layers/layersLts'
 import type { SearchParamsCqiMap } from './storeCqi'
 import { skipInspectorKeys, translationTagValues, translationsKey } from './translations.const'
 
@@ -18,11 +20,27 @@ function MapInspectorPrimaryIndex({ properties }: { properties: GeoJSON.Feature[
     )
   }
   if (params.anzeige === 'lts') {
+    const displayLevels = [1, 2, 3, 4]
     return (
-      <div className="flex justify-center">
-        <div className="flex min-h-12 min-w-12 items-center justify-center rounded-full bg-white/20 p-2 text-xl">
-          {String(properties.stress_level)}
-        </div>
+      <div className="my-2 flex justify-center">
+        {displayLevels.map((displayLevel) => {
+          const current = properties.stress_level === displayLevel
+          const color = legendLts.find((l) => l.key === `stress_level_${displayLevel}`)?.color
+          return (
+            <div
+              className={twJoin(
+                'flex min-h-12 min-w-12 items-center justify-center rounded-full border border-2 p-2 text-xl',
+                current ? 'bg-white/40 font-bold' : 'bg-white/5',
+              )}
+              style={{
+                backgroundColor: current ? color : undefined,
+                borderColor: color,
+              }}
+            >
+              {String(displayLevel)}
+            </div>
+          )
+        })}
       </div>
     )
   }

@@ -65,15 +65,17 @@ export const OverlayLayerSelection = () => {
                 >
                   {name}
                 </RadioGroup.Label>
-                <RadioGroup.Description
-                  as="span"
-                  className={twJoin(
-                    checked ? 'text-emerald-700' : 'text-gray-500',
-                    'block text-sm',
-                  )}
-                >
-                  {description}
-                </RadioGroup.Description>
+                {active && (
+                  <RadioGroup.Description
+                    as="span"
+                    className={twJoin(
+                      checked ? 'text-emerald-700' : 'text-gray-500',
+                      'block text-sm',
+                    )}
+                  >
+                    {description}
+                  </RadioGroup.Description>
+                )}
               </span>
             </>
           )}

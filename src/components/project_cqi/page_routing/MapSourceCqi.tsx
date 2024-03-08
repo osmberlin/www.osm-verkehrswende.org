@@ -48,10 +48,10 @@ export const MapSourceCqi = () => {
             id={layer.id}
             source="cqi"
             source-layer="default"
-            type={layer.type}
+            type={layer.type as any}
             paint={layer.paint}
             // layout={{ visibility: visible ? 'visible' : 'none' }}
-            filter={layer.filter}
+            // filter={wrapFilterWithAll(layer.filter) as FilterSpecification}
           />
         )
       })}

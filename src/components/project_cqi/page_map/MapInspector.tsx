@@ -1,9 +1,43 @@
-import { $clickedMapData } from '@components/BaseMap/store'
+import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
-import React from 'react'
-import { translationTagValues, translationsKey, skipInspectorKeys } from './translations.const'
+import type { SearchParamsCqiMap } from './storeCqi'
+import { skipInspectorKeys, translationTagValues, translationsKey } from './translations.const'
 
-export const MapInspector: React.FC = () => {
+function MapInspectorPrimaryIndex({ properties }: { properties: GeoJSON.Feature['properties'] }) {
+  const params = useStore($searchParams) as SearchParamsCqiMap
+  if (!properties) {
+    return null
+  }
+  if (params.anzeige === '1to100') {
+    return (
+      <div className="flex justify-center">
+        <div className="flex min-h-12 min-w-12 items-center justify-center rounded-full bg-white/20 p-2 text-xl">
+          {String(properties.index)}
+        </div>
+      </div>
+    )
+  }
+  if (params.anzeige === 'lts') {
+    return (
+      <div className="flex justify-center">
+        <div className="flex min-h-12 min-w-12 items-center justify-center rounded-full bg-white/20 p-2 text-xl">
+          {String(properties.stress_level)}
+        </div>
+      </div>
+    )
+  }
+  if (params.anzeige === 'incompleteness') {
+    return (
+      <div className="flex justify-center bg-white/20 p-2 text-xl">
+        {!properties.data_missing && <>Keine</>}
+        {properties.data_missing && <>{properties.data_missing}</>}
+      </div>
+    )
+  }
+  return null
+}
+
+export const MapInspector = () => {
   const clickedMapData = useStore($clickedMapData)
 
   if (!clickedMapData || !clickedMapData.length) return null
@@ -34,6 +68,8 @@ export const MapInspector: React.FC = () => {
         return (
           <div key={feature.properties.id} className="mt-8">
             <h2 className="text-lg">{feature.properties.name || feature.properties.id}</h2>
+            <MapInspectorPrimaryIndex properties={feature.properties} />
+
             <table className="w-full">
               <tbody>
                 {Object.entries(feature.properties as Record<string, string | number>)

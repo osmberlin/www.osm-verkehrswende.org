@@ -54,7 +54,7 @@ export const layersLts = [
           'rgb(0, 0, 0)',
         ],
       },
-      'source-layer': 'cycling_quality_index_epsg432-9mobr8',
+      'source-layer': 'cycling_quality_index_epsg432-4roq5v',
     },
   ]),
   cleanupMapboxLayerJson('lts_gap_background', [
@@ -68,7 +68,7 @@ export const layersLts = [
       paint: {
         'line-color': [
           'match',
-          ['get', 'index2stresslevel'],
+          ['get', 'stress_level'],
           [1],
           '#ab1b04',
           [2],
@@ -92,7 +92,7 @@ export const layersLts = [
           ['match', ['get', 'side'], ['right'], 12, ['left'], -12, 0],
         ],
       },
-      'source-layer': 'cycling_quality_index_epsg432-9mobr8',
+      'source-layer': 'cycling_quality_index_epsg432-4roq5v',
     },
   ]),
   cleanupMapboxLayerJson('lts_main_colour', [
@@ -100,7 +100,7 @@ export const layersLts = [
       layout: {
         'line-sort-key': [
           'step',
-          ['get', 'index2stresslevel'],
+          ['get', 'stress_level'],
           3,
           10,
           10,
@@ -128,7 +128,7 @@ export const layersLts = [
       paint: {
         'line-color': [
           'match',
-          ['get', 'index2stresslevel'],
+          ['get', 'stress_level'],
           [1],
           '#ab1b04',
           [2],
@@ -152,7 +152,7 @@ export const layersLts = [
           ['match', ['get', 'side'], ['right'], 12, ['left'], -12, 0],
         ],
       },
-      'source-layer': 'cycling_quality_index_epsg432-9mobr8',
+      'source-layer': 'cycling_quality_index_epsg432-4roq5v',
     },
   ]),
 ]
@@ -161,21 +161,21 @@ export const legendLts = [
   {
     color: '#ab1b04',
     label: 'LTS 1 (Kampfradler)',
-    filterConfig: { key: 'index2stresslevel', rule: '==', value: 1 },
+    filterConfig: { key: 'stress_level', values: [1] },
   },
   {
     color: '#f5a038',
     label: 'LTS 2',
-    filterConfig: { key: 'index2stresslevel', rule: '==', value: 2 },
+    filterConfig: { key: 'stress_level', values: [2] },
   },
   {
     color: '#f3cf33',
     label: 'LTS 3',
-    filterConfig: { key: 'index2stresslevel', rule: '==', value: 3 },
+    filterConfig: { key: 'stress_level', values: [3] },
   },
   {
     color: '#a7c878',
     label: 'LTS 4 (Kindertauglich)',
-    filterConfig: { key: 'index2stresslevel', rule: '==', value: 4 },
+    filterConfig: { key: 'stress_level', values: [4] },
   },
 ]

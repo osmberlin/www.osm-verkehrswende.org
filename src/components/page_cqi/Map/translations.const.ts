@@ -114,6 +114,7 @@ export const translationTagValues: Record<string, string> = {
   'proc_highway=living_street': 'Verkehrsberuhigter Bereich',
   'proc_highway=service': 'Zufahrtsweg',
   'proc_highway=pedestrian': 'Fußgängerzone',
+  'proc_maxspeed=299': 'unbegrenzt',
   'data_missing=width': 'Breite („width“)',
   'data_missing=surface': 'Oberflächenbelag („surface“)',
   'data_missing=smoothness': 'Oberflächenqualität („smoothness“)',

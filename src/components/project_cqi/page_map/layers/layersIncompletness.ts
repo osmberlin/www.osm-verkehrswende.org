@@ -163,51 +163,61 @@ export const layersIncompletness = [
 
 export const legendIncompletness = [
   {
+    key: 'incompleteness_0',
     color: '#fafafa',
     label: 'Vollständig',
     filterConfig: { key: 'data_incompleteness', values: [0] },
   },
   {
+    key: 'incompleteness_10',
     color: '#dfdfdf',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [10] },
   },
   {
+    key: 'incompleteness_20',
     color: '#c4c4c4',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [20] },
   },
   {
+    key: 'incompleteness_30',
     color: '#a8a8a8',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [30] },
   },
   {
+    key: 'incompleteness_40',
     color: '#8d8d8d',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [40] },
   },
   {
+    key: 'incompleteness_50',
     color: '#727272',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [50] },
   },
   {
+    key: 'incompleteness_60',
     color: '#575757',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [60] },
   },
   {
+    key: 'incompleteness_70',
     color: '#3b3b3b',
     label: 'Einige Daten fehlen',
     filterConfig: { key: 'data_incompleteness', values: [70] },
   },
   {
+    key: 'incompleteness_80',
     color: '#202020',
     label: 'Unvollständig',
     filterConfig: { key: 'data_incompleteness', values: [80] },
   },
   {
+    key: 'incompleteness_90',
     color: '#000000',
     label: 'Sehr unvollständig',
     filterConfig: { key: 'data_incompleteness', values: [90] },

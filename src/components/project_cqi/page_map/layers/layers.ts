@@ -65,8 +65,13 @@ export const layerByGroups: Record<SearchParamsCqiMap['anzeige'], Record<string,
   incompleteness: layersIncompletness,
 }
 
-export type FilterConfig = { key: string; values: (string | number)[] }
+export type FilterConfig = {
+  key: string
+  values: (string | number)[]
+}
+
 type Legend = {
+  key: string
   color: string
   label: string
   filterConfig: null | FilterConfig

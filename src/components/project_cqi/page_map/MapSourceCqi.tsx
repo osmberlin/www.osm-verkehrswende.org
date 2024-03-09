@@ -17,7 +17,15 @@ export const MapSourceCqi = () => {
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
-  const focusFilter = focus ? [focus.rule, focus.key, focus.value] : null
+  const focusFilter = focus ? ['match', focus.key, focus.values, true, false] : null
+
+  // See https://github.com/maplibre/maplibre-style-spec/issues/555
+  const cleanFilter = (input: undefined | []) => {
+    const inputString = JSON.stringify(input)
+    // Regular experession that finds all occurences of `anything["get","ANYSTRING"]anything` in the string and changes them to just "anything"ANYSTRING"anything"
+    const outputString = inputString.replace(/(.*?)\["get","([^"]*)"\](.*?)/g, '$1"$2"$3')
+    return JSON.parse(outputString)
+  }
 
   return (
     <Source
@@ -38,8 +46,8 @@ export const MapSourceCqi = () => {
             layout={layer.layout}
             filter={
               wrapFilterWithAll([
-                ...(layer.filter ? layer.filter : []),
                 focusFilter,
+                ...(layer.filter ? cleanFilter(layer.filter) : []),
                 ['in', 'id', ...mapDataIds],
               ]) as FilterSpecification
             }
@@ -62,8 +70,8 @@ export const MapSourceCqi = () => {
               layout={{ visibility: visible ? 'visible' : 'none' }}
               filter={
                 wrapFilterWithAll([
-                  ...(layer.filter ? layer.filter : []),
                   focusFilter,
+                  ...(layer.filter ? cleanFilter(layer.filter) : []),
                 ]) as FilterSpecification
               }
             />

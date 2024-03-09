@@ -32,7 +32,7 @@ export const MapInspector = () => {
 
       {clickedMapData.map((feature) => {
         return (
-          <div key={feature.properties.id} className="mt-8">
+          <div key={`${feature.properties.id}/${feature.properties.side}`} className="mt-8">
             <h2 className="text-lg">{feature.properties.name || feature.properties.id}</h2>
             <MapInspectorPrimaryInformation properties={feature.properties} />
 

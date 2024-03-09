@@ -17,7 +17,7 @@ export const MapSourceCqi = () => {
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
-  const focusFilter = focus ? ['match', focus.key, focus.values, true, false] : null
+  const focusFilter = focus ? ['match', ['get', focus.key], focus.values, true, false] : null
 
   return (
     <Source

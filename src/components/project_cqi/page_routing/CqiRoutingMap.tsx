@@ -2,6 +2,7 @@ import { BaseMap } from '@components/BaseMap/BaseMap'
 import { type MapSearchParam } from '@components/BaseMap/store'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
+import { MapRoute } from './MapRoute'
 import { MapSourceCqi } from './MapSourceCqi'
 import { interactiveLayerIds } from './layers'
 
@@ -27,6 +28,7 @@ export const CqiRoutingMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
       boxZoom={false}
       interactiveLayerIds={interactiveLayerIds}
     >
+      <MapRoute />
       <MapSourceCqi />
       <NavigationControl showCompass={false} position="top-right" />
       {/* <MapInspector /> */}

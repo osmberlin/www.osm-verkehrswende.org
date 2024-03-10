@@ -24,6 +24,7 @@ export const CqiRoutingMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}
+      boxZoom={false}
       interactiveLayerIds={interactiveLayerIds}
     >
       <MapSourceCqi />

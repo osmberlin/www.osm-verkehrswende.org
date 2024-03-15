@@ -23,14 +23,12 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
       ?.legends?.find((l) => l.key === `index_${properties.index_10}`)?.color
 
     return (
-      <div className="my-2 flex items-center justify-center gap-1">
+      <div
+        className="my-2 flex items-center justify-center gap-1 rounded py-2 text-gray-950"
+        style={{ backgroundColor: color }}
+      >
         {properties.index != 1 && <>1…</>}
-        <span
-          className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full bg-gray-500 text-xl font-bold leading-tight text-gray-950"
-          style={{ backgroundColor: color }}
-        >
-          {String(properties.index)}
-        </span>
+        <span className="text-2xl font-bold leading-tight">{String(properties.index)}</span>
         {properties.index != 100 && <>…100</>}
       </div>
     )
@@ -48,6 +46,7 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
 
           return (
             <div
+              key={displayLevel}
               className={twJoin(
                 'flex min-h-12 min-w-12 items-center justify-center rounded-full border-2 leading-tight',
                 current

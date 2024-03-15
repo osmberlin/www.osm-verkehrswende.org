@@ -1,6 +1,6 @@
 import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
 import type { SearchParamsCqiMap } from '../storeCqi'
-import { layers1to100, legend1to100 } from './layers1to100'
+import { layersCqi, legendCqi } from './layersCqi'
 import { layersIncompletness, legendIncompletness } from './layersIncompletness'
 import { layersLts, legendLts } from './layersLts'
 // import { layersLts, legendLts } from './layersLts'
@@ -54,13 +54,13 @@ export const layerSelection: {
   name: string
   description: null | string
 }[] = [
-  { key: '1to100', name: 'Standard-Klassifizierung', description: '1-100' },
+  { key: 'cqi', name: 'CQI', description: 'Cycling Quality Index 1-100' },
   { key: 'lts', name: 'LTS', description: 'Level of traffic stress 1-4' },
   { key: 'incompleteness', name: 'Datenlücken', description: null },
 ]
 
 export const layerByGroups: Record<SearchParamsCqiMap['anzeige'], Record<string, any>[]> = {
-  '1to100': layers1to100,
+  cqi: layersCqi,
   lts: layersLts,
   incompleteness: layersIncompletness,
 }
@@ -79,13 +79,13 @@ type Legend = {
 }
 
 export const legendByGroups: Record<SearchParamsCqiMap['anzeige'], LegendGroup[]> = {
-  '1to100': legend1to100,
+  cqi: legendCqi,
   lts: legendLts,
   incompleteness: legendIncompletness,
 }
 
 export const interactiveLayerIdsByGroup = {
-  '1to100': ['index_casing'],
+  cqi: ['index_casing'],
   lts: ['lts_casing'],
   incompleteness: ['incomp_casing'],
 }

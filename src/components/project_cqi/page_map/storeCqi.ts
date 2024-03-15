@@ -4,7 +4,7 @@ import type { FilterConfig } from './layers/layers'
 
 export type SearchParamsCqiMap = SearchParamBaseMap & {
   anzeige:
-    | '1to100'
+    | 'cqi'
     | 'lts' // Level of Traffic Stress
     | 'incompleteness'
 }

@@ -1,7 +1,6 @@
-import type { GeoJSON } from 'geojson'
 import type { SearchParamBaseMap } from '@components/BaseMap/store'
+import type { GeoJSON } from 'geojson'
 import { atom } from 'nanostores'
-import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 
 export type SearchParamsCqiMap = SearchParamBaseMap & {}
 

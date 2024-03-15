@@ -1,7 +1,7 @@
 import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
 import type { LegendGroup } from './layers'
 
-export const layers1to100 = [
+export const layersCqi = [
   cleanupMapboxLayerJson('index_casing', [
     {
       layout: {
@@ -357,7 +357,7 @@ export const layers1to100 = [
   ]),
 ]
 
-export const legend1to100: LegendGroup[] = [
+export const legendCqi: LegendGroup[] = [
   {
     title: 'Hauptkategorie',
     primary: true,

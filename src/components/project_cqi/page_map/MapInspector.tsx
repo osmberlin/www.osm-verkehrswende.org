@@ -43,6 +43,7 @@ export const MapInspector = () => {
                   .map(([key, value]) => {
                     const multipleValues = typeof value === 'string' && value.includes(';')
                     let translationTag = `${key}=${value}`
+
                     return (
                       <tr key={key} className="border-b border-gray-800">
                         <th className="py-1 text-left leading-tight">

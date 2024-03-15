@@ -1,7 +1,7 @@
 import { $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
-import { legend1to100 } from '../layers/layers1to100'
+import { legendCqi } from '../layers/layersCqi'
 import { legendLts } from '../layers/layersLts'
 import type { SearchParamsCqiMap } from '../storeCqi'
 
@@ -16,9 +16,9 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
     return null
   }
 
-  if (params.anzeige === '1to100') {
+  if (params.anzeige === 'cqi') {
     // Der index berechnet sich aus base_index (Basisindex entsprechend des Wegetyps) * fac_1 (Faktor für Breite und Oberfläche) * fac_2 (Faktor für Straßenklasse und Höchstgeschwindigkeit) * fac_3 (Faktor für Physische Trennung und Sicherheitsabstand, derzeit nicht implementiert und daher immer 1) * fac_4 (Sonstige auf- oder abwertende Umgebungsvariablen). Die einzelnen Faktoren wiederum basieren insbesondere auf den proc_*-Werten, also fac_1 z.B. auf proc_width und proc_surface. Da steckt aber viel Vodoo und Gewichtungen dahinter, daher ist mMn eigentlich höchstens die Anzeige der fac_1..4 sinnvoll.
-    const color = legend1to100
+    const color = legendCqi
       .find((group) => group.primary)
       ?.legends?.find((l) => l.key === `index_${properties.index_10}`)?.color
 

@@ -1,3 +1,5 @@
+import type { ListStyleType } from './inspector/MapInspectorValueAsList'
+
 export const skipInspectorKeys = [
   'index_10',
   'offset',
@@ -14,6 +16,12 @@ export const skipInspectorKeys = [
   'filter_way_type',
   'filter_usable',
 ]
+
+export const listStyledKeys: Record<string, ListStyleType> = {
+  data_missing: 'questionmark',
+  data_bonus: 'plus',
+  data_malus: 'minus',
+}
 
 export const translationsKey: Record<string, string> = {
   name: 'Straßenname',

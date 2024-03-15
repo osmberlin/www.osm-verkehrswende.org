@@ -1,7 +1,13 @@
 import { $clickedMapData } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import { MapInspectorPrimaryInformation } from './inspector/MapInspectorPrimaryInformation'
-import { skipInspectorKeys, translationTagValues, translationsKey } from './translations.const'
+import {
+  listStyledKeys,
+  skipInspectorKeys,
+  translationTagValues,
+  translationsKey,
+} from './translations.const'
+import { MapInspectorValueAsList } from './inspector/MapInspectorValueAsList'
 
 export const MapInspector = () => {
   const clickedMapData = useStore($clickedMapData)
@@ -41,8 +47,11 @@ export const MapInspector = () => {
                 {Object.entries(feature.properties as Record<string, string | number>)
                   .filter(([key, _]) => !skipInspectorKeys.includes(key))
                   .map(([key, value]) => {
-                    const multipleValues = typeof value === 'string' && value.includes(';')
-                    let translationTag = `${key}=${value}`
+                    const multipleValues =
+                      value &&
+                      typeof value === 'string' &&
+                      (value.includes(';') || Object.keys(listStyledKeys).includes(key))
+                    const translationTag = `${key}=${value}`
 
                     return (
                       <tr key={key} className="border-b border-gray-800">
@@ -53,28 +62,11 @@ export const MapInspector = () => {
                           {typeof value === 'number' ? (
                             <span>{value.toLocaleString()}</span>
                           ) : multipleValues ? (
-                            <ul className="ml-3 list-disc">
-                              {value.split(';').map((singleValue) => {
-                                translationTag = `${key}=${singleValue}`
-                                return (
-                                  <li key={translationTag}>
-                                    {translationTagValues[translationTag] ? (
-                                      <span data-key={translationTag}>
-                                        {translationTagValues[translationTag]}
-                                      </span>
-                                    ) : (
-                                      <code>
-                                        <span>
-                                          {typeof singleValue === 'boolean'
-                                            ? JSON.stringify(singleValue)
-                                            : singleValue}
-                                        </span>
-                                      </code>
-                                    )}
-                                  </li>
-                                )
-                              })}
-                            </ul>
+                            <MapInspectorValueAsList
+                              tagKey={key}
+                              tagValue={value}
+                              listStyle={listStyledKeys[key] || 'list'}
+                            />
                           ) : translationTagValues[translationTag] ? (
                             <span data-key={translationTag}>
                               {translationTagValues[translationTag]}

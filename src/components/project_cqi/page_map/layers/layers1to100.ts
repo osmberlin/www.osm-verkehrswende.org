@@ -1,4 +1,5 @@
 import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
+import type { LegendGroup } from './layers'
 
 export const layers1to100 = [
   cleanupMapboxLayerJson('index_casing', [
@@ -352,65 +353,71 @@ export const layers1to100 = [
   ]),
 ]
 
-export const legend1to100 = [
+export const legend1to100: LegendGroup[] = [
   {
-    key: 'index_1',
-    color: '#7a0403',
-    label: 'Einstufung 10 – am Schlechtesten',
-    filterConfig: { key: 'index_10', values: [1] },
-  },
-  {
-    key: 'index_2',
-    color: '#ab1b04',
-    label: 'Einstufung 20',
-    filterConfig: { key: 'index_10', values: [2] },
-  },
-  {
-    key: 'index_3',
-    color: '#d54a12',
-    label: 'Einstufung 30',
-    filterConfig: { key: 'index_10', values: [3] },
-  },
-  {
-    key: 'index_4',
-    color: '#f5a038',
-    label: 'Einstufung 40',
-    filterConfig: { key: 'index_10', values: [4] },
-  },
-  {
-    key: 'index_5',
-    color: '#f3cf33',
-    label: 'Einstufung 50',
-    filterConfig: { key: 'index_10', values: [5] },
-  },
-  {
-    key: 'index_6',
-    color: '#e6f122',
-    label: 'Einstufung 60',
-    filterConfig: { key: 'index_10', values: [6] },
-  },
-  {
-    key: 'index_7',
-    color: '#a7c878',
-    label: 'Einstufung 70',
-    filterConfig: { key: 'index_10', values: [7] },
-  },
-  {
-    key: 'index_8',
-    color: '#679fce',
-    label: 'Einstufung 80',
-    filterConfig: { key: 'index_10', values: [8] },
-  },
-  {
-    key: 'index_9',
-    color: '#4473e1',
-    label: 'Einstufung 90',
-    filterConfig: { key: 'index_10', values: [9] },
-  },
-  {
-    key: 'index_10',
-    color: '#4143a7',
-    label: 'Einstufung 100 – am Besten',
-    filterConfig: { key: 'index_10', values: [10] },
+    title: 'Hauptkategorie',
+    primary: true,
+    legends: [
+      {
+        key: 'index_1',
+        color: '#7a0403',
+        label: 'Einstufung 10 – am Schlechtesten',
+        filterConfig: { key: 'index_10', values: [1] },
+      },
+      {
+        key: 'index_2',
+        color: '#ab1b04',
+        label: 'Einstufung 20',
+        filterConfig: { key: 'index_10', values: [2] },
+      },
+      {
+        key: 'index_3',
+        color: '#d54a12',
+        label: 'Einstufung 30',
+        filterConfig: { key: 'index_10', values: [3] },
+      },
+      {
+        key: 'index_4',
+        color: '#f5a038',
+        label: 'Einstufung 40',
+        filterConfig: { key: 'index_10', values: [4] },
+      },
+      {
+        key: 'index_5',
+        color: '#f3cf33',
+        label: 'Einstufung 50',
+        filterConfig: { key: 'index_10', values: [5] },
+      },
+      {
+        key: 'index_6',
+        color: '#e6f122',
+        label: 'Einstufung 60',
+        filterConfig: { key: 'index_10', values: [6] },
+      },
+      {
+        key: 'index_7',
+        color: '#a7c878',
+        label: 'Einstufung 70',
+        filterConfig: { key: 'index_10', values: [7] },
+      },
+      {
+        key: 'index_8',
+        color: '#679fce',
+        label: 'Einstufung 80',
+        filterConfig: { key: 'index_10', values: [8] },
+      },
+      {
+        key: 'index_9',
+        color: '#4473e1',
+        label: 'Einstufung 90',
+        filterConfig: { key: 'index_10', values: [9] },
+      },
+      {
+        key: 'index_10',
+        color: '#4143a7',
+        label: 'Einstufung 100 – am Besten',
+        filterConfig: { key: 'index_10', values: [10] },
+      },
+    ],
   },
 ]

@@ -1,4 +1,5 @@
 import { cleanupMapboxLayerJson } from '../../../BaseMap/utils/cleanupMapboxLayerJson'
+import type { LegendGroup } from './layers'
 
 export const layersLts = [
   cleanupMapboxLayerJson('lts_casing', [
@@ -132,29 +133,35 @@ export const layersLts = [
   ]),
 ]
 
-export const legendLts = [
+export const legendLts: LegendGroup[] = [
   {
-    key: 'stress_level_1',
-    color: '#a7c878',
-    label: 'LTS 1 (Kindertauglich)',
-    filterConfig: { key: 'stress_level', values: [1] },
-  },
-  {
-    key: 'stress_level_2',
-    color: '#f3cf33',
-    label: 'LTS 2 (Niedriger Stress)',
-    filterConfig: { key: 'stress_level', values: [2] },
-  },
-  {
-    key: 'stress_level_3',
-    color: '#f5a038',
-    label: 'LTS 3 (Mittlerer Stress)',
-    filterConfig: { key: 'stress_level', values: [3] },
-  },
-  {
-    key: 'stress_level_4',
-    color: '#ab1b04',
-    label: 'LTS 4 (Kampfradler, hoher Stress)',
-    filterConfig: { key: 'stress_level', values: [4] },
+    title: 'Hauptkategorie',
+    primary: true,
+    legends: [
+      {
+        key: 'stress_level_1',
+        color: '#a7c878',
+        label: 'LTS 1 (Kindertauglich)',
+        filterConfig: { key: 'stress_level', values: [1] },
+      },
+      {
+        key: 'stress_level_2',
+        color: '#f3cf33',
+        label: 'LTS 2 (Niedriger Stress)',
+        filterConfig: { key: 'stress_level', values: [2] },
+      },
+      {
+        key: 'stress_level_3',
+        color: '#f5a038',
+        label: 'LTS 3 (Mittlerer Stress)',
+        filterConfig: { key: 'stress_level', values: [3] },
+      },
+      {
+        key: 'stress_level_4',
+        color: '#ab1b04',
+        label: 'LTS 4 (Kampfradler, hoher Stress)',
+        filterConfig: { key: 'stress_level', values: [4] },
+      },
+    ],
   },
 ]

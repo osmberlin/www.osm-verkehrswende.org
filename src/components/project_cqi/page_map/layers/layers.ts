@@ -70,6 +70,7 @@ export type FilterConfig = {
   values: (string | number)[]
 }
 
+export type LegendGroup = { title: string; primary?: boolean; legends: Legend[] }
 type Legend = {
   key: string
   color: string
@@ -77,7 +78,7 @@ type Legend = {
   filterConfig: null | FilterConfig
 }
 
-export const legendByGroups: Record<SearchParamsCqiMap['anzeige'], Legend[]> = {
+export const legendByGroups: Record<SearchParamsCqiMap['anzeige'], LegendGroup[]> = {
   '1to100': legend1to100,
   lts: legendLts,
   incompleteness: legendIncompletness,

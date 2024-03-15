@@ -5,7 +5,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
 import { MapInspector } from './MapInspector'
 import { MapSourceCqi } from './MapSourceCqi'
-import type { SearchParamsCqiMap } from './storeCqi'
+import { validAnzeigeValues, type SearchParamsCqiMap } from './storeCqi'
 import { interactiveLayerIdsByGroup } from './layers/layers'
 import { Overlay } from './Overlay'
 
@@ -17,6 +17,11 @@ type Props = {
 
 export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
   const params = useStore($searchParams) as SearchParamsCqiMap
+
+  // Guard against invalid "anzeige" param values
+  if (!validAnzeigeValues.includes(params.anzeige)) {
+    $searchParams.open({ ...params, ...{ anzeige: 'cqi' } })
+  }
 
   return (
     <BaseMap

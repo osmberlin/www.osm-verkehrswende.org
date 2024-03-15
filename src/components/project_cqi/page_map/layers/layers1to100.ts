@@ -420,4 +420,22 @@ export const legend1to100: LegendGroup[] = [
       },
     ],
   },
+  {
+    title: 'Nutzbarkeit',
+    primary: false,
+    legends: [
+      {
+        key: 'no',
+        color: 'gray',
+        label: 'Nicht nutzbar',
+        filterConfig: { key: 'filter_usable', values: [0] },
+      },
+      {
+        key: 'yes',
+        color: 'gray',
+        label: 'Nutzbar',
+        filterConfig: { key: 'filter_usable', values: [1] },
+      },
+    ],
+  },
 ]

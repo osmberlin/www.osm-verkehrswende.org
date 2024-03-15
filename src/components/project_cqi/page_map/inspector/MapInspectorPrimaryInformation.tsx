@@ -18,7 +18,10 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
 
   if (params.anzeige === '1to100') {
     // Der index berechnet sich aus base_index (Basisindex entsprechend des Wegetyps) * fac_1 (Faktor für Breite und Oberfläche) * fac_2 (Faktor für Straßenklasse und Höchstgeschwindigkeit) * fac_3 (Faktor für Physische Trennung und Sicherheitsabstand, derzeit nicht implementiert und daher immer 1) * fac_4 (Sonstige auf- oder abwertende Umgebungsvariablen). Die einzelnen Faktoren wiederum basieren insbesondere auf den proc_*-Werten, also fac_1 z.B. auf proc_width und proc_surface. Da steckt aber viel Vodoo und Gewichtungen dahinter, daher ist mMn eigentlich höchstens die Anzeige der fac_1..4 sinnvoll.
-    const color = legend1to100.find((l) => l.key === `index_${properties.index_10}`)?.color
+    const color = legend1to100
+      .find((group) => group.primary)
+      ?.legends?.find((l) => l.key === `index_${properties.index_10}`)?.color
+
     return (
       <div className="my-2 flex items-center justify-center gap-1">
         {properties.index != 1 && <>1…</>}
@@ -39,7 +42,10 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
       <div className="my-2 flex justify-center gap-1">
         {displayLevels.map((displayLevel) => {
           const current = properties.stress_level === displayLevel
-          const color = legendLts.find((l) => l.key === `stress_level_${displayLevel}`)?.color
+          const color = legendLts
+            .find((group) => group.primary)
+            ?.legends.find((l) => l.key === `stress_level_${displayLevel}`)?.color
+
           return (
             <div
               className={twJoin(

@@ -41,7 +41,7 @@ export const OverlayLegendAndFocus = () => {
             {curentLegendGroup.map((legendGroup) => {
               return (
                 <div key={`${params.anzeige}-${legendGroup.title}`}>
-                  <h2 className={legendGroup.primary ? 'sr-only' : 'font-semibold'}>
+                  <h2 className={legendGroup.primary ? 'sr-only' : 'px-2 pb-2 text-sm'}>
                     {legendGroup.title}
                   </h2>
                   <ul

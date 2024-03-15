@@ -4,6 +4,7 @@ import { twJoin } from 'tailwind-merge'
 import { legendCqi } from '../layers/layersCqi'
 import { legendLts } from '../layers/layersLts'
 import type { SearchParamsCqiMap } from '../storeCqi'
+import { MapInspectorValueAsList } from './MapInspectorValueAsList'
 
 type Props = {
   properties: GeoJSON.Feature['properties']
@@ -68,9 +69,15 @@ export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
 
   if (params.anzeige === 'incompleteness') {
     return (
-      <div className="flex justify-center bg-white/20 p-2 text-xl">
+      <div className="my-1 flex rounded bg-gray-950 p-2 text-base">
         {!properties.data_missing && <>Keine</>}
-        {properties.data_missing && <>{properties.data_missing}</>}
+        {properties.data_missing && (
+          <MapInspectorValueAsList
+            tagKey={'data_missing'}
+            tagValue={properties.data_missing}
+            listStyle="questionmark"
+          />
+        )}
       </div>
     )
   }

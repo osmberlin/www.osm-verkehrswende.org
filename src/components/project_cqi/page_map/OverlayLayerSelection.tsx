@@ -65,7 +65,8 @@ export const OverlayLayerSelection = () => {
                 >
                   {name}
                 </RadioGroup.Label>
-                {active && (
+
+                {checked && (
                   <RadioGroup.Description
                     as="span"
                     className={twJoin(

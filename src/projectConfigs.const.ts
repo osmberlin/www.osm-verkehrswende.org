@@ -185,8 +185,8 @@ export const projectConfigs = {
       },
     ],
     meta: {
-      title: 'TODO META',
-      description: 'TODO META',
+      title: 'Cycling Quality Index (BETA)',
+      description: 'Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes',
       imagePath: '/social-sharing.png',
       imageAlt: '/social-sharing.png',
       language: 'de',
@@ -194,7 +194,7 @@ export const projectConfigs = {
   },
   mapillary: {
     enabled: true,
-    name: 'Mapillary Missing Streets',
+    name: 'Mapillary Missing Streets (ALPHA)',
     root: '/mapillary',
     menus: [
       {
@@ -208,8 +208,8 @@ export const projectConfigs = {
     ],
     additionalFooterLinks: [],
     meta: {
-      title: 'Mapillary Missing Streets',
-      description: 'Easily find out which streets in Berlin require fresh 360° images',
+      title: 'Mapillary Missing Streets (ALPHA)',
+      description: 'An easy way to find out which streets in Berlin require fresh 360° images',
       imagePath: '/social-sharing.png',
       imageAlt: '/social-sharing.png',
       language: 'de',

@@ -1,6 +1,9 @@
 import { useStore } from '@nanostores/react'
+import { useEffect, useRef } from 'react'
 import { Layer, Source, useMap } from 'react-map-gl/maplibre'
+import initRouteSnapper from 'route-snapper'
 import { $routeToolGj } from './storeRouting'
+import { RouteSnapper } from './lib/route_snapper_lib'
 
 export const MapRoute = () => {
   const routeToolGj = useStore($routeToolGj)
@@ -8,11 +11,35 @@ export const MapRoute = () => {
   const map = useMap()
   console.log(map.current?.getMap())
 
-  // const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
+  const routeSnapper = useRef<RouteSnapper | null>(null)
+  const snapTool = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const initializeRouteSnapper = async () => {
+      await initRouteSnapper()
+      const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
+      try {
+        const resp = await fetch(graphPath)
+        const graphBytes = await resp.arrayBuffer()
+        routeSnapper.current = new RouteSnapper(
+          map.current?.getMap(),
+          new Uint8Array(graphBytes),
+          snapTool.current,
+        )
+      } catch (err) {
+        console.log(`Route tool broke: ${err}`)
+        snapTool.current!.innerHTML = 'Failed to load'
+      }
+    }
+
+    initializeRouteSnapper()
+  }, [])
+
   const circleRadiusPixels = 10
 
   return (
     <Source id="route_line" type="geojson" data={routeToolGj} attribution="© OpenStreetMap">
+      <div ref={snapTool}>Route tool loading...</div>
       <Layer
         key="route_line"
         id="route_line"

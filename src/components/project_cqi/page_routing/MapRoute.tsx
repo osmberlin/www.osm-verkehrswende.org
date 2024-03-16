@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import { Layer, Source, useMap } from 'react-map-gl/maplibre'
 import initRouteSnapper from 'route-snapper'
 import { $routeToolGj } from './storeRouting'
-import { RouteSnapper } from './lib/route_snapper_lib'
+import { RouteTool } from './utils/routeSnapperTools'
 
 export const MapRoute = () => {
   const routeToolGj = useStore($routeToolGj)
@@ -11,7 +11,7 @@ export const MapRoute = () => {
   const map = useMap()
   console.log(map.current?.getMap())
 
-  const routeSnapper = useRef<RouteSnapper | null>(null)
+  const routeSnapper = useRef<RouteTool | null>(null)
   const snapTool = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -21,11 +21,7 @@ export const MapRoute = () => {
       try {
         const resp = await fetch(graphPath)
         const graphBytes = await resp.arrayBuffer()
-        routeSnapper.current = new RouteSnapper(
-          map.current?.getMap(),
-          new Uint8Array(graphBytes),
-          snapTool.current,
-        )
+        routeSnapper.current = new RouteTool(map.current!.getMap(), new Uint8Array(graphBytes))
       } catch (err) {
         console.log(`Route tool broke: ${err}`)
         snapTool.current!.innerHTML = 'Failed to load'

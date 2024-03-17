@@ -42,9 +42,9 @@ export const translationsKey: Record<string, string> = {
   proc_mandatory: 'Benutzungspflicht',
   proc_traffic_sign: 'Verkehrszeichen',
   base_index: 'Grundeinstufung der Wegeklasse',
-  fac_1: 'Faktor Wegequalität',
-  fac_2: 'Faktor anliegende Straße',
-  fac_4: 'Faktor sonstige Eigenschaften',
+  fac_1: 'Faktor Physische Beschaffenheit',
+  fac_2: 'Faktor Anliegende Straße',
+  fac_4: 'Faktor Sonstige Eigenschaften',
   data_bonus: 'Aufwertende Faktoren',
   data_malus: 'Abwertende Faktoren',
 }

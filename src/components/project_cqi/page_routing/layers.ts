@@ -49,7 +49,7 @@ export const layers = [
     id: 'debugStyleLayerLine',
     type: 'line',
     paint: {
-      'line-width': 3,
+      'line-width': 1,
       'line-color': '#a21caf',
       'line-opacity': 0.6,
     },

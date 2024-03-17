@@ -25,4 +25,12 @@ export default defineConfig({
   redirects: {
     // '/from': '/to',
   },
+  vite: {
+    ssr: {
+      noExternal: ['route-snapper'],
+    },
+    optimizeDeps: {
+      exclude: ['route-snapper'],
+    },
+  },
 })

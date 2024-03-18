@@ -437,13 +437,13 @@ export const legendCqi: LegendGroup[] = [
       {
         key: 'no',
         color: 'gray',
-        label: 'Alle Straßen und Fahrbahnen einblenden',
+        label: 'Alle Fahrbahnen einblenden',
         filterConfig: { key: 'filter_usable', values: [0] },
       },
       {
         key: 'yes',
         color: 'gray',
-        label: 'Nur für Radverkehr nutzbare Straßen und Fahrbahnen einblenden',
+        label: 'Nur nutzbare einblenden',
         filterConfig: { key: 'filter_usable', values: [1] },
       },
     ],

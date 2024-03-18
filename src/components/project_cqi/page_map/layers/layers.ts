@@ -54,8 +54,8 @@ export const layerSelection: {
   name: string
   description: null | string
 }[] = [
-  { key: 'cqi', name: 'CQI', description: 'Cycling Quality Index 1-100' },
-  { key: 'lts', name: 'LTS', description: 'Level of traffic stress 1-4' },
+  { key: 'cqi', name: 'Cycling Quality Index', description: 'Indexwerte 0 bis 100' },
+  { key: 'lts', name: 'Level of Traffic Stress', description: 'Stress Levels 1 bis 4' },
   { key: 'incompleteness', name: 'Datenlücken', description: null },
 ]
 

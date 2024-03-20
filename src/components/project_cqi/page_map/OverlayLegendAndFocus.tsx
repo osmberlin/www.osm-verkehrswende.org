@@ -2,18 +2,45 @@ import { $searchParams } from '@components/BaseMap/store'
 import { Disclosure } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
-import { legendByGroups } from './layers/layers'
-import { $focus, type SearchParamsCqiMap } from './storeCqi'
+import { legendByGroups, type Legend } from './layers/layers'
+import {
+  filterParamsKey,
+  filterParamsObject,
+  filterParamsStringify,
+  type SearchParamsCqiMap,
+} from './storeCqi'
 
 export const OverlayLegendAndFocus = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap
-  const focus = useStore($focus)
   const curentLegendGroup = legendByGroups[params?.anzeige ?? 'cqi']
 
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
   const smallScreen = typeof window !== 'undefined' && window.innerWidth < 1024
+
+  const filters = filterParamsObject(params.filters)
+
+  const handleClick = (key: string) => {
+    const active = filters?.includes(key)
+    if (active) {
+      // remove
+      console.log('Remove filter1', key, filters)
+      const newFilterString = filterParamsStringify(filters?.filter((f) => f !== key))
+      if (!newFilterString) {
+        delete params.filters
+      }
+      const newParams = newFilterString ? { ...params, ...{ filters: newFilterString } } : params
+      $searchParams.open(newParams)
+      console.log('Remove filter2', newParams)
+    } else {
+      // add
+      const filterString = filterParamsStringify([params?.filters, key])
+      const newParams = filterString ? { ...params, ...{ filters: filterString } } : params
+      $searchParams.open(newParams)
+      console.log('Add filter', newParams)
+    }
+  }
 
   return (
     <Disclosure defaultOpen={!smallScreen}>
@@ -46,30 +73,26 @@ export const OverlayLegendAndFocus = () => {
                   </h2>
                   <ul
                     className={twJoin(
-                      'group/legend space-y-2 px-2 pb-4 text-sm font-normal leading-4 text-gray-900',
+                      'group/legend px-2 pb-4 text-sm font-normal leading-4 text-gray-900',
                       open && smallScreen ? '' : 'pt-4',
                     )}
                   >
                     {legendGroup.legends.map((legend) => {
-                      const hasFocus = legend.filterConfig !== null
+                      const key = filterParamsKey({
+                        groupKey: legendGroup.key,
+                        legendKey: legend.key,
+                      })
+                      const filteringEnabled = legend.filterConfig !== null
+                      const filterActive = filters?.includes(key)
+
                       return (
                         <li
                           key={`${legend.label}-${legend.color}`}
                           className={twJoin(
                             'flex items-center justify-between gap-2',
-                            hasFocus ? 'group/focus cursor-pointer' : '',
+                            filteringEnabled ? 'group/focus cursor-pointer' : '',
                           )}
-                          onClick={() => {
-                            if (hasFocus && $focus) {
-                              if (JSON.stringify(focus) !== JSON.stringify(legend.filterConfig)) {
-                                $focus.set(legend.filterConfig)
-                              } else if (focus === null) {
-                                $focus.set(legend.filterConfig)
-                              } else {
-                                $focus.set(null)
-                              }
-                            }
-                          }}
+                          onClick={() => filteringEnabled && handleClick(key)}
                         >
                           <div className="items-top flex gap-2">
                             <div
@@ -78,9 +101,14 @@ export const OverlayLegendAndFocus = () => {
                             />
                             <span>{legend.label}</span>
                           </div>
-                          {hasFocus && (
-                            <button className="rounded-md border border-white p-1.5 text-gray-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 group-hover/focus:border-gray-200 group-hover/focus:bg-blue-50 group-hover/legend:text-gray-800">
-                              {JSON.stringify(focus) === JSON.stringify(legend.filterConfig) ? (
+                          {filteringEnabled && (
+                            <button
+                              className={twJoin(
+                                'rounded-md border border-white p-1.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 group-hover/focus:border-gray-200 group-hover/focus:bg-blue-50 group-hover/legend:text-gray-800',
+                                filterActive ? 'text-yellow-500' : 'text-gray-300',
+                              )}
+                            >
+                              {filterActive ? (
                                 <svg
                                   // Heroicon Solid light-bulb
                                   xmlns="http://www.w3.org/2000/svg"

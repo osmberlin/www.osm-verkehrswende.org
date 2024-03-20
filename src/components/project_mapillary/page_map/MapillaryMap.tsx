@@ -1,16 +1,15 @@
-import type { MapSearchParam } from '@components/BaseMap/store'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
-import { BaseMap } from '../../BaseMap/BaseMap'
+import { BaseMap, type MapInitialViewState } from '../../BaseMap/BaseMap'
 import { MapInspector } from './MapInspector'
 import { MapSourceBoundaries } from './MapSourceBoundaries'
 import { MapSourceMapillaryMissingImages } from './MapSourceMapillaryMissingImages'
 import { Overlay } from './Overlay'
 
 type Props = {
-  maxBounds: MapSearchParam['maxBounds']
-  minZoom: MapSearchParam['minZoom']
-  maxZoom?: MapSearchParam['maxZoom']
+  maxBounds: MapInitialViewState['maxBounds']
+  minZoom: MapInitialViewState['minZoom']
+  maxZoom?: MapInitialViewState['maxZoom']
 }
 
 export const MapillaryMap = ({ maxBounds, minZoom, maxZoom }: Props) => {

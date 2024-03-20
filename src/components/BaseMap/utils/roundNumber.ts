@@ -1,4 +1,4 @@
-import type { MapSearchParam } from '../store'
+import type { BaseMapSeachparamsObject } from '../store'
 
 export const roundNumber = (number: number | string, precision?: number) => {
   if (typeof number === 'string') {
@@ -15,7 +15,7 @@ const roundByZoom = (number: number | string, zoom: number) => {
   return roundNumber(number, latLngPrecisionByZoom)
 }
 
-export const roundPositionForURL = ({ longitude, latitude, zoom }: MapSearchParam) => {
+export const roundPositionForURL = ({ longitude, latitude, zoom }: BaseMapSeachparamsObject) => {
   longitude = roundByZoom(longitude, zoom)
   latitude = roundByZoom(latitude, zoom)
   zoom = roundNumber(zoom, 1)
@@ -23,5 +23,5 @@ export const roundPositionForURL = ({ longitude, latitude, zoom }: MapSearchPara
     longitude,
     latitude,
     zoom,
-  } satisfies MapSearchParam
+  } satisfies BaseMapSeachparamsObject
 }

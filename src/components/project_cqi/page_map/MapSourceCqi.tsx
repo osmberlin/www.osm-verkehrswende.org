@@ -3,12 +3,11 @@ import { useStore } from '@nanostores/react'
 import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
 import { wrapFilterWithAll } from '../../BaseMap/utils/wrapFilterWithAll'
-import { layerByGroups, layersSelected } from './layers/layers'
-import { $focus, type SearchParamsCqiMap } from './storeCqi'
+import { layerByGroups, layersSelected, legendByGroups } from './layers/layers'
+import { filterParamsObject, type SearchParamsCqiMap } from './storeCqi'
 
 export const MapSourceCqi = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap
-  const focus = useStore($focus)
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
 
@@ -17,7 +16,22 @@ export const MapSourceCqi = () => {
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
-  const focusFilter = focus ? ['match', ['get', focus.key], focus.values, true, false] : null
+  const focusFilter: ['match', ['get', string], (string | number)[], boolean, boolean][] = []
+  const filters = filterParamsObject(params.filters)
+  const flatLayerGroups = Object.values(legendByGroups)
+    .map((groups) => groups)
+    .flat()
+  if (filters && filters?.length > 0) {
+    filters.forEach((filter) => {
+      const [groupKey, legendKey] = filter.split('-')
+      const filterConfig = flatLayerGroups
+        .find((g) => g.key === groupKey)
+        ?.legends?.find((l) => l.key === legendKey)?.filterConfig
+      if (filterConfig) {
+        focusFilter.push(['match', ['get', filterConfig.key], filterConfig.values, true, false])
+      }
+    })
+  }
 
   return (
     <Source
@@ -38,7 +52,7 @@ export const MapSourceCqi = () => {
             layout={layer.layout}
             filter={
               wrapFilterWithAll([
-                focusFilter,
+                wrapFilterWithAll(focusFilter),
                 ...(layer.filter ? layer.filter : []),
                 ['in', 'id', ...mapDataIds],
               ]) as FilterSpecification
@@ -62,7 +76,7 @@ export const MapSourceCqi = () => {
               layout={{ visibility: visible ? 'visible' : 'none' }}
               filter={
                 wrapFilterWithAll([
-                  focusFilter,
+                  wrapFilterWithAll(focusFilter),
                   ...(layer.filter ? layer.filter : []),
                 ]) as FilterSpecification
               }

@@ -4,7 +4,7 @@ import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { layerSelection } from './layers/layers'
-import { $focus, type SearchParamsCqiMap } from './storeCqi'
+import { type SearchParamsCqiMap } from './storeCqi'
 
 export const OverlayLayerSelection = () => {
   const params = useStore($searchParams)
@@ -12,8 +12,9 @@ export const OverlayLayerSelection = () => {
   const [localSelected, setLocalSelected] = useState<SearchParamsCqiMap['anzeige']>('cqi')
 
   const setSelected = (value: string) => {
-    $searchParams.open({ ...params, ...{ anzeige: value } })
-    $focus.set(null)
+    delete params.filter
+    params.anzeige = value
+    $searchParams.open(params)
     setLocalSelected(value as SearchParamsCqiMap['anzeige'])
   }
 

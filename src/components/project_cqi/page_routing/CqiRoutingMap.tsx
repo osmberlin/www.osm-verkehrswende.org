@@ -1,5 +1,4 @@
-import { BaseMap } from '@components/BaseMap/BaseMap'
-import { type MapSearchParam } from '@components/BaseMap/store'
+import { BaseMap, type MapInitialViewState } from '@components/BaseMap/BaseMap'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
 import { MapRoute } from './MapRoute'
@@ -7,9 +6,9 @@ import { MapSourceCqi } from './MapSourceCqi'
 import { interactiveLayerIds } from './layers'
 
 type Props = {
-  maxBounds: MapSearchParam['maxBounds']
-  minZoom: MapSearchParam['minZoom']
-  maxZoom?: MapSearchParam['maxZoom']
+  maxBounds: MapInitialViewState['maxBounds']
+  minZoom: MapInitialViewState['minZoom']
+  maxZoom?: MapInitialViewState['maxZoom']
 }
 
 export const CqiRoutingMap = ({ maxBounds, minZoom, maxZoom }: Props) => {

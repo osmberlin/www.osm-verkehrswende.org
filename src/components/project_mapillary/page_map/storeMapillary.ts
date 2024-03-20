@@ -1,5 +1,5 @@
-import type { SearchParamBaseMap } from '@components/BaseMap/store'
+import type { BaseMapSearchparams } from '@components/BaseMap/store'
 
-export type SearchParamsMapillaryMap = SearchParamBaseMap & {
+export type SearchParamsMapillaryMap = BaseMapSearchparams & {
   anzeige: 'complete' | 'completePano' | 'completeFresh' | 'completeFreshPano'
 }

@@ -1,8 +1,8 @@
-import type { SearchParamBaseMap } from '@components/BaseMap/store'
+import type { BaseMapSearchparams } from '@components/BaseMap/store'
 import type { GeoJSON } from 'geojson'
 import { atom } from 'nanostores'
 
-export type SearchParamsCqiMap = SearchParamBaseMap & {}
+export type SearchParamsCqiMap = BaseMapSearchparams & {}
 
 // Following https://github.com/dabreegster/ltn/blob/main/web/src/common/snapper/stores.ts
 export const $routeToolGj = atom<GeoJSON>({

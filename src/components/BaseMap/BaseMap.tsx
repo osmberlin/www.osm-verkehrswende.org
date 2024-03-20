@@ -3,20 +3,30 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import * as pmtiles from 'pmtiles'
 import { useEffect, useState } from 'react'
+import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 import { Map, type ViewStateChangeEvent } from 'react-map-gl/maplibre'
 import {
   $clickedMapData,
   $mapLoaded,
   $searchParams,
-  paramMapParse,
-  paramMapStringify,
-  type MapSearchParam,
-  type SearchParamBaseMap,
+  baseMapSearchparamsParse,
+  baseMapSearchparamsStringify,
+  type BaseMapSeachparamsObject,
+  type BaseMapSearchparams,
 } from './store'
 import { roundPositionForURL } from './utils/roundNumber'
 
+export type MapInitialViewState = BaseMapSeachparamsObject & {
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setmaxbounds
+  maxBounds?: LngLatBoundsLike
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setminzoom
+  minZoom?: number
+  // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setmaxzoom
+  maxZoom?: number
+}
+
 type Props = {
-  initialViewState: MapSearchParam
+  initialViewState: MapInitialViewState
   interactiveLayerIds: string[]
   boxZoom?: boolean
   children: React.ReactNode
@@ -31,13 +41,13 @@ export const BaseMap = ({ initialViewState, interactiveLayerIds, boxZoom, childr
     }
   }, [])
 
-  const params = useStore($searchParams) as SearchParamBaseMap
+  const params = useStore($searchParams) as BaseMapSearchparams
 
   const [cursorStyle, setCursorStyle] = useState('grab')
 
-  const setParamsMap = ({ latitude, longitude, zoom }: MapSearchParam) => {
+  const setParamsMap = ({ latitude, longitude, zoom }: BaseMapSeachparamsObject) => {
     const mapParamsRounded = roundPositionForURL({ latitude, longitude, zoom })
-    const mapParamString = paramMapStringify(mapParamsRounded)
+    const mapParamString = baseMapSearchparamsStringify(mapParamsRounded)
     const replaceHistory = true
     $searchParams.open({ ...params, map: mapParamString }, replaceHistory)
   }
@@ -54,7 +64,7 @@ export const BaseMap = ({ initialViewState, interactiveLayerIds, boxZoom, childr
     setParamsMap(initialViewState)
   }, [])
 
-  const latLngZoom = paramMapParse(params.map)
+  const latLngZoom = baseMapSearchparamsParse(params.map)
 
   return (
     <Map

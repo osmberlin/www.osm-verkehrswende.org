@@ -117,8 +117,8 @@ export const projectConfigs = {
         label: null,
         items: [
           { href: '/bicycle-parking/', label: 'Über das Projekt' },
-          { href: 'https://bikeparking.lorenz.lu/missingmap/Berlin/', label: 'Datenabgleich' },
-          { href: 'https://bikeparking.lorenz.lu/parkingmap/', label: 'Karte' },
+          { href: 'https://bikeparking.lorenz.lu/missingmap/Berlin', label: 'Datenabgleich' },
+          { href: 'https://bikeparking.lorenz.lu/parkingmap', label: 'Karte' },
         ],
       },
       NavigationNews,

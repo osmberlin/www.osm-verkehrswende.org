@@ -151,16 +151,16 @@ export const projectConfigs = {
   },
   cqi: {
     enabled: true,
-    name: 'Cycling Quality Index (BETA)',
+    name: 'Cycling Quality Index',
     root: '/cqi',
     menus: [
       {
         label: null,
         items: [
           { href: '/cqi/', label: 'Über das Projekt' },
-          { href: '/cqi/map/', label: 'Karte (BETA)' },
-          { href: '/cqi/routing/', label: 'Routing (ALPHA)' },
           // { href: '/cqi/participate/', label: 'Mitmachen' },
+          { href: '/cqi/map/', label: 'Karte' },
+          { href: '/cqi/routing/', label: 'Routing (PLANNED)' },
         ],
       },
       // {
@@ -185,7 +185,7 @@ export const projectConfigs = {
       },
     ],
     meta: {
-      title: 'Cycling Quality Index (BETA)',
+      title: 'Cycling Quality Index',
       description: 'Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes',
       imagePath: '/social-sharing.png',
       imageAlt: '/social-sharing.png',

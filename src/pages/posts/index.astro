@@ -1,5 +1,5 @@
 ---
-import LayoutArticlePage from '@layouts/LayoutArticlePage.astro'
+import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
 import { getCollection } from 'astro:content'
 
 const allPosts = await getCollection('posts')
@@ -8,7 +8,7 @@ const sortedPosts = allPosts.sort(
 )
 ---
 
-<LayoutArticlePage title="Alle Blogposts" menuHighlight="posts" noindex={true}>
+<LayoutArticlePageAstro title="Alle Blogposts" menuHighlight="posts" noindex={true}>
   <header class="mb-20">
     <h1>Alle Blogposts aller Projekte ({sortedPosts.length})</h1>
   </header>
@@ -41,4 +41,4 @@ const sortedPosts = allPosts.sort(
       }
     </tbody>
   </table>
-</LayoutArticlePage>
+</LayoutArticlePageAstro>

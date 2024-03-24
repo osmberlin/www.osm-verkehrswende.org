@@ -6,7 +6,7 @@ author: Tobias Jordans @tordans
 menuTitle: Launch post
 # canonicalUrl:
 inMenu: true
-languate: 'en'
+language: 'en'
 ---
 
 ## This Post is WIP. Best to ignore it for now…

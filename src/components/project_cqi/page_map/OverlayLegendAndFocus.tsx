@@ -25,45 +25,77 @@ export const OverlayLegendAndFocus = () => {
     const active = filters?.includes(key)
     if (active) {
       // remove
-      console.log('Remove filter1', key, filters)
       const newFilterString = filterParamsStringify(filters?.filter((f) => f !== key))
       if (!newFilterString) {
         delete params.filters
       }
       const newParams = newFilterString ? { ...params, ...{ filters: newFilterString } } : params
       $searchParams.open(newParams)
-      console.log('Remove filter2', newParams)
     } else {
       // add
       const filterString = filterParamsStringify([params?.filters, key])
       const newParams = filterString ? { ...params, ...{ filters: filterString } } : params
       $searchParams.open(newParams)
-      console.log('Add filter', newParams)
     }
+  }
+
+  // State if no filter is active except the default filter.
+  const defaultFilters = curentLegendGroup
+    .map((group) =>
+      group.legends
+        .filter((legend) => legend.defaultOn)
+        .map((legend) => filterParamsKey({ groupKey: group.key, legendKey: legend.key })),
+    )
+    .flat(2)
+  const currentNonDefaultFilter = filters?.filter((f) => !defaultFilters.includes(f))
+  const noUserFilter = currentNonDefaultFilter ? currentNonDefaultFilter?.length === 0 : true
+
+  const resetFilter = () => {
+    const defaultFilter = filterParamsStringify(defaultFilters)
+    if (!defaultFilter) {
+      delete params.filters
+    }
+    const newParams = defaultFilter ? { ...params, ...{ filters: defaultFilter } } : params
+    $searchParams.open(newParams)
   }
 
   return (
     <Disclosure defaultOpen={!smallScreen}>
       {({ open }) => (
         <>
-          <Disclosure.Button
-            className={twJoin(
-              'gap-1 px-2 py-2 text-sm hover:font-medium',
-              smallScreen ? 'flex' : 'hidden',
-            )}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className={twJoin('h-5 w-5 transition-transform', open ? 'rotate-90 transform' : '')}
+          <div className="flex items-center justify-between">
+            <Disclosure.Button
+              className={twJoin(
+                'grow gap-1 px-2 py-2 text-sm hover:font-medium',
+                smallScreen ? 'flex' : 'hidden',
+              )}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-            Legende
-          </Disclosure.Button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className={twJoin(
+                  'h-5 w-5 transition-transform',
+                  open ? 'rotate-90 transform' : '',
+                )}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+              Legende
+            </Disclosure.Button>
+            {!noUserFilter && (
+              <>
+                <button
+                  onClick={resetFilter}
+                  className="mr-1 underline decoration-yellow-500 underline-offset-2 hover:decoration-2"
+                >
+                  Filter löschen
+                </button>
+              </>
+            )}
+          </div>
           <Disclosure.Panel>
             {curentLegendGroup.map((legendGroup) => {
               return (

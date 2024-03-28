@@ -10,7 +10,6 @@ import { Overlay } from './Overlay'
 import { interactiveLayerIdsByGroup, legendByGroups } from './layers/layers'
 import {
   filterParamsKey,
-  filterParamsObject,
   filterParamsStringify,
   validAnzeigeValues,
   type SearchParamsCqiMap,

@@ -66,7 +66,6 @@ export const layerByGroups: Record<SearchParamsCqiMap['anzeige'], Record<string,
 }
 
 export type FilterConfig = {
-  groupKey: LegendGroup['key']
   key: string
   values: (string | number)[]
 }

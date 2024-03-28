@@ -2,7 +2,7 @@ import { $searchParams } from '@components/BaseMap/store'
 import { Disclosure } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
-import { legendByGroups, type Legend } from './layers/layers'
+import { legendByGroups } from './layers/layers'
 import {
   filterParamsKey,
   filterParamsObject,

@@ -16,7 +16,9 @@ export const MapSourceCqi = () => {
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
-  const focusFilter: ['match', ['get', string], (string | number)[], boolean, boolean][] = []
+  const userFilterGroups: {
+    [group: string]: ['in', string, ...(string | number)[]][]
+  } = {}
   const filters = filterParamsObject(params.filters)
   const flatLayerGroups = Object.values(legendByGroups)
     .map((groups) => groups)
@@ -28,10 +30,14 @@ export const MapSourceCqi = () => {
         .find((g) => g.key === groupKey)
         ?.legends?.find((l) => l.key === legendKey)?.filterConfig
       if (filterConfig) {
-        focusFilter.push(['match', ['get', filterConfig.key], filterConfig.values, true, false])
+        userFilterGroups[groupKey!] = [
+          ...(userFilterGroups[groupKey!] || []),
+          ['in', filterConfig.key, ...filterConfig.values],
+        ]
       }
     })
   }
+  const userFilterExpression = Object.values(userFilterGroups).map((filters) => ['any', ...filters])
 
   return (
     <Source
@@ -52,7 +58,7 @@ export const MapSourceCqi = () => {
             layout={layer.layout}
             filter={
               wrapFilterWithAll([
-                wrapFilterWithAll(focusFilter),
+                ...userFilterExpression,
                 ...(layer.filter ? layer.filter : []),
                 ['in', 'id', ...mapDataIds],
               ]) as FilterSpecification
@@ -64,7 +70,6 @@ export const MapSourceCqi = () => {
       {Object.entries(layerByGroups).map(([groupkey, groupLayers]) => {
         return groupLayers.map((layer) => {
           const visible = params?.anzeige === groupkey
-
           return (
             <Layer
               key={layer.id}
@@ -76,7 +81,7 @@ export const MapSourceCqi = () => {
               layout={{ visibility: visible ? 'visible' : 'none' }}
               filter={
                 wrapFilterWithAll([
-                  wrapFilterWithAll(focusFilter),
+                  ...userFilterExpression,
                   ...(layer.filter ? layer.filter : []),
                 ]) as FilterSpecification
               }

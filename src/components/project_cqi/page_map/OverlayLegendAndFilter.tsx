@@ -17,7 +17,7 @@ export const OverlayLegendAndFilter = () => {
   // const map = useMap()
   // console.log(map.current?.getStyle())
 
-  const smallScreen = typeof window !== 'undefined' && window.innerWidth < 1024
+  const legendDefaultClosedOnSmallScreen = typeof window !== 'undefined' && window.innerWidth < 1024
 
   const filters = filterParamsObject(params.filters)
 
@@ -60,16 +60,11 @@ export const OverlayLegendAndFilter = () => {
   }
 
   return (
-    <Disclosure defaultOpen={!smallScreen}>
+    <Disclosure defaultOpen={!legendDefaultClosedOnSmallScreen}>
       {({ open }) => (
         <>
           <div className="flex items-center justify-between">
-            <Disclosure.Button
-              className={twJoin(
-                'grow gap-1 px-2 py-2 text-sm hover:font-medium',
-                smallScreen ? 'flex' : 'hidden',
-              )}
-            >
+            <Disclosure.Button className="flex grow gap-1 px-2 py-2 text-sm hover:font-medium">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -106,7 +101,6 @@ export const OverlayLegendAndFilter = () => {
                   <ul
                     className={twJoin(
                       'group/legend px-2 pb-4 text-sm font-normal leading-4 text-gray-900',
-                      open && smallScreen ? '' : 'pt-4',
                     )}
                   >
                     {legendGroup.legends.map((legend) => {

@@ -9,6 +9,7 @@ import {
   filterParamsStringify,
   type SearchParamsCqiMap,
 } from './storeCqi'
+import { defaultFilterByGroup, paramsWithDefaultFilters } from './utils/filterUtils'
 
 export const OverlayLegendAndFilter = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap
@@ -40,22 +41,12 @@ export const OverlayLegendAndFilter = () => {
   }
 
   // State if no filter is active except the default filter.
-  const defaultFilters = curentLegendGroup
-    .map((group) =>
-      group.legends
-        .filter((legend) => legend.defaultOn)
-        .map((legend) => filterParamsKey({ groupKey: group.key, legendKey: legend.key })),
-    )
-    .flat(2)
+  const defaultFilters = defaultFilterByGroup(curentLegendGroup)
   const currentNonDefaultFilter = filters?.filter((f) => !defaultFilters.includes(f))
   const noUserFilter = currentNonDefaultFilter ? currentNonDefaultFilter?.length === 0 : true
 
   const resetFilter = () => {
-    const defaultFilter = filterParamsStringify(defaultFilters)
-    if (!defaultFilter) {
-      delete params.filters
-    }
-    const newParams = defaultFilter ? { ...params, ...{ filters: defaultFilter } } : params
+    const newParams = paramsWithDefaultFilters(defaultFilters, params)
     $searchParams.open(newParams)
   }
 

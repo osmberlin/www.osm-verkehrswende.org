@@ -10,7 +10,7 @@ import {
   type SearchParamsCqiMap,
 } from './storeCqi'
 
-export const OverlayLegendAndFocus = () => {
+export const OverlayLegendAndFilter = () => {
   const params = useStore($searchParams) as SearchParamsCqiMap
   const curentLegendGroup = legendByGroups[params?.anzeige ?? 'cqi']
 

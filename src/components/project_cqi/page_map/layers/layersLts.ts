@@ -143,29 +143,29 @@ export const layersLts = [
 export const legendLts: LegendGroup[] = [
   {
     title: 'Hauptkategorie',
-    key: 'main',
+    key: 'lts',
     primary: true,
     legends: [
       {
-        key: 'lts1',
+        key: 'l1',
         color: '#4589fc',
         label: 'LTS 1 (Kindertauglich)',
         filterConfig: { key: 'stress_level', values: [1] },
       },
       {
-        key: 'lts2',
+        key: 'l2',
         color: '#a7c878',
         label: 'LTS 2 (Niedriger Stress)',
         filterConfig: { key: 'stress_level', values: [2] },
       },
       {
-        key: 'lts3',
+        key: 'l3',
         color: '#ffcf23',
         label: 'LTS 3 (Mittlerer Stress)',
         filterConfig: { key: 'stress_level', values: [3] },
       },
       {
-        key: 'lts4',
+        key: 'l4',
         color: '#ab1b04',
         label: 'LTS 4 (Kampfradler, hoher Stress)',
         filterConfig: { key: 'stress_level', values: [4] },

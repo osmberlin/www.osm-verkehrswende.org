@@ -170,9 +170,11 @@ export const MapRoute = () => {
           filter={['==', '$type', 'LineString']}
           paint={{
             // 'line-color': ['case', ['get', 'snapped'], 'red', 'blue'],
-            'line-color': 'red',
-            'line-width': 2.5,
+            'line-color': '#18181b', // 'zinc-900'
+            'line-opacity': 0.95,
+            'line-width': 16,
           }}
+          layout={{ 'line-cap': 'round', 'line-join': 'round' }}
         />
         <Layer
           id="route-points"
@@ -183,15 +185,16 @@ export const MapRoute = () => {
               'match',
               ['get', 'type'],
               'snapped-waypoint',
-              'black',
+              '#18181b', // 'zinc-900'
               // 'free-waypoint',
               // 'blue',
               'node',
-              'red',
+              '#09090b', // 'zinc-950'
               'transparent',
             ],
             // 'circle-opacity': ['case', ['has', 'hovered'], 0.5, 1.0],
-            'circle-radius': ['match', ['get', 'type'], 'node', 3, 'snapped-waypoint', 6, 0],
+            // 'circle-radius': ['match', ['get', 'type'], 'node', 8, 'snapped-waypoint', 10, 0],
+            'circle-radius': ['match', ['get', 'type'], 'snapped-waypoint', 10, 0],
           }}
         />
       </Source>

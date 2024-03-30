@@ -21,7 +21,7 @@ export const MapSourceCqi = () => {
       url="pmtiles://https://atlas-tiles.s3.eu-central-1.amazonaws.com/cycling_quality_index.pmtiles"
       attribution="© OpenStreetMap"
     >
-      {layersSelected.map((layer) => {
+      {/* {layersSelected.map((layer) => {
         return (
           <Layer
             key={layer.id}
@@ -39,7 +39,7 @@ export const MapSourceCqi = () => {
             }
           />
         )
-      })}
+      })} */}
 
       {layers.map((layer) => {
         return (
@@ -49,7 +49,7 @@ export const MapSourceCqi = () => {
             source="cqi"
             source-layer="default"
             type={layer.type as any}
-            paint={layer.paint}
+            paint={layer.paint as any}
             // layout={{ visibility: visible ? 'visible' : 'none' }}
             // filter={wrapFilterWithAll(layer.filter) as FilterSpecification}
           />

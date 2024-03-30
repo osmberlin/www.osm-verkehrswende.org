@@ -46,14 +46,47 @@ export const layersSelected = [
 
 export const layers = [
   {
-    id: 'debugStyleLayerLine',
+    id: 'border',
     type: 'line',
     paint: {
-      'line-width': 1,
-      'line-color': '#a21caf',
-      'line-opacity': 0.6,
+      'line-color': 'white',
+      'line-width': 3.2,
+      'line-opacity': 1,
+    },
+  },
+  {
+    id: 'routing_index_main_colour',
+    type: 'line',
+    paint: {
+      'line-color': [
+        'step',
+        ['get', 'index'],
+        '#7a0403',
+        10,
+        '#ab1b04',
+        20,
+        '#d54a12',
+        30,
+        '#f5a038',
+        40,
+        '#f3cf33',
+        50,
+        '#e6f122',
+        60,
+        '#a7c878',
+        70,
+        '#679fce',
+        80,
+        '#4473e1',
+        90,
+        '#436dda',
+        100,
+        '#4143a7',
+      ],
+      'line-width': 2,
     },
   },
 ]
 
-export const interactiveLayerIds = ['index_casing']
+// export const interactiveLayerIds = ['routing_index_main_colour']
+export const interactiveLayerIds = []

@@ -6,21 +6,20 @@ import { MapSourceCqi } from './MapSourceCqi'
 import { interactiveLayerIds } from './layers'
 
 type Props = {
-  maxBounds: MapInitialViewState['maxBounds']
+  center: { lat: number; lng: number }
   minZoom: MapInitialViewState['minZoom']
   maxZoom?: MapInitialViewState['maxZoom']
 }
 
-export const CqiRoutingMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
+export const CqiRoutingMap = ({ center, minZoom, maxZoom }: Props) => {
   return (
     <BaseMap
       initialViewState={{
-        longitude: 13.390386527027175,
-        latitude: 52.5180225850377,
-        zoom: 12,
+        longitude: center.lng,
+        latitude: center.lat,
+        zoom: 14.7,
         // Only pass the props if they are implicitly present
         // Needed to get rid of Astro's strict TS settings https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes
-        ...(maxBounds ? { maxBounds } : {}),
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}

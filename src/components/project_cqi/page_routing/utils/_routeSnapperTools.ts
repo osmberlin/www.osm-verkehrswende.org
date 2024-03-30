@@ -277,7 +277,7 @@ export class RouteTool {
     this.redraw()
   }
 
-  private redraw() {
+  redraw() {
     let gj = JSON.parse(this.inner.renderGeojson())
     $routeToolGj.set(gj)
     this.map.getCanvas().style.cursor = gj.cursor
@@ -285,7 +285,7 @@ export class RouteTool {
     $undoLength.set(gj.undo_length)
   }
 
-  private dataUpdated() {
+  dataUpdated() {
     let rawJSON = this.inner.toFinalFeature()
     if (rawJSON) {
       // Pass copies to each callback

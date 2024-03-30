@@ -1,54 +1,91 @@
 import { useStore } from '@nanostores/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { Layer, Marker, type MarkerDragEvent, Source, useMap } from 'react-map-gl/maplibre'
-import initSync from 'route-snapper'
+import { Layer, Marker, Source, type MarkerDragEvent } from 'react-map-gl/maplibre'
+import initSync, { JsRouteSnapper } from 'route-snapper'
 import { $routeToolGj } from './storeRouting'
-import { RouteTool } from './utils/routeSnapperTools'
 
 export const MapRoute = () => {
   const routeToolGj = useStore($routeToolGj)
+  const routeSnapper = useRef<JsRouteSnapper | null>(null)
+  const [routeSnapperInitialized, setRouteSnapperInitialized] = useState(false)
 
-  const map = useMap()
-  console.log(map.current?.getMap())
-
-  const routeSnapper = useRef<RouteTool | null>(null)
-  const snapTool = useRef<HTMLDivElement | null>(null)
-
+  // Initialize route snapper by loading the graph.bin file
   useEffect(() => {
     const initializeRouteSnapper = async () => {
       initSync()
+
       const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
       try {
         const resp = await fetch(graphPath)
         const graphBytes = await resp.arrayBuffer()
-        routeSnapper.current = new RouteTool(map.current!.getMap(), new Uint8Array(graphBytes))
-        routeSnapper.current.active = true
-        console.log('Route tool', routeSnapper.current)
+        console.time('JsRouteSnapper: Deserialize and setup JsRouteSnapper')
+        routeSnapper.current = new JsRouteSnapper(new Uint8Array(graphBytes))
+        console.timeEnd('JsRouteSnapper: Deserialize and setup JsRouteSnapper')
+        setRouteSnapperInitialized(true)
+
+        // console.log('routeSnapper.current', routeSnapper.current)
       } catch (err) {
-        console.log(`Route tool broke: ${err}`)
-        snapTool.current!.innerHTML = 'Failed to load'
+        console.error(`Route tool broke: ${err}`)
       }
     }
 
     initializeRouteSnapper()
   }, [])
 
-  const [markerStart, setMarkerStart] = useState({ lat: 52.4783, lon: 13.4492 })
+  // Set initial route "start", "end" points
+  useEffect(() => {
+    if (routeSnapperInitialized !== true && !routeSnapper.current) return
+    // routeSnapper.current?.addSnappedWaypoint(markerStart.lng, markerStart.lat)
+    // routeSnapper.current?.addSnappedWaypoint(markerEnd.lng, markerEnd.lat)
+    updateRoutePoints({ start: markerStart, end: markerEnd })
+  }, [routeSnapperInitialized, routeSnapper.current])
+
+  const [markerStart, setMarkerStart] = useState({ lng: 13.447936, lat: 52.477325 })
+  // Set new "start", use existing "end"
   const onMarkerStartDragEnd = (event: MarkerDragEvent) => {
-    setMarkerStart({ lat: event.lngLat.lat, lon: event.lngLat.lng })
+    updateRoutePoints({ start: { lng: event.lngLat.lng, lat: event.lngLat.lat }, end: markerEnd })
   }
-  const [markerEnd, setMarkerEnd] = useState({ lat: 52.4726, lon: 13.435 })
+  const [markerEnd, setMarkerEnd] = useState({ lng: 13.434527, lat: 52.472595 })
+  // Set new "end", use existing "start"
   const onMarkerEndDragEnd = (event: MarkerDragEvent) => {
-    setMarkerEnd({ lat: event.lngLat.lat, lon: event.lngLat.lng })
+    updateRoutePoints({ start: markerStart, end: { lng: event.lngLat.lng, lat: event.lngLat.lat } })
   }
 
-  const circleRadiusPixels = 10
+  type LngLat = { lng: number; lat: number }
+  type UpdateRoutePointsProps = { start: LngLat; end: LngLat }
+  const updateRoutePoints = ({ start, end }: UpdateRoutePointsProps) => {
+    if (!routeSnapper.current) return
+
+    // Update route start-end points
+    const waypoints = [
+      { lon: start.lng, lat: start.lat, snapped: true },
+      { lon: end.lng, lat: end.lat, snapped: true },
+    ]
+    routeSnapper.current.editExisting(waypoints)
+    updateRoute()
+
+    // Update marker on map
+    setMarkerStart({ lng: start.lng, lat: start.lat })
+    setMarkerEnd({ lng: end.lng, lat: end.lat })
+  }
+
+  const updateRoute = () => {
+    if (!routeSnapper.current) return
+
+    // Draw route
+    const routeGeojson = JSON.parse(routeSnapper.current.renderGeojson())
+    // routeSnapper.current.toFinalFeature() // TODO: What does this do?
+    $routeToolGj.set(routeGeojson)
+
+    // console.log('updateRoute: routeSnapper.current', routeSnapper.current)
+    console.log('updateRoute: routeToolGj', routeToolGj)
+  }
 
   return (
     <Fragment>
       <Marker
-        longitude={markerStart.lat}
-        latitude={markerStart.lon}
+        longitude={markerStart.lng}
+        latitude={markerStart.lat}
         anchor="bottom"
         draggable
         // onDragStart={onMarkerDragStart}
@@ -58,8 +95,8 @@ export const MapRoute = () => {
         <div className="rounded-md bg-red-400">Start</div>
       </Marker>
       <Marker
-        longitude={markerEnd.lat}
-        latitude={markerEnd.lon}
+        longitude={markerEnd.lng}
+        latitude={markerEnd.lat}
         anchor="bottom"
         draggable
         // onDragStart={onMarkerDragStart}
@@ -69,17 +106,14 @@ export const MapRoute = () => {
         <div className="rounded-md bg-red-400">End</div>
       </Marker>
       <Source id="route_line" type="geojson" data={routeToolGj} attribution="© OpenStreetMap">
-        <div ref={snapTool} className="absolute inset-x-5 rounded bg-red-400">
-          Route tool loading...
-        </div>
         <Layer
-          key="route_line"
-          id="route_line"
-          source="route_line"
+          id="route-lines"
           type="line"
+          filter={['==', '$type', 'LineString']}
           paint={{
-            'line-color': '#ff0000',
-            'line-width': 2,
+            // 'line-color': ['case', ['get', 'snapped'], 'red', 'blue'],
+            'line-color': 'red',
+            'line-width': 2.5,
           }}
         />
         <Layer
@@ -91,37 +125,15 @@ export const MapRoute = () => {
               'match',
               ['get', 'type'],
               'snapped-waypoint',
-              'red',
-              'free-waypoint',
-              'blue',
               'black',
-            ],
-            'circle-opacity': ['case', ['has', 'hovered'], 0.5, 1.0],
-            'circle-radius': [
-              'match',
-              ['get', 'type'],
+              // 'free-waypoint',
+              // 'blue',
               'node',
-              circleRadiusPixels / 2.0,
-              circleRadiusPixels,
+              'red',
+              'transparent',
             ],
-          }}
-        />
-        <Layer
-          id="route-lines"
-          type="line"
-          filter={['==', '$type', 'LineString']}
-          paint={{
-            'line-color': ['case', ['get', 'snapped'], 'red', 'blue'],
-            'line-width': 2.5,
-          }}
-        />
-        <Layer
-          id="route-polygons"
-          type="fill"
-          filter={['==', '$type', 'Polygon']}
-          paint={{
-            'fill-color': 'black',
-            'fill-opacity': 0.5,
+            // 'circle-opacity': ['case', ['has', 'hovered'], 0.5, 1.0],
+            'circle-radius': ['match', ['get', 'type'], 'node', 3, 'snapped-waypoint', 6, 0],
           }}
         />
       </Source>

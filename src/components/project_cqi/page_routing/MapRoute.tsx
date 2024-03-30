@@ -81,6 +81,10 @@ export const MapRoute = () => {
     console.log('updateRoute: routeToolGj', routeToolGj)
   }
 
+  const changeDirection = () => {
+    updateRoutePoints({ start: markerEnd, end: markerStart })
+  }
+
   return (
     <Fragment>
       <Marker
@@ -105,6 +109,11 @@ export const MapRoute = () => {
       >
         <div className="rounded-md bg-red-400">End</div>
       </Marker>
+      <div className="absolute left-3 top-3 rounded bg-white/90 px-2 py-0.5">
+        <button onClick={changeDirection} className="underline hover:decoration-2">
+          Reverse Route Direction
+        </button>
+      </div>
       <Source id="route_line" type="geojson" data={routeToolGj} attribution="© OpenStreetMap">
         <Layer
           id="route-lines"

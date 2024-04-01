@@ -1,0 +1,11 @@
+---
+import { CqiRoutingTestMap } from '@components/project_cqi/page_routing_test/CqiRoutingTestMap'
+import LayoutApp from '@layouts/LayoutApp.astro'
+
+const center = { lng: 13.4433, lat: 52.4733 }
+const minZoom = 14
+---
+
+<LayoutApp noindex title="Cycling Quality Index LTS Routing Test Graph and Map">
+  <CqiRoutingTestMap client:load center={center} minZoom={minZoom} />
+</LayoutApp>

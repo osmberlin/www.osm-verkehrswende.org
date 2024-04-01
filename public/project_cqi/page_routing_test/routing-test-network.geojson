@@ -1,0 +1,152 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.473805],
+          [13.431855, 52.472192],
+          [13.431855, 52.4716119],
+          [13.431855, 52.4709611],
+          [13.431855, 52.4702961],
+          [13.431855, 52.4696028]
+        ]
+      },
+      "properties": { "name": "left", "forward_cost": 1, "backward_cost": 1 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4439563, 52.4740596],
+          [13.4439563, 52.4731966],
+          [13.4446996, 52.4729278],
+          [13.4439563, 52.4725458],
+          [13.4446996, 52.4723052],
+          [13.4439563, 52.4720223],
+          [13.4446996, 52.4717251],
+          [13.4439563, 52.4713714],
+          [13.4446996, 52.4708903],
+          [13.4439563, 52.4701231]
+        ]
+      },
+      "properties": { "name": "right", "desc": "with split", "forward_cost": 1, "backward_cost": 1 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4393651, 52.469923],
+          [13.4439563, 52.4701231]
+        ]
+      },
+      "properties": { "name": "lts1-forward-only", "forward_cost": 1, "backward_cost": 999 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.4696028],
+          [13.4393651, 52.469923]
+        ]
+      },
+      "properties": { "name": "lts1-both", "forward_cost": 1, "backward_cost": 1 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.472192],
+          [13.4439563, 52.4731966]
+        ]
+      },
+      "properties": { "name": "unroutable", "forward_cost": 999, "backward_cost": 999 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4393651, 52.469923],
+          [13.4446996, 52.4708903]
+        ]
+      },
+      "properties": { "name": "lts1-backward-only", "forward_cost": 999, "backward_cost": 1 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.4702961],
+          [13.4393651, 52.4708616],
+          [13.4439563, 52.4713714]
+        ]
+      },
+      "properties": { "name": "lts2", "forward_cost": 2, "backward_cost": 2 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.4709611],
+          [13.4393651, 52.4715457],
+          [13.4439563, 52.4720223]
+        ]
+      },
+      "properties": { "name": "lts3", "forward_cost": 3, "backward_cost": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4393651, 52.4715457],
+          [13.4446996, 52.4723052]
+        ]
+      },
+      "properties": { "name": "lts3-backward-only", "backward_cost": 3, "forward_cost": 999 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.431855, 52.4716119],
+          [13.4394696, 52.4720865],
+          [13.4439563, 52.4725458]
+        ]
+      },
+      "properties": { "name": "lts4", "backward_cost": 4, "forward_cost": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4393651, 52.4720865],
+          [13.4446996, 52.4729278]
+        ]
+      },
+      "properties": { "name": "lts4-backward-only", "forward_cost": 999, "backward_cost": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.4393651, 52.4708616],
+          [13.4446996, 52.4717251]
+        ]
+      },
+      "properties": { "name": "lts2-backward-only", "backward_cost": 2, "forward_cost": 999 }
+    }
+  ]
+}

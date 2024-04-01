@@ -75,8 +75,13 @@ export const MapRoute = () => {
     if (!routeSnapper.current) return
 
     // Draw route
-    const routeGeojson = JSON.parse(routeSnapper.current.renderGeojson())
-    // routeSnapper.current.toFinalFeature() // TODO: What does this do?
+    // const routeString = routeSnapper.current.renderGeojson() // shows more points
+    const routeString = routeSnapper.current.toFinalFeature()
+    if (!routeString) {
+      console.error('updateRoute: `toFinalFeature` is `undefined`')
+      return
+    }
+    const routeGeojson = JSON.parse(routeString)
     $routeToolGj.set(routeGeojson)
 
     // console.log('updateRoute: routeSnapper.current', routeSnapper.current)
@@ -127,39 +132,17 @@ export const MapRoute = () => {
           Ziel
         </button>
       </div>
+
       <Source id="route_line" type="geojson" data={routeToolGj} attribution="© OpenStreetMap">
         <Layer
           id="route-lines"
           type="line"
-          filter={['==', '$type', 'LineString']}
           paint={{
-            // 'line-color': ['case', ['get', 'snapped'], 'red', 'blue'],
             'line-color': '#18181b', // 'zinc-900'
             'line-opacity': 0.95,
             'line-width': 16,
           }}
           layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-        />
-        <Layer
-          id="route-points"
-          type="circle"
-          filter={['==', '$type', 'Point']}
-          paint={{
-            'circle-color': [
-              'match',
-              ['get', 'type'],
-              'snapped-waypoint',
-              '#18181b', // 'zinc-900'
-              // 'free-waypoint',
-              // 'blue',
-              'node',
-              '#09090b', // 'zinc-950'
-              'transparent',
-            ],
-            // 'circle-opacity': ['case', ['has', 'hovered'], 0.5, 1.0],
-            // 'circle-radius': ['match', ['get', 'type'], 'node', 8, 'snapped-waypoint', 10, 0],
-            'circle-radius': ['match', ['get', 'type'], 'snapped-waypoint', 10, 0],
-          }}
         />
       </Source>
     </Fragment>

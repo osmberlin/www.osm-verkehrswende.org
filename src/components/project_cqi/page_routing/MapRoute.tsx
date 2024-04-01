@@ -114,7 +114,7 @@ export const MapRoute = () => {
       >
         <div className="ml-2 flex items-center justify-center gap-0.5 rounded-md bg-fuchsia-700 px-1 py-0.5 text-fuchsia-50 hover:bg-fuchsia-800">
           <IconMarkerCursor />
-          End
+          Ziel
         </div>
       </Marker>
       <div className="absolute left-3 top-3 rounded bg-white/90 px-2 py-0.5">
@@ -122,8 +122,9 @@ export const MapRoute = () => {
           onClick={changeDirection}
           className="group flex items-center gap-1 underline underline-offset-2 hover:decoration-fuchsia-700 hover:decoration-2"
         >
+          Start
           <IconMove />
-          Reverse Route Direction
+          Ziel
         </button>
       </div>
       <Source id="route_line" type="geojson" data={routeToolGj} attribution="© OpenStreetMap">

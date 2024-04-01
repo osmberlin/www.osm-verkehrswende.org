@@ -9,7 +9,7 @@ console.log('START')
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const inputFile = path.resolve(__dirname, './geojson/cycling_quality_index_epsg4326.geojson')
-const outputFile = path.resolve(__dirname, './geojson/routing_cycling_quality_index.geojson')
+const outputPath = path.resolve(__dirname, './geojson/')
 
 // Read
 const inputRaw = fs.readFileSync(inputFile, 'utf8')
@@ -26,15 +26,15 @@ for (const feature of inputJson.features) {
   groupedFeatures[key].push(feature)
 }
 
-// For each group, find the feature with side: NULL and update its forward_cost/backward_cost
+// For each group, find the centerline feature (with side: NULL) and update its forward_cost/backward_cost
 const results = []
 for (const properties of Object.values(groupedFeatures)) {
   const left = properties.find((feature) => feature.properties.side === 'left')
-  const left_index = left ? left.properties.index : null
+  const left_lts = left ? left.properties.stress_level : null
   const centerline = properties.find((feature) => feature.properties.side === null)
-  const centerline_index = centerline ? centerline.properties.index : null
+  const centerline_lts = centerline ? centerline.properties.stress_level : null
   const right = properties.find((feature) => feature.properties.side === 'right')
-  const right_index = right ? right.properties.index : null
+  const right_lts = right ? right.properties.stress_level : null
 
   const resultSource = centerline || left || right
   const resultGeometry = resultSource.geometry
@@ -48,18 +48,18 @@ for (const properties of Object.values(groupedFeatures)) {
     resultProperties.DEBUG_linestring = 'Centerline was missing, used left or right instead'
   }
 
-  resultProperties.forward_cost = Math.max(centerline_index, right_index)
-  resultProperties.backward_cost = Math.max(centerline_index, left_index)
+  resultProperties.forward_cost = Math.max(centerline_lts, right_lts)
+  resultProperties.backward_cost = Math.max(centerline_lts, left_lts)
 
-  resultProperties.DEBUG_forward_cost = [centerline_index, right_index].join(',')
-  resultProperties.DEBUG_backward_cost = [centerline_index, left_index].join(',')
+  resultProperties.DEBUG_forward_cost = [centerline_lts, right_lts].join(';')
+  resultProperties.DEBUG_backward_cost = [centerline_lts, left_lts].join(';')
 
   // Testcase: way/881155243 uses the "shared road", not the separate bike lane which is horrible
   // Testcase: way/36738527 uses the "cycle track" which is better than the road
   resultProperties.forward_infrastructure =
-    right_index > centerline_index ? right.properties.way_type : centerline.properties.way_type
+    right_lts > centerline_lts ? right.properties.way_type : centerline.properties.way_type
   resultProperties.backward_infrastructure =
-    left_index > centerline_index ? left.properties.way_type : centerline.properties.way_type
+    left_lts > centerline_lts ? left.properties.way_type : centerline.properties.way_type
 
   results.push(turf.lineString(resultGeometry.coordinates, resultProperties))
 }
@@ -67,7 +67,10 @@ for (const properties of Object.values(groupedFeatures)) {
 const outputGeosjon = turf.featureCollection(results)
 
 // Write
-fs.writeFileSync(outputFile, JSON.stringify(outputGeosjon, undefined, 2))
+fs.writeFileSync(
+  path.join(outputPath, 'routing_cycling_quality_index.geojson'),
+  JSON.stringify(outputGeosjon, undefined, 2),
+)
 
 // DONE
 console.log('DONE')

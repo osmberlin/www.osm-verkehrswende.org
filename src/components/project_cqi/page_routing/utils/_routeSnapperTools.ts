@@ -3,7 +3,7 @@
 import type { Feature, LineString, Polygon, Position } from 'geojson'
 import type { Map, MapMouseEvent } from 'maplibre-gl'
 import { JsRouteSnapper } from 'route-snapper'
-import { $routeToolGj, $snapMode, $undoLength } from '../storeRouting'
+import { $routeToolGj } from '../storeRouting'
 
 const snapDistancePixels = 30
 
@@ -281,8 +281,8 @@ export class RouteTool {
     let gj = JSON.parse(this.inner.renderGeojson())
     $routeToolGj.set(gj)
     this.map.getCanvas().style.cursor = gj.cursor
-    $snapMode.set(gj.snap_mode)
-    $undoLength.set(gj.undo_length)
+    // $snapMode.set(gj.snap_mode)
+    // $undoLength.set(gj.undo_length)
   }
 
   dataUpdated() {

@@ -38,5 +38,3 @@ export const $routeToolGj = atom<
   geometry: { coordinates: [], type: 'LineString' },
   properties: { length_meters: 0, route_name: '', waypoints: [] },
 })
-export const $snapMode = atom(true)
-export const $undoLength = atom(0)

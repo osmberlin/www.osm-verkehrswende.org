@@ -6,7 +6,9 @@ import { $routeToolGj } from './storeRouting'
 import { IconMarkerCursor } from './icons/IconMarkerCursor'
 import { IconMove } from './icons/IconMove'
 
-export const MapRoute = () => {
+type GraphPathProp = { graphPath: string }
+
+export const MapRoute = ({ graphPath }: GraphPathProp) => {
   const routeToolGj = useStore($routeToolGj)
   const routeSnapper = useRef<JsRouteSnapper | null>(null)
   const [routeSnapperInitialized, setRouteSnapperInitialized] = useState(false)
@@ -16,7 +18,6 @@ export const MapRoute = () => {
     const initializeRouteSnapper = async () => {
       initSync()
 
-      const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
       try {
         const resp = await fetch(graphPath)
         const graphBytes = await resp.arrayBuffer()

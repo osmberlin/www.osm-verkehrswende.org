@@ -12,6 +12,8 @@ type Props = {
 }
 
 export const CqiRoutingMap = ({ center, minZoom, maxZoom }: Props) => {
+  const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
+
   return (
     <BaseMap
       initialViewState={{
@@ -26,7 +28,7 @@ export const CqiRoutingMap = ({ center, minZoom, maxZoom }: Props) => {
       boxZoom={false}
       interactiveLayerIds={interactiveLayerIds}
     >
-      <MapRoute />
+      <MapRoute graphPath={graphPath} />
       <MapSourceCqi />
       <NavigationControl showCompass={false} position="top-right" />
       {/* <MapInspector /> */}

@@ -1,10 +1,16 @@
+import { $searchParams } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Layer, Marker, Source, type MarkerDragEvent } from 'react-map-gl/maplibre'
 import initSync, { JsRouteSnapper } from 'route-snapper'
-import { $routeToolGj } from './storeRouting'
 import { IconMarkerCursor } from './icons/IconMarkerCursor'
 import { IconMove } from './icons/IconMove'
+import {
+  $routeToolGj,
+  startEndParamsObject,
+  type CqiRoutingSearchparams,
+  pointParamsStringify,
+} from './storeRouting'
 
 type GraphPathProp = { graphPath: string }
 
@@ -35,23 +41,36 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
     initializeRouteSnapper()
   }, [])
 
+  // Get `start`, `stop` from params
+  // Initialize internal state with initialStartStop
+  // But also make sure we initialize the params with the same values
+  const params = useStore($searchParams) as CqiRoutingSearchparams
+  const initialStartStop = {
+    start: { lng: 13.447936, lat: 52.477325 },
+    end: { lng: 13.434527, lat: 52.472595 },
+  }
+  const { start, end } = startEndParamsObject(params, initialStartStop)
+  if (params?.start === undefined || params?.end === undefined) {
+    $searchParams.open({
+      ...params,
+      ...{ start: pointParamsStringify(initialStartStop.start) },
+      ...{ end: pointParamsStringify(initialStartStop.end) },
+    })
+  }
+
   // Set initial route "start", "end" points
   useEffect(() => {
     if (routeSnapperInitialized !== true && !routeSnapper.current) return
-    // routeSnapper.current?.addSnappedWaypoint(markerStart.lng, markerStart.lat)
-    // routeSnapper.current?.addSnappedWaypoint(markerEnd.lng, markerEnd.lat)
-    updateRoutePoints({ start: markerStart, end: markerEnd })
+    updateRoutePoints({ start, end })
   }, [routeSnapperInitialized, routeSnapper.current])
 
-  const [markerStart, setMarkerStart] = useState({ lng: 13.447936, lat: 52.477325 })
   // Set new "start", use existing "end"
   const onMarkerStartDragEnd = (event: MarkerDragEvent) => {
-    updateRoutePoints({ start: { lng: event.lngLat.lng, lat: event.lngLat.lat }, end: markerEnd })
+    updateRoutePoints({ start: { lng: event.lngLat.lng, lat: event.lngLat.lat }, end })
   }
-  const [markerEnd, setMarkerEnd] = useState({ lng: 13.434527, lat: 52.472595 })
   // Set new "end", use existing "start"
   const onMarkerEndDragEnd = (event: MarkerDragEvent) => {
-    updateRoutePoints({ start: markerStart, end: { lng: event.lngLat.lng, lat: event.lngLat.lat } })
+    updateRoutePoints({ start, end: { lng: event.lngLat.lng, lat: event.lngLat.lat } })
   }
 
   type LngLat = { lng: number; lat: number }
@@ -68,8 +87,11 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
     updateRoute()
 
     // Update marker on map
-    setMarkerStart({ lng: start.lng, lat: start.lat })
-    setMarkerEnd({ lng: end.lng, lat: end.lat })
+    $searchParams.open({
+      ...params,
+      ...{ start: pointParamsStringify({ lng: start.lng, lat: start.lat }) },
+      ...{ end: pointParamsStringify({ lng: end.lng, lat: end.lat }) },
+    })
   }
 
   const updateRoute = () => {
@@ -90,14 +112,14 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
   }
 
   const changeDirection = () => {
-    updateRoutePoints({ start: markerEnd, end: markerStart })
+    updateRoutePoints({ start: end, end: start })
   }
 
   return (
     <Fragment>
       <Marker
-        longitude={markerStart.lng}
-        latitude={markerStart.lat}
+        longitude={start.lng}
+        latitude={start.lat}
         anchor="left"
         draggable
         // onDragStart={onMarkerDragStart}
@@ -110,8 +132,8 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
         </div>
       </Marker>
       <Marker
-        longitude={markerEnd.lng}
-        latitude={markerEnd.lat}
+        longitude={end.lng}
+        latitude={end.lat}
         anchor="left"
         draggable
         // onDragStart={onMarkerDragStart}

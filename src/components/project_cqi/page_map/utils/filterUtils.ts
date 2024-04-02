@@ -1,5 +1,5 @@
 import type { LegendGroup } from '../layers/layers'
-import { filterParamsKey, filterParamsStringify, type SearchParamsCqiMap } from '../storeCqi'
+import { filterParamsKey, filterParamsStringify, type CqiMapSearchparams } from '../storeCqi'
 
 export const defaultFilterByGroup = (curentLegendGroup: LegendGroup[]) => {
   return curentLegendGroup
@@ -13,7 +13,7 @@ export const defaultFilterByGroup = (curentLegendGroup: LegendGroup[]) => {
 
 export const paramsWithDefaultFilters = (
   defaultFilters: ReturnType<typeof defaultFilterByGroup>,
-  params: SearchParamsCqiMap,
+  params: CqiMapSearchparams,
 ) => {
   const defaultFilter = filterParamsStringify(defaultFilters)
   if (!defaultFilter) {

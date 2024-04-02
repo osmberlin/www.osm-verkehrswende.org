@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { legendCqi } from '../layers/layersCqi'
 import { legendLts } from '../layers/layersLts'
-import type { SearchParamsCqiMap } from '../storeCqi'
+import type { CqiMapSearchparams } from '../storeCqi'
 import { MapInspectorValueAsList } from './MapInspectorValueAsList'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const MapInspectorPrimaryInformation = ({ properties }: Props) => {
-  const params = useStore($searchParams) as SearchParamsCqiMap
+  const params = useStore($searchParams) as CqiMapSearchparams
 
   if (!properties) {
     return null

@@ -7,12 +7,12 @@ import {
   filterParamsKey,
   filterParamsObject,
   filterParamsStringify,
-  type SearchParamsCqiMap,
+  type CqiMapSearchparams,
 } from './storeCqi'
 import { defaultFilterByGroup, paramsWithDefaultFilters } from './utils/filterUtils'
 
 export const OverlayLegendAndFilter = () => {
-  const params = useStore($searchParams) as SearchParamsCqiMap
+  const params = useStore($searchParams) as CqiMapSearchparams
   const curentLegendGroup = legendByGroups[params?.anzeige ?? 'cqi']
 
   // const map = useMap()

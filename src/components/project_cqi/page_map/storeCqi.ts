@@ -6,7 +6,7 @@ export const validAnzeigeValues = [
   'incompleteness',
 ] as const
 
-export type SearchParamsCqiMap = BaseMapSearchparams & {
+export type CqiMapSearchparams = BaseMapSearchparams & {
   anzeige: (typeof validAnzeigeValues)[number]
   filters?: string
 }
@@ -35,7 +35,7 @@ export const filterParamsStringify = (filters: undefined | (undefined | string)[
   return sort?.join(',')
 }
 
-export const filterParamsObject = (filterParam: SearchParamsCqiMap['filters']) => {
+export const filterParamsObject = (filterParam: CqiMapSearchparams['filters']) => {
   if (!filterParam) return undefined
   return filterParam.split(',')
 }

@@ -4,10 +4,10 @@ import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
 import { wrapFilterWithAll } from '../../BaseMap/utils/wrapFilterWithAll'
 import { layerByGroups, layersSelected, legendByGroups } from './layers/layers'
-import { filterParamsObject, type SearchParamsCqiMap } from './storeCqi'
+import { filterParamsObject, type CqiMapSearchparams } from './storeCqi'
 
 export const MapSourceCqi = () => {
-  const params = useStore($searchParams) as SearchParamsCqiMap
+  const params = useStore($searchParams) as CqiMapSearchparams
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
 

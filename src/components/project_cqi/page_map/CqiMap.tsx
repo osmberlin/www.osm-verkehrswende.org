@@ -12,7 +12,7 @@ import {
   filterParamsKey,
   filterParamsStringify,
   validAnzeigeValues,
-  type SearchParamsCqiMap,
+  type CqiMapSearchparams,
 } from './storeCqi'
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
 }
 
 export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
-  const params = useStore($searchParams) as SearchParamsCqiMap
+  const params = useStore($searchParams) as CqiMapSearchparams
 
   // Guard against invalid "anzeige" param values
   if (!validAnzeigeValues.includes(params.anzeige)) {

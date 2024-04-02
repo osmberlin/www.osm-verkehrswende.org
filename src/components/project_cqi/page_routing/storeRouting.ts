@@ -2,7 +2,34 @@ import type { BaseMapSearchparams } from '@components/BaseMap/store'
 import type { Feature, LineString } from 'geojson'
 import { atom } from 'nanostores'
 
-export type SearchParamsCqiMap = BaseMapSearchparams & {}
+export type CqiRoutingSearchparams = BaseMapSearchparams & { start: string; end: string }
+
+export type CqiRoutingSearchparamsObject = {
+  start: { lng: number; lat: number }
+  end: { lng: number; lat: number }
+}
+
+export const pointParamsStringify = ({ lng, lat }: { lng: number; lat: number }) => {
+  return `${lng},${lat}`
+}
+
+export const startEndParamsObject = (
+  params: CqiRoutingSearchparams,
+  withFallback: {
+    start: CqiRoutingSearchparamsObject['start']
+    end: CqiRoutingSearchparamsObject['end']
+  },
+) => {
+  const stringToObject = (input: string) => {
+    const point = input.split(',').map(Number)
+    return { lng: point[0]!, lat: point[1]! }
+  }
+
+  return {
+    start: params?.start ? stringToObject(params.start) : withFallback.start,
+    end: params?.end ? stringToObject(params.end) : withFallback.end,
+  }
+}
 
 // // === renderGeojson() ===
 // export const $routeToolGj = atom<{

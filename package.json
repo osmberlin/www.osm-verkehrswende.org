@@ -17,6 +17,7 @@
     "updateCqi:createMbtiles": "node ./scripts/cqi/createMbtiles.js",
     "updateCqi:upload": "node ./scripts/cqi/upload.js",
     "updatePackages": "npx taze major --write",
+    "updatePackages:minor": "npx taze minor --write",
     "prepare": "husky install"
   },
   "dependencies": {

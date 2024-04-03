@@ -1,4 +1,4 @@
-import { createSearchParams } from '@nanostores/router'
+import { createSearchParams } from '@components/store/createSearchParams'
 import { atom } from 'nanostores'
 import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 

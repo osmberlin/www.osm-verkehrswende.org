@@ -209,7 +209,12 @@
           [13.4439563, 52.4701231]
         ]
       },
-      "properties": { "name": "lts1-forward-only", "forward_cost": 1, "backward_cost": 999 }
+      "properties": {
+        "name": "lts1-forward-only",
+        "forward_cost": 1,
+        "backward_cost": 999,
+        "stroke": "blue"
+      }
     },
     {
       "type": "Feature",
@@ -220,7 +225,7 @@
           [13.4393651, 52.469923]
         ]
       },
-      "properties": { "name": "lts1-both", "forward_cost": 1, "backward_cost": 1 }
+      "properties": { "name": "lts1-both", "forward_cost": 1, "backward_cost": 1, "stroke": "blue" }
     },
     {
       "type": "Feature",
@@ -242,7 +247,12 @@
           [13.4446996, 52.4708903]
         ]
       },
-      "properties": { "name": "lts1-backward-only", "forward_cost": 999, "backward_cost": 1 }
+      "properties": {
+        "name": "lts1-backward-only",
+        "forward_cost": 999,
+        "backward_cost": 1,
+        "stroke": "blue"
+      }
     },
     {
       "type": "Feature",
@@ -253,7 +263,7 @@
           [13.4393651, 52.4708616]
         ]
       },
-      "properties": { "name": "lts2-1", "forward_cost": 2, "backward_cost": 2 }
+      "properties": { "name": "lts2-1", "forward_cost": 2, "backward_cost": 2, "stroke": "green" }
     },
     {
       "type": "Feature",
@@ -264,7 +274,7 @@
           [13.4439563, 52.4713714]
         ]
       },
-      "properties": { "name": "lts2-2", "forward_cost": 2, "backward_cost": 2 }
+      "properties": { "name": "lts2-2", "forward_cost": 2, "backward_cost": 2, "stroke": "green" }
     },
     {
       "type": "Feature",
@@ -275,7 +285,7 @@
           [13.4393651, 52.4715457]
         ]
       },
-      "properties": { "name": "lts3-1", "forward_cost": 3, "backward_cost": 3 }
+      "properties": { "name": "lts3-1", "forward_cost": 3, "backward_cost": 3, "stroke": "orange" }
     },
     {
       "type": "Feature",
@@ -286,7 +296,7 @@
           [13.4439563, 52.4720223]
         ]
       },
-      "properties": { "name": "lts3-2", "forward_cost": 3, "backward_cost": 3 }
+      "properties": { "name": "lts3-2", "forward_cost": 3, "backward_cost": 3, "stroke": "orange" }
     },
     {
       "type": "Feature",
@@ -297,7 +307,12 @@
           [13.4446996, 52.4723052]
         ]
       },
-      "properties": { "name": "lts3-backward-only", "backward_cost": 3, "forward_cost": 999 }
+      "properties": {
+        "name": "lts3-backward-only",
+        "backward_cost": 3,
+        "forward_cost": 999,
+        "stroke": "orange"
+      }
     },
     {
       "type": "Feature",
@@ -308,7 +323,7 @@
           [13.4394696, 52.4720865]
         ]
       },
-      "properties": { "name": "lts4-1", "backward_cost": 4, "forward_cost": 4 }
+      "properties": { "name": "lts4-1", "backward_cost": 4, "forward_cost": 4, "stroke": "red" }
     },
     {
       "type": "Feature",
@@ -319,18 +334,23 @@
           [13.4439563, 52.4725458]
         ]
       },
-      "properties": { "name": "lts4-2", "backward_cost": 4, "forward_cost": 4 }
+      "properties": { "name": "lts4-2", "backward_cost": 4, "forward_cost": 4, "stroke": "red" }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [13.4393651, 52.4720865],
+          [13.4394696, 52.4720865],
           [13.4446996, 52.4729278]
         ]
       },
-      "properties": { "name": "lts4-backward-only", "forward_cost": 999, "backward_cost": 4 }
+      "properties": {
+        "name": "lts4-backward-only",
+        "forward_cost": 999,
+        "backward_cost": 4,
+        "stroke": "red"
+      }
     },
     {
       "type": "Feature",
@@ -341,7 +361,12 @@
           [13.4446996, 52.4717251]
         ]
       },
-      "properties": { "name": "lts2-backward-only", "backward_cost": 2, "forward_cost": 999 }
+      "properties": {
+        "name": "lts2-backward-only",
+        "backward_cost": 2,
+        "forward_cost": 999,
+        "stroke": "green"
+      }
     }
   ]
 }

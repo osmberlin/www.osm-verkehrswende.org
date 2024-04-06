@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const CqiRoutingTestMap = ({ center, minZoom, maxZoom }: Props) => {
-  const graphPath = '/project_cqi/page_routing_test/routing-test-network-graph.bin'
+  const graphPath = '/project_cqi/page_routing_test/route-snapper-graph.bin'
 
   return (
     <BaseMap

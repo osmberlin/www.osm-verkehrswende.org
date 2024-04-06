@@ -16,6 +16,9 @@
     "updateCqi:createPmtiles": "node ./scripts/cqi/createPmtiles.js",
     "updateCqi:createMbtiles": "node ./scripts/cqi/createMbtiles.js",
     "updateCqi:upload": "node ./scripts/cqi/upload.js",
+    "updateCqi:routing": "npm run updateCqi:routing:berlin && npm run updateCqi:routing:testfile",
+    "updateCqi:routing:berlin": "node ./scripts/cqi/routing.js cycling_quality_index_epsg4326.geojson",
+    "updateCqi:routing:testfile": "node ./scripts/cqi/routing.js test-network-for-routing.geojson",
     "updatePackages": "npx taze major --write",
     "updatePackages:minor": "npx taze minor --write",
     "prepare": "husky install"

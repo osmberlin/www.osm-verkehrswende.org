@@ -3,13 +3,14 @@ import { useStore } from '@nanostores/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Layer, Marker, Source, type MarkerDragEvent } from 'react-map-gl/maplibre'
 import initSync, { JsRouteSnapper } from 'route-snapper'
+import { SourceLayerLastmile } from './SourceLayerLastmile'
 import { IconMarkerCursor } from './icons/IconMarkerCursor'
 import { IconMove } from './icons/IconMove'
 import {
   $routeToolGj,
+  pointParamsStringify,
   startEndParamsObject,
   type CqiRoutingSearchparams,
-  pointParamsStringify,
 } from './storeRouting'
 
 type GraphPathProp = { graphPath: string }
@@ -168,6 +169,8 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
           layout={{ 'line-cap': 'round', 'line-join': 'round' }}
         />
       </Source>
+
+      <SourceLayerLastmile route={routeToolGj} startMarker={start} endMarker={end} />
     </Fragment>
   )
 }

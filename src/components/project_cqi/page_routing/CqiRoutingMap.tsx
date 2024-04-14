@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const CqiRoutingMap = ({ center, minZoom, maxZoom }: Props) => {
-  const graphPath = '/project_cqi/page_routing/route-snapper-graph.bin'
+  const graphPath = '/project_cqi/routing/routing_cycling_quality_index_lts1.bin.br'
 
   return (
     <BaseMap

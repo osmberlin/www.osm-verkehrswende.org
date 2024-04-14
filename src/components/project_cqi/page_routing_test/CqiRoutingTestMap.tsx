@@ -3,7 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import { Layer, NavigationControl, Source } from 'react-map-gl/maplibre'
 import { MapRoute } from '../page_routing/MapRoute'
 import { interactiveLayerIds } from '../page_routing/layers'
-import geojsonData from '/project_cqi/page_routing_test/routing-test-network.geojson?url'
+import geojsonData from '/project_cqi/routing/routing_test-network-for-routing_base.geojson.br?url'
 
 // Now you can use geojsonData in your component
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const CqiRoutingTestMap = ({ center, minZoom, maxZoom }: Props) => {
-  const graphPath = '/project_cqi/page_routing_test/route-snapper-graph.bin'
+  const graphPath = '/project_cqi/routing/routing_test-network-for-routing_lts1.bin.br'
 
   return (
     <BaseMap

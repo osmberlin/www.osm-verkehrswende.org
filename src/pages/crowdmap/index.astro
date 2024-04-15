@@ -1,0 +1,80 @@
+---
+import ProjectHeadline from '@components/text/ProjectHeadline.astro'
+import ProseSection from '@components/text/ProseSection.astro'
+import LayoutArticle from '@layouts/LayoutArticle.astro'
+---
+
+<LayoutArticle title="Crowdmap-Experiment – Gebäude in Berlin aktualisieren">
+  <ProjectHeadline
+    title="Crowdmap-Experiment"
+    subtitle="Gebäude in Berlin aktualisieren und vervollständigen"
+  />
+
+  <ProseSection classes="flex gap-4 mb-3">
+    <a
+      href="https://crowdmap.heigit.org/"
+      class="flex grow flex-col items-center justify-center rounded bg-gray-100 pt-5 hover:bg-green-100"
+      target="_blank"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-10"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M17.303 5.197A7.5 7.5 0 0 0 6.697 15.803a.75.75 0 0 1-1.061 1.061A9 9 0 1 1 21 10.5a.75.75 0 0 1-1.5 0c0-1.92-.732-3.839-2.197-5.303Zm-2.121 2.121a4.5 4.5 0 0 0-6.364 6.364.75.75 0 1 1-1.06 1.06A6 6 0 1 1 18 10.5a.75.75 0 0 1-1.5 0c0-1.153-.44-2.303-1.318-3.182Zm-3.634 1.314a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68Z"
+          clip-rule="evenodd"></path>
+      </svg>
+
+      <h2 class="mb-3 mt-1 py-0">Mitmachen…</h2>
+    </a>
+    <a
+      href="/crowdmap/posts/2024-01-20-crowdmap"
+      class="flex grow flex-col items-center justify-center rounded bg-gray-100 pt-5 hover:bg-green-100"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-10"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
+          clip-rule="evenodd"></path>
+        <path
+          d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"
+        ></path>
+      </svg>
+
+      <h2 class="mb-3 mt-1 py-0">Mehr erfahren…</h2>
+    </a>
+  </ProseSection>
+
+  <ProseSection highlight>
+    <h3>Helft mit und prüft mit uns die Gebäude in Friedrichshain-Kreuzberg!</h3>
+    <p>
+      Wir wollen wissen, in welchen Gebiete in Xhain die Gebäude in OSM verbessert werden müssen.
+      Dafür nutzen wir Crowdmap, <strong>um pro Karten-Ausschnitt zu beantworten…</strong>
+    </p>
+    <ul>
+      <li>
+        <strong>✅ hier ist alles OK </strong><br />
+        <em>"Hier stimmen die Gebäude aus OSM mit dem Luftbild überein."</em>
+      </li>
+      <li>
+        <strong>👀 hier gibt es etwas zu prüfen verbessern</strong><br />
+        <em
+          >"Hier müssen die Gebäude in OSM kontrolliert werden, denn es gibt Abweichungen zum
+          Luftbild."</em
+        >
+      </li>
+      <li>
+        <strong>🤷 diese Kachel bitte übersprungen</strong><br />
+        <em>"Ich kann die Frage für diese Kachel nicht beantworten."</em>
+      </li>
+    </ul>
+  </ProseSection>
+</LayoutArticle>

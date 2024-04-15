@@ -5,7 +5,7 @@ const postCollection = defineCollection({
     title: z.string(),
     project: z.enum([
       'about',
-      'mapswipe',
+      'crowdmap',
       'benches',
       'bicycle-parking',
       'cqi',

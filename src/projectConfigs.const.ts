@@ -80,34 +80,6 @@ export const projectConfigs = {
     //   language: 'de',
     // },
   },
-  mapswipe: {
-    enabled: false,
-    name: 'Mapswipe',
-    root: '/mapswipe',
-    menus: [
-      {
-        label: null,
-        items: [{ href: '/mapswipe/', label: 'Über das Projekt' }],
-      },
-      {
-        label: 'Phase 1',
-        items: [{ href: '/mapswipe/phase1', label: 'Vollständigkeit markieren' }],
-      },
-      {
-        label: 'Phase 2 (später)',
-        items: [{ href: '/mapswipe/phase2', label: 'Gebäude aktualisieren' }],
-      },
-      NavigationNews,
-    ],
-    additionalFooterLinks: [],
-    meta: {
-      title: 'TODO META',
-      description: 'TODO META',
-      imagePath: '/social-sharing.png',
-      imageAlt: '/social-sharing.png',
-      language: 'de',
-    },
-  },
   'bicycle-parking': {
     enabled: true,
     name: 'Fahrradstellplätze',
@@ -121,23 +93,6 @@ export const projectConfigs = {
           { href: 'https://bikeparking.lorenz.lu/parkingmap', label: 'Karte' },
         ],
       },
-      NavigationNews,
-    ],
-    additionalFooterLinks: [],
-    meta: {
-      title: 'TODO META',
-      description: 'TODO META',
-      imagePath: '/social-sharing.png',
-      imageAlt: '/social-sharing.png',
-      language: 'de',
-    },
-  },
-  benches: {
-    enabled: false,
-    name: 'Bänke',
-    root: '/benches',
-    menus: [
-      { label: null, items: [{ href: '/benches/', label: 'Über das Projekt' }] },
       NavigationNews,
     ],
     additionalFooterLinks: [],
@@ -187,6 +142,44 @@ export const projectConfigs = {
     meta: {
       title: 'Cycling Quality Index',
       description: 'Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes',
+      imagePath: '/social-sharing.png',
+      imageAlt: '/social-sharing.png',
+      language: 'de',
+    },
+  },
+  crowdmap: {
+    enabled: true,
+    name: 'Crowdmap',
+    root: '/crowdmap',
+    menus: [
+      {
+        label: null,
+        items: [{ href: '/crowdmap/', label: 'Über das Projekt' }],
+      },
+      NavigationNews,
+    ],
+    additionalFooterLinks: [],
+    meta: {
+      title: 'Crowdmap-Experiment zur Prüfung von Gebäude Daten in Berlin',
+      description:
+        'Ein Projekt um die Datenqualität von Geäbuden in OSM für Berlin zu prüfen und zu verbessern.',
+      imagePath: '/social-sharing-crowdmap.png',
+      imageAlt: 'Luftbild mit OSM Gebäudedaten und Angaben zur Validierung der Gebäude.',
+      language: 'de',
+    },
+  },
+  benches: {
+    enabled: false,
+    name: 'Bänke',
+    root: '/benches',
+    menus: [
+      { label: null, items: [{ href: '/benches/', label: 'Über das Projekt' }] },
+      NavigationNews,
+    ],
+    additionalFooterLinks: [],
+    meta: {
+      title: 'TODO META',
+      description: 'TODO META',
       imagePath: '/social-sharing.png',
       imageAlt: '/social-sharing.png',
       language: 'de',

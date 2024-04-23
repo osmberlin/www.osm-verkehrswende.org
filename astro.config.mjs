@@ -23,7 +23,7 @@ export default defineConfig({
   },
   site: 'https://www.osm-verkehrswende.org/',
   redirects: {
-    // '/from': '/to',
+    '/mapswipe': '/crowdmap',
   },
   vite: {
     ssr: {

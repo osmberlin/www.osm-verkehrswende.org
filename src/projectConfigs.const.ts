@@ -113,9 +113,15 @@ export const projectConfigs = {
         label: null,
         items: [
           { href: '/cqi/', label: 'Über das Projekt' },
+          { href: '/cqi/improve-data/', label: 'Mitmachen' },
+        ],
+      },
+      {
+        label: 'Karte',
+        items: [
           { href: '/cqi/map/', label: 'Karte' },
           { href: '/cqi/routing/', label: 'Routing (PLANNED)' },
-          { href: '/cqi/improve-data/', label: 'Mitmachen' },
+          { href: '/cqi/regions/', label: 'Other regions' },
         ],
       },
       // {

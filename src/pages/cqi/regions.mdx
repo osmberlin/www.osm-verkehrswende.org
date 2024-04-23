@@ -9,9 +9,9 @@ language: 'en'
 
 There are other regions that used the processing and part of the website code from this project show the cycling quality index for their city:
 
-* [Vienna, Austria](https://bmaron.net/bla-cycling-quality/?mode=cqi&map=12.3/4.358/50.677)
-* [Braine-l'Alleud, Belgium](https://vienna-cycling-quality.lw1.at/?mode=cqi&map=11/16.37/48.2)
-* [Neuss, Germany](https://ckrey.de/neuss-cycling-quality/?mode=cqi&map=11.5/6.699/51.191)
+- [Vienna, Austria](https://bmaron.net/bla-cycling-quality/?mode=cqi&map=12.3/4.358/50.677)
+- [Braine-l'Alleud, Belgium](https://vienna-cycling-quality.lw1.at/?mode=cqi&map=11/16.37/48.2)
+- [Neuss, Germany](https://ckrey.de/neuss-cycling-quality/?mode=cqi&map=11.5/6.699/51.191)
 
 Please [an issue or pull request on Github](https://github.com/osmberlin/www.osm-verkehrswende.org/issues) if you want to add your region to this page.
 
@@ -21,9 +21,9 @@ Right now, we do not have the technical setup and capacity to setup or support o
 
 However, this is all open source and open for collaboration:
 
-* [The Vienna CQI Repo on Github](https://github.com/Findus23/vienna-cycling-quality) is a great extract of the core functionality of this project as a stand alone website. It can be forked to create your own stand alone map ob the project.
-* You will have to create your own dataset for you region [based on Alex' QGIS script](https://github.com/SupaplexOSM/OSM-Cycling-Quality-Index) using Overpass and QGIS+Python. This will create a .geojson with custom attributes.
-* Afterwards you need to transform this geojson to pmtiles ([this is Tobias' script](https://github.com/osmberlin/www.osm-verkehrswende.org/tree/main/scripts/cqi/createPmtiles)). The [vienna project has a readme on this process](https://github.com/Findus23/vienna-cycling-quality/tree/main/data). The pmtiles need to be hosted somehwere and linked in the code.
-* You can use github pages to host the website but the pmtiles is likely to large for Github, so you need some FTP- or S3-Space.
+- [The Vienna CQI Repo on Github](https://github.com/Findus23/vienna-cycling-quality) is a great extract of the core functionality of this project as a stand alone website. It can be forked to create your own stand alone map ob the project.
+- You will have to create your own dataset for you region [based on Alex' QGIS script](https://github.com/SupaplexOSM/OSM-Cycling-Quality-Index) using Overpass and QGIS+Python. This will create a .geojson with custom attributes.
+- Afterwards you need to transform this geojson to pmtiles ([this is Tobias' script](https://github.com/osmberlin/www.osm-verkehrswende.org/tree/main/scripts/cqi/createPmtiles)). The [vienna project has a readme on this process](https://github.com/Findus23/vienna-cycling-quality/tree/main/data). The pmtiles need to be hosted somehwere and linked in the code.
+- You can use github pages to host the website but the pmtiles is likely to large for Github, so you need some FTP- or S3-Space.
 
 FYI, there is [talk about how to make this project multi-regional](https://github.com/Findus23/vienna-cycling-quality/issues/2).

@@ -1,7 +1,9 @@
 ---
+import ImageWrapper from '@components/ImageWrapper.astro'
 import ProjectHeadline from '@components/text/ProjectHeadline.astro'
 import ProseSection from '@components/text/ProseSection.astro'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
+import ImageExample from '/public/social-sharing-crowdmap.png'
 ---
 
 <LayoutArticle title="Crowdmap-Experiment – Gebäude in Berlin aktualisieren">
@@ -84,5 +86,29 @@ import LayoutArticle from '@layouts/LayoutArticle.astro'
         <em>"Ich kann die Frage für diese Kachel nicht beantworten."</em>
       </li>
     </ul>
+  </ProseSection>
+
+  <ProseSection>
+    <h3>FAQ: Wie genau soll ich sein?</h3>
+    <p>
+      Ziel 1 ist, große Unterschiede zu finden. Also fehlende Gebäude; Gebäude die abgerissen
+      wurden; Gebäude im Bau; Fehlende Baustellen;…
+    </p>
+    <p>Ziel 2 ist, größere Fehler zu finden. Beispielweise wenn eine Geometrie spürbar abweicht.</p>
+    <p>
+      Am Ende ist es aber eine persönliche Abwägung. Alles, was wir markieren, wollen wir später
+      erneut im Editor anschauen und korrigieren. Im besten Fall haben wir später auch mehrere
+      Antworten ("Meinunge") pro Kachel, so dass wir darüber eine Priorisierung vornehmen können.
+    </p>
+    <p>
+      Wir empfehlen auch, nicht zu viel Zeit mit jeder Kachel zu verbringen. Wenn dir nichts ins
+      Auge springt, dann ist der Unterschied vermutlich nicht groß genug. Die Idee der Crowdmap ist
+      es, große Gebiete schnell durchzuklicken um die relevanten Untergebiete herauszufiltern.
+    </p>
+    <ImageWrapper
+      src={ImageExample.src}
+      alt="Beispiel für Antworten in Grün und Orange"
+      caption="Beispiel für Antworten: Grüne Häuser sind OK; Orange Häuser müssen geprüft werden. In Crowdmap würdest du die ganze Kachel grün oder orange markieren."
+    />
   </ProseSection>
 </LayoutArticle>

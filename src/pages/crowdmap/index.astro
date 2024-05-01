@@ -11,10 +11,8 @@ import LayoutArticle from '@layouts/LayoutArticle.astro'
   />
 
   <ProseSection classes="flex gap-4 mb-3">
-    <a
-      href="https://crowdmap.heigit.org/"
+    <div
       class="flex grow flex-col items-center justify-center rounded bg-gray-100 pt-5 hover:bg-green-100"
-      target="_blank"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +26,18 @@ import LayoutArticle from '@layouts/LayoutArticle.astro'
           clip-rule="evenodd"></path>
       </svg>
 
-      <h2 class="mb-3 mt-1 py-0">Mitmachen…</h2>
-    </a>
+      <details>
+        <summary>
+          <h2 class="mb-3 mt-1 inline-block cursor-pointer py-0">Mitmachen…</h2>
+        </summary>
+        <p>
+          Aktuell teilen wir die URL zu Crowdmap nur im kleinen Kreis. Bitte melde dich <a
+            href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende#Kontakt_und_Kommunikation"
+            >im Matrix Kanal</a
+          > oder <a href="/contact">bei Tobias</a>.
+        </p>
+      </details>
+    </div>
     <a
       href="/crowdmap/posts/2024-01-20-crowdmap"
       class="flex grow flex-col items-center justify-center rounded bg-gray-100 pt-5 hover:bg-green-100"

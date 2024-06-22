@@ -17,7 +17,7 @@ export const MapSourceCqi = () => {
   // console.log(map.current?.getStyle())
 
   const userFilterGroups: {
-    [group: string]: ['in', string, ...(string | number)[]][]
+    [group: string]: ['in', string | [string, string], ['literal', (string | number)[]]][]
   } = {}
   const filters = filterParamsObject(params.filters)
   const flatLayerGroups = Object.values(legendByGroups)
@@ -32,7 +32,7 @@ export const MapSourceCqi = () => {
       if (filterConfig) {
         userFilterGroups[groupKey!] = [
           ...(userFilterGroups[groupKey!] || []),
-          ['in', filterConfig.key, ...filterConfig.values],
+          ['in', ['get', filterConfig.key], ['literal', filterConfig.values]],
         ]
       }
     })
@@ -60,7 +60,9 @@ export const MapSourceCqi = () => {
               wrapFilterWithAll([
                 ...userFilterExpression,
                 ...(layer.filter ? layer.filter : []),
-                ['in', 'id', ...mapDataIds],
+                ...(mapDataIds.length > 0
+                  ? [['in', ['get', 'id'], ['literal', mapDataIds]]]
+                  : [['literal', false]]),
               ]) as FilterSpecification
             }
           />

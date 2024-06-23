@@ -15,5 +15,6 @@
       // https://docs.astro.build/en/guides/typescript/#setup
       { "name": "@astrojs/ts-plugin" }
     ]
-  }
+  },
+  "exclude": ["dist"]
 }

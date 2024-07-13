@@ -70,7 +70,7 @@ const noindex = projectConfig.enabled !== true || contentNoindex
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml" />
 
     <!-- TODO: Check out https://npm.io/package/tailwindcss-safe-area as a possible alternative -->
-    <script is:raw>
+    <script is:inline is:raw>
       /*
       Fix .h-screen, see .computed-h-screen
       https://css-tricks.com/the-trick-to-viewport-units-on-mobile/

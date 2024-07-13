@@ -1,13 +1,9 @@
-import { $clickedMapData } from '@components/BaseMap/store'
-import { wrapFilterWithAll } from '@components/BaseMap/utils/wrapFilterWithAll'
-import { useStore } from '@nanostores/react'
-import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
-import { layers, layersSelected } from './layers'
+import { layers } from './layers'
 
 export const MapSourceCqi = () => {
-  const mapData = useStore($clickedMapData)
-  const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
+  // const mapData = useStore($clickedMapData)
+  // const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
 
   // Debugging:
   // console.log(mapDataIds)

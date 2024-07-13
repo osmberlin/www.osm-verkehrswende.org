@@ -1,13 +1,13 @@
 import { $clickedMapData } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import { MapInspectorPrimaryInformation } from './inspector/MapInspectorPrimaryInformation'
+import { MapInspectorValueAsList } from './inspector/MapInspectorValueAsList'
 import {
   listStyledKeys,
   skipInspectorKeys,
   translationTagValues,
   translationsKey,
 } from './translations.const'
-import { MapInspectorValueAsList } from './inspector/MapInspectorValueAsList'
 
 export const MapInspector = () => {
   const clickedMapData = useStore($clickedMapData)

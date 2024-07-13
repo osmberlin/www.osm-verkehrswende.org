@@ -4,7 +4,11 @@ export default {
   singleQuote: true,
   arrowParens: 'always',
   printWidth: 100,
-  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+  plugins: [
+    'prettier-plugin-astro',
+    'prettier-plugin-organize-imports',
+    'prettier-plugin-tailwindcss',
+  ],
   overrides: [
     {
       files: '*.astro',
@@ -13,4 +17,6 @@ export default {
       },
     },
   ],
+  tailwindFunctions: ['clsx'],
+  tailwindAttributes: ['className', 'class:list', 'class'],
 }

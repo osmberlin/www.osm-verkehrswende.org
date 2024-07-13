@@ -1,5 +1,10 @@
 import { $searchParams } from '@components/BaseMap/store'
-import { RadioGroup } from '@headlessui/react'
+import {
+  RadioGroup,
+  RadioGroupDescription,
+  RadioGroupLabel,
+  RadioGroupOption,
+} from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
@@ -9,7 +14,7 @@ import { defaultFilterByGroup, paramsWithDefaultFilters } from './utils/filterUt
 
 export const OverlayLayerSelection = () => {
   const params = useStore($searchParams) as CqiMapSearchparams
-  // TODO: I really don't get why we need this but something prevents the rerendering of the buttons so the active state is wrong. Did not find any AstroJS Docs on this. And we are doing what we are supposed to do with nanostores.
+  // TODO: I really don't get why we need this but something prevents the rerendering of the buttons so the focus state is wrong. Did not find any AstroJS Docs on this. And we are doing what we are supposed to do with nanostores.
   const [localSelected, setLocalSelected] = useState<CqiMapSearchparams['anzeige']>('cqi')
 
   const setSelected = (value: CqiMapSearchparams['anzeige']) => {
@@ -32,9 +37,9 @@ export const OverlayLayerSelection = () => {
 
   return (
     <RadioGroup value={localSelected} onChange={handleChange}>
-      <RadioGroup.Label className="sr-only">Filterung der Karte ändern</RadioGroup.Label>
+      <RadioGroupLabel className="sr-only">Filterung der Karte ändern</RadioGroupLabel>
       {layerSelection.map(({ key, name, description }) => (
-        <RadioGroup.Option
+        <RadioGroupOption
           key={key}
           value={key}
           className={({ checked }) =>
@@ -47,20 +52,20 @@ export const OverlayLayerSelection = () => {
             )
           }
         >
-          {({ active, checked }) => (
+          {({ focus, checked }) => (
             <>
               <span
                 className={twJoin(
                   checked ? 'border-transparent bg-emerald-600' : 'border-gray-300 bg-white',
-                  active ? 'ring-2 ring-emerald-600 ring-offset-2' : '',
-                  'mt-0.5 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border  ',
+                  focus ? 'ring-2 ring-emerald-600 ring-offset-2' : '',
+                  'mt-0.5 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border',
                 )}
                 aria-hidden="true"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-white" />
               </span>
               <span className="ml-3 flex flex-col">
-                <RadioGroup.Label
+                <RadioGroupLabel
                   as="div"
                   className={twJoin(
                     checked ? 'font-medium text-emerald-900' : 'font-normal text-gray-900',
@@ -68,10 +73,10 @@ export const OverlayLayerSelection = () => {
                   )}
                 >
                   {name}
-                </RadioGroup.Label>
+                </RadioGroupLabel>
 
                 {checked && (
-                  <RadioGroup.Description
+                  <RadioGroupDescription
                     as="span"
                     className={twJoin(
                       checked ? 'text-emerald-700' : 'text-gray-500',
@@ -79,12 +84,12 @@ export const OverlayLayerSelection = () => {
                     )}
                   >
                     {description}
-                  </RadioGroup.Description>
+                  </RadioGroupDescription>
                 )}
               </span>
             </>
           )}
-        </RadioGroup.Option>
+        </RadioGroupOption>
       ))}
     </RadioGroup>
   )

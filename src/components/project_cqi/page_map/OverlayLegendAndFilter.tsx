@@ -1,5 +1,5 @@
 import { $searchParams } from '@components/BaseMap/store'
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { legendByGroups } from './layers/layers'
@@ -55,7 +55,7 @@ export const OverlayLegendAndFilter = () => {
       {({ open }) => (
         <>
           <div className="flex items-center justify-between">
-            <Disclosure.Button className="flex grow gap-1 px-2 py-2 text-sm hover:font-medium">
+            <DisclosureButton className="flex grow gap-1 px-2 py-2 text-sm hover:font-medium">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -70,7 +70,7 @@ export const OverlayLegendAndFilter = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
               </svg>
               Legende
-            </Disclosure.Button>
+            </DisclosureButton>
             {!noUserFilter && (
               <>
                 <button
@@ -82,7 +82,7 @@ export const OverlayLegendAndFilter = () => {
               </>
             )}
           </div>
-          <Disclosure.Panel>
+          <DisclosurePanel>
             {curentLegendGroup.map((legendGroup) => {
               return (
                 <div key={`${params.anzeige}-${legendGroup.title}`}>
@@ -166,7 +166,7 @@ export const OverlayLegendAndFilter = () => {
                 </div>
               )
             })}
-          </Disclosure.Panel>
+          </DisclosurePanel>
         </>
       )}
     </Disclosure>

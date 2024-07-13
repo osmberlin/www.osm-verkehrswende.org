@@ -6,9 +6,7 @@ import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 
 const berlinInnenstadtBbox = [13.08, 52.336, 13.76, 52.676] satisfies ReturnType<typeof turf.bbox>
 const maxBounds = turf.bbox(
-  turf.buffer(turf.bboxPolygon(berlinInnenstadtBbox), 250, {
-    units: 'meters',
-  }),
+  turf.buffer(turf.bboxPolygon(berlinInnenstadtBbox), 250, { units: 'meters' })!,
 ) as LngLatBoundsLike
 
 const minZoom = 10

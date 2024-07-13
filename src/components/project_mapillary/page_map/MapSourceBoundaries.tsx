@@ -1,4 +1,4 @@
-import { Source, Layer } from 'react-map-gl/maplibre'
+import { Layer, Source } from 'react-map-gl/maplibre'
 
 export const MapSourceBoundaries = () => {
   return (

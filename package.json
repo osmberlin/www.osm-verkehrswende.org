@@ -20,8 +20,8 @@
     "cqi:routing:geojson": "chmod +x ./scripts/cqi/routing/createGeojson.sh && ./scripts/cqi/routing/createGeojson.sh",
     "cqi:routing:graph": "chmod +x ./scripts/cqi/routing/createGraph.sh && ./scripts/cqi/routing/createGraph.sh",
     "cqi:routing:copy": "chmod +x ./scripts/cqi/routing/copyPublicFiles.sh && ./scripts/cqi/routing/copyPublicFiles.sh",
-    "updatePackages": "npx taze major --write",
-    "updatePackages:minor": "npx taze minor --write",
+    "updatePackages:major": "npx taze major --write && npm install",
+    "updatePackages:minor": "npx taze minor --write && npm install",
     "prepare": "husky install"
   },
   "dependencies": {

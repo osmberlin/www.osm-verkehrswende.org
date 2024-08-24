@@ -1,1 +1,3 @@
-export type LayoutLanguage = 'en' | 'de'
+export const languages = ['en', 'de'] as const
+
+export type LayoutLanguage = keyof typeof languages

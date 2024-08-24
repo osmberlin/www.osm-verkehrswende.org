@@ -1,5 +1,13 @@
 ---
+import Card from '@components/text/Card.astro'
+import CardWrapper from '@components/text/CardWrapper.astro'
 import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
+import BookOpen from 'astro-heroicons/outline/BookOpen.astro'
+import Cube from 'astro-heroicons/outline/Cube.astro'
+import CalendarDays from 'astro-heroicons/solid/CalendarDays.astro'
+import DocumentPlus from 'astro-heroicons/outline/DocumentPlus.astro'
+import QueueList from 'astro-heroicons/outline/QueueList.astro'
+import { projectConfigs } from 'src/projectConfigs.const'
 ---
 
 <LayoutArticlePageAstro title="OpenStreetMap Verkehrswende">
@@ -12,21 +20,83 @@ import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
     <p class="-mt-2 text-3xl font-bold text-sky-700">Tagging, Tools und Analysen</p>
   </header>
 
-  <section class="notice prose-sm my-12 mb-10 bg-emerald-100">
-    <h2 class="sr-only" id="video">Vortrag FOSSGIS 2022</h2>
+  <section class="notice prose-sm my-12 mb-10 flex gap-5 bg-emerald-100">
     <iframe
       class="aspect-video w-full overflow-hidden rounded"
       src="https://media.ccc.de/v/fossgis2022-14174-mit-osm-die-verkehrswende-begleiten-tagging-tools-und-analysen/oembed"
       allowfullscreen></iframe>
-    <p class="pt-4">
-      Eine 20-Minunte-Zusammenfassung der Ziele und Projekte der OSM-Verkehrswende-Community. Ein
-      Vortrag von der
-      <a href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/FOSSGIS-2022#Vortrag">
-        FOSSGIS-Konferenz 2022
-      </a>
-      von Alex und Tobias.
-    </p>
+    <div>
+      <h2 class="sr-only" id="video">Vortrag FOSSGIS 2022</h2>
+      <p>
+        Eine 20-Minunte-Zusammenfassung der Ziele und Projekte der OSM-Verkehrswende-Community. Ein
+        Vortrag von der
+        <a href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/FOSSGIS-2022#Vortrag">
+          FOSSGIS-Konferenz 2022
+        </a>
+        von Alex und Tobias.
+      </p>
+    </div>
   </section>
+
+  <CardWrapper classes="mt-10">
+    <Card
+      external
+      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup"
+      text="Wiki öffnen…"
+      alt="Verkehrswende Wiki"
+      variant="iconGrid"
+    >
+      <BookOpen class="size-10" />
+    </Card>
+    <Card
+      external
+      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Meetups"
+      text="Termine anzeigen…"
+      alt="Mtl. online Meetup"
+      variant="iconGrid"
+    >
+      <CalendarDays class="size-10" />
+    </Card>
+  </CardWrapper>
+
+  <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mb-0">
+    {
+      Object.entries(projectConfigs).map(([_projectKey, projectValues]) => {
+        if (!projectValues.enabled) return null
+        if (!projectValues.name) return null
+
+        return (
+          <Card
+            href={projectValues.root}
+            text={projectValues.name}
+            alt={projectValues.meta?.description}
+            imageSrc={projectValues.meta?.imagePath}
+            variant="iconImageGrid"
+          >
+            <Cube class="size-14" />
+          </Card>
+        )
+      })
+    }
+
+    <Card
+      external
+      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Tagging-Proposals"
+      text="Unsere Tagging Proposals"
+      variant="iconImageGrid"
+    >
+      <DocumentPlus class="size-14" />
+    </Card>
+  </CardWrapper>
+
+  <CardWrapper classes="mt-8">
+    <p class="col-span-2 my-0">
+      Die Projekte der OSM Berlin Gruppe könnten euch auch interessieren:
+    </p>
+    <Card external href="https://www.osm-berlin.org" text="OSM Berlin Projekte" variant="iconGrid">
+      <QueueList class="size-10" />
+    </Card>
+  </CardWrapper>
 
   <section class="prose-lg mb-20">
     <h2 class="text-sky-700" id="verkehrswende-osm">Die Verkehrswende &amp; OpenStreetMap</h2>

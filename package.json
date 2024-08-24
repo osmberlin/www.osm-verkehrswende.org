@@ -38,6 +38,7 @@
     "@nanostores/router": "^0.15.0",
     "@turf/turf": "^7.0.0",
     "astro": "^4.11.5",
+    "astro-heroicons": "^2.1.5-1",
     "maplibre-gl": "^4.5.0",
     "nanostores": "^0.10.3",
     "pmtiles": "^3.0.6",

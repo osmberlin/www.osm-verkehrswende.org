@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 
-const baseStyles = 'text-rs8-pink hover:text-rs8-blue'
+const baseStyles = 'text-blue-600'
 export const linkStyles = `${baseStyles} underline`
-export const buttonStyles = `${baseStyles} rounded-full border border-rs8-pink px-6 pt-4 pb-3`
+export const buttonStyles = `${baseStyles} rounded-full border border-blue-600 px-6 pt-4 pb-3`
 
 type Props = {
   to: string
@@ -14,14 +14,7 @@ type Props = {
   children: React.ReactNode
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const Link: React.FC<Props> = ({
-  to,
-  className,
-  children,
-  blank = false,
-  button,
-  ...props
-}) => {
+export const Link = ({ to, className, children, blank = false, button, ...props }: Props) => {
   return (
     <a
       href={to}

@@ -1,14 +1,13 @@
 ---
 title: Mit Crowdmap den besten Gebäude-Datensatz in Berlin erzeugen
-project: crowdmap
-pubDate: 2024-01-20 09:00:00 +0100
-author: Tobias Jordans @tordans
 menuTitle: Einführung
-# canonicalUrl:
+project: crowdmap
+pubDate: 2024-01-20T09:00:00.000Z
+author: Tobias Jordans @tordans
 inMenu: true
-language: 'de'
+language: de
+showToc: false
 ---
-
 Wir starten ein Experiment mit der OSM Berlin Community und dem Team von Crowdmap von HeiGIT: Gemeinsam testen wir die Prozesse und Technologie Crowdmap, um die Vollständigkeit und Richtigkeit der Gäube in OpenStreetMap Berlin zu überprüfen.
 
 ## Ausgangslage
@@ -31,10 +30,11 @@ In 2021 haben wir [ein erstes Experiment in diese Richtung gestartet](https://ta
 
 Das übliche Werkzeug, dass die OSM Community verwendet, wenn es darum geht große Flächen systematisch zu bearbeiten ist [der Tasking Manger](https://wiki.openstreetmap.org/wiki/Tasking_Manager). Dort teilt man eine Fläche in Quadrate und kann diese dann gemeinsam abarbeiten.
 
-![](https://weeklyosm.eu/wp-content/uploads/2023/02/655_T_all.png)
-[Bildquelle](https://weeklyosm.eu/de/archives/16294)
+<Image src="https://weeklyosm.eu/wp-content/uploads/2023/02/655_T_all.png" osm_urls={[]}>
+  [Bildquelle](https://weeklyosm.eu/de/archives/16294)
+</Image>
 
-Im humanitären Bereich ist dieses Tool erfolgreich im Einsatz. Nach einem Erdbeben werden so Freiwillige aus der ganzen Welt koordiniert ([Beispiel](https://tasks.hotosm.org/explore?campaign=Turkey%20and%20Syria%20Earthquake%20Response%20February%202023&orderBy=priority&orderByType=ASC)) um Gebäude und Straßen zu aktualisieren. Und zwischen den Krisen können Freiwillige in ["Missing Maps" Mapathons](https://www.aerzte-ohne-grenzen.de/sich-engagieren/veranstaltungen/mapathon) dort Basisdaten erheben, wo noch gar nichts gemapped wurde.
+Im humanitären Bereich ist dieses Tool erfolgreich im Einsatz. Nach einem Erdbeben werden so Freiwillige aus der ganzen Welt koordiniert ([Beispiel](https://tasks.hotosm.org/explore?campaign=Turkey%20and%20Syria%20Earthquake%20Response%20February%202023\&orderBy=priority\&orderByType=ASC)) um Gebäude und Straßen zu aktualisieren. Und zwischen den Krisen können Freiwillige in ["Missing Maps" Mapathons](https://www.aerzte-ohne-grenzen.de/sich-engagieren/veranstaltungen/mapathon) dort Basisdaten erheben, wo noch gar nichts gemapped wurde.
 
 Für die Aufgabe, einen Datenabgleich mit OpenData in Berlin durchzuführen, hat sich der Tasking Manager als das falsche Werkzeug erwiesen: Der Editing Workflow ist langsam und man hat kaum Erfolgserlebnisse. Hinzu kommt, dass man sich in einem hoch gemappten Gebiet wie Berlin zu schnell in Details verliert, was den ganzen Prozess noch langsamer macht.
 
@@ -58,12 +58,12 @@ Wir wollen jetzt herausfinden, wie gut die Crowdmap Methoden für einen Anedungs
 
 **Die Aufgaber aller Helfer:innen ist jetzt, die Karte durchzu"wischen" und für jede Kachel zu markieren…**
 
-- **✅ ob alles OK ist**<br>
-  _"Hier stimmen die Gebäude aus OSM mit dem Luftbild überein."_
-- **👀 ob es etwas zu prüfen gibt**<br>
-  _"Hier müssen die Gebäude in OSM kontrolliert werden, denn es gibt Abweichungen zum Luftbild."_
-- **🤷 ob die Kachel übersprungen werden soll**<br>
-  _"Ich kann die Frage für diese Kachel nicht beantworten."_
+* **✅ ob alles OK ist**
+  *"Hier stimmen die Gebäude aus OSM mit dem Luftbild überein."*
+* **👀 ob es etwas zu prüfen gibt**
+  *"Hier müssen die Gebäude in OSM kontrolliert werden, denn es gibt Abweichungen zum Luftbild."*
+* **🤷 ob die Kachel übersprungen werden soll**
+  *"Ich kann die Frage für diese Kachel nicht beantworten."*
 
 ## Es wird mehrere Phasen geben
 

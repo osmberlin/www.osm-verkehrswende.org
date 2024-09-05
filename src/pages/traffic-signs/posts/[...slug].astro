@@ -1,10 +1,10 @@
 ---
 import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import { mdxComponentsAstro } from 'keystatic/mdxComponents'
 
 export async function getStaticPaths() {
-  const project = 'bicycle-parking' // REMINDER: this needs to be change for each project and added to `src/projectsConfig.const.ts`
+  const project = 'traffic-signs' // REMINDER: this needs to be change for each project and added to `src/projectsConfig.const.ts`
   const posts = await getCollection('posts')
   return posts
     .filter((post) => post.data.project === project)

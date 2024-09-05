@@ -1,12 +1,16 @@
 import rss from '@astrojs/rss'
+import { getProjects } from '@layouts/utils/getProjects'
 import { getCollection } from 'astro:content'
-import { projectConfigs } from '../projectConfigs.const'
 
 export async function get(context) {
+  const projects = await getProjects()
+  const rootProject = projects.find((p) => p.name.slug === 'root')
+
   const posts = await getCollection('posts')
+
   return rss({
-    title: projectConfigs.about.meta.title,
-    description: projectConfigs.about.meta.description,
+    title: rootProject.meta.title,
+    description: rootProject.meta.description,
     site: context.site,
     items: posts.map((post) => ({
       ...post.data,

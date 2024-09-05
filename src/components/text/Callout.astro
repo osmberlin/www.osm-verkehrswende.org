@@ -1,0 +1,13 @@
+---
+import type { LayoutLanguage } from '@layouts/languages'
+
+type Props = {
+  language: LayoutLanguage
+}
+
+const { language } = Astro.props
+---
+
+<div lang={language} class="rounded bg-yellow-100 p-3 leading-tight">
+  <slot />
+</div>

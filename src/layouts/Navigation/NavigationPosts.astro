@@ -1,17 +1,21 @@
 ---
-import { pickProject } from '@layouts/utils/pickProject'
 import { getCollection } from 'astro:content'
+import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import MenuItem from './MenuItem/MenuItem.astro'
 import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from './MenuItem/MenuItemWrapper.astro'
 
-const project = pickProject(Astro.request.url)
+type Props = {
+  project: TProjectConfig
+}
+const { project } = Astro.props
+
 const allPosts = await getCollection('posts')
 const sortedPosts = allPosts.sort(
   (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf(),
 )
 const relevantPosts = sortedPosts
-  .filter((post) => post.data.project === project)
+  .filter((post) => post.data.project === project.name.slug)
   .filter((post) => post.data.inMenu === true)
 ---
 
@@ -24,7 +28,7 @@ const relevantPosts = sortedPosts
       </MenuItemHeadline>
       <MenuItemWrapper>
         {relevantPosts.map((post) => (
-          <MenuItem href={`/${project}/posts/${post.slug}`}>
+          <MenuItem href={`/${project.name.slug}/posts/${post.slug}`}>
             <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
               {[
                 new Date(post.data.pubDate).getFullYear(),

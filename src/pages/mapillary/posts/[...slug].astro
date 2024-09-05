@@ -1,6 +1,7 @@
 ---
 import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
+import { mdxComponentsAstro } from 'keystatic/mdxComponents'
 
 export async function getStaticPaths() {
   const project = 'mapillary' // REMINDER: this needs to be change for each project and added to `src/projectsConfig.const.ts`
@@ -19,5 +20,5 @@ const { Content } = await post.render()
 ---
 
 <LayoutArticlePost {...post.data}>
-  <Content />
+  <Content components={mdxComponentsAstro} />
 </LayoutArticlePost>

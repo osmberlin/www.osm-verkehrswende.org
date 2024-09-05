@@ -1,10 +1,10 @@
 ---
-import type { ProjectConfigItem } from 'src/projectConfigs.const'
+import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import { twJoin } from 'tailwind-merge'
 
 export interface Props {
   menuHighlight: string | undefined
-  additionalLinks: ProjectConfigItem['additionalFooterLinks']
+  additionalLinks: TProjectConfig['additionalFooterLinks']
 }
 
 const { menuHighlight, additionalLinks } = Astro.props
@@ -12,7 +12,7 @@ const { menuHighlight, additionalLinks } = Astro.props
 
 <ul class="prose prose-sm mb-4 ml-3 block space-y-3 leading-snug">
   {
-    additionalLinks.map((link) => (
+    additionalLinks?.map((link) => (
       <li>
         <a
           class={

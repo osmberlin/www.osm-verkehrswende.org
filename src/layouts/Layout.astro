@@ -1,9 +1,8 @@
 ---
-import { projectConfigs } from 'src/projectConfigs.const'
 import TailwindResponsiveHelper from './TailwindResponsiveHelper.astro'
 import './base.css'
-import type { LayoutLanguage } from './types'
-import { pickProject } from './utils/pickProject'
+import type { LayoutLanguage } from './languages'
+import { getProject } from './utils/getProject'
 
 type Props = {
   title: string
@@ -15,15 +14,14 @@ type Props = {
   imageAlt?: string
 }
 
-const project = pickProject(Astro.request.url)
-const projectConfig = projectConfigs[project]
+const project = await getProject(Astro.request.url)
 
 const defaults = {
-  title: projectConfig.meta?.title,
-  language: projectConfig.meta?.language,
-  description: projectConfig.meta?.description,
-  imagePath: projectConfig.meta?.imagePath,
-  imageAlt: projectConfig.meta?.imageAlt,
+  title: project.meta?.title,
+  language: project.meta.language,
+  description: project.meta.description,
+  imagePath: project.meta.imagePath?.value,
+  imageAlt: project.meta.imageAlt,
 }
 
 const {
@@ -35,7 +33,7 @@ const {
   imagePath,
   imageAlt,
 } = Astro.props
-const noindex = projectConfig.enabled !== true || contentNoindex
+const noindex = project.enabled === false || contentNoindex
 ---
 
 <!doctype html>

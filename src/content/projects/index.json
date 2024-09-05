@@ -1,0 +1,289 @@
+{
+  "projects": [
+    {
+      "name": {
+        "name": "OSM Verkehrswende",
+        "slug": "root"
+      },
+      "enabled": true,
+      "header": "AboutHeader",
+      "menus": [],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "OpenStreetMap Verkehrswende",
+        "description": "OSM kann die Verkehrswende begleiten und beschleunigen mit Tagging, Tools und Analysen.",
+        "imagePath": {
+          "discriminant": false,
+          "value": "projects/0/meta/imagePath/value.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Parkraum",
+        "slug": "parking"
+      },
+      "enabled": true,
+      "externalProjektPage": "https://parkraum.osm-verkehrswende.org/",
+      "header": "ProjectHeader",
+      "menus": [],
+      "menuNews": false,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Parkraum Daten aus OpenStreetMap",
+        "description": "Aktuelle und leicht aktualisierbare Daten zu Parkraum aus OpenStreetMap",
+        "imagePath": {
+          "discriminant": true,
+          "value": "public/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Verkehrszeichen",
+        "slug": "traffic-signs"
+      },
+      "enabled": false,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/traffic-signs/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Verkehrszeichen in OpenStreetMap",
+        "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Cycling Quality Index",
+        "slug": "cqi"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/cqi/"
+            },
+            {
+              "label": "Mitmachen",
+              "href": "/cqi/improve-data/"
+            }
+          ]
+        },
+        {
+          "label": "Karte",
+          "items": [
+            {
+              "label": "Karte",
+              "href": "/cqi/map/"
+            },
+            {
+              "label": "Routing (PLANNED)",
+              "href": "/cqi/routing/"
+            },
+            {
+              "label": "Other regions",
+              "href": "/cqi/regions/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [
+        {
+          "label": "Github: Code für den Index",
+          "href": "https://github.com/SupaplexOSM/OSM-Cycling-Quality-Index"
+        },
+        {
+          "label": "Github: Code für die Website",
+          "href": "https://github.com/osmberlin/www.osm-verkehrswende.org"
+        }
+      ],
+      "meta": {
+        "title": "Cycling Quality Index",
+        "description": "Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Fahrradstellplätze",
+        "slug": "bicycle-parking"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/bicycle-parking/"
+            },
+            {
+              "label": "Datenabgleich",
+              "href": "https://bikeparking.lorenz.lu/missingmap/Berlin"
+            },
+            {
+              "label": "Karte",
+              "href": "https://bikeparking.lorenz.lu/parkingmap"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Fahrradstellplätze in OpenStreetMap",
+        "description": "Datenabgleich und Statisitik zu Fahradstellplätzen in OpenStreetMap",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Crowdmap",
+        "slug": "crowdmap"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/crowdmap/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Crowdmap-Experiment zur Prüfung von Gebäude Daten in Berlin",
+        "description": "Ein Projekt um die Datenqualität von Geäbuden in OSM für Berlin zu prüfen und zu verbessern.",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing-crowdmap.png"
+        },
+        "imageAlt": "Luftbild mit OSM Gebäudedaten und Angaben zur Validierung der Gebäude.",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Mapillary Missing Streets (ALPHA)",
+        "slug": "mapillary"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/mapillary/"
+            },
+            {
+              "label": "Karte (ALPHA)",
+              "href": "/mapillary/map/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Mapillary Missing Streets (ALPHA)",
+        "description": "An easy way to find out which streets in Berlin require fresh 360° images",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Bänke",
+        "slug": "benches"
+      },
+      "enabled": false,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/benches/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Bänke in OpenStreetMap",
+        "description": "Verzeichnis von Parkbänden und Sitzbänken aus OpenStreetMap",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "(FALLBACK)",
+        "slug": "unknown"
+      },
+      "enabled": false,
+      "header": "AboutHeader",
+      "menus": [],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "OpenStreetMap Verkehrswende",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    }
+  ]
+}

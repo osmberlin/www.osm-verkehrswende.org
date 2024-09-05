@@ -1,5 +1,5 @@
 ---
-import ImageWrapper from '@components/ImageWrapper.astro'
+import Image from '@components/text/Image.astro'
 import ProjectHeadline from '@components/text/ProjectHeadline.astro'
 import ProseSection from '@components/text/ProseSection.astro'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
@@ -105,10 +105,9 @@ import ImageExample from '/public/social-sharing-crowdmap.png'
       Auge springt, dann ist der Unterschied vermutlich nicht groß genug. Die Idee der Crowdmap ist
       es, große Gebiete schnell durchzuklicken um die relevanten Untergebiete herauszufiltern.
     </p>
-    <ImageWrapper
-      src={ImageExample.src}
-      alt="Beispiel für Antworten in Grün und Orange"
-      caption="Beispiel für Antworten: Grüne Häuser sind OK; Orange Häuser müssen geprüft werden. In Crowdmap würdest du die ganze Kachel grün oder orange markieren."
-    />
+    <Image src={ImageExample.src} alt="Beispiel für Antworten in Grün und Orange"
+      >Beispiel für Antworten: Grüne Häuser sind OK; Orange Häuser müssen geprüft werden. In
+      Crowdmap würdest du die ganze Kachel grün oder orange markieren.</Image
+    >
   </ProseSection>
 </LayoutArticle>

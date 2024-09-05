@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "extract-project-keys": "bun run keystatic/scripts/extractProjectKeys.ts && prettier 'keystatic/extractedProjectKeys.ts' --write",
+    "generate-types": "astro sync --verbose && cat ./.astro/astro/content.d.ts",
     "type-check": "astro check && tsc --skipLibCheck --noEmit",
     "lint": "eslint",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\" --write",
@@ -22,6 +24,10 @@
     "cqi:routing:copy": "chmod +x ./scripts/cqi/routing/copyPublicFiles.sh && ./scripts/cqi/routing/copyPublicFiles.sh",
     "updatePackages:major": "npx taze major --write && npm install",
     "updatePackages:minor": "npx taze minor --write && npm install",
+    "bleach": "rm -rf node_modules/.astro && rm -rf node_modules/.bin && rm -rf node_modules/.vite && rm -rf .astro/ && rm -rf .netlify/ && rm -rf dist/ && npm install && npm run bleach:info",
+    "bleach:info": "echo \"\u001b[43m\u001b[30m(!) Also delete the browser cache, see https://github.com/vitejs/vite/discussions/17738#discussioncomment-10158746\u001b[0m\"",
+    "bleach:all": "rm -rf node_modules/ && npm run bleach",
+    "bleach:full": "rm package-lock.json && npm run bleach:all",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -34,6 +40,7 @@
     "@astrojs/ts-plugin": "^1.10.1",
     "@aws-sdk/client-s3": "^3.614.0",
     "@headlessui/react": "^2.1.2",
+    "@heroicons/react": "^2.1.5",
     "@keystatic/astro": "^5.0.0",
     "@keystatic/core": "^0.5.32",
     "@nanostores/react": "^0.7.2",
@@ -64,6 +71,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-organize-imports": "^4.0.0",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "vite-plugin-watch-and-run": "^1.7.1"
   }
 }

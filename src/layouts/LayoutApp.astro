@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro'
 import Navigation from './Navigation/Navigation.astro'
-import { pickProject } from './utils/pickProject'
+import { getProject } from './utils/getProject'
 
 type Props = {
   title: string
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const { title, menuHighlight, noindex } = Astro.props
-const project = pickProject(Astro.request.url)
+const project = await getProject(Astro.request.url)
 ---
 
 <Layout title={title} noindex={noindex}>

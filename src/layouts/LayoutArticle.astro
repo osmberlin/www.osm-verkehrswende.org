@@ -1,9 +1,9 @@
 ---
 import ScriptLinkifyHeadlines from '@components/scripts/ScriptLinkifyHeadlines.astro'
 import Layout from './Layout.astro'
-import type { LayoutLanguage } from './types'
-import { pickProject } from './utils/pickProject'
 import Navigation from './Navigation/Navigation.astro'
+import { getProject } from './utils/getProject'
+import type { LayoutLanguage } from './languages'
 
 type Props = {
   title: string
@@ -13,7 +13,7 @@ type Props = {
 }
 
 const { title, menuHighlight, noindex, language } = Astro.props
-const project = pickProject(Astro.request.url)
+const project = await getProject(Astro.request.url)
 ---
 
 <Layout title={title} noindex={noindex} language={language}>

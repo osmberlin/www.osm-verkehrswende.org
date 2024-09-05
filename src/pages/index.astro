@@ -7,7 +7,13 @@ import Cube from 'astro-heroicons/outline/Cube.astro'
 import CalendarDays from 'astro-heroicons/solid/CalendarDays.astro'
 import DocumentPlus from 'astro-heroicons/outline/DocumentPlus.astro'
 import QueueList from 'astro-heroicons/outline/QueueList.astro'
-import { projectConfigs } from 'src/projectConfigs.const'
+import { getProjects } from '@layouts/utils/getProjects'
+import { getRootUrl } from '@layouts/utils/getRootUrl'
+
+const projects = await getProjects()
+const showcaseProjects = projects
+  .filter((p) => p.name.slug !== 'root')
+  .filter((p) => p.enabled === true)
 ---
 
 <LayoutArticlePageAstro title="OpenStreetMap Verkehrswende">
@@ -20,7 +26,7 @@ import { projectConfigs } from 'src/projectConfigs.const'
     <p class="-mt-2 text-3xl font-bold text-sky-700">Tagging, Tools und Analysen</p>
   </header>
 
-  <section class="notice prose-sm my-12 mb-10 flex gap-5 bg-emerald-100">
+  <section class="notice prose-sm my-12 mb-10 gap-5 bg-emerald-100 sm:flex">
     <iframe
       class="aspect-video w-full overflow-hidden rounded"
       src="https://media.ccc.de/v/fossgis2022-14174-mit-osm-die-verkehrswende-begleiten-tagging-tools-und-analysen/oembed"
@@ -61,16 +67,13 @@ import { projectConfigs } from 'src/projectConfigs.const'
 
   <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mb-0">
     {
-      Object.entries(projectConfigs).map(([_projectKey, projectValues]) => {
-        if (!projectValues.enabled) return null
-        if (!projectValues.name) return null
-
+      showcaseProjects.map((project) => {
         return (
           <Card
-            href={projectValues.root}
-            text={projectValues.name}
-            alt={projectValues.meta?.description}
-            imageSrc={projectValues.meta?.imagePath}
+            href={getRootUrl(project)}
+            text={project.name.name}
+            alt={project.meta?.description}
+            imageSrc={project.meta?.imagePath.value}
             variant="iconImageGrid"
           >
             <Cube class="size-14" />
@@ -90,7 +93,7 @@ import { projectConfigs } from 'src/projectConfigs.const'
   </CardWrapper>
 
   <CardWrapper classes="mt-8">
-    <p class="col-span-2 my-0">
+    <p class="my-0 sm:col-span-2">
       Die Projekte der OSM Berlin Gruppe könnten euch auch interessieren:
     </p>
     <Card external href="https://www.osm-berlin.org" text="OSM Berlin Projekte" variant="iconGrid">

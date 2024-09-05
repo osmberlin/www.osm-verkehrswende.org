@@ -1,25 +1,25 @@
 ---
+import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import Header from './NavigationHeaderProject.astro'
-import { projectConfigs, type NavigationProjects } from 'src/projectConfigs.const'
+import PageAboutHeader from './page_about/PageAboutHeader.astro'
+import { getRootUrl } from '@layouts/utils/getRootUrl'
 
 interface Props {
-  project: NavigationProjects
+  project: TProjectConfig
 }
 
 const { project } = Astro.props
-const projectConfig = projectConfigs[project]
-const CustomHeaderComp =
-  'customHeader' in projectConfig && typeof projectConfig.customHeader === 'function'
-    ? projectConfig.customHeader
-    : undefined
 ---
 
 <div>
   {
-    CustomHeaderComp ? (
-      <CustomHeaderComp />
-    ) : (
-      <Header name={projectConfig.name} link={projectConfig.root} />
-    )
+    (() => {
+      switch (project.header) {
+        case 'AboutHeader':
+          return <PageAboutHeader />
+        case 'ProjectHeader':
+          return <Header name={project.name.name} link={getRootUrl(project)} />
+      }
+    })()
   }
 </div>

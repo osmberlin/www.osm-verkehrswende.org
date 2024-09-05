@@ -1,12 +1,14 @@
 ---
+import { getProjects } from '@layouts/utils/getProjects'
 import MenuItem from '../MenuItem/MenuItem.astro'
 import MenuItemHeadline from '../MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from '../MenuItem/MenuItemWrapper.astro'
-import { projectConfigs } from 'src/projectConfigs.const'
+import { getRootUrl } from '@layouts/utils/getRootUrl'
 
-const enabledProjectConfigs = Object.entries(projectConfigs)
-  .filter(([_key, value]) => value.enabled)
-  .filter(([_key, value]) => value.name)
+const projects = await getProjects()
+const showcaseProjects = projects
+  .filter((p) => p.name.slug !== 'root')
+  .filter((p) => p.enabled === true)
 ---
 
 <MenuItemWrapper>
@@ -16,8 +18,8 @@ const enabledProjectConfigs = Object.entries(projectConfigs)
 <MenuItemHeadline>Projekte</MenuItemHeadline>
 <MenuItemWrapper>
   {
-    enabledProjectConfigs.map(([_, { name, root }]) => {
-      return <MenuItem href={root}>{name}</MenuItem>
+    showcaseProjects.map((project) => {
+      return <MenuItem href={getRootUrl(project)}>{project.name.name}</MenuItem>
     })
   }
 </MenuItemWrapper>

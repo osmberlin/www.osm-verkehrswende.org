@@ -4,9 +4,9 @@ osm-verkehrswende.org is a project hub that documents the different activities o
 
 Learn more…
 
-* https://www.osm-verkehrswende.org/
-* https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende
-* Join our next meetup
+- https://www.osm-verkehrswende.org/
+- https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende
+- Join our next meetup
 
 ## Meetups
 
@@ -24,5 +24,5 @@ This project is build with [Astro](https://astro.build/), using `.astro` files w
 
 - Create a new project folder in `/pages`
 - Update the project slug in `pages/PROJECT/posts/[...slug].astro`
-- Add the project slug to `content/config.ts`
-- Add the project config to `projectConfigs.const.ts`
+- Add the project via Keystatic in `src/content/projects/index.json`
+- (The project keys will be [extractd automatically](keystatic/scripts/README.md).)

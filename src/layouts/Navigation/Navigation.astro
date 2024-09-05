@@ -1,5 +1,5 @@
 ---
-import type { NavigationProjects } from 'src/projectConfigs.const'
+import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import { twJoin } from 'tailwind-merge'
 import { NavigationMobile } from './NavigationMobile.tsx'
 import ProjectToHeader from './ProjectToHeader.astro'
@@ -8,7 +8,7 @@ import ProjectToMenu from './ProjectToMenu.astro'
 export interface Props {
   /** @desc switches the navigation to scroll in itself ("app") vs. with the "article" */
   layoutType: 'article' | 'app'
-  project: NavigationProjects
+  project: TProjectConfig
   menuHighlight?: string | undefined
 }
 

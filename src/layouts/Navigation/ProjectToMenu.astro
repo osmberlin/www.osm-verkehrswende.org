@@ -1,29 +1,27 @@
 ---
 // TODO: Replace the wrapper for <MenuItem> with <MenuItemWrapper> which does not work ATM.
 // import MenuItemWrapper from './MenuItem/MenuItemWrapper.astro'
-import { pickProject } from '@layouts/utils/pickProject'
+import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import MenuItem from './MenuItem/MenuItem.astro'
 import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
 import NavigationFooter from './NavigationFooter.astro'
-import { projectConfigs, type NavigationProjects } from 'src/projectConfigs.const'
+import NavigationPosts from './NavigationPosts.astro'
+import PageAboutMenu from './page_about/PageAboutMenu.astro'
+import { projectKeyFromUrl } from '@layouts/utils/projectKeyFromUrl'
 
 interface Props {
-  project: NavigationProjects
+  project: TProjectConfig
   menuHighlight?: string | undefined
 }
 
 const isDev = import.meta.env.DEV
 const { project, menuHighlight } = Astro.props
-const { menus } = projectConfigs[project]
 ---
 
-{
-  menus?.map((menu) => {
-    if (typeof menu === 'function') {
-      const NavComp = menu
-      return <NavComp menuHighlight={menuHighlight} />
-    }
+{project.name.slug === 'root' && <PageAboutMenu />}
 
+{
+  project.menus?.map((menu) => {
     return (
       <Fragment>
         {typeof menu.label === 'string' && <MenuItemHeadline>{menu.label}</MenuItemHeadline>}
@@ -42,15 +40,14 @@ const { menus } = projectConfigs[project]
   })
 }
 
+{project.menuNews && <NavigationPosts project={project} />}
+
 {
-  !menus && isDev && (
+  !project.menus && isDev && (
     <p class="text-red-500">
-      `project` `{pickProject(Astro.request.url)}` für Navigation nicht erkannt.
+      `project` `{projectKeyFromUrl(Astro.request.url)}` für Navigation nicht erkannt.
     </p>
   )
 }
 
-<NavigationFooter
-  menuHighlight={menuHighlight}
-  additionalLinks={projectConfigs[project].additionalFooterLinks}
-/>
+<NavigationFooter menuHighlight={menuHighlight} additionalLinks={project.additionalFooterLinks} />

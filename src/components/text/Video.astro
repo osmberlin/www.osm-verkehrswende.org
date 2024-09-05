@@ -1,0 +1,9 @@
+---
+type Props = {
+  src: string
+}
+
+const { src } = Astro.props
+---
+
+<iframe class="mt-10 aspect-video w-full" src={src} frameborder="0" allowfullscreen></iframe>

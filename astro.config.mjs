@@ -44,24 +44,16 @@ export default defineConfig({
     }),
     ASTRO_OUTPUT_MODE === 'hybrid' ? keystatic() : undefined,
   ],
-  markdown: {
-    remarkPlugins: [remarkToc],
-  },
+  markdown: { remarkPlugins: [remarkToc] },
   site: 'https://www.osm-verkehrswende.org/',
   redirects: {
     '/mapswipe': '/crowdmap',
     '/about': '/root',
   },
   vite: {
-    ssr: {
-      noExternal: ['route-snapper'],
-    },
+    ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: {
-      exclude: [
-        'route-snapper',
-        // Needed for `watchAndRun` https://stackoverflow.com/a/75655669
-        'fsevents',
-      ],
+      exclude: ['route-snapper'],
     },
     plugins: [
       // See keystatic/scripts/README.md

@@ -45,45 +45,6 @@
     },
     {
       "name": {
-        "name": "Verkehrszeichen",
-        "slug": "traffic-signs"
-      },
-      "enabled": true,
-      "header": "ProjectHeader",
-      "menus": [
-        {
-          "items": [
-            {
-              "label": "Über das Projekt",
-              "href": "/traffic-signs/"
-            }
-          ]
-        },
-        {
-          "label": "Eintragen",
-          "items": [
-            {
-              "label": "Werkzeug",
-              "href": "https://trafficsigns.osm-verkehrswende.org/"
-            }
-          ]
-        }
-      ],
-      "menuNews": true,
-      "additionalFooterLinks": [],
-      "meta": {
-        "title": "Verkehrszeichen in OpenStreetMap",
-        "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
-        "imageAlt": "OpenStreetMap Verkehrswende Community",
-        "language": "de"
-      }
-    },
-    {
-      "name": {
         "name": "Cycling Quality Index",
         "slug": "cqi"
       },
@@ -134,6 +95,45 @@
       "meta": {
         "title": "Cycling Quality Index",
         "description": "Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes",
+        "imagePath": {
+          "discriminant": true,
+          "value": "/social-sharing.png"
+        },
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Verkehrszeichen",
+        "slug": "traffic-signs"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/traffic-signs/"
+            }
+          ]
+        },
+        {
+          "label": "Eintragen",
+          "items": [
+            {
+              "label": "Werkzeug",
+              "href": "https://trafficsigns.osm-verkehrswende.org/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Verkehrszeichen in OpenStreetMap",
+        "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",
         "imagePath": {
           "discriminant": true,
           "value": "/social-sharing.png"

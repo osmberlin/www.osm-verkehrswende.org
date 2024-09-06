@@ -13,7 +13,7 @@
     "generate-types": "astro sync --verbose && cat ./.astro/astro/content.d.ts",
     "type-check": "astro check && tsc --skipLibCheck --noEmit",
     "lint": "eslint",
-    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro|mdx)\" --write",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|astro)\" --write",
     "check": "npm run type-check && npm run format && npm run lint",
     "cqi:createPmtiles": "npm run cqi:createPmtiles:pmTiles && npm run cqi:createPmtiles:upload",
     "cqi:createPmtiles:pmTiles": "node ./scripts/cqi/createPmtiles/createPmtiles.js",

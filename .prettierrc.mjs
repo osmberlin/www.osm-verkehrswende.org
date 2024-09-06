@@ -17,6 +17,6 @@ export default {
       },
     },
   ],
-  tailwindFunctions: ['clsx'],
+  tailwindFunctions: ['clsx', 'twMerge', 'twJoin'],
   tailwindAttributes: ['className', 'class:list', 'class'],
 }

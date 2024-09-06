@@ -105,7 +105,7 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
       console.error('updateRoute: `toFinalFeature` is `undefined`')
       return
     }
-    const routeGeojson = JSON.parse(routeString)
+    const routeGeojson = JSON.parse(routeString) as any
     $routeToolGj.set(routeGeojson)
 
     // console.log('updateRoute: routeSnapper.current', routeSnapper.current)

@@ -1,0 +1,56 @@
+---
+title: Verkehrszeichen in OpenStreetMap
+menuTitle: Projektstart
+project: traffic-signs
+pubDate: 2024-09-06T12:00:00.000Z
+author: Tobias Jordans @tordans
+inMenu: true
+noindex: false
+language: de
+showToc: false
+---
+In den nächsten Monaten werden auf dieser Seite Werkzeuge entstehen, die es einfacher machen Verkehrszeichen in OpenStreetMap einzutragen und zu nutzen.
+
+Im Zeitraum September 2024 bis Februar 2025 wird [dieses Projekt](https://prototypefund.de/project/verkehrszeichen-in-osm/) durch den Prototype Fund (Runde 16) des Bundesministeriums für Bildung und Forschung (BMBF) gefördert.
+
+In diesem Beitrag findet ihr Ausschnitte aus dem Antrag beim Prototype Fund die das Projekt und seine Hintergründe beschreiben:
+
+---
+
+## **Kurzbeschreibung**
+
+Die OSM Verkehrszeichen Werkzeuge vereinfachen das Eintragen von Verkehrszeichen in OpenStreetMap. Dadurch werden die Daten in OSM systematisiert, vollständiger und damit auch für **Behörden und Verwaltungen in Deutschland** attraktiver. Es ergeben sich neue Möglichkeiten der Datenauswertung und Qualitätssicherung und nicht selten werden dabei Ungereimtheiten zwischen der jurist-verkehrsplanerischen Sicht und der “on the ground”-Sicht in OSM sichtbar.
+
+Gerade im Bereich der Radinfrastruktur ist es wichtig, die Anordnungen der Verwaltungen in Form von Verkehrszeichen zu dokumentieren, da OpenStreetMap-Daten zunehmend für die Planung von Radnetzen und die Analyse von Infrastruktur (bspw. Fahrradfreundlichkeit) herangezogen wird.
+
+## **Kooperation mit Verwaltungen**
+
+Das OSM Verkehrszeichen Tool ist ein kleiner Baustein, um das OpenStreetMap-Ökosystem zu verbessern. Die dadurch verbesserten Daten eröffnen neue Möglichkeiten der Kooperation zwischen der ehrenamtlichen Community und hauptamtlichen Fachpersonen in den Verwaltungen. Dort hat OpenStreetMap inzwischen ein hohes Ansehen als einfach zugängliche und flächendeckend verfügbare Quelle für eine hohe Vielzahl an sehr unterschiedlichen Daten erreicht. Jetzt ist die richtige Zeit, um die Zusammenarbeit mit der Verwaltung zu verstärken. Dafür müssen wir die Datenqualität weiter steigern und Daten liefern, die dem Arbeitsalltag der Verwaltungsmitarbeiter:innen entsprechen. Mehr Verkehrszeichen-Daten in OSM erreicht genau das. Damit steigert OSM sein Potenzial, die Verwaltung zu digitalisieren, Verwaltungsprozesse und essenzielle Transformationen wie die für bessere Radinfrastruktur zu beschleunigen.
+
+## **Technische Umsetzung**
+
+**Verkehrszeichenkatalog und Übersetzungstool:** Es soll ein TypeScript Projekt entstehen, das als NPM Paket veröffentlicht wird. Dies enthält dann die Verkehrszeichen-Tabelle sowie die Transformationen hin zu OSM Tags und kann Vorschläge zu Verkehrszeichen auf Basis von OSM Tags liefern.
+
+**Standalone-Tool:** Mit AstroJS und React wird eine Website gebaut, die es Mapper:innen ermöglicht, Verkehrszeichen zusammenzustellen und die Tagging-Empfehlungen abzulesen.
+
+Einen Proof-Of-Concept dazu findet ihr unter [https://trafficsigns.osm-verkehrswende.org/](https://trafficsigns.osm-verkehrswende.org/)
+
+(An dieser Stelle schonmal Danke an den unbekannten OSM Mapper, der vor Jahren [https://osmtools.de/traffic\_signs/](https://osmtools.de/traffic_signs/) gebaut hat. Dein Projekt war eine große Inspiration für diese Arbeit.)
+
+**Editor-Integration:** Ideal wäre, im Rahmen des Projektes eine Integration in den iD Editor zu bauen. Wie gut sich das Tooling dort integrieren lässt und ob dafür Zeit ist, wird sich im Projektverlauf zeigen.
+
+**Auswertung, Deutschlandkarte:** OpenStreetMap Daten sollen mit osm2pgsql prozessiert werden um auf dieser Basis Auswertungen und Vector Tiles zu erzeugen. Diese könnt ihr dann hier auf Basis einer Maplibre Karte mit React/react-map-gl nutzen.
+
+**Datenqualität:** Die Verbesserung der Datenqualität soll über MapRoulette-Kampagnen erfolgen, die aus der Prozessierung gefüttert werden.
+
+**Disclaimer:** Welche Teile dieses Plans sich umsetzen lassen – zeitlich und technisch – wird sich im Projektverlauf zeigen.
+
+## **Zielgruppen**
+
+**Zielgruppe 1 sind OSM Mapper:innen in Deutschland.** Im ersten Schritt wird das Standalone Tool über die Wiki-Dokumentation und Mapathons verbreitet. Es wird außerdem in OSS-Projekte wie [den Radverkehrsatlas](https://radverkehrsatlas.de/) integriert. Darüber soll das Tool für Verkehrszeichen in den USA und anderen Ländern erweitert werden können.
+
+**Zielgruppe 2 sind die Verwaltungen.** Diese haben "automatisch" Zugriff auf die verbesserten Daten in OSM, profitieren aber besonders von verbesserten, vorprozessierten Daten wie dem Parkraum Projekt (PF12), dem Radverkehrsatlas und insbesondere dem offenen Verkehrszeichenkataster, das im Projektverlauf entsteht.
+
+## **Andere Länder**
+
+Der Fokus für dieses Projekt wird erstmal in Deutschland liegen. Es gibt aber viele andere Länder, für die diese Werkzeuge hilfreich sein können. In Github gibt es [eine Sammlung von Ländern und Verkehrszeichenlisten](https://github.com/osmberlin/osm-traffic-sign-tool/issues/11), auf die man das Projekt erweitern könnte.

@@ -52,9 +52,7 @@ export default defineConfig({
   },
   vite: {
     ssr: { noExternal: ['route-snapper'] },
-    optimizeDeps: {
-      exclude: ['route-snapper'],
-    },
+    optimizeDeps: { exclude: ['route-snapper'] },
     plugins: [
       // See keystatic/scripts/README.md
       watchAndRun([

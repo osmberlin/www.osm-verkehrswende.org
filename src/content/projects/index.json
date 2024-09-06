@@ -48,7 +48,7 @@
         "name": "Verkehrszeichen",
         "slug": "traffic-signs"
       },
-      "enabled": false,
+      "enabled": true,
       "header": "ProjectHeader",
       "menus": [
         {
@@ -56,6 +56,15 @@
             {
               "label": "Über das Projekt",
               "href": "/traffic-signs/"
+            }
+          ]
+        },
+        {
+          "label": "Eintragen",
+          "items": [
+            {
+              "label": "Werkzeug",
+              "href": "https://trafficsigns.osm-verkehrswende.org/"
             }
           ]
         }

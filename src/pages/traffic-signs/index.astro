@@ -1,7 +1,10 @@
 ---
+import { LinkExternal } from '@components/Link'
 import ProjectHeadline from '@components/text/ProjectHeadline.astro'
 import ProseSection from '@components/text/ProseSection.astro'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
+import svgBmbf from './images/prototype-fund/logo-bmbf.svg'
+import svgPrototypeFund from './images/prototype-fund/logo-prototype-fund.svg'
 ---
 
 <LayoutArticle title="OpenStreetMap Verkehrszeichen Werkzeuge">
@@ -20,5 +23,29 @@ import LayoutArticle from '@layouts/LayoutArticle.astro'
     <h2 id="verkehrswende-osm">H2</h2>
 
     <p>Foo</p>
+  </ProseSection>
+
+  <ProseSection id="prototype-fund">
+    <h2 class="mb-3">Förderung Prototype Fund</h2>
+
+    <p>
+      Im Zeitraum September 2024 bis Februar 2025 wird dieses Projekt durch den Prototype Fund
+      (Runde 16) des Bundesministeriums für Bildung und Forschung (BMBF) gefördert.
+      <LinkExternal href="https://prototypefund.de/project/verkehrszeichen-in-osm/">
+        Mehr erfahren…
+      </LinkExternal>
+    </p>
+    <div class="grid grid-cols-3 items-start justify-start gap-3">
+      <img src={svgPrototypeFund.src} class="m-0" alt="Logo Prototype Fund" />
+      <img src={svgBmbf.src} class="m-0" alt="Logo Bundesministerium für Bildung und Forschung" />
+    </div>
+  </ProseSection>
+
+  <ProseSection id="contact">
+    <h2 class="mb-3">Kontakt</h2>
+
+    <p>
+      <a href="/contact">Meetups, Github, Telegram, …</a>
+    </p>
   </ProseSection>
 </LayoutArticle>

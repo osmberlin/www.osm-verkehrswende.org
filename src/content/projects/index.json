@@ -37,7 +37,7 @@
         "description": "Aktuelle und leicht aktualisierbare Daten zu Parkraum aus OpenStreetMap",
         "imagePath": {
           "discriminant": true,
-          "value": "public/social-sharing.png"
+          "value": "/social-sharing.png"
         },
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"

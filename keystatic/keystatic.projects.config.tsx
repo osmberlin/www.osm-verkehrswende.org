@@ -81,7 +81,7 @@ export const keystaticProjectsConfig = singleton({
             label: 'Menu Group',
             description: 'First level of menu item. Can have a label but dont havte to.',
             itemLabel: (props) =>
-              `${props.fields.label.value} (${props.fields.items.elements.map((i) => `"${i.fields.label}"`).join(', ')})`,
+              `${props.fields.label.value ? `${props.fields.label.value}:` : ''} ${props.fields.items.elements.map((i) => `"${i.fields.label.value}"`).join(', ')}`,
           },
         ),
         menuNews: fields.checkbox({ label: 'Show News in Menu', defaultValue: false }),

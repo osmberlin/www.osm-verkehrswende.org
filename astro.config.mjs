@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx'
+import netlify from '@astrojs/netlify'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
@@ -30,7 +31,7 @@ export default defineConfig({
   // Using static makes sure features like Astros redirecting work as expected.
   // Docs https://docs.astro.build/en/basics/rendering-modes/
   output: ASTRO_OUTPUT_MODE,
-  // adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
+  adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
   integrations: [
     tailwind({
       // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#applybasestyles

@@ -7,7 +7,7 @@
     "start": "npm run dev",
     "build": "astro build",
     "build:local": "ASTRO_OUTPUT_MODE=static astro build",
-    "preview": "astro preview",
+    "preview:local": "ASTRO_OUTPUT_MODE=static astro preview",
     "astro": "astro",
     "extract-project-keys": "bun run keystatic/scripts/extractProjectKeys.ts && prettier 'keystatic/extractedProjectKeys.ts' --write",
     "generate-types": "astro sync --verbose && cat ./.astro/astro/content.d.ts",

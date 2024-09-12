@@ -89,7 +89,7 @@
       "meta": {
         "title": "Cycling Quality Index",
         "description": "Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes",
-        "image": "/src/content/projects/projects/3/meta/image.png",
+        "image": "/src/content/projects/projects/2/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -125,10 +125,7 @@
       "meta": {
         "title": "Verkehrszeichen in OpenStreetMap",
         "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
+        "image": "/src/content/projects/projects/3/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }

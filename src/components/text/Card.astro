@@ -1,16 +1,18 @@
 ---
+import ArrowTopRightOnSquare from 'astro-heroicons/outline/ArrowTopRightOnSquare.astro'
+import { Image } from 'astro:assets'
 import { twJoin } from 'tailwind-merge'
 
-type Props = {
+export type CardProps = {
   href: string
   external?: boolean
   text?: string
   alt?: string | undefined | null
-  imageSrc?: string | undefined
+  image?: ImageMetadata | undefined
   variant: 'iconGrid' | 'iconImageGrid'
 }
 
-const { href, external, text, alt, imageSrc, variant } = Astro.props
+const { href, external, text, alt, image, variant } = Astro.props
 ---
 
 <a
@@ -20,10 +22,13 @@ const { href, external, text, alt, imageSrc, variant } = Astro.props
   target={external ? '_blank' : undefined}
 >
   {
-    imageSrc ? (
-      <img
-        src={imageSrc}
+    image ? (
+      <Image
+        src={image}
+        height={160}
+        densities={[1.5, 2]}
         class="m-0 max-h-40 w-full overflow-clip rounded-t border border-gray-100 object-cover"
+        alt=""
       />
     ) : (
       <div
@@ -38,31 +43,6 @@ const { href, external, text, alt, imageSrc, variant } = Astro.props
   }
   <h2 class="justify-left not-prose mb-3 mt-1 flex items-center gap-1 py-0">
     {text ? text : 'Mehr erfahren…'}
-    {
-      external ? (
-        <>
-          {/* arrow-top-right-on-square */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="size-5"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Z"
-              clip-rule="evenodd"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M6.194 12.753a.75.75 0 0 0 1.06.053L16.5 4.44v2.81a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0 0 1.5h2.553l-9.056 8.194a.75.75 0 0 0-.053 1.06Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </>
-      ) : (
-        ''
-      )
-    }
+    {external ? <ArrowTopRightOnSquare class="size-5" /> : ''}
   </h2>
 </a>

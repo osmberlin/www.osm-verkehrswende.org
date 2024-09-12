@@ -9,29 +9,30 @@ import { projectsSelect } from './utils/projectsSelect'
 
 export const astroPostsDefinition = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    project: z.enum(extractedProjectKeys),
-    pubDate: z
-      .string()
-      .or(z.date())
-      .transform((val) => new Date(val)),
-    updatedDate: z
-      .string()
-      .or(z.date())
-      .transform((val) => new Date(val))
-      .optional(), // Note: implemented but unused ATM
-    author: z.string(),
-    inMenu: z.boolean(),
-    menuTitle: z.string(),
-    menuHighlight: z.string().optional(), // TODO Do we still need this?
-    canonicalUrl: z.string().url().optional(),
-    language: z.enum(languages).optional(),
-    imagePath: z.string().optional(),
-    imageAlt: z.string().optional(),
-    showToc: z.boolean().optional(), // TODO Do we need this?
-    noindex: z.boolean().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      project: z.enum(extractedProjectKeys),
+      pubDate: z
+        .string()
+        .or(z.date())
+        .transform((val) => new Date(val)),
+      updatedDate: z
+        .string()
+        .or(z.date())
+        .transform((val) => new Date(val))
+        .optional(), // Note: implemented but unused ATM
+      author: z.string(),
+      inMenu: z.boolean(),
+      menuTitle: z.string(),
+      menuHighlight: z.string().optional(), // TODO Do we still need this?
+      canonicalUrl: z.string().url().optional(),
+      language: z.enum(languages).optional(),
+      image: image().nullish(),
+      imageAlt: z.string().optional(),
+      showToc: z.boolean().optional(), // TODO Do we need this?
+      noindex: z.boolean().optional(),
+    }),
 })
 
 export const keystaticPostsConfig = collection({
@@ -66,7 +67,7 @@ export const keystaticPostsConfig = collection({
       label: 'Content',
       components: mdxComponentsKeystatic,
     }),
-    imagePath: fields.image({
+    image: fields.image({
       label: 'Social Sharing Image Path',
       description: 'Bild bitte im Format 1200x630px hochladen.',
     }),

@@ -13,10 +13,7 @@
       "meta": {
         "title": "OpenStreetMap Verkehrswende",
         "description": "OSM kann die Verkehrswende begleiten und beschleunigen mit Tagging, Tools und Analysen.",
-        "imagePath": {
-          "discriminant": false,
-          "value": "projects/0/meta/imagePath/value.png"
-        },
+        "image": "/src/content/projects/projects/0/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -35,11 +32,8 @@
       "meta": {
         "title": "Parkraum Daten aus OpenStreetMap",
         "description": "Aktuelle und leicht aktualisierbare Daten zu Parkraum aus OpenStreetMap",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
-        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "image": "/src/content/projects/projects/1/meta/image.png",
+        "imageAlt": "Parkraumdaten in OpenStreetMap",
         "language": "de"
       }
     },
@@ -95,10 +89,7 @@
       "meta": {
         "title": "Cycling Quality Index",
         "description": "Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
+        "image": "/src/content/projects/projects/3/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -172,10 +163,7 @@
       "meta": {
         "title": "Fahrradstellplätze in OpenStreetMap",
         "description": "Datenabgleich und Statisitik zu Fahradstellplätzen in OpenStreetMap",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
+        "image": "/src/content/projects/projects/4/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -202,10 +190,7 @@
       "meta": {
         "title": "Crowdmap-Experiment zur Prüfung von Gebäude Daten in Berlin",
         "description": "Ein Projekt um die Datenqualität von Geäbuden in OSM für Berlin zu prüfen und zu verbessern.",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing-crowdmap.png"
-        },
+        "image": "/src/content/projects/projects/5/meta/image.png",
         "imageAlt": "Luftbild mit OSM Gebäudedaten und Angaben zur Validierung der Gebäude.",
         "language": "de"
       }
@@ -236,10 +221,7 @@
       "meta": {
         "title": "Mapillary Missing Streets (ALPHA)",
         "description": "An easy way to find out which streets in Berlin require fresh 360° images",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
+        "image": "/src/content/projects/projects/6/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -266,10 +248,6 @@
       "meta": {
         "title": "Bänke in OpenStreetMap",
         "description": "Verzeichnis von Parkbänden und Sitzbänken aus OpenStreetMap",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -286,10 +264,6 @@
       "additionalFooterLinks": [],
       "meta": {
         "title": "OpenStreetMap Verkehrswende",
-        "imagePath": {
-          "discriminant": true,
-          "value": "/social-sharing.png"
-        },
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }

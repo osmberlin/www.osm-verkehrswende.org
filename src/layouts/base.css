@@ -17,7 +17,7 @@
   }
 
   .notice {
-    @apply mb-3 p-4;
+    @apply p-4;
     @apply bg-gray-200;
     @apply rounded;
     @apply leading-normal;

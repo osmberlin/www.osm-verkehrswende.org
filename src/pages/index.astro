@@ -2,13 +2,14 @@
 import Card from '@components/text/Card.astro'
 import CardWrapper from '@components/text/CardWrapper.astro'
 import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
-import BookOpen from 'astro-heroicons/outline/BookOpen.astro'
-import Cube from 'astro-heroicons/outline/Cube.astro'
-import CalendarDays from 'astro-heroicons/solid/CalendarDays.astro'
-import DocumentPlus from 'astro-heroicons/outline/DocumentPlus.astro'
-import QueueList from 'astro-heroicons/outline/QueueList.astro'
 import { getProjects } from '@layouts/utils/getProjects'
 import { getRootUrl } from '@layouts/utils/getRootUrl'
+import BookOpen from 'astro-heroicons/outline/BookOpen.astro'
+import Cube from 'astro-heroicons/outline/Cube.astro'
+import DocumentPlus from 'astro-heroicons/outline/DocumentPlus.astro'
+import QueueList from 'astro-heroicons/outline/QueueList.astro'
+import CalendarDays from 'astro-heroicons/solid/CalendarDays.astro'
+import pngSocialSharingFallback from '../../public/social-sharing.png'
 
 const projects = await getProjects()
 const showcaseProjects = projects
@@ -26,7 +27,7 @@ const showcaseProjects = projects
     <p class="-mt-2 text-3xl font-bold text-sky-700">Tagging, Tools und Analysen</p>
   </header>
 
-  <section class="notice prose-sm my-12 mb-10 gap-5 bg-emerald-100 sm:flex">
+  <section class="notice prose-sm mt-16 gap-5 bg-emerald-100 sm:flex">
     <iframe
       class="aspect-video w-full overflow-hidden rounded"
       src="https://media.ccc.de/v/fossgis2022-14174-mit-osm-die-verkehrswende-begleiten-tagging-tools-und-analysen/oembed"
@@ -44,7 +45,7 @@ const showcaseProjects = projects
     </div>
   </section>
 
-  <CardWrapper classes="mt-10">
+  <CardWrapper sectionClasses="mt-16">
     <Card
       external
       href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup"
@@ -65,7 +66,7 @@ const showcaseProjects = projects
     </Card>
   </CardWrapper>
 
-  <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mb-0">
+  <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mt-16">
     {
       showcaseProjects.map((project) => {
         return (
@@ -73,7 +74,7 @@ const showcaseProjects = projects
             href={getRootUrl(project)}
             text={project.name.name}
             alt={project.meta?.description}
-            imageSrc={project.meta?.imagePath.value}
+            image={project.meta.image || pngSocialSharingFallback}
             variant="iconImageGrid"
           >
             <Cube class="size-14" />

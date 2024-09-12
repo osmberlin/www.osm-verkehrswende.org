@@ -7,37 +7,38 @@ export type TProjectConfig = CollectionEntry<'projects'>['data']['projects'][num
 
 export const astroProjectsDefinition = defineCollection({
   type: 'data',
-  schema: z.object({
-    projects: z.array(
-      z.object({
-        enabled: z.boolean(),
-        name: z.object({ name: z.string(), slug: z.string() }),
-        externalProjektPage: z.string().optional(),
-        header: z.enum(['ProjectHeader', 'AboutHeader']),
-        menus: z
-          .array(
-            // Menu Group
-            z.object({
-              label: z.string().nullish(),
-              // Menu Items
-              items: z.array(z.object({ href: z.string(), label: z.string() })),
-            }),
-          )
-          .nullish(),
-        menuNews: z.boolean(),
-        additionalFooterLinks: z
-          .array(z.object({ href: z.string(), label: z.string() }))
-          .optional(),
-        meta: z.object({
-          title: z.string(),
-          description: z.string().nullish(),
-          imagePath: z.object({ value: z.string() }),
-          imageAlt: z.string().nullish(),
-          language: z.enum(languages),
+  schema: ({ image }) =>
+    z.object({
+      projects: z.array(
+        z.object({
+          enabled: z.boolean(),
+          name: z.object({ name: z.string(), slug: z.string() }),
+          externalProjektPage: z.string().optional(),
+          header: z.enum(['ProjectHeader', 'AboutHeader']),
+          menus: z
+            .array(
+              // Menu Group
+              z.object({
+                label: z.string().nullish(),
+                // Menu Items
+                items: z.array(z.object({ href: z.string(), label: z.string() })),
+              }),
+            )
+            .nullish(),
+          menuNews: z.boolean(),
+          additionalFooterLinks: z
+            .array(z.object({ href: z.string(), label: z.string() }))
+            .optional(),
+          meta: z.object({
+            title: z.string(),
+            description: z.string().nullish(),
+            image: image().nullish(),
+            imageAlt: z.string().nullish(),
+            language: z.enum(languages),
+          }),
         }),
-      }),
-    ),
-  }),
+      ),
+    }),
 })
 
 export const keystaticProjectsConfig = singleton({
@@ -101,20 +102,11 @@ export const keystaticProjectsConfig = singleton({
             label: 'Social Sharing Description',
             validation: { isRequired: false },
           }),
-          // Docs https://keystatic.com/docs/fields/conditional
-          imagePath: fields.conditional(
-            fields.checkbox({ label: 'Fallback Social Sharing Image', defaultValue: true }),
-            {
-              // Docs https://keystatic.com/docs/fields/path-reference
-              true: fields.pathReference({
-                label: 'Fallback Social Sharing Image Path',
-                pattern: 'public/**/*',
-              }),
-              false: fields.image({
-                label: 'Social Sharing Image',
-              }),
-            },
-          ),
+          image: fields.image({
+            label: 'Social Sharing Image',
+            directory: 'src/content/projects',
+            publicPath: '/src/content/projects',
+          }),
           imageAlt: fields.text({
             label: 'Social Sharing Image Alt',
             validation: { isRequired: false },

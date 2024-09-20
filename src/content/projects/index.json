@@ -117,7 +117,12 @@
         }
       ],
       "menuNews": true,
-      "additionalFooterLinks": [],
+      "additionalFooterLinks": [
+        {
+          "label": "Github: Code für das Werkzeug",
+          "href": "https://github.com/osmberlin/osm-traffic-sign-tool"
+        }
+      ],
       "meta": {
         "title": "Verkehrszeichen in OpenStreetMap",
         "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",

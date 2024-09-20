@@ -12,6 +12,7 @@ export const astroPostsDefinition = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      menuTitle: z.string(),
       project: z.enum(extractedProjectKeys),
       pubDate: z
         .string()
@@ -24,14 +25,13 @@ export const astroPostsDefinition = defineCollection({
         .optional(), // Note: implemented but unused ATM
       author: z.string(),
       inMenu: z.boolean(),
-      menuTitle: z.string(),
-      menuHighlight: z.string().optional(), // TODO Do we still need this?
-      canonicalUrl: z.string().url().optional(),
+      // TODO DELETE in Templates – menuHighlight: z.string().optional(), // TODO Do we still need this?
+      noindex: z.boolean().optional(),
       language: z.enum(languages).optional(),
       image: image().nullish(),
       imageAlt: z.string().optional(),
       showToc: z.boolean().optional(), // TODO Do we need this?
-      noindex: z.boolean().optional(),
+      canonicalUrl: z.string().url().optional(),
     }),
 })
 
@@ -73,6 +73,6 @@ export const keystaticPostsConfig = collection({
     }),
     imageAlt: fields.text({ label: 'Social Sharin Image Alt Text' }),
     showToc: fields.checkbox({ label: 'Show TOC', defaultValue: false }),
-    canonical_url: fields.url({ label: 'Canonical URL', validation: { isRequired: false } }),
+    canonicalUrl: fields.url({ label: 'Canonical URL', validation: { isRequired: false } }),
   },
 })

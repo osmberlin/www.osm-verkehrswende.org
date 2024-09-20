@@ -80,10 +80,6 @@
         {
           "label": "Github: Code für den Index",
           "href": "https://github.com/SupaplexOSM/OSM-Cycling-Quality-Index"
-        },
-        {
-          "label": "Github: Code für die Website",
-          "href": "https://github.com/osmberlin/www.osm-verkehrswende.org"
         }
       ],
       "meta": {

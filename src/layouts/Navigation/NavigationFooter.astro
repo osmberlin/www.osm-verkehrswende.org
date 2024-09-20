@@ -28,6 +28,14 @@ const { menuHighlight, additionalLinks } = Astro.props
   }
   <li>
     <a
+      class="underline hover:text-gray-500"
+      href="https://github.com/osmberlin/www.osm-verkehrswende.org"
+    >
+      Github: Code für die Website
+    </a>
+  </li>
+  <li>
+    <a
       class={(twJoin(menuHighlight === 'contact' ? 'text-bold text-black' : 'hover:text-gray-500'),
       'underline')}
       href="/contact"

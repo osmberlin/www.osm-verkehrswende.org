@@ -1,0 +1,20 @@
+{
+  "defaultBasemap": -1,
+  "defaultBasemapId": "",
+  "description": "{task_markdown}\\n\\n\\n\\n. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ",
+  "difficulty": 2,
+  "highPriorityRule": "{}",
+  "lowPriorityRule": "{}",
+  "mediumPriorityRule": "{}",
+  "overpassTargetType": null,
+  "parent": 57664,
+  "tags": "highway",
+  "presets": [],
+  "taskStyles": [],
+  "name": "Fahrradstraßen ohne Verkehrszeichen",
+  "remoteGeoJson": "https://radverkehrsatlas.de/api/maproulette/missing_traffic_sign_244?ids=51477",
+  "instruction": "Diese Kampagne enthält Wege, die [im Radverkehrsatlas](https://radverkehrsatlas.de/) als Fahrradstraße kategorisiert wurden, jedoch fehlt das zugehörige Verkehrszeichen.",
+  "checkinComment": "Verkehrszeichen ergänzt #osm_traffic_signs_project #missing_traffic_sign_244 #maproulette",
+  "checkinSource": "osm_traffic_signs_project",
+  "dataOriginDate": "2024-09-30T22:00:00.000Z"
+}

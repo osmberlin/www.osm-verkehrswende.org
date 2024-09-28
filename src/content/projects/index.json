@@ -114,6 +114,15 @@
               "href": "https://trafficsigns.osm-verkehrswende.org/"
             }
           ]
+        },
+        {
+          "label": "Kampagnen",
+          "items": [
+            {
+              "label": "Übersicht",
+              "href": "/traffic-signs/campaigns"
+            }
+          ]
         }
       ],
       "menuNews": true,

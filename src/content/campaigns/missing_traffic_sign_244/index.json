@@ -1,0 +1,18 @@
+{
+  "name": "Fahrradstraßen ohne Verkehrszeichen",
+  "menuTitle": "Fahrradstraßen ohne Verkehrszeichen",
+  "project": "traffic-signs",
+  "pubDate": "2024-09-20T15:00",
+  "author": "Tobias Jordans @tordans",
+  "inMenu": true,
+  "language": "de",
+  "content": "Diese Kampagne enthält Wege, die [im Radverkehrsatlas](https://radverkehrsatlas.de/) als Fahrradstraße kategorisiert wurden, jedoch fehlt das zugehörige Verkehrszeichen.",
+  "maprouletteChallenge": {
+    "id": 49357,
+    "name": "Fahrradstraßen ohne Verkehrszeichen",
+    "enabled": true,
+    "remoteGeoJson": "https://radverkehrsatlas.de/api/maproulette/missing_traffic_sign_244?ids=51477",
+    "checkinComment": "Fahrradstraßen ohne Verkehrszeichen #missing_traffic_sign_244 #traffic_signs #maproulette",
+    "checkinSource": "osm_traffic_signs_project"
+  }
+}

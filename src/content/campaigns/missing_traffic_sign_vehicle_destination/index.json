@@ -1,0 +1,18 @@
+{
+  "name": "Fahrradstraßen ohne Zusatzzeichen »Anlieger frei«",
+  "menuTitle": "Fahrradstraßen ohne Zusatzzeichen",
+  "project": "traffic-signs",
+  "pubDate": "2024-10-01T15:00",
+  "author": "Tobias Jordans @tordans",
+  "inMenu": true,
+  "language": "de",
+  "content": "Diese Kampagne enthält Wege, die [im Radverkehrsatlas](https://radverkehrsatlas.de/) als Fahrradstraße mit 'Anlieger frei'-Freigabe für Kfz kategorisiert wurden, jedoch fehlt das zugehörige Zusatzzeichen.",
+  "maprouletteChallenge": {
+    "name": "Fahrradstraßen ohne Zusatzzeichen »Anlieger frei«",
+    "enabled": true,
+    "remoteGeoJson": "https://radverkehrsatlas.de/api/maproulette/missing_traffic_sign_vehicle_destination?ids=51477",
+    "checkinComment": "Fahrradstraßen ohne Zusatzzeichen #missing_traffic_sign_vehicle_destination #traffic_signs #maproulette",
+    "checkinSource": "osm_traffic_signs_project",
+    "id": 49363
+  }
+}

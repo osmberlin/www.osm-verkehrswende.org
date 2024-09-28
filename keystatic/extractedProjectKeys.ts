@@ -4,8 +4,8 @@
 export const extractedProjectKeys = [
   'root',
   'parking',
-  'traffic-signs',
   'cqi',
+  'traffic-signs',
   'bicycle-parking',
   'crowdmap',
   'mapillary',

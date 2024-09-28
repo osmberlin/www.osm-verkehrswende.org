@@ -41,6 +41,7 @@ export const keystaticPostsConfig = collection({
   path: 'src/content/posts/*/',
   format: { contentField: 'content' },
   entryLayout: 'content',
+  columns: ['title', 'pubDate'],
   schema: {
     title: fields.text({ label: 'Title', validation: { isRequired: true } }),
     menuTitle: fields.slug({ name: { label: 'Menu title', validation: { isRequired: true } } }),
@@ -49,7 +50,7 @@ export const keystaticPostsConfig = collection({
       options: projectsSelect,
       defaultValue: projectsSelect.at(0)!.value,
     }),
-    pubDate: fields.datetime({ label: 'Publish Date/Time' }),
+    pubDate: fields.datetime({ label: 'Publish Date/Time', validation: { isRequired: true } }),
     updatedDatae: fields.datetime({ label: 'Date/Time of last relevant update' }),
     author: fields.select({
       label: 'Author',

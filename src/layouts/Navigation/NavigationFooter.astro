@@ -3,11 +3,12 @@ import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
 import { twJoin } from 'tailwind-merge'
 
 export interface Props {
-  menuHighlight: string | undefined
   additionalLinks: TProjectConfig['additionalFooterLinks']
 }
 
-const { menuHighlight, additionalLinks } = Astro.props
+const { additionalLinks } = Astro.props
+
+const { pathname: currentPathname } = Astro.url
 ---
 
 <ul class="prose prose-sm mb-4 ml-3 block space-y-3 leading-snug">
@@ -15,10 +16,11 @@ const { menuHighlight, additionalLinks } = Astro.props
     additionalLinks?.map((link) => (
       <li>
         <a
-          class={
-            (twJoin(menuHighlight === link.href ? 'text-bold text-black' : 'hover:text-gray-500'),
-            'underline')
-          }
+          class={twJoin(
+            currentPathname === `/${link.href}`
+              ? 'font-bold text-black'
+              : 'underline hover:text-gray-500',
+          )}
           href={link.href}
         >
           {link.label}
@@ -36,8 +38,11 @@ const { menuHighlight, additionalLinks } = Astro.props
   </li>
   <li>
     <a
-      class={(twJoin(menuHighlight === 'contact' ? 'text-bold text-black' : 'hover:text-gray-500'),
-      'underline')}
+      class={twJoin(
+        currentPathname === '/contact'
+          ? 'font-bold text-black no-underline'
+          : 'underline hover:text-gray-500',
+      )}
       href="/contact"
       lang="de"
     >

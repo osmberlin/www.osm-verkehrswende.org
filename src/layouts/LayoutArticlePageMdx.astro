@@ -6,7 +6,6 @@ import { proseBase, proseHeadings } from './baseStyles'
 type Props = {
   frontmatter: {
     title: string
-    menuHighlight?: string | undefined
     noindex?: boolean | undefined
     language?: 'en' | 'de' | undefined
   }
@@ -14,11 +13,11 @@ type Props = {
 export type LayoutArticleProps = Props
 
 const {
-  frontmatter: { title, menuHighlight, noindex, language },
+  frontmatter: { title, noindex, language },
 } = Astro.props
 ---
 
-<LayoutArticle title={title} menuHighlight={menuHighlight} noindex={noindex}>
+<LayoutArticle title={title} noindex={noindex}>
   <article class={twJoin(proseBase, 'max-w-prose', proseHeadings)} lang={language}>
     <slot />
   </article>

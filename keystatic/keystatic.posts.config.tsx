@@ -25,7 +25,6 @@ export const astroPostsDefinition = defineCollection({
         .optional(), // Note: implemented but unused ATM
       author: z.string(),
       inMenu: z.boolean(),
-      // TODO DELETE in Templates – menuHighlight: z.string().optional(), // TODO Do we still need this?
       noindex: z.boolean().optional(),
       language: z.enum(languages).optional(),
       image: image().nullish(),

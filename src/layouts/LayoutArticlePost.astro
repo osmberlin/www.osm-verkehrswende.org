@@ -6,10 +6,10 @@ import { proseBase, proseHeadings } from './baseStyles'
 
 export type Props = CollectionEntry<'posts'>['data']
 
-const { title, menuHighlight, noindex, language, pubDate, updatedDate, author } = Astro.props
+const { title, noindex, language, pubDate, updatedDate, author } = Astro.props
 ---
 
-<LayoutArticle title={title} menuHighlight={menuHighlight} noindex={noindex}>
+<LayoutArticle title={title} noindex={noindex}>
   <!-- {% if page.showToc %}prose-h1:mt-10 {% endif %} -->
 
   <article

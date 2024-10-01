@@ -11,11 +11,10 @@ import { projectKeyFromUrl } from '@layouts/utils/projectKeyFromUrl'
 
 interface Props {
   project: TProjectConfig
-  menuHighlight?: string | undefined
 }
 
 const isDev = import.meta.env.DEV
-const { project, menuHighlight } = Astro.props
+const { project } = Astro.props
 ---
 
 {project.name.slug === 'root' && <PageAboutMenu />}
@@ -50,4 +49,4 @@ const { project, menuHighlight } = Astro.props
   )
 }
 
-<NavigationFooter menuHighlight={menuHighlight} additionalLinks={project.additionalFooterLinks} />
+<NavigationFooter additionalLinks={project.additionalFooterLinks} />

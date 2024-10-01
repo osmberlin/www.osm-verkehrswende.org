@@ -9,10 +9,9 @@ export interface Props {
   /** @desc switches the navigation to scroll in itself ("app") vs. with the "article" */
   layoutType: 'article' | 'app'
   project: TProjectConfig
-  menuHighlight?: string | undefined
 }
 
-const { layoutType, project, menuHighlight } = Astro.props
+const { layoutType, project } = Astro.props
 ---
 
 <nav
@@ -27,10 +26,10 @@ const { layoutType, project, menuHighlight } = Astro.props
   <ProjectToHeader project={project} />
 
   <NavigationMobile client:load>
-    <ProjectToMenu project={project} menuHighlight={menuHighlight} />
+    <ProjectToMenu project={project} />
   </NavigationMobile>
 
   <div class="z-[2000] hidden transition-all duration-150 lg:block">
-    <ProjectToMenu project={project} menuHighlight={menuHighlight} />
+    <ProjectToMenu project={project} />
   </div>
 </nav>

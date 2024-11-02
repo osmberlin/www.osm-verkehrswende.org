@@ -1,3 +1,4 @@
+import { maprouletteChallengeUrl } from '@components/campaigns/maprouletteChallengeUrl'
 import { z } from 'astro/zod'
 import { Glob } from 'bun'
 import { startOfDay } from 'date-fns'
@@ -89,6 +90,7 @@ async function main() {
   const campaignPaths = glob.scan(campaignsFolder)
 
   for await (const campaignPath of campaignPaths) {
+    console.log('  HANDLE', campaignPath)
     const [slug] = campaignPath.split('/')
     const filePath = `${campaignsFolder}/${campaignPath}`
     const json = await Bun.file(filePath).json()
@@ -102,13 +104,16 @@ async function main() {
         const { id } = z.object({ id: z.number() }).parse(challenge)
         json.maprouletteChallenge.id = id
         await Bun.write(filePath, JSON.stringify(json, undefined, 2))
+        console.log('    CREATED campaing', maprouletteChallengeUrl(id))
         break
       case 'UPDATE':
         const updateData = dataUpdateChallenge({ slug, ...json })
         await updateChallenge(updateData)
+        console.log('    UPDATED campaing', maprouletteChallengeUrl(updateData.id))
         break
     }
   }
 }
 
+console.log('STARTING maproulette/process')
 main()

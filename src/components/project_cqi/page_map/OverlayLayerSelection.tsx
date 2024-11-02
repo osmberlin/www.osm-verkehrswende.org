@@ -1,10 +1,5 @@
 import { $searchParams } from '@components/BaseMap/store'
-import {
-  RadioGroup,
-  RadioGroupDescription,
-  RadioGroupLabel,
-  RadioGroupOption,
-} from '@headlessui/react'
+import { Description, Label, Radio, RadioGroup } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
@@ -36,10 +31,13 @@ export const OverlayLayerSelection = () => {
   }
 
   return (
-    <RadioGroup value={localSelected} onChange={handleChange}>
-      <RadioGroupLabel className="sr-only">Filterung der Karte ändern</RadioGroupLabel>
+    <RadioGroup
+      value={localSelected}
+      onChange={handleChange}
+      aria-label="Filterung der Karte ändern"
+    >
       {layerSelection.map(({ key, name, description }) => (
-        <RadioGroupOption
+        <Radio
           key={key}
           value={key}
           className={({ checked }) =>
@@ -65,7 +63,7 @@ export const OverlayLayerSelection = () => {
                 <span className="h-1.5 w-1.5 rounded-full bg-white" />
               </span>
               <span className="ml-3 flex flex-col">
-                <RadioGroupLabel
+                <Label
                   as="div"
                   className={twJoin(
                     checked ? 'font-medium text-emerald-900' : 'font-normal text-gray-900',
@@ -73,10 +71,10 @@ export const OverlayLayerSelection = () => {
                   )}
                 >
                   {name}
-                </RadioGroupLabel>
+                </Label>
 
                 {checked && (
-                  <RadioGroupDescription
+                  <Description
                     as="span"
                     className={twJoin(
                       checked ? 'text-emerald-700' : 'text-gray-500',
@@ -84,12 +82,12 @@ export const OverlayLayerSelection = () => {
                     )}
                   >
                     {description}
-                  </RadioGroupDescription>
+                  </Description>
                 )}
               </span>
             </>
           )}
-        </RadioGroupOption>
+        </Radio>
       ))}
     </RadioGroup>
   )

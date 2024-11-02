@@ -18,7 +18,7 @@ function dataCreateChallenge({ slug, ...astroCampaignData }: { slug: string } & 
     infoLink: `https://www.osm-verkehrswende.org/traffic-signs/campaigns/${slug}`,
     remoteGeoJson: astroCampaignData.maprouletteChallenge.remoteGeoJson,
     enabled: astroCampaignData.maprouletteChallenge.enabled,
-    instruction: astroCampaignData.content,
+    description: astroCampaignData.content,
     checkinComment: astroCampaignData.maprouletteChallenge.checkinComment,
     checkinSource: astroCampaignData.maprouletteChallenge.checkinSource,
     dataOriginDate: startOfDay(new Date()).toISOString(), // Atlas data is always fresh

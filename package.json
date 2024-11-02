@@ -30,7 +30,7 @@
     "bleach:info": "echo \"\u001b[43m\u001b[30m(!) Also delete the browser cache, see https://github.com/vitejs/vite/discussions/17738#discussioncomment-10158746\u001b[0m\"",
     "bleach:all": "rm -rf node_modules/ && npm run bleach",
     "bleach:full": "rm package-lock.json && npm run bleach:all",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",

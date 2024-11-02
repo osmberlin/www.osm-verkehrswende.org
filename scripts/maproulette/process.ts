@@ -25,6 +25,7 @@ function dataCreateChallenge({ slug, ...astroCampaignData }: { slug: string } & 
   }
   return CreateMapRouletteChallengeSchema.parse(challengeData)
 }
+
 function dataUpdateChallenge({ slug, ...astroCampaignData }: { slug: string } & AstroCampaignType) {
   invariant(
     astroCampaignData.maprouletteChallenge.id,

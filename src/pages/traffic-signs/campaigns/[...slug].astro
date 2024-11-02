@@ -1,4 +1,5 @@
 ---
+import { maprouletteChallengeUrl } from '@components/campaigns/maprouletteChallengeUrl'
 import MegaButton from '@components/Link/MegaButton.astro'
 import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
@@ -19,18 +20,18 @@ const page = Astro.props
 // TODO, see https://github.com/Thinkmill/keystatic/discussions/1318
 // const { Content } = await page.render()
 
-const maprouletteChallengeUrl = `https://maproulette.org/challenge/${page.data.maprouletteChallenge.id}`
+const url = maprouletteChallengeUrl(page.data.maprouletteChallenge.id)
 ---
 
 <LayoutArticlePost
   title={page.data.name}
   {...page.data}
-  noindex={!maprouletteChallengeUrl || !page.data.maprouletteChallenge.enabled}
+  noindex={!url || !page.data.maprouletteChallenge.enabled}
 >
   <MegaButton
-    href={maprouletteChallengeUrl || '#wip'}
+    href={url || '#wip'}
     iconKey="maproulette"
-    label={maprouletteChallengeUrl ? 'Mitmachen' : 'MapRoulette Challenge noch nicht verfügbar'}
+    label={url ? 'Mitmachen' : 'MapRoulette Challenge noch nicht verfügbar'}
     subline="Zur MapRoulette Challenge"
   />
 

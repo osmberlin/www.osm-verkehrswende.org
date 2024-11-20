@@ -1,4 +1,5 @@
 import { config } from '@keystatic/core'
+import { KEYSTATIC_STORAGE_KIND } from 'astro:env/client'
 import { keystaticCampaignsConfig } from 'keystatic/keystatic.campaigns.config'
 import { keystaticPostsConfig } from 'keystatic/keystatic.posts.config'
 import { keystaticProjectsConfig } from 'keystatic/keystatic.projects.config'
@@ -6,7 +7,7 @@ import { keystaticProjectsConfig } from 'keystatic/keystatic.projects.config'
 export default config({
   storage: {
     // https://keystatic.com/docs/github-mode#setting-up-git-hub-mode
-    kind: import.meta.env.PUBLIC_ASTRO_STORAGE_KIND,
+    kind: KEYSTATIC_STORAGE_KIND,
     repo: {
       owner: 'osmberlin',
       name: 'www.osm-verkehrswende.org',

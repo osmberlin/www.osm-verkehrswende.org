@@ -1,5 +1,5 @@
 import { $searchParams } from '@components/BaseMap/store'
-import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/react'
+import { Label, Radio, RadioGroup } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { twJoin } from 'tailwind-merge'
@@ -34,9 +34,9 @@ export const OverlayFilter = () => {
 
   return (
     <RadioGroup value={localSelected} onChange={handleChange}>
-      <RadioGroupLabel className="sr-only">Filterung der Karte ändern</RadioGroupLabel>
+      <Label className="sr-only">Filterung der Karte ändern</Label>
       {buttons.map(({ key, name }, _buttonIdx) => (
-        <RadioGroupOption
+        <Radio
           key={key}
           value={key}
           className={({ checked }) =>
@@ -62,7 +62,7 @@ export const OverlayFilter = () => {
                 <span className="h-1.5 w-1.5 rounded-full bg-white" />
               </span>
               <span className="ml-3 flex flex-col">
-                <RadioGroupLabel
+                <Label
                   as="div"
                   className={twJoin(
                     checked ? 'font-medium text-emerald-900' : 'font-normal text-gray-900',
@@ -70,7 +70,7 @@ export const OverlayFilter = () => {
                   )}
                 >
                   {name}
-                </RadioGroupLabel>
+                </Label>
                 {/* <RadioGroupDescription
                       as="span"
                       className={twJoin(
@@ -83,7 +83,7 @@ export const OverlayFilter = () => {
               </span>
             </>
           )}
-        </RadioGroupOption>
+        </Radio>
       ))}
     </RadioGroup>
   )

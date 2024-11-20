@@ -23,6 +23,7 @@ jobs:
       - name: Install, build, and upload your site output
         uses: withastro/action@v2
         env:
+          KEYSTATIC_STORAGE_KIND: "local"
           ASTRO_ENV: "production"
           ASTRO_OUTPUT_MODE: "static"
           ASTRO_USE_NETLIFY_ADAPTER: "false"

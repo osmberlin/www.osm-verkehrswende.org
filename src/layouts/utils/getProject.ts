@@ -9,7 +9,14 @@ export const getProject = async (astroUrl: string) => {
   const project = projects.data.projects.find((p) => p.name.slug === projectSlugFromPath)
 
   if (!project) {
-    console.warn('WARNING: getProject did not find any project for path ', astroUrl)
+    const doNotWarnAllowlist = ['/contact/', '/posts/']
+    if (!doNotWarnAllowlist.includes(new URL(astroUrl).pathname)) {
+      console.warn(
+        'WARNING: getProject did not find any project for path ',
+        astroUrl,
+        new URL(astroUrl).pathname,
+      )
+    }
     return projects.data.projects.find((p) => p.name.slug === 'unknown')!
   }
 

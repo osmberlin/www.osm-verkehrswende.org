@@ -4,7 +4,7 @@ import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import keystatic from '@keystatic/astro'
-import { defineConfig } from 'astro/config'
+import { defineConfig, envField } from 'astro/config'
 import path from 'path'
 import remarkToc from 'remark-toc'
 import { watchAndRun } from 'vite-plugin-watch-and-run'
@@ -27,12 +27,9 @@ const { ASTRO_OUTPUT_MODE, ASTRO_USE_NETLIFY_ADAPTER } = loadEnv(
 // CONFIG:
 // https://astro.build/config
 export default defineConfig({
-  // On Netlify and during development we use `hybrid`, on Github Pages we usd `static`.
-  // Using static makes sure features like Astros redirecting work as expected.
-  // Docs https://docs.astro.build/en/basics/rendering-modes/
-  output: ASTRO_OUTPUT_MODE,
-  adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
+  site: 'https://www.osm-verkehrswende.org/',
   integrations: [
+    ASTRO_OUTPUT_MODE === 'hybrid' ? keystatic() : undefined,
     tailwind({
       // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#applybasestyles
       applyBaseStyles: false,
@@ -42,14 +39,17 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.endsWith('README/'),
     }),
-    ASTRO_OUTPUT_MODE === 'hybrid' ? keystatic() : undefined,
   ],
-  markdown: { remarkPlugins: [remarkToc] },
-  site: 'https://www.osm-verkehrswende.org/',
+  // On Netlify and during development we use `hybrid`, on Github Pages we usd `static`.
+  // Using static makes sure features like Astros redirecting work as expected.
+  // Docs https://docs.astro.build/en/basics/rendering-modes/
+  output: ASTRO_OUTPUT_MODE,
+  adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
   redirects: {
     '/mapswipe': '/crowdmap',
     '/about': '/root',
   },
+  markdown: { remarkPlugins: [remarkToc] },
   vite: {
     ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: { exclude: ['route-snapper'] },
@@ -65,5 +65,34 @@ export default defineConfig({
         },
       ]),
     ],
+  },
+  experimental: {
+    env: {
+      schema: {
+        ASTRO_OUTPUT_MODE: envField.enum({
+          values: ['static', 'hybrid', 'server'],
+          access: 'secret',
+          context: 'server',
+          optional: false,
+        }),
+        ASTRO_USE_NETLIFY_ADAPTER: envField.boolean({
+          access: 'secret',
+          context: 'server',
+          optional: false,
+        }),
+        KEYSTATIC_STORAGE_KIND: envField.enum({
+          values: ['local', 'github'],
+          access: 'public',
+          context: 'client',
+          optional: false,
+        }),
+        ASTRO_ENV: envField.enum({
+          values: ['development', 'staging', 'production'],
+          access: 'public',
+          context: 'client',
+          optional: false,
+        }),
+      },
+    },
   },
 })

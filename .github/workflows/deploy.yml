@@ -23,9 +23,9 @@ jobs:
       - name: Install, build, and upload your site output
         uses: withastro/action@v2
         env:
+          ASTRO_ENV: "production"
           ASTRO_OUTPUT_MODE: "static"
           ASTRO_USE_NETLIFY_ADAPTER: "false"
-          PUBLIC_ASTRO_STORAGE_KIND: "local"
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
         # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)

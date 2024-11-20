@@ -24,7 +24,7 @@ This project is build with [Astro](https://astro.build/), using `.astro` files w
 
 We use [Keystatic](https://keystatic.com/) to edit some of the content.
 
-- CMS-Website – can only be used by user that have permissions to this Github repo
+- [CMS-Website](https://osm-verkehrswende-keystatic.netlify.app/keystatic) (Can only be used by users that have permissions to this Github repo)
 - [Netlify-Backend for the CMS](https://app.netlify.com/sites/osm-verkehrswende-keystatic/overview) (Managed by @tordans)
 
 ### Add a new project

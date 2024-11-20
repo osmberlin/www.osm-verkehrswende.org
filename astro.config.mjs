@@ -29,7 +29,7 @@ const { ASTRO_OUTPUT_MODE, ASTRO_USE_NETLIFY_ADAPTER } = loadEnv(
 export default defineConfig({
   site: 'https://www.osm-verkehrswende.org/',
   integrations: [
-    ASTRO_OUTPUT_MODE === 'hybrid' ? keystatic() : undefined,
+    ASTRO_OUTPUT_MODE === 'static' ? undefined : keystatic(),
     tailwind({
       // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#applybasestyles
       applyBaseStyles: false,

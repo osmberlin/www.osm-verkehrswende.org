@@ -47,6 +47,10 @@ export default defineConfig({
   adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
   redirects: {
     '/mapswipe': '/crowdmap',
+    '/crowdmap': 'https://www.osm-berlin.org/crowdmap/',
+    '/crowdmap/xhain': 'https://www.osm-berlin.org/crowdmap/xhain/',
+    '/crowdmap/posts/2024-01-20-crowdmap/':
+      'https://www.osm-berlin.org//crowdmap/posts/2024-01-20-crowdmap/',
     '/about': '/root',
   },
   markdown: { remarkPlugins: [remarkToc] },

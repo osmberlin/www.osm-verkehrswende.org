@@ -181,17 +181,9 @@
         "slug": "crowdmap"
       },
       "enabled": true,
+      "externalProjektPage": "https://www.osm-berlin.org/crowdmap/",
       "header": "ProjectHeader",
-      "menus": [
-        {
-          "items": [
-            {
-              "label": "Über das Projekt",
-              "href": "/crowdmap/"
-            }
-          ]
-        }
-      ],
+      "menus": [],
       "menuNews": true,
       "additionalFooterLinks": [],
       "meta": {

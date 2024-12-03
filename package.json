@@ -81,6 +81,7 @@
     "husky": "^9.1.7",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro-organize-imports": "^0.4.11",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "vite-plugin-watch-and-run": "^1.7.1"

@@ -1,6 +1,6 @@
 ---
 import ArrowTopRightOnSquare from 'astro-heroicons/outline/ArrowTopRightOnSquare.astro'
-import { Image } from 'astro:assets'
+import { Picture } from 'astro:assets'
 import { twJoin } from 'tailwind-merge'
 
 export type CardProps = {
@@ -23,10 +23,11 @@ const { href, external, text, alt, image, variant } = Astro.props
 >
   {
     image ? (
-      <Image
+      <Picture
         src={image}
         height={160}
         densities={[1.5, 2]}
+        formats={['png', 'avif']}
         class="m-0 max-h-40 w-full overflow-clip rounded-t border border-gray-100 object-cover"
         alt=""
       />

@@ -18,7 +18,7 @@ type Props = CollectionEntry<'campaigns'>
 
 const page = Astro.props
 // TODO, see https://github.com/Thinkmill/keystatic/discussions/1318
-// const { Content } = await page.render()
+// const { Content } = await render(page)
 
 const url = maprouletteChallengeUrl(page.data.maprouletteChallenge.id)
 ---

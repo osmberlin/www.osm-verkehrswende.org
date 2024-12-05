@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
-import type { TProjectConfig } from 'keystatic/keystatic.projects.config'
+import type { TProjectConfig } from 'keystatic/projectsAstro'
 import MenuItem from './MenuItem/MenuItem.astro'
 import MenuItemHeadline from './MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from './MenuItem/MenuItemWrapper.astro'
@@ -28,7 +28,7 @@ const relevantPosts = sortedPosts
       </MenuItemHeadline>
       <MenuItemWrapper>
         {relevantPosts.map((post) => (
-          <MenuItem href={`/${project.name.slug}/posts/${post.slug}`}>
+          <MenuItem href={`/${project.name.slug}/posts/${post.id}`}>
             <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
               {[
                 new Date(post.data.pubDate).getFullYear(),

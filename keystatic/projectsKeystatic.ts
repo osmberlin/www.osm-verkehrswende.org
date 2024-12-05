@@ -1,49 +1,10 @@
 import { fields, singleton } from '@keystatic/core'
-import { languages } from '@layouts/languages'
-import { defineCollection, z, type CollectionEntry } from 'astro:content'
 import { languagesSelect } from './utils/languagesSelect'
 
-export type TProjectConfig = CollectionEntry<'projects'>['data']['projects'][number]
-
-export const astroProjectsDefinition = defineCollection({
-  type: 'data',
-  schema: ({ image }) =>
-    z.object({
-      projects: z.array(
-        z.object({
-          enabled: z.boolean(),
-          name: z.object({ name: z.string(), slug: z.string() }),
-          externalProjektPage: z.string().optional(),
-          header: z.enum(['ProjectHeader', 'AboutHeader']),
-          menus: z
-            .array(
-              // Menu Group
-              z.object({
-                label: z.string().nullish(),
-                // Menu Items
-                items: z.array(z.object({ href: z.string(), label: z.string() })),
-              }),
-            )
-            .nullish(),
-          menuNews: z.boolean(),
-          additionalFooterLinks: z
-            .array(z.object({ href: z.string(), label: z.string() }))
-            .optional(),
-          meta: z.object({
-            title: z.string(),
-            description: z.string().nullish(),
-            image: image().nullish(),
-            imageAlt: z.string().nullish(),
-            language: z.enum(languages),
-          }),
-        }),
-      ),
-    }),
-})
-
+export const contentBase = 'src/content/projects/'
 export const keystaticProjectsConfig = singleton({
   label: 'Projekte',
-  path: 'src/content/projects/',
+  path: contentBase,
   format: { data: 'json' },
   schema: {
     projects: fields.array(

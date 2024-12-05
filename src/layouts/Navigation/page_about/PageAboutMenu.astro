@@ -7,8 +7,8 @@ import { getRootUrl } from '@layouts/utils/getRootUrl'
 
 const projects = await getProjects()
 const showcaseProjects = projects
-  .filter((p) => p.name.slug !== 'root')
-  .filter((p) => p.enabled === true)
+  ?.filter((p) => p.name.slug !== 'root')
+  ?.filter((p) => p.enabled === true)
 ---
 
 <MenuItemWrapper>
@@ -18,7 +18,7 @@ const showcaseProjects = projects
 <MenuItemHeadline>Projekte</MenuItemHeadline>
 <MenuItemWrapper>
   {
-    showcaseProjects.map((project) => {
+    showcaseProjects?.map((project) => {
       return <MenuItem href={getRootUrl(project)}>{project.name.name}</MenuItem>
     })
   }

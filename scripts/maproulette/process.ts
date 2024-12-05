@@ -2,7 +2,7 @@ import { maprouletteChallengeUrl } from '@components/campaigns/maprouletteChalle
 import { z } from 'astro/zod'
 import { Glob } from 'bun'
 import { startOfDay } from 'date-fns'
-import type { AstroCampaignType } from 'keystatic/keystatic.campaigns.config'
+import type { AstroCampaignType } from 'keystatic/campaignsAstro'
 import invariant from 'tiny-invariant'
 import { defaultChallenge } from './default.const'
 import {

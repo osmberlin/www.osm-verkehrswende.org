@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
   const projects = await getProjects()
-  const rootProject = projects.find((p) => p.name.slug === 'root')!
+  const rootProject = projects?.find((p) => p.name.slug === 'root')!
 
   const posts = await getCollection('posts')
 
@@ -15,7 +15,7 @@ export async function GET(context: APIContext) {
     site: context.site!,
     items: posts.map((post) => ({
       ...post.data,
-      link: `${post.data.project}/posts/${post.slug}/`,
+      link: `${post.data.project}/posts/${post.id}/`,
       customData: `<language>${post.data.language || 'de'}</language>`,
     })),
   })

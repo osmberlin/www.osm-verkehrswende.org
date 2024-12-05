@@ -1,6 +1,6 @@
 ---
 import LayoutArticlePost from '@layouts/LayoutArticlePost.astro'
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection, render } from 'astro:content'
 import { mdxComponentsAstro } from 'keystatic/mdxComponents'
 
 export async function getStaticPaths() {
@@ -9,14 +9,14 @@ export async function getStaticPaths() {
   return posts
     .filter((post) => post.data.project === project)
     .map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.id },
       props: post,
     }))
 }
 type Props = CollectionEntry<'posts'>
 
 const post = Astro.props
-const { Content } = await post.render()
+const { Content } = await render(post)
 ---
 
 <LayoutArticlePost {...post.data}>

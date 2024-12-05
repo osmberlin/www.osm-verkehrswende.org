@@ -1,44 +1,14 @@
 import { collection, fields } from '@keystatic/core'
-import { languages } from '@layouts/languages'
-import { defineCollection, z } from 'astro:content'
-import { extractedProjectKeys } from './extractedProjectKeys'
 import { mdxComponentsKeystatic } from './mdxComponents'
 import { authorsSelect } from './utils/authorsSelect'
 import { languagesSelect } from './utils/languagesSelect'
 import { projectsSelect } from './utils/projectsSelect'
 
-export const AstroCampaignSchema = z.object({
-  name: z.string(),
-  menuTitle: z.string(),
-  project: z.enum(extractedProjectKeys),
-  pubDate: z
-    .string()
-    .or(z.date())
-    .transform((val) => new Date(val)),
-  author: z.string(),
-  inMenu: z.boolean(),
-  language: z.enum(languages).optional(),
-  maprouletteChallenge: z.object({
-    id: z.number().nullable(),
-    enabled: z.boolean(),
-    name: z.string(),
-    remoteGeoJson: z.string().url(),
-    checkinComment: z.string(),
-    checkinSource: z.string(),
-  }),
-})
-
-export type AstroCampaignType = z.infer<typeof AstroCampaignSchema> & { content: string }
-
-export const astroCampaignsDefinition = defineCollection({
-  type: 'data',
-  schema: () => AstroCampaignSchema,
-})
-
+export const contentBase = 'src/content/campaigns'
 export const keystaticCampaignsConfig = collection({
   label: 'Kampagne',
   slugField: 'menuTitle',
-  path: 'src/content/campaigns/*/',
+  path: `${contentBase}/*/`,
   format: { data: 'json' },
   entryLayout: 'form',
   columns: ['name', 'pubDate'],

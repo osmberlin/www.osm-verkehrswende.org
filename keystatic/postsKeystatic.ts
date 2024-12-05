@@ -1,43 +1,14 @@
 import { collection, fields } from '@keystatic/core'
-import { languages } from '@layouts/languages'
-import { defineCollection, z } from 'astro:content'
-import { extractedProjectKeys } from './extractedProjectKeys'
 import { mdxComponentsKeystatic } from './mdxComponents'
 import { authorsSelect } from './utils/authorsSelect'
 import { languagesSelect } from './utils/languagesSelect'
 import { projectsSelect } from './utils/projectsSelect'
 
-export const astroPostsDefinition = defineCollection({
-  type: 'content',
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      menuTitle: z.string(),
-      project: z.enum(extractedProjectKeys),
-      pubDate: z
-        .string()
-        .or(z.date())
-        .transform((val) => new Date(val)),
-      updatedDate: z
-        .string()
-        .or(z.date())
-        .transform((val) => new Date(val))
-        .optional(), // Note: implemented but unused ATM
-      author: z.string(),
-      inMenu: z.boolean(),
-      noindex: z.boolean().optional(),
-      language: z.enum(languages).optional(),
-      image: image().nullish(),
-      imageAlt: z.string().optional(),
-      showToc: z.boolean().optional(), // TODO Do we need this?
-      canonicalUrl: z.string().url().optional(),
-    }),
-})
-
+export const contentBase = 'src/content/posts'
 export const keystaticPostsConfig = collection({
   label: 'Blog',
   slugField: 'menuTitle',
-  path: 'src/content/posts/*/',
+  path: `${contentBase}/*/`,
   format: { contentField: 'content' },
   entryLayout: 'content',
   columns: ['title', 'pubDate'],

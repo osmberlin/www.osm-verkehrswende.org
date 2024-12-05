@@ -1,8 +1,8 @@
 import { config } from '@keystatic/core'
 import { KEYSTATIC_STORAGE_KIND } from 'astro:env/client'
-import { keystaticCampaignsConfig } from 'keystatic/keystatic.campaigns.config'
-import { keystaticPostsConfig } from 'keystatic/keystatic.posts.config'
-import { keystaticProjectsConfig } from 'keystatic/keystatic.projects.config'
+import { keystaticCampaignsConfig } from 'keystatic/campaignsKeystatic'
+import { keystaticPostsConfig } from 'keystatic/postsKeystatic'
+import { keystaticProjectsConfig } from 'keystatic/projectsKeystatic'
 
 export default config({
   storage: {

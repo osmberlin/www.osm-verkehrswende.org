@@ -13,8 +13,8 @@ import pngSocialSharingFallback from '../../public/social-sharing.png'
 
 const projects = await getProjects()
 const showcaseProjects = projects
-  .filter((p) => p.name.slug !== 'root')
-  .filter((p) => p.enabled === true)
+  ?.filter((p) => p.name.slug !== 'root')
+  ?.filter((p) => p.enabled === true)
 ---
 
 <LayoutArticlePageAstro title="OpenStreetMap Verkehrswende">
@@ -68,7 +68,7 @@ const showcaseProjects = projects
 
   <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mt-16">
     {
-      showcaseProjects.map((project) => {
+      showcaseProjects?.map((project) => {
         return (
           <Card
             href={getRootUrl(project)}

@@ -6,7 +6,7 @@ export const getProject = async (astroUrl: string) => {
 
   const projectSlugFromPath = projectKeyFromUrl(astroUrl)
 
-  const project = projects.data.projects.find((p) => p.name.slug === projectSlugFromPath)
+  const project = projects?.data.projects.find((p) => p.name.slug === projectSlugFromPath)
 
   if (!project) {
     const doNotWarnAllowlist = ['/contact/', '/posts/']
@@ -17,7 +17,7 @@ export const getProject = async (astroUrl: string) => {
         new URL(astroUrl).pathname,
       )
     }
-    return projects.data.projects.find((p) => p.name.slug === 'unknown')!
+    return projects?.data.projects.find((p) => p.name.slug === 'unknown')!
   }
 
   return project

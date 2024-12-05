@@ -1,9 +1,9 @@
 ---
 import { getProjects } from '@layouts/utils/getProjects'
+import { getRootUrl } from '@layouts/utils/getRootUrl'
 import MenuItem from '../MenuItem/MenuItem.astro'
 import MenuItemHeadline from '../MenuItem/MenuItemHeadline.astro'
 import MenuItemWrapper from '../MenuItem/MenuItemWrapper.astro'
-import { getRootUrl } from '@layouts/utils/getRootUrl'
 
 const projects = await getProjects()
 const showcaseProjects = projects

@@ -29,12 +29,13 @@ const { href, external, text, alt, image, variant } = Astro.props
         densities={[1.5, 2]}
         formats={['png', 'avif']}
         class="m-0 max-h-40 w-full overflow-clip rounded-t border border-gray-100 object-cover"
+        pictureAttributes={{ class: 'not-prose w-full' }}
         alt=""
       />
     ) : (
       <div
         class={twJoin(
-          variant === 'iconImageGrid' ? 'h-40 w-full border-b border-gray-50' : 'pb-2 pt-5',
+          variant === 'iconImageGrid' ? 'h-40 w-full border-b border-gray-50' : 'pt-5',
           'm-0 flex items-center justify-center',
         )}
       >

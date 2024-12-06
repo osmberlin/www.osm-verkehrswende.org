@@ -14,10 +14,9 @@ const { id, highlight, classes } = Astro.props
 <section
   id={id}
   class={twMerge(
-    'group relative mb-20 rounded leading-normal',
+    'group relative mb-20 rounded',
     'prose prose-lg prose-blue max-w-prose',
     'prose-headings:mb-5 prose-headings:text-sky-700 prose-headings:first:mt-0',
-    'prose-p:m-0',
     highlight ? 'bg-emerald-100 p-4' : '',
     id ? 'target:bg-purple-100' : '',
     classes,

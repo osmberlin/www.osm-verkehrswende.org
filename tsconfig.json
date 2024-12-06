@@ -1,20 +1,23 @@
 {
-  "extends": "astro/tsconfigs/strictest",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "plugins": [
+      {
+        // https://docs.astro.build/en/guides/typescript/#setup
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
-    "strictNullChecks": true, // https://docs.astro.build/de/guides/content-collections/#setting-up-typescript
     "paths": {
-      "@data/*": ["data/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"]
     },
-    "plugins": [
-      // https://docs.astro.build/en/guides/typescript/#setup
-      { "name": "@astrojs/ts-plugin" }
-    ]
+    "noErrorTruncation": true // https://stackoverflow.com/a/53131824
   },
+  "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }

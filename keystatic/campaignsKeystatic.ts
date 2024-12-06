@@ -1,5 +1,5 @@
 import { collection, fields } from '@keystatic/core'
-import { mdxComponentsKeystatic } from './mdxComponents'
+import { mdxComponentsKeystatic } from './components/mdxComponentsKeystatic'
 import { authorsSelect } from './utils/authorsSelect'
 import { languagesSelect } from './utils/languagesSelect'
 import { projectsSelect } from './utils/projectsSelect'

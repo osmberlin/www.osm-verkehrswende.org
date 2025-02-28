@@ -18,7 +18,6 @@
     "format": "prettier --ignore-path .gitignore '{src,keystatic}/**/*.+(ts|js|tsx|astro)' --write",
     "format:all": "prettier --ignore-path .gitignore '{src,keystatic}/**/*.+(ts|js|tsx|astro|mdx)' --write",
     "check": "npm run type-check && npm run format && npm run lint",
-    "campaigns:create": "bun run --env-file=scripts/maproulette/.env scripts/maproulette/process.ts",
     "cqi:createPmtiles": "npm run cqi:createPmtiles:pmTiles && npm run cqi:createPmtiles:upload",
     "cqi:createPmtiles:pmTiles": "node ./scripts/cqi/createPmtiles/createPmtiles.js",
     "cqi:createPmtiles:upload": "node ./scripts/cqi/createPmtiles/upload.js",

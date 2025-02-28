@@ -120,7 +120,7 @@
           "items": [
             {
               "label": "Übersicht",
-              "href": "/traffic-signs/campaigns"
+              "href": "https://radinfra.de/kampagnen/"
             }
           ]
         }

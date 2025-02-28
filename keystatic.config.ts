@@ -1,6 +1,5 @@
 import { config } from '@keystatic/core'
 import { KEYSTATIC_STORAGE_KIND } from 'astro:env/client'
-import { keystaticCampaignsConfig } from 'keystatic/campaignsKeystatic'
 import { keystaticPostsConfig } from 'keystatic/postsKeystatic'
 import { keystaticProjectsConfig } from 'keystatic/projectsKeystatic'
 
@@ -21,12 +20,10 @@ export default config({
     navigation: {
       Meta: ['projects'],
       Blog: ['posts'],
-      Kampagnen: ['campaigns'],
     },
   },
   collections: {
     posts: keystaticPostsConfig,
-    campaigns: keystaticCampaignsConfig,
   },
   singletons: {
     projects: keystaticProjectsConfig,

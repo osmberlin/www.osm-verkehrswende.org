@@ -2,11 +2,10 @@
 import SvgArrowSmall from '@assets/icons/ArrowSmall.svg'
 import Map from 'astro-heroicons/outline/Map.astro'
 import RectangleStack from 'astro-heroicons/solid/RectangleStack.astro'
-import MapRouletteLogo from './assets/MapRouletteLogo.svg'
 
 type Props = {
   href: string
-  iconKey: 'map' | 'stack' | 'maproulette'
+  iconKey: 'map' | 'stack'
   label: string
   subline?: string | undefined
 }
@@ -28,8 +27,6 @@ const { href, iconKey, label, subline } = Astro.props
             return <Map class="size-20" />
           case 'stack':
             return <RectangleStack class="size-20" />
-          case 'maproulette':
-            return <img src={MapRouletteLogo.src} class="size-16" alt="" />
         }
       })()
     }

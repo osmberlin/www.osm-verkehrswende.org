@@ -11,12 +11,13 @@ const { additionalLinks } = Astro.props
 const { pathname: currentPathname } = Astro.url
 ---
 
-<ul class="prose prose-sm mb-4 ml-3 block space-y-3 leading-snug">
+<ul class="prose prose-sm mb-4 ml-3 block leading-snug">
   {
     additionalLinks?.map((link) => (
       <li>
         <a
           class={twJoin(
+            'block pb-3',
             currentPathname === `/${link.href}`
               ? 'font-bold text-black'
               : 'underline hover:text-gray-500',
@@ -30,7 +31,7 @@ const { pathname: currentPathname } = Astro.url
   }
   <li>
     <a
-      class="underline hover:text-gray-500"
+      class="block pb-3 underline hover:text-gray-500"
       href="https://github.com/osmberlin/www.osm-verkehrswende.org"
     >
       Github: Code für die Website
@@ -39,6 +40,7 @@ const { pathname: currentPathname } = Astro.url
   <li>
     <a
       class={twJoin(
+        'block pb-3',
         currentPathname === '/contact'
           ? 'font-bold text-black no-underline'
           : 'underline hover:text-gray-500',

@@ -26,7 +26,7 @@
     "cqi:routing:geojson": "chmod +x ./scripts/cqi/routing/createGeojson.sh && ./scripts/cqi/routing/createGeojson.sh",
     "cqi:routing:graph": "chmod +x ./scripts/cqi/routing/createGraph.sh && ./scripts/cqi/routing/createGraph.sh",
     "cqi:routing:copy": "chmod +x ./scripts/cqi/routing/copyPublicFiles.sh && ./scripts/cqi/routing/copyPublicFiles.sh",
-    "updatePackages:major": "npx taze major --includeLocked --write --exclude /react/ && npm run updatePackages:minor && npm install",
+    "updatePackages:major": "npx taze major --includeLocked --write && npm install",
     "updatePackages:minor": "npx taze minor --includeLocked --write && npm install",
     "bleach": "rm -rf node_modules/.astro && rm -rf node_modules/.bin && rm -rf node_modules/.vite && rm -rf .astro/ && rm -rf .netlify/ && rm -rf dist/ && npm install && npm run bleach:info",
     "bleach:info": "echo \"\u001b[43m\u001b[30m(!) Also delete the browser cache, see https://github.com/vitejs/vite/discussions/17738#discussioncomment-10158746\u001b[0m\"",

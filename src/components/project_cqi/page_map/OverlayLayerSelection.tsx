@@ -46,7 +46,7 @@ export const OverlayLayerSelection = () => {
               '-mx-px -mt-px',
               // buttonIdx === buttons.length - 1 ? 'rounded-bl-md rounded-br-md' : '',
               checked ? 'z-10 border-emerald-200 bg-emerald-50' : 'border-gray-200',
-              'relative flex w-full min-w-[19em] cursor-pointer border px-4 py-2.5 hover:bg-blue-50 focus:outline-none',
+              'relative flex w-full min-w-[19em] cursor-pointer border px-4 py-2.5 hover:bg-blue-50 focus:outline-hidden',
             )
           }
         >

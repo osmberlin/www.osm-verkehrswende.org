@@ -29,7 +29,7 @@ const relevantPosts = sortedPosts
       <MenuItemWrapper>
         {relevantPosts.map((post) => (
           <MenuItem href={`/${project.name.slug}/posts/${post.id}`}>
-            <span class="-ml-1.5 mr-1 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
+            <span class="mr-1 -ml-1.5 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">
               {[
                 new Date(post.data.pubDate).getFullYear(),
                 new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),

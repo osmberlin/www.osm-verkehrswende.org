@@ -11,7 +11,7 @@ export const MapInspector: React.FC = () => {
     <section className="absolute inset-x-1 bottom-1 z-50 overflow-y-auto rounded-lg bg-blue-900 p-4 text-blue-50 shadow-xl sm:inset-x-auto sm:inset-y-2.5 sm:right-2.5 sm:w-96">
       <button
         onClick={() => $clickedMapData.set(undefined)}
-        className="absolute right-2.5 top-2.5 z-10 rounded-full bg-white p-1.5 text-blue-900 hover:bg-blue-50 hover:shadow-lg"
+        className="absolute top-2.5 right-2.5 z-10 rounded-full bg-white p-1.5 text-blue-900 hover:bg-blue-50 hover:shadow-lg"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -17,7 +17,7 @@ const { href, external, text, alt, image, variant } = Astro.props
 
 <a
   href={href}
-  class="flex grow flex-col items-center justify-center rounded bg-gray-100 hover:bg-green-100"
+  class="flex grow flex-col items-center justify-center rounded-sm bg-gray-100 hover:bg-green-100"
   title={alt}
   target={external ? '_blank' : undefined}
 >
@@ -43,7 +43,7 @@ const { href, external, text, alt, image, variant } = Astro.props
       </div>
     )
   }
-  <h2 class="justify-left not-prose mb-3 mt-1 flex items-center gap-1 py-0 text-center">
+  <h2 class="justify-left not-prose mt-1 mb-3 flex items-center gap-1 py-0 text-center">
     {text ? text : 'Mehr erfahren…'}
     {external ? <ArrowTopRightOnSquare class="size-5" /> : ''}
   </h2>

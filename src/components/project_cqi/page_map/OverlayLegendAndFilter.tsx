@@ -91,7 +91,7 @@ export const OverlayLegendAndFilter = () => {
                   </h2>
                   <ul
                     className={twJoin(
-                      'group/legend px-2 pb-4 text-sm font-normal leading-4 text-gray-900',
+                      'group/legend px-2 pb-4 text-sm leading-4 font-normal text-gray-900',
                     )}
                   >
                     {legendGroup.legends.map((legend) => {
@@ -121,7 +121,7 @@ export const OverlayLegendAndFilter = () => {
                           {filteringEnabled && (
                             <button
                               className={twJoin(
-                                'rounded-md border border-white p-1.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 group-hover/focus:border-gray-200 group-hover/focus:bg-blue-50 group-hover/legend:text-gray-800',
+                                'rounded-md border border-white p-1.5 transition-colors group-hover/focus:border-gray-200 group-hover/focus:bg-blue-50 group-hover/legend:text-gray-800 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75',
                                 filterActive ? 'text-yellow-500' : 'text-gray-300',
                               )}
                             >

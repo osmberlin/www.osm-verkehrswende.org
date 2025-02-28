@@ -146,7 +146,7 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
           Ziel
         </div>
       </Marker>
-      <div className="absolute left-3 top-3 rounded bg-white/90 px-2 py-0.5">
+      <div className="absolute top-3 left-3 rounded-sm bg-white/90 px-2 py-0.5">
         <button
           onClick={changeDirection}
           className="group flex items-center gap-1 underline underline-offset-2 hover:decoration-fuchsia-700 hover:decoration-2"

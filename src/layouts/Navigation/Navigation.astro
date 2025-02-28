@@ -18,7 +18,7 @@ const { layoutType, project } = Astro.props
   data-navigation-project={project}
   class={twJoin(
     layoutType === 'app' ? 'bg-white' : 'mb-10 lg:mb-0',
-    'z-[1001] flex w-full flex-none justify-between px-3 py-3 shadow-xl lg:relative lg:z-auto lg:block lg:w-64 lg:py-6 lg:shadow-none',
+    'z-1001 flex w-full flex-none justify-between px-3 py-3 shadow-xl lg:relative lg:z-auto lg:block lg:w-64 lg:py-6 lg:shadow-none',
     'group/navi',
   )}
   lang="de"
@@ -29,7 +29,7 @@ const { layoutType, project } = Astro.props
     <ProjectToMenu project={project} />
   </NavigationMobile>
 
-  <div class="z-[2000] hidden transition-all duration-150 lg:block">
+  <div class="z-2000 hidden transition-all duration-150 lg:block">
     <ProjectToMenu project={project} />
   </div>
 </nav>

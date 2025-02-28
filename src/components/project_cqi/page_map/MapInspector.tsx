@@ -18,7 +18,7 @@ export const MapInspector = () => {
     <section className="absolute inset-x-1 bottom-1 z-50 overflow-y-auto rounded-lg bg-gray-900 p-4 text-gray-50 shadow-xl sm:inset-x-auto sm:inset-y-2.5 sm:right-2.5 sm:w-96">
       <button
         onClick={() => $clickedMapData.set(undefined)}
-        className="absolute right-2.5 top-2.5 z-10 rounded-full bg-white p-1.5 text-gray-900 hover:bg-gray-50 hover:shadow-lg"
+        className="absolute top-2.5 right-2.5 z-10 rounded-full bg-white p-1.5 text-gray-900 hover:bg-gray-50 hover:shadow-lg"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export const MapInspector = () => {
                         <th className="py-1 text-left leading-tight">
                           {translationsKey[key] || <code>{key}</code>}
                         </th>
-                        <td className="w-full break-all py-1 pl-2 leading-tight">
+                        <td className="w-full py-1 pl-2 leading-tight break-all">
                           {typeof value === 'number' ? (
                             <span>{value.toLocaleString()}</span>
                           ) : multipleValues ? (

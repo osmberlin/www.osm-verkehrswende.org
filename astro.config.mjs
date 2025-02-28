@@ -2,8 +2,8 @@ import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
 import keystatic from '@keystatic/astro'
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, envField } from 'astro/config'
 import path from 'path'
 import remarkToc from 'remark-toc'
@@ -30,10 +30,6 @@ export default defineConfig({
   site: 'https://www.osm-verkehrswende.org/',
   integrations: [
     ASTRO_OUTPUT_MODE === 'static' ? undefined : keystatic(),
-    tailwind({
-      // https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#applybasestyles
-      applyBaseStyles: false,
-    }),
     react(),
     mdx(),
     sitemap({
@@ -65,6 +61,7 @@ export default defineConfig({
     ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: { exclude: ['route-snapper'] },
     plugins: [
+      tailwindcss(),
       // See keystatic/scripts/README.md
       watchAndRun([
         {

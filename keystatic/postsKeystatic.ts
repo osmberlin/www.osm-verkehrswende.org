@@ -37,10 +37,18 @@ export const keystaticPostsConfig = collection({
     content: fields.mdx({
       label: 'Content',
       components: mdxComponentsKeystatic,
+      options: {
+        image: {
+          directory: 'src/assets/posts',
+          publicPath: '/src/assets/posts',
+        },
+      },
     }),
     image: fields.image({
       label: 'Social Sharing Image Path',
       description: 'Bild bitte im Format 1200x630px hochladen.',
+      directory: 'src/assets/posts',
+      publicPath: '/src/assets/posts',
     }),
     imageAlt: fields.text({ label: 'Social Sharin Image Alt Text' }),
     showToc: fields.checkbox({ label: 'Show TOC', defaultValue: false }),

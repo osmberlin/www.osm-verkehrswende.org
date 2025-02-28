@@ -53,11 +53,12 @@ export default defineConfig({
       'https://www.osm-berlin.org//crowdmap/posts/2024-01-20-crowdmap/',
     '/about': '/root',
     '/traffic-signs/campaigns/': 'https://radinfra.de/kampagnen/',
-    '/traffic-signs/campaigns/': 'https://radinfra.de/kampagnen/',
-    '//traffic-signs/campaigns/missing_acccess_tag_bicycle_road/': 'https://radinfra.de/kampagnen/',
-    '//traffic-signs/campaigns/missing_traffic_sign_vehicle_destination/':
-      'https://radinfra.de/kampagnen/',
-    '//traffic-signs/campaigns/missing_traffic_sign_244/': 'https://radinfra.de/kampagnen/',
+    '/traffic-signs/campaigns/missing_acccess_tag_bicycle_road/':
+      'https://radinfra.de/kampagnen/missing_access_tag_bicycle_road/',
+    '/traffic-signs/campaigns/missing_traffic_sign_vehicle_destination/':
+      'https://radinfra.de/kampagnen/missing_traffic_sign_vehicle_destination/',
+    '/traffic-signs/campaigns/missing_traffic_sign_244/':
+      'https://radinfra.de/kampagnen/missing_traffic_sign_244/',
   },
   markdown: { remarkPlugins: [remarkToc] },
   vite: {

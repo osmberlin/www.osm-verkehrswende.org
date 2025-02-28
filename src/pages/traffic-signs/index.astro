@@ -1,5 +1,5 @@
 ---
-import { LinkExternal } from '@components/Link'
+import { Link, LinkExternal } from '@components/Link'
 import ProjectHeadline from '@components/text/ProjectHeadline.astro'
 import ProseSection from '@components/text/ProseSection.astro'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
@@ -7,30 +7,58 @@ import svgBmbf from './_images/prototype-fund/logo-bmbf.svg'
 import svgPrototypeFund from './_images/prototype-fund/logo-prototype-fund.svg'
 ---
 
-<LayoutArticle title="OpenStreetMap Verkehrszeichen Werkzeuge">
-  <ProjectHeadline
-    title="OpenStreetMap als offenes Verkehrszeichen-Kataster"
-    subtitle="Werkzeuge und Auswertungen"
-  />
+<LayoutArticle title="Verkehrszeichen in OpenStreetMap – Werkzeuge und Kampagnen">
+  <ProjectHeadline title="Verkehrszeichen in OpenStreetMap" subtitle="Werkzeuge und Kampagnen" />
 
   <ProseSection highlight>
     <p>
       Verkehrszeichen sind wertvolle Daten in OpenStreetMap. <br />
-      Auf dieser Projektseite entstehen …
+      Diese Projektseite ist im Rahmen eines Prototype Fund Projektes in 2025 entstanden und ist jetzt
+      <strong>archiviert</strong>. Die Arbeit an den Teilprojekten geht weiter in ihren jeweilen
+      Github Repositories und Webseiten.
     </p>
+    <h2 class="text-lg">Wichtige Ergebnisse des Projektes</h2>
     <ul class="mt-0 marker:text-sky-700">
-      <li>…Tools, um Verkehrszeichen einfacher in OSM einzutragen.</li>
-      <li>…Karten, um den Datenstand zu verstehen.</li>
-      <li>…Auswertungen, um die Daten zu verbessern und anzureichern.</li>
+      <li>
+        Ein Werkzeug, um Verkehrszeichen anzugeben und OSM <strong>Tagging Empfehlungen</strong> zu erhalten:
+        Das <LinkExternal href="https://trafficsigns.osm-verkehrswende.org/DE" blank
+          >OSM Traffic Sign Tool 2</LinkExternal
+        >
+      </li>
+      <li>
+        Eine <strong>Karte</strong>, um den Datenstand zu sehen: <LinkExternal
+          href="https://radverkehrsatlas.de/regionen/radinfra?map=11.1/52.487/13.369&config=v92cax.1wec.3dc&v=2"
+          blank>Deutschlandkarte der Verkehrszeichen auf Radinfrastruktur-Daten</LinkExternal
+        >
+      </li>
+      <li>
+        <strong>Kampagnen</strong>, um die Daten zu verbessern und anzureichern: <LinkExternal
+          href="https://radinfra.de/"
+          >Kampagnen zur Verbesserung und Qualitätssicherung von Radinfrastruktur-Daten</LinkExternal
+        >
+      </li>
     </ul>
-    <a href="/traffic-signs/posts/2024-09-06-projektstart-verkehrszeichen">Mehr zum Projekt…</a>
+    <p>
+      Die Kampagnen und Karten sind in Kooperation mit den verlinkten OpenSource-Projekten
+      entstanden und profitieren von den dort bestehenden Prozessen und Werkzeugen. Wir haben die
+      Verkehrszeichen-Relevanten ergänzungen beigetragen.
+    </p>
+
+    <h2 class="text-lg">Über das Projekt</h2>
+    <ul>
+      <li>
+        <Link to="/traffic-signs/posts/2025-vortrag-demo-day"
+          >Wie Verkehrszeichen zur Qualitätssicherung von OpenStreetMap-Daten beitragen können</Link
+        >
+      </li>
+    </ul>
   </ProseSection>
 
   <ProseSection id="prototype-fund">
     <h2 class="mb-3">Förderung Prototype Fund</h2>
 
     <p>
-      Im Zeitraum September 2024 bis Februar 2025 wird dieses Projekt durch den Prototype Fund
+      Im Zeitraum September 2024 bis Februar 2025 wurde dieses Projekt durch den Prototype Fund
       (Runde 16) des Bundesministeriums für Bildung und Forschung (BMBF) gefördert.
       <LinkExternal href="https://prototypefund.de/project/verkehrszeichen-in-osm/">
         Mehr erfahren…
@@ -46,7 +74,7 @@ import svgPrototypeFund from './_images/prototype-fund/logo-prototype-fund.svg'
     <h2 class="mb-3">Kontakt</h2>
 
     <p>
-      <a href="/contact">Meetups, Github, Telegram, …</a>
+      <a href="/contact">Meetups, Github, Matrix, …</a>
     </p>
   </ProseSection>
 </LayoutArticle>

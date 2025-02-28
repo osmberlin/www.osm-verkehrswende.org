@@ -103,23 +103,13 @@
             {
               "label": "Über das Projekt",
               "href": "/traffic-signs/"
-            }
-          ]
-        },
-        {
-          "label": "Eintragen",
-          "items": [
+            },
             {
-              "label": "Werkzeug",
+              "label": "Werzeug um Schild in Tags zu übersetzen…",
               "href": "https://trafficsigns.osm-verkehrswende.org/"
-            }
-          ]
-        },
-        {
-          "label": "Kampagnen",
-          "items": [
+            },
             {
-              "label": "Übersicht",
+              "label": "Kampagnen zu Verkehrszeichen in OSM…",
               "href": "https://radinfra.de/kampagnen/"
             }
           ]

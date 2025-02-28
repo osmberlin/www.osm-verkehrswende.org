@@ -56,6 +56,10 @@ export default defineConfig({
     '/traffic-signs/campaigns/missing_traffic_sign_244/':
       'https://radinfra.de/kampagnen/missing_traffic_sign_244/',
   },
+  experimental: {
+    // https://docs.astro.build/en/reference/experimental-flags/svg/
+    svg: true,
+  },
   markdown: { remarkPlugins: [remarkToc] },
   vite: {
     ssr: { noExternal: ['route-snapper'] },

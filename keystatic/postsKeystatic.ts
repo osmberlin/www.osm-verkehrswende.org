@@ -40,7 +40,7 @@ export const keystaticPostsConfig = collection({
       options: {
         image: {
           directory: 'src/assets/posts',
-          publicPath: '/src/assets/posts',
+          publicPath: '../../../assets/posts',
         },
       },
     }),

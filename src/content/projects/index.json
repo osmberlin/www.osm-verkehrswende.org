@@ -186,7 +186,7 @@
     },
     {
       "name": {
-        "name": "Mapillary Missing Streets (ALPHA)",
+        "name": "Mapillary Missing Streets",
         "slug": "mapillary"
       },
       "enabled": true,
@@ -199,16 +199,21 @@
               "href": "/mapillary/"
             },
             {
-              "label": "Karte (ALPHA)",
+              "label": "Karte",
               "href": "/mapillary/map/"
             }
           ]
         }
       ],
       "menuNews": true,
-      "additionalFooterLinks": [],
+      "additionalFooterLinks": [
+        {
+          "label": "Github: Code for the coverage analysis",
+          "href": "https://github.com/vizsim/mapillary_coverage"
+        }
+      ],
       "meta": {
-        "title": "Mapillary Missing Streets (ALPHA)",
+        "title": "Mapillary Missing Streets",
         "description": "An easy way to find out which streets in Berlin require fresh 360° images",
         "image": "/src/content/projects/projects/6/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",

@@ -4,16 +4,24 @@ import LayoutApp from '@layouts/LayoutApp.astro'
 import * as turf from '@turf/turf'
 import type { LngLatBoundsLike } from 'react-map-gl/maplibre'
 
-const berlinInnenstadtBbox = [13.2823206, 52.4648758, 13.4757235, 52.5497578] satisfies ReturnType<
-  typeof turf.bbox
->
+const germanyBbox = [5.87, 47.27, 15.04, 55.06] satisfies ReturnType<typeof turf.bbox>
 const maxBounds = turf.bbox(
-  turf.buffer(turf.bboxPolygon(berlinInnenstadtBbox), 250, { units: 'meters' })!,
+  turf.buffer(turf.bboxPolygon(germanyBbox), 50000, { units: 'meters' })!,
 ) as LngLatBoundsLike
 
-const minZoom = 12
+const minZoom = 6
+const initialViewState = {
+  longitude: 13.390386527027175,
+  latitude: 52.5180225850377,
+  zoom: 12,
+}
 ---
 
 <LayoutApp title="Mapillary Missing Streets — Ein Projekt der OpenStreetMap Verkehrswende-Gruppe">
-  <MapillaryMap client:load maxBounds={maxBounds} minZoom={minZoom} />
+  <MapillaryMap
+    client:load
+    maxBounds={maxBounds}
+    minZoom={minZoom}
+    initialViewState={initialViewState}
+  />
 </LayoutApp>

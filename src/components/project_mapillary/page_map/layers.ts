@@ -1,38 +1,20 @@
 export const layers = [
   {
-    id: 'complete',
+    id: 'current',
     type: 'line',
     paint: {
       'line-color': '#1e40af',
       'line-width': 2.2,
     },
-    filter: ['==', ['get', 'complete'], true],
+    filter: ['in', ['get', 'mapillary_coverage'], ['literal', ['regular', 'pano']]],
   },
   {
-    id: 'completePano',
+    id: 'pano',
     type: 'line',
     paint: {
       'line-color': '#3730a3',
       'line-width': 2.2,
     },
-    filter: ['==', ['get', 'completePano'], true],
-  },
-  {
-    id: 'completeFresh',
-    type: 'line',
-    paint: {
-      'line-color': '#1e40af',
-      'line-width': 2.2,
-    },
-    filter: ['==', ['get', 'completeFresh'], true],
-  },
-  {
-    id: 'completeFreshPano',
-    type: 'line',
-    paint: {
-      'line-color': '#3730a3',
-      'line-width': 2.2,
-    },
-    filter: ['==', ['get', 'completeFreshPano'], true],
+    filter: ['==', ['get', 'mapillary_coverage'], 'pano'],
   },
 ]

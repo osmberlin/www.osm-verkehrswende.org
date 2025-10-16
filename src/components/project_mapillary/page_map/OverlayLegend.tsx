@@ -1,11 +1,16 @@
-import { $searchParams } from '@components/BaseMap/store'
+import { $searchParams, baseMapSearchparamsParse } from '@components/BaseMap/store'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { MAPILLARY_COLORS } from './colors'
+import { FRESH_IMAGERY_DATE, FRESH_IMAGERY_ZOOM_LEVEL } from './FreshMapillaryLayers'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 export const OverlayLegend = () => {
   const params = useStore($searchParams) as SearchParamsMapillaryMap
+
+  // Check if we're zoomed in enough to show fresh imagery
+  const mapParams = baseMapSearchparamsParse(params.map)
+  const showFreshImagery = mapParams.zoom && mapParams.zoom > FRESH_IMAGERY_ZOOM_LEVEL
 
   return (
     <div className="px-2 py-4">
@@ -46,6 +51,23 @@ export const OverlayLegend = () => {
           <span>…fehlenden Fotos</span>
         </li>
       </ul>
+
+      {/* Fresh imagery - only shown when zoomed in */}
+      <details
+        className={twJoin('mt-2 max-w-60 leading-snug', showFreshImagery ? '' : 'text-gray-300')}
+      >
+        <summary
+          className={twJoin('text-xs', showFreshImagery ? 'cursor-pointer hover:underline' : '')}
+        >
+          Gestrichelte Linien: Neuste Fotostrecken
+        </summary>
+        <div className="text-sm">
+          Diese Karte zeigt prozessierte Daten, die nur alle paar Monate aktualisiert werden. Um zu
+          bewerten, ob eine Straße immer noch frische Fotos benötigt, werden zusätzlich Daten direkt
+          von Mapillary angezeigt. Die gestrichelten Linien zeigen Mapillary-Sequenzen, die nach dem{' '}
+          {new Date(FRESH_IMAGERY_DATE).toLocaleDateString('de-DE')} aufgenommen wurden.
+        </div>
+      </details>
     </div>
   )
 }

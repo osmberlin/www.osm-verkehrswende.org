@@ -1,7 +1,7 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { useStore } from '@nanostores/react'
 import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 import { $searchParams, baseMapSearchparamsParse } from '../../BaseMap/store'
+import { Link } from '../../Link/Link'
 import { FRESH_IMAGERY_DATE } from './MapSourceMapillary'
 
 type Props = {
@@ -31,15 +31,9 @@ export const MapInspectorMapillary = ({ feature, clickCoordinates }: Props) => {
       <div className="mt-4">
         <p className="mb-3 text-sm text-white/70">Öffne Mapillary Street View an dieser Position</p>
 
-        <a
-          href={mapillaryUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-        >
-          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+        <Link to={mapillaryUrl} blank button className="inline-flex items-center">
           In Mapillary öffnen
-        </a>
+        </Link>
       </div>
     </div>
   )

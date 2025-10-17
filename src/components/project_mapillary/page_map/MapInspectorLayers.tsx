@@ -3,6 +3,7 @@ import { useStore } from '@nanostores/react'
 import { format } from 'date-fns'
 import { de } from 'date-fns/locale'
 import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
+import { Link } from '../../Link/Link'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 type Props = {
@@ -49,43 +50,38 @@ export const MapInspectorLayers = ({ feature }: Props) => {
       <h2 className="text-lg">{props.road || 'Unbekannte Straße'}</h2>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <a
-          href={`https://www.openstreetmap.org/${props.id}/history`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded bg-white/10 px-3 py-1.5 text-sm no-underline hover:bg-white/20"
+        <Link
+          to={`https://www.openstreetmap.org/${props.id}/history`}
+          blank
+          button
+          className="inline-flex items-center"
         >
           OpenStreetMap
-        </a>
+        </Link>
 
         {props.changeset_id && (
-          <a
-            href={`https://www.openstreetmap.org/changeset/${props.changeset_id}#map=17/${lat}/${lng}&layers=N`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center rounded bg-white/10 px-3 py-1.5 text-sm no-underline hover:bg-white/20"
+          <Link
+            to={`https://www.openstreetmap.org/changeset/${props.changeset_id}#map=17/${lat}/${lng}&layers=N`}
+            blank
+            button
+            className="inline-flex items-center"
           >
             Changeset
-          </a>
+          </Link>
         )}
 
-        <a
-          href={getMapillaryUrl(lat, lng)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded bg-white/10 px-3 py-1.5 text-sm no-underline hover:bg-white/20"
-        >
+        <Link to={getMapillaryUrl(lat, lng)} blank button className="inline-flex items-center">
           Mapillary
-        </a>
+        </Link>
 
-        <a
-          href={`https://tilda-geo.de/regionen/radinfra?map=${getCurrentZoom()}/${lat}/${lng}&config=pdqyyt.7h3d.am2gw&osmNotes=true&v=2`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded bg-white/10 px-3 py-1.5 text-sm no-underline hover:bg-white/20"
+        <Link
+          to={`https://tilda-geo.de/regionen/radinfra?map=${getCurrentZoom()}/${lat}/${lng}&config=pdqyyt.7h3d.am2gw&osmNotes=true&v=2`}
+          blank
+          button
+          className="inline-flex items-center"
         >
           TILDA radinfra
-        </a>
+        </Link>
       </div>
 
       <details className="mt-4">

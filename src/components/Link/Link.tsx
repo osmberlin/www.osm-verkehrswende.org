@@ -2,7 +2,8 @@ import { twMerge } from 'tailwind-merge'
 
 const baseStyles = 'text-blue-600'
 export const linkStyles = `${baseStyles} underline`
-export const buttonStyles = `${baseStyles} rounded-full border border-blue-600 px-6 pt-4 pb-3`
+export const buttonStyles =
+  'rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 no-underline'
 
 type Props = {
   to: string

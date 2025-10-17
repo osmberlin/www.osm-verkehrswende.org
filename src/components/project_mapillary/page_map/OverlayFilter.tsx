@@ -50,10 +50,10 @@ export const OverlayFilter = () => {
           className={({ checked }) =>
             twJoin(
               // buttonIdx === 0 ? 'rounded-tl-md rounded-tr-md' : '-mt-px',
-              '-mx-px -mt-px',
+              '-mt-px',
               // buttonIdx === buttons.length - 1 ? 'rounded-bl-md rounded-br-md' : '',
               checked ? 'z-10 border-emerald-200 bg-emerald-50' : 'border-gray-200',
-              'relative flex w-full min-w-[19em] cursor-pointer items-center justify-between border px-4 py-2.5 hover:bg-blue-50 focus:outline-hidden',
+              'relative flex w-full min-w-[19em] cursor-pointer items-center justify-between border-t border-b px-4 py-2.5 hover:bg-blue-50 focus:outline-hidden',
             )
           }
         >
@@ -63,11 +63,11 @@ export const OverlayFilter = () => {
                 className={twJoin(
                   checked ? 'border-transparent bg-emerald-600' : 'border-gray-300 bg-white',
                   focus ? 'ring-2 ring-emerald-600 ring-offset-2' : '',
-                  'mt-0.5 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center self-start rounded-full border',
+                  'mt-0.5 flex size-4 shrink-0 cursor-pointer items-center justify-center self-start rounded-full border',
                 )}
                 aria-hidden="true"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                <span className="size-1.5 rounded-full bg-white" />
               </span>
               <span className="ml-3 flex flex-1 flex-col">
                 <Label

@@ -208,7 +208,7 @@
       "menuNews": true,
       "additionalFooterLinks": [
         {
-          "label": "Github: Code for the coverage analysis",
+          "label": "Github: Code für die Mapillary Abdeckung",
           "href": "https://github.com/vizsim/mapillary_coverage"
         }
       ],

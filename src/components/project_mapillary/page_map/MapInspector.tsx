@@ -35,7 +35,7 @@ export const MapInspector: React.FC = () => {
           if (isMapillaryLayer) {
             return (
               <div key={feature.properties.id || index}>
-                <MapInspectorMapillary feature={feature} clickCoordinates={clickedMapData.lngLat} />
+                <MapInspectorMapillary clickCoordinates={clickedMapData.lngLat} />
               </div>
             )
           } else {

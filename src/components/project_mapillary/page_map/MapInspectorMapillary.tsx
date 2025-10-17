@@ -1,20 +1,21 @@
 import { useStore } from '@nanostores/react'
-import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 import { $searchParams, baseMapSearchparamsParse } from '../../BaseMap/store'
 import { Link } from '../../Link/Link'
-import { FRESH_IMAGERY_DATE } from './MapSourceMapillary'
+import { useMapillaryDate } from './useMapillaryDate'
 
 type Props = {
-  feature: MapGeoJSONFeature
   clickCoordinates: { lng: number; lat: number }
 }
 
-export const MapInspectorMapillary = ({ feature, clickCoordinates }: Props) => {
+export const MapInspectorMapillary = ({ clickCoordinates }: Props) => {
   const { lat, lng } = clickCoordinates
   const searchParams = useStore($searchParams)
+  const mapillaryDateData = useMapillaryDate()
 
-  // Convert timestamp to YYYY-MM-DD format for Mapillary
-  const dateFrom = new Date(FRESH_IMAGERY_DATE).toISOString().split('T')[0]
+  // Don't render anything if we're still loading or there's an error
+  if (!mapillaryDateData) {
+    return null
+  }
 
   // Get current zoom from search params and add 1
   const parsedParams = baseMapSearchparamsParse(searchParams.map)
@@ -22,7 +23,7 @@ export const MapInspectorMapillary = ({ feature, clickCoordinates }: Props) => {
   const mapillaryZoom = Math.round(currentZoom + 1)
 
   // Create Mapillary URL
-  const mapillaryUrl = `https://www.mapillary.com/app/?lat=${lat}&lng=${lng}&z=${mapillaryZoom}&dateFrom=${dateFrom}`
+  const mapillaryUrl = `https://www.mapillary.com/app/?lat=${lat}&lng=${lng}&z=${mapillaryZoom}&dateFrom=${mapillaryDateData.dateString}`
 
   return (
     <div className="prose prose-invert mb-4 max-w-none border-b-1 border-blue-200 pb-4 last:border-b-0">

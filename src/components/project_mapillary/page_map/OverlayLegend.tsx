@@ -2,11 +2,13 @@ import { $searchParams, baseMapSearchparamsParse } from '@components/BaseMap/sto
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { MAPILLARY_COLORS } from './colors'
-import { FRESH_IMAGERY_DATE, FRESH_IMAGERY_ZOOM_LEVEL } from './MapSourceMapillary'
+import { FRESH_IMAGERY_ZOOM_LEVEL } from './MapSourceMapillary'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
+import { useMapillaryDate } from './useMapillaryDate'
 
 export const OverlayLegend = () => {
   const params = useStore($searchParams) as SearchParamsMapillaryMap
+  const mapillaryDateData = useMapillaryDate()
 
   // Check if we're zoomed in enough to show fresh imagery
   const mapParams = baseMapSearchparamsParse(params.map)
@@ -59,13 +61,13 @@ export const OverlayLegend = () => {
         <summary
           className={twJoin('text-xs', showFreshImagery ? 'cursor-pointer hover:underline' : '')}
         >
-          Gestrichelte Linien: Neuste Fotostrecken
+          Gestrichelt: Fotos nach dem {mapillaryDateData ? mapillaryDateData.displayDate : '...'}
         </summary>
         <div className="text-sm">
           Diese Karte zeigt prozessierte Daten, die nur alle paar Monate aktualisiert werden. Um zu
           bewerten, ob eine Straße immer noch frische Fotos benötigt, werden zusätzlich Daten direkt
           von Mapillary angezeigt. Die gestrichelten Linien zeigen Mapillary-Sequenzen, die nach dem{' '}
-          {new Date(FRESH_IMAGERY_DATE).toLocaleDateString('de-DE')} aufgenommen wurden.
+          {mapillaryDateData ? mapillaryDateData.displayDate : '...'} aufgenommen wurden.
         </div>
       </details>
     </div>

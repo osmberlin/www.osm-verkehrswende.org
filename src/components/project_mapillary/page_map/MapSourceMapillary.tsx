@@ -1,15 +1,12 @@
 import { Layer, Source } from 'react-map-gl/maplibre'
 import { MAPILLARY_COLORS } from './colors'
 import { BEFORE_CITY_LABELS } from './constants'
+import { useMapillaryDate } from './useMapillaryDate'
 
 const LINE_WIDTH_THIN = 2.2
 
 // Shared zoom level for fresh imagery
 export const FRESH_IMAGERY_ZOOM_LEVEL = 14
-
-// Configuration for fresh Mapillary imagery
-// See https://github.com/vizsim/mapillary_coverage/tree/main/output
-export const FRESH_IMAGERY_DATE = new Date('2025-10-07').getTime()
 
 // https://www.mapillary.com/dashboard/developers
 export const MAPILLARY_API_KEY = 'MLY|25685938474328402|b27ce963d08801bc87bcda87d2d6481b'
@@ -21,6 +18,13 @@ export const MAPILLARY_INTERACTIVE_LAYERS = [
 ]
 
 export const MapSourceMapillary = () => {
+  const mapillaryDateData = useMapillaryDate()
+
+  // Don't render anything if we're still loading or there's an error
+  if (!mapillaryDateData) {
+    return null
+  }
+
   return (
     <Source
       id="mapillary-fresh"
@@ -49,7 +53,7 @@ export const MapSourceMapillary = () => {
           // Only show at zoom 14 and above
           ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
           // Only show imagery captured after the fresh date
-          ['>', ['get', 'captured_at'], FRESH_IMAGERY_DATE],
+          ['>', ['get', 'captured_at'], mapillaryDateData.timestamp],
         ]}
       />
 
@@ -84,7 +88,7 @@ export const MapSourceMapillary = () => {
           // Only show at zoom 14 and above
           ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
           // Only show imagery captured after the fresh date
-          ['>', ['get', 'captured_at'], FRESH_IMAGERY_DATE],
+          ['>', ['get', 'captured_at'], mapillaryDateData.timestamp],
         ]}
       />
     </Source>

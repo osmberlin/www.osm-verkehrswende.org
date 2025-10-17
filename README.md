@@ -32,4 +32,4 @@ We use [Keystatic](https://keystatic.com/) to edit some of the content.
 - Create a new project folder in `/pages`
 - Update the project slug in `pages/PROJECT/posts/[...slug].astro`
 - Add the project via Keystatic in `src/content/projects/index.json`
-- (The project keys will be [extractd automatically](keystatic/scripts/README.md).)
+- (The project keys will be [extractd automatically](cms/scripts/README.md).)

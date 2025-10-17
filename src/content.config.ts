@@ -1,5 +1,5 @@
-import { astroPostsDefinition } from 'keystatic/postsAstro'
-import { astroProjectsDefinition } from 'keystatic/projectsAstro'
+import { astroPostsDefinition } from 'cms/postsAstro'
+import { astroProjectsDefinition } from 'cms/projectsAstro'
 
 export const collections = {
   projects: astroProjectsDefinition,

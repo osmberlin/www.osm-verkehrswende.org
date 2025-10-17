@@ -62,7 +62,7 @@ export default defineConfig({
     optimizeDeps: { exclude: ['route-snapper'] },
     plugins: [
       tailwindcss(),
-      // See keystatic/scripts/README.md
+      // See cms/scripts/README.md
       watchAndRun([
         {
           name: 'extract-project-keys',

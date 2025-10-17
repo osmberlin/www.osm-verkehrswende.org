@@ -12,7 +12,7 @@ const slugs = data.projects.map((project: any) => project.name.slug) as string[]
 
 const tsContent = `
 // (!) This file is auto-generated
-// See keystatic/scripts/README.md for more
+// See cms/scripts/README.md for more
 
 export const extractedProjectKeys = ${JSON.stringify(slugs, null, 2)} as const;
 `

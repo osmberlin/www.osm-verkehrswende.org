@@ -42,6 +42,8 @@ export default defineConfig({
   output: ASTRO_OUTPUT_MODE,
   adapter: ASTRO_USE_NETLIFY_ADAPTER === 'true' ? netlify() : undefined,
   redirects: {
+    '/mapillary/posts/2023-10-30-mapillary-missing-streets-proof-of-concept/':
+      '/mapillary/posts/2025-10-12-mapillary-completeness-map/',
     '/mapswipe': '/crowdmap',
     '/crowdmap': 'https://www.osm-berlin.org/crowdmap/',
     '/crowdmap/xhain': 'https://www.osm-berlin.org/crowdmap/xhain/',

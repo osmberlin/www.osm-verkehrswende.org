@@ -1,0 +1,31 @@
+---
+import PlayIcon from 'astro-heroicons/solid/Play.astro'
+import { Picture } from 'astro:assets'
+import { getImage } from '../utils/getImage'
+
+const { link, previewImage } = Astro.props
+
+const image = getImage(previewImage)
+---
+
+<a
+  href={link}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group not-prose relative my-8 flex aspect-video w-full items-center justify-center overflow-clip rounded-md"
+>
+  <div
+    class="flex h-20 w-20 items-center justify-center rounded-full bg-yellow-500 text-teal-900 shadow-sm backdrop-blur-md transition-all duration-300 group-hover:h-24 group-hover:w-24"
+  >
+    <PlayIcon class="ml-2 h-14 w-14 transition-all group-hover:h-20 group-hover:w-20" />
+  </div>
+  <Picture
+    src={image}
+    alt=""
+    class="aspect-video bg-teal-950 object-cover"
+    pictureAttributes={{ class: 'absolute inset-0 -z-10 h-auto' }}
+    width={960}
+    densities={[1.5, 2]}
+    formats={['jpg', 'avif']}
+  />
+</a>

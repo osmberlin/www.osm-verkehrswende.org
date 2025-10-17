@@ -2,33 +2,25 @@
 identifier: mapillary_home
 title: Mapillary Missing Streets - OSM Verkehrswende
 pageTitle: Mapillary Missing Streets
-pageSubtitle: Find the streets for your next Mapillary trip…
-description: Find the streets for your next Mapillary trip…
+pageSubtitle: Finde die Straßen für deine nächste Mapillary-Tour…
+description: Finde die Straßen für deine nächste Mapillary-Tour…
 noindex: false
 language: de
-imageAlt: Mapillary Missing Streets project visualization
+imageAlt: Mapillary Missing Streets Projekt-Visualisierung
 ---
-
 <Callout language="de" color="green">
-## About
-
-Street level imagery is a great way to update OpenStreetMap. We where looking for an easy way
-to find those streets, that require an update.
-
+  Das Tool hilft dabei, Straßen zu finden, die aktuelle Mapillary-Fotos benötigen. Pinke Linien
+  markieren Abschnitte ohne aktuelle Aufnahmen – perfekt für die Planung deiner nächsten Foto-Tour.
 </Callout>
 
-<YouTubePreview
-  link="https://youtu.be/Jt3jukv0VIw"
-  previewImage="/src/content/posts/2023-10-30-mapillary-missing-streets-proof-of-concept/mapillary-coverage-karten-screenshot.png"
-/>
+<Button label="Karte öffnen" href="/mapillary/map/" newWindow={false} />
 
-## Processing
+<YouTubePreview link="https://youtu.be/Jt3jukv0VIw" previewImage="/src/content/pages/mapillary_home/mapillary-coverage-karten-screenshot.png" />
 
-The processing is documented at [github.com/osmberlin/mapillary-missing-streets](https://github.com/osmberlin/mapillary-missing-streets/). This is where you will find the default settings used to generate the data used on this
-page.
+## Karte
 
-## Map
+[Die Karte](/mapillary/map/) zeigt die Verfügbarkeit von Mapillary-Fotos basierend auf dem OSM-Straßennetz. Blaue, gepunktete Linien zeigen neue Mapillary-Sequenzen seit der letzten Aktualisierung.
 
-The processing generate pmTiles of a given region. [The map](./map) on this website
-is managed at
-[github.com/osmberlin/www.osm-verkehrswende.org/](https://github.com/osmberlin/www.osm-verkehrswende.org/).
+## Details
+
+Für weitere Informationen zur Funktionsweise, technischen Hintergründen und der Datenverarbeitung siehe unseren [Blogpost über das Projekt](/mapillary/posts/2023-10-30-mapillary-missing-streets-proof-of-concept).

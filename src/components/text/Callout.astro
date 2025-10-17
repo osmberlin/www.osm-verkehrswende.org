@@ -17,7 +17,11 @@ const colorClasses = {
 
 <div
   lang={language}
-  class={twJoin('first:prose-headings:mt-0 rounded-sm p-3 leading-tight', colorClasses[color])}
+  class={twJoin(
+    'lead',
+    'first:prose-headings:mt-0 first:prose-p:mt-0 rounded-sm p-3 leading-tight',
+    colorClasses[color],
+  )}
 >
   <slot />
 </div>

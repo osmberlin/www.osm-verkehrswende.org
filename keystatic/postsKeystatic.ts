@@ -11,7 +11,7 @@ export const keystaticPostsConfig = collection({
   path: `${contentBase}/*/`,
   format: { contentField: 'content' },
   entryLayout: 'content',
-  columns: ['title', 'pubDate'],
+  columns: ['title', 'project', 'pubDate'],
   schema: {
     title: fields.text({ label: 'Title', validation: { isRequired: true } }),
     menuTitle: fields.slug({ name: { label: 'Menu title', validation: { isRequired: true } } }),

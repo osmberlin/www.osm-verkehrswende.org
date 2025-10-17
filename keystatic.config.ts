@@ -1,5 +1,6 @@
 import { config } from '@keystatic/core'
 import { KEYSTATIC_STORAGE_KIND } from 'astro:env/client'
+import { keystaticPagesConfig } from 'cms/pagesKeystatic'
 import { keystaticPostsConfig } from 'cms/postsKeystatic'
 import { keystaticProjectsConfig } from 'cms/projectsKeystatic'
 
@@ -19,10 +20,12 @@ export default config({
     },
     navigation: {
       Meta: ['projects'],
+      Pages: ['pages'],
       Blog: ['posts'],
     },
   },
   collections: {
+    pages: keystaticPagesConfig,
     posts: keystaticPostsConfig,
   },
   singletons: {

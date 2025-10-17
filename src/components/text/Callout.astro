@@ -1,13 +1,23 @@
 ---
 import type { LayoutLanguage } from '@layouts/languages'
+import { twJoin } from 'tailwind-merge'
 
 type Props = {
   language: LayoutLanguage
+  color?: 'yellow' | 'green'
 }
 
-const { language } = Astro.props
+const { language, color = 'yellow' } = Astro.props
+
+const colorClasses = {
+  yellow: 'bg-yellow-100',
+  green: 'bg-emerald-100',
+}
 ---
 
-<div lang={language} class="rounded-sm bg-yellow-100 p-3 leading-tight">
+<div
+  lang={language}
+  class={twJoin('first:prose-headings:mt-0 rounded-sm p-3 leading-tight', colorClasses[color])}
+>
   <slot />
 </div>

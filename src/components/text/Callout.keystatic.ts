@@ -10,5 +10,13 @@ export const CalloutKeystatic = wrapper({
       options: languagesSelect,
       defaultValue: languagesSelect.at(0)!.value,
     }),
+    color: fields.select({
+      label: 'Color',
+      options: [
+        { label: 'Yellow', value: 'yellow' },
+        { label: 'Green', value: 'green' },
+      ],
+      defaultValue: 'yellow',
+    }),
   },
 })

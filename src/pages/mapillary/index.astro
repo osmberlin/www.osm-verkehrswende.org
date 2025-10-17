@@ -1,48 +1,40 @@
 ---
 import ProjectHeadline from '@components/text/ProjectHeadline.astro'
-import ProseSection from '@components/text/ProseSection.astro'
+import { proseBase } from '@layouts/baseStyles'
+import type { LayoutLanguage } from '@layouts/languages'
 import LayoutArticle from '@layouts/LayoutArticle.astro'
+import { getCollection, render } from 'astro:content'
+import { mdxComponentsAstro } from 'cms/components/mdxComponentsAstro.astro'
+import { twJoin } from 'tailwind-merge'
+
+const pagesCollection = await getCollection(
+  'pages',
+  (page) => page.data.identifier === 'mapillary_home',
+)
+const pageEntry = pagesCollection[0]
+
+if (!pageEntry) {
+  throw new Error('Page with identifier "mapillary_home" not found')
+}
+
+const { Content } = await render(pageEntry)
 ---
 
 <LayoutArticle
-  title="Mapillary Missing Streets — A project of the OpenStreetMap Verkehrswende-Group"
-  language="en"
+  title={pageEntry.data.title}
+  description={pageEntry.data.description}
+  noindex={pageEntry.data.noindex}
+  language={pageEntry.data.language as LayoutLanguage}
+  image={pageEntry.data.socialSharingImage}
+  imageAlt={pageEntry.data.imageAlt}
 >
-  <ProjectHeadline
-    title="Mapillary Missing Streets"
-    subtitle="Find the streets for your next Mapillary trip…"
-  />
-
-  <ProseSection highlight>
-    <h2 id="about">About</h2>
-
-    <p>
-      Street level imagery is a great way to update OpenStreetMap. We where looking for an easy way
-      to find those streets, that require an update.
-    </p>
-  </ProseSection>
-
-  <ProseSection>
-    <h2 id="processing">Processing</h2>
-
-    <p>
-      The processing is documented at <a
-        href="https://github.com/osmberlin/mapillary-missing-streets/"
-        >github.com/osmberlin/mapillary-missing-streets</a
-      >. This is where you will find the default settings used to generate the data used on this
-      page.
-    </p>
-  </ProseSection>
-
-  <ProseSection>
-    <h2 id="map">Map</h2>
-
-    <p>
-      The processing generate pmTiles of a given region. <a href="./map">The map</a> on this website
-      is managed at
-      <a href="https://github.com/osmberlin/www.osm-verkehrswende.org/"
-        >github.com/osmberlin/www.osm-verkehrswende.org</a
-      >.
-    </p>
-  </ProseSection>
+  <div>
+    <ProjectHeadline title={pageEntry.data.pageTitle} subtitle={pageEntry.data.pageSubtitle} />
+    <article
+      class={twJoin(proseBase, 'last:prose-p:mb-0 max-w-prose')}
+      lang={pageEntry.data.language}
+    >
+      <Content components={mdxComponentsAstro} />
+    </article>
+  </div>
 </LayoutArticle>

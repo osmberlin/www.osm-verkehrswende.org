@@ -1,22 +1,61 @@
 ---
-title: Mapillary Missing Street – Proof of concept launched
+title: Mapillary Missing Street für Deutschland veröffentlich
 project: mapillary
-pubDate: 2025-01-14T09:00
+pubDate: 2025-10-12T16:00
 author: Tobias Jordans @tordans
-menuTitle: Launch post
+menuTitle: Project-Launch
 # canonicalUrl:
 inMenu: true
-language: 'en'
+language: 'de'
 ---
 
-## This Post is WIP. Best to ignore it for now…
+Wir freuen uns, dass es nun eine Version des Tools gibt, die sich im Alltag sinnvoll einsetzen lässt. Der Weg bis hierhin war lang – aber dank der guten Zusammenarbeit in der OSM-Community haben wir jetzt eine Lösung, die praktisch nutzbar ist.
 
-This projects has been in my mind for a few years now. And on the recent [Hackweekend in Berlin](https://www.fossgis.de/news/2023_10_22_hackweekend_berlin/) it was finally time to create this proof of concept. Let's have a look at what this is, for now…
+## Worum geht es?
 
-## Backstory
+Das Ziel des Tools ist es, auf einfache Weise zu erkennen, wo aktuelle Mapillary-Fotos fehlen.
+Wenn du also eine Fahrt oder Tour planst, kannst du auf der Karte nach pinken Linien suchen – sie markieren Abschnitte, an denen laut Analyse keine aktuellen Fotos vorhanden sind. So lässt sich gezielt entscheiden, welche Strecken neue Aufnahmen brauchen.
 
-In Berlin, we have quite an [active Mapillary Community](https://www.mapillary.com/app/leaderboard/542609?location=Berlin%2C+Germany&focus=map&lat=52.523460832607356&lng=13.38212698771747&z=11.316230389043383) providing us with a constant flow of freh imagery. This data is essential when it comes to explore projects like the [Straßenraumkarte](https://strassenraumkarte.osm-berlin.org/) and the [street parking project](https://parkraum.osm-verkehrswende.org/regions/berlin/).
+## Funktionsweise
 
-For the last few years most of our most active contributors switched to 360° GoPro Max Cameras.
+Die Karte zeigt die Verfügbarkeit von Mapillary-Fotos auf Basis des OSM-Straßen- und Wegenetzes.
+Diese Daten müssen manuell aktualisiert werden – wir bemühen uns, dies regelmäßig zu tun, mindestens aber alle sechs Monate.
 
-https://wiki.openstreetmap.org/wiki/Berlin/Kameraverleih
+Da dieser Zeitraum recht lang ist, werden zusätzlich alle Mapillary-Sequenzen (Linien) eingeblendet, die seit der letzten Veröffentlichung aufgenommen wurden.
+Ab Zoomstufe 14 kann man also gut erkennen, ob ein Abschnitt, der in Pink als „fehlend“ markiert ist, mittlerweile durch eine blaue, gepunktete Mapillary-Linie abgedeckt wurde.
+
+## Technische Hintergründe
+
+Die Daten zur Mapillary-Abdeckung werden von einem Tool erzeugt, das von **vizsim** entwickelt wurde und unter
+[github.com/vizsim/mapillary_coverage](https://github.com/vizsim/mapillary_coverage/tree/main/output) gepflegt wird.
+
+Das Tool lädt die Vector-Tile-Daten von Mapillary für ganz Deutschland herunter und verschneidet sie mit dem OSM-Straßennetz.
+Diese Ergebnisse werden anschließend im Rahmen der **osm2gpsql**-Prozessierung in [TILDA Radverkehr](https://tilda-geo.de/) als CSV eingelesen und mit den dortigen Straßen- und Radinfrastruktur-Daten verknüpft.
+
+Die Integration in TILDA läuft bereits seit einiger Zeit und bildet die Grundlage für aktuelle Kampagnen auf [radinfra.de](https://radinfra.de), bei denen Wege mit Mapillary-Fotos bevorzugt werden – was das sogenannte „Sofa-Mapping“ deutlich erleichtert.
+Nun nutzen wir die gleichen Daten auch in dieser Ansicht auf **osm-verkehrswende.org**, speziell optimiert für die Planung von Foto-Touren.
+
+## Hintergrund des Projekts
+
+Vielleicht kommt euch die Seite bekannt vor – an dieser Stelle stand bereits früher ein _Proof of Concept_, der während des [OSM Hackweekends Ende 2023](https://www.fossgis.de/news/2023_10_22_hackweekend_berlin/) entstanden war.
+Der damalige Code ([osmberlin/mapillary-missing-streets](https://github.com/osmberlin/mapillary-missing-streets/)) wurde inzwischen archiviert, da er keine größeren Datenmengen performant verarbeiten konnte.
+
+Beim Hackweekend 2025 wurde das Thema erneut aufgegriffen, und daraus entstand der Ansatz, der nun umgesetzt wurde.
+
+## Datenverarbeitung im Detail
+
+Der neue Ansatz von **vizsim** ist bewusst pragmatisch gewählt, um die benötigten Daten überhaupt generieren zu können.
+Anstatt die Mapillary-API zu nutzen, werden die **Vector Tiles** direkt vom Mapillary-Endpunkt geladen.
+Dabei werden ausschließlich die Linien der Foto-Sequenzen verwendet, nicht die einzelnen Punktdaten.
+
+Die Sequenzen werden um 10 m gepuffert und mit einem gefilterten OSM-Straßennetz verschnitten.
+Nur Wege mit mindestens 60 % Überlappung gelten als „erfasst“.
+Berücksichtigt werden ausschließlich Fotos, die **nach dem 1. Januar 2023** aufgenommen wurden.
+Unterschieden wird außerdem, ob Panorama-Fotos oder nur reguläre Aufnahmen vorhanden sind.
+
+## Mitmachen
+
+Wenn du selbst mithelfen möchtest, findest du erste Informationen unter [radinfra.de/mitmachen/fotos](https://radinfra.de/mitmachen/fotos/)
+
+Jedes Foto hilft – auch wenn es nur mit einer Handy-Kamera aufgenommen wurde.
+Und wenn du richtig einsteigen willst, schau beim [Kameraverleih der OSM-Community Berlin](https://wiki.openstreetmap.org/wiki/Berlin/Kameraverleih) vorbei.

@@ -14,7 +14,13 @@ export const FRESH_IMAGERY_DATE = new Date('2025-10-07').getTime()
 // https://www.mapillary.com/dashboard/developers
 export const MAPILLARY_API_KEY = 'MLY|25685938474328402|b27ce963d08801bc87bcda87d2d6481b'
 
-export const FreshMapillaryLayers = () => {
+// Interactive layer IDs for Mapillary
+export const MAPILLARY_INTERACTIVE_LAYERS = [
+  'mapillary-fresh-lines',
+  'mapillary-fresh-click-target',
+]
+
+export const MapSourceMapillary = () => {
   return (
     <Source
       id="mapillary-fresh"
@@ -27,6 +33,26 @@ export const FreshMapillaryLayers = () => {
       attribution="© Mapillary"
       promoteId="id"
     >
+      {/* Invisible click target layer - 4px wide */}
+      <Layer
+        id="mapillary-fresh-click-target"
+        type="line"
+        source="mapillary-fresh"
+        source-layer="sequence"
+        beforeId={BEFORE_CITY_LABELS}
+        paint={{
+          'line-width': 4,
+          'line-opacity': 0, // Completely invisible
+        }}
+        filter={[
+          'all',
+          // Only show at zoom 14 and above
+          ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
+          // Only show imagery captured after the fresh date
+          ['>', ['get', 'captured_at'], FRESH_IMAGERY_DATE],
+        ]}
+      />
+
       {/* Fresh imagery lines - only show after zoom 14+ */}
       <Layer
         id="mapillary-fresh-lines"

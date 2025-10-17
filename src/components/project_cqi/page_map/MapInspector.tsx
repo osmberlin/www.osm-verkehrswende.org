@@ -12,7 +12,7 @@ import {
 export const MapInspector = () => {
   const clickedMapData = useStore($clickedMapData)
 
-  if (!clickedMapData || !clickedMapData.length) return null
+  if (!clickedMapData || clickedMapData.features.length === 0) return null
 
   return (
     <section className="absolute inset-x-1 bottom-1 z-50 overflow-y-auto rounded-lg bg-gray-900 p-4 text-gray-50 shadow-xl sm:inset-x-auto sm:inset-y-2.5 sm:right-2.5 sm:w-96">
@@ -36,7 +36,7 @@ export const MapInspector = () => {
         <span className="sr-only">Details ausblenden</span>
       </button>
 
-      {clickedMapData.map((feature) => {
+      {clickedMapData.features.map((feature) => {
         return (
           <div key={`${feature.properties.id}/${feature.properties.side}`} className="mt-8">
             <h2 className="text-lg">{feature.properties.name || feature.properties.id}</h2>

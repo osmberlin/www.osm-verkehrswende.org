@@ -2,7 +2,7 @@ import { $searchParams, baseMapSearchparamsParse } from '@components/BaseMap/sto
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { MAPILLARY_COLORS } from './colors'
-import { FRESH_IMAGERY_DATE, FRESH_IMAGERY_ZOOM_LEVEL } from './FreshMapillaryLayers'
+import { FRESH_IMAGERY_DATE, FRESH_IMAGERY_ZOOM_LEVEL } from './MapSourceMapillary'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 export const OverlayLegend = () => {

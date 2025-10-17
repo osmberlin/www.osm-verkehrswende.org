@@ -47,7 +47,7 @@ export const mapSources: MapSource[] = [
 export const MapSourceLayers = () => {
   const params = useStore($searchParams) as SearchParamsMapillaryMap
   const mapData = useStore($clickedMapData)
-  const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
+  const mapDataIds = mapData?.features?.map((feature) => feature.properties?.id) ?? []
 
   return (
     <>

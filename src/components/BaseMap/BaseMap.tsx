@@ -88,7 +88,12 @@ export const BaseMap = ({ initialViewState, interactiveLayerIds, boxZoom, childr
       cursor={cursorStyle}
       onMouseEnter={() => setCursorStyle('pointer')}
       onMouseLeave={() => setCursorStyle('grab')}
-      onClick={(event) => $clickedMapData.set(event.features)}
+      onClick={(event) =>
+        $clickedMapData.set({
+          features: event.features || [],
+          lngLat: event.lngLat,
+        })
+      }
     >
       {children}
     </Map>

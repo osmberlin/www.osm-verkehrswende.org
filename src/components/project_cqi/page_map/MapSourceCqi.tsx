@@ -9,7 +9,7 @@ import { filterParamsObject, type CqiMapSearchparams } from './storeCqi'
 export const MapSourceCqi = () => {
   const params = useStore($searchParams) as CqiMapSearchparams
   const mapData = useStore($clickedMapData)
-  const mapDataIds = mapData?.map((feature) => feature.properties?.id) ?? []
+  const mapDataIds = mapData?.features?.map((feature) => feature.properties?.id) ?? []
 
   // Debugging:
   // console.log(mapDataIds)

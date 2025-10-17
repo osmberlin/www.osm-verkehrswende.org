@@ -1,10 +1,10 @@
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
 import { BaseMap, type MapInitialViewState } from '../../BaseMap/BaseMap'
-import { FreshMapillaryLayers } from './FreshMapillaryLayers'
 import { MapInspector } from './MapInspector'
 import { MapSourceBoundaries } from './MapSourceBoundaries'
 import { MapSourceLayers, mapSources } from './MapSourceLayers'
+import { MAPILLARY_INTERACTIVE_LAYERS, MapSourceMapillary } from './MapSourceMapillary'
 import { Overlay } from './Overlay'
 
 type Props = {
@@ -28,11 +28,14 @@ export const MapillaryMap = ({ maxBounds, minZoom, maxZoom, initialViewState }: 
         ...(minZoom ? { minZoom } : {}),
         ...(maxZoom ? { maxZoom } : {}),
       }}
-      interactiveLayerIds={mapSources.map((source) => `${source.id}-coverage`)}
+      interactiveLayerIds={[
+        ...mapSources.map((source) => `${source.id}-coverage`),
+        ...MAPILLARY_INTERACTIVE_LAYERS,
+      ]}
     >
       <MapSourceBoundaries />
       <MapSourceLayers />
-      <FreshMapillaryLayers />
+      <MapSourceMapillary />
       <NavigationControl showCompass={false} position="top-right" />
       <MapInspector />
       <Overlay />

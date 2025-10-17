@@ -3,7 +3,12 @@ import { atom } from 'nanostores'
 import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 
 export const $mapLoaded = atom(false)
-export const $clickedMapData = atom<MapGeoJSONFeature[] | undefined>(undefined)
+
+export type ClickedMapData = {
+  features: MapGeoJSONFeature[]
+  lngLat: { lng: number; lat: number }
+}
+export const $clickedMapData = atom<ClickedMapData | undefined>(undefined)
 
 export type BaseMapSearchparams = {
   map: string

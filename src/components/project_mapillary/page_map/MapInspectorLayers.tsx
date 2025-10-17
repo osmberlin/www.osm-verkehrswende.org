@@ -47,7 +47,7 @@ export const MapInspectorLayers = ({ feature }: Props) => {
 
   return (
     <div className="prose prose-invert mb-4 max-w-none border-b-1 border-blue-200 pb-4 last:border-b-0">
-      <h2 className="text-lg">{props.road || 'Unbekannte Straße'}</h2>
+      <h2 className="text-lg">{props.category || props.road || 'Unbekannte Straße'}</h2>
 
       <div className="mt-4 flex flex-wrap gap-2">
         <Link

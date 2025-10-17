@@ -1,0 +1,41 @@
+---
+import { Picture } from 'astro:assets'
+import ImageFigcaption from '../ImageFigcaption.astro'
+import { getImage } from '../utils/getImage'
+import type { ImageSingleSquare } from './keystatic.ImageSingleSquare.config'
+
+type Props = ImageSingleSquare
+const { src, alt, caption, imageConfig } = Astro.props
+
+const image = getImage(src)
+const width = imageConfig.discriminant
+const position = 'value' in imageConfig ? imageConfig.value : undefined
+---
+
+<div
+  class:list={[
+    position === 'center' && 'justify-center',
+    position === 'right' && 'justify-end',
+    'flex w-full',
+    'not-prose',
+  ]}
+>
+  <figure
+    class:list={[
+      width === 'half' ? 'w-full md:w-1/2' : 'w-full',
+      'overflow-hidden rounded-sm border border-gray-100 bg-gray-50 shadow-sm',
+    ]}
+  >
+    <Picture
+      class="aspect-square w-full object-cover"
+      pictureAttributes={{ class: 'not-prose' }}
+      src={image}
+      alt={alt || ''}
+      loading="lazy"
+      width={width === 'half' ? 960 / 2 : 960}
+      densities={[1.5, 2]}
+      formats={['jpg', 'avif']}
+    />
+    {caption && <ImageFigcaption>{caption}</ImageFigcaption>}
+  </figure>
+</div>

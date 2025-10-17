@@ -1,0 +1,7 @@
+---
+const { className } = Astro.props
+---
+
+<figcaption class:list={['mt-2 text-xs text-gray-600 italic md:text-sm', className]}>
+  <slot />
+</figcaption>

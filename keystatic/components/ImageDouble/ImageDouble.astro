@@ -1,0 +1,46 @@
+---
+import { Picture } from 'astro:assets'
+import ImageFigcaption from '../ImageFigcaption.astro'
+import { getImage } from '../utils/getImage'
+import type { ImageDoubleType } from './keystatic.ImageDouble.config'
+
+type Props = ImageDoubleType
+const { src, alt, caption, srcSecond, altSecond, captionSecond, imageConfig } = Astro.props
+
+const image1 = getImage(src)
+const image2 = getImage(srcSecond)
+const images = [
+  { image: image1, alt, caption },
+  { image: image2, alt: altSecond, caption: captionSecond },
+]
+
+const orientation = imageConfig.discriminant
+const ratio = 'value' in imageConfig ? imageConfig.value : undefined
+---
+
+<div class="not-prose my-8 grid w-full grid-cols-1 gap-5 md:grid-cols-2">
+  {
+    images.map((image) => (
+      <figure class="overflow-hidden rounded-sm border border-gray-100 bg-gray-50 shadow-sm">
+        <Picture
+          class:list={[
+            orientation === 'square' && 'aspect-1/1',
+            orientation === 'horizontal' && ratio === '3/2' && 'aspect-3/2',
+            orientation === 'horizontal' && ratio === '4/3' && 'aspect-4/3',
+            orientation === 'vertical' && ratio === '3/2' && 'aspect-3/4',
+            orientation === 'vertical' && ratio === '4/3' && 'aspect-2/3',
+            'h-full w-full object-cover',
+          ]}
+          pictureAttributes={{ class: 'not-prose' }}
+          src={image.image}
+          alt={image.alt || ''}
+          loading="lazy"
+          width={960 / 2 - 20 / 2}
+          densities={[1.5, 2]}
+          formats={['jpg', 'avif']}
+        />
+        {image.caption && <ImageFigcaption>{image.caption}</ImageFigcaption>}
+      </figure>
+    ))
+  }
+</div>

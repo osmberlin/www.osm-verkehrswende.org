@@ -36,13 +36,10 @@ export const keystaticPostsConfig = collection({
     }),
     content: fields.mdx({
       label: 'Content',
-      components: mdxComponentsKeystatic,
-      options: {
-        image: {
-          directory: 'src/assets/posts',
-          publicPath: '../../../assets/posts',
-        },
-      },
+      components: mdxComponentsKeystatic('posts'),
+      // Astro does not allow to configure max image sizes for Content components.
+      // Instead we rely on our custom image components.
+      options: { image: false },
     }),
     image: fields.image({
       label: 'Social Sharing Image Path',

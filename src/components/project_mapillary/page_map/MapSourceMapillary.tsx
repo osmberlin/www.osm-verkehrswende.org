@@ -1,6 +1,10 @@
+import { useStore } from '@nanostores/react'
+import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
+import { $searchParams } from '../../BaseMap/store'
 import { MAPILLARY_COLORS } from './colors'
 import { BEFORE_CITY_LABELS } from './constants'
+import type { SearchParamsMapillaryMap } from './storeMapillary'
 import { useMapillaryDate } from './useMapillaryDate'
 
 const LINE_WIDTH_THIN = 2.2
@@ -19,11 +23,27 @@ export const MAPILLARY_INTERACTIVE_LAYERS = [
 
 export const MapSourceMapillary = () => {
   const mapillaryDateData = useMapillaryDate()
+  const params = useStore($searchParams) as SearchParamsMapillaryMap
 
   // Don't render anything if we're still loading or there's an error
   if (!mapillaryDateData) {
     return null
   }
+
+  // Build base filter
+  const baseFilter: FilterSpecification = [
+    'all',
+    // Only show at zoom 14 and above
+    ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
+    // Only show imagery captured after the fresh date
+    ['>', ['get', 'captured_at'], mapillaryDateData.timestamp],
+  ]
+
+  // Add panorama filter if in panorama-only mode
+  const freshImageryFilter: FilterSpecification =
+    params?.anzeige === 'current_pano'
+      ? [...baseFilter, ['==', ['get', 'is_pano'], true]]
+      : baseFilter
 
   return (
     <Source
@@ -48,13 +68,7 @@ export const MapSourceMapillary = () => {
           'line-width': 4,
           'line-opacity': 0, // Completely invisible
         }}
-        filter={[
-          'all',
-          // Only show at zoom 14 and above
-          ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
-          // Only show imagery captured after the fresh date
-          ['>', ['get', 'captured_at'], mapillaryDateData.timestamp],
-        ]}
+        filter={freshImageryFilter}
       />
 
       {/* Fresh imagery lines - only show after zoom 14+ */}
@@ -83,13 +97,7 @@ export const MapSourceMapillary = () => {
           'line-opacity': ['interpolate', ['linear'], ['zoom'], 14, 0.6, 16, 0.8, 18, 0.9],
           'line-dasharray': [2, 2], // Dotted line pattern
         }}
-        filter={[
-          'all',
-          // Only show at zoom 14 and above
-          ['>=', ['zoom'], FRESH_IMAGERY_ZOOM_LEVEL],
-          // Only show imagery captured after the fresh date
-          ['>', ['get', 'captured_at'], mapillaryDateData.timestamp],
-        ]}
+        filter={freshImageryFilter}
       />
     </Source>
   )

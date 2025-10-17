@@ -1,20 +1,22 @@
 ---
 title: Mapillary Missing Street für Deutschland veröffentlich
-project: mapillary
-pubDate: 2025-10-12T16:00
-author: Tobias Jordans @tordans
 menuTitle: Project-Launch
-# canonicalUrl:
+project: mapillary
+pubDate: 2025-10-12T16:00:00.000Z
+author: Tobias Jordans @tordans
 inMenu: true
-language: 'de'
+noindex: false
+language: de
+showToc: false
 ---
-
 Wir freuen uns, dass es nun eine Version des Tools gibt, die sich im Alltag sinnvoll einsetzen lässt. Der Weg bis hierhin war lang – aber dank der guten Zusammenarbeit in der OSM-Community haben wir jetzt eine Lösung, die praktisch nutzbar ist.
 
 ## Worum geht es?
 
 Das Ziel des Tools ist es, auf einfache Weise zu erkennen, wo aktuelle Mapillary-Fotos fehlen.
 Wenn du also eine Fahrt oder Tour planst, kannst du auf der Karte nach pinken Linien suchen – sie markieren Abschnitte, an denen laut Analyse keine aktuellen Fotos vorhanden sind. So lässt sich gezielt entscheiden, welche Strecken neue Aufnahmen brauchen.
+
+<ImageSingleHorizontal src="/src/content/posts/2023-10-30-mapillary-missing-streets-proof-of-concept/Bildschirmfoto 2025-10-17 um 13.03.35.png" caption="Karte mit Wegen wo Fotos fehlen (pink), wo aktuelle Fotos vorhanden sind (blau) sowie aktuellen Mapillary Strecken (gestrichelt)" alt="Screenshot Mapillary Coverage Tool" imageConfig={{"discriminant":"pano"}} />
 
 ## Funktionsweise
 
@@ -27,7 +29,7 @@ Ab Zoomstufe 14 kann man also gut erkennen, ob ein Abschnitt, der in Pink als �
 ## Technische Hintergründe
 
 Die Daten zur Mapillary-Abdeckung werden von einem Tool erzeugt, das von **vizsim** entwickelt wurde und unter
-[github.com/vizsim/mapillary_coverage](https://github.com/vizsim/mapillary_coverage/tree/main/output) gepflegt wird.
+[github.com/vizsim/mapillary\_coverage](https://github.com/vizsim/mapillary_coverage/tree/main/output) gepflegt wird.
 
 Das Tool lädt die Vector-Tile-Daten von Mapillary für ganz Deutschland herunter und verschneidet sie mit dem OSM-Straßennetz.
 Diese Ergebnisse werden anschließend im Rahmen der **osm2gpsql**-Prozessierung in [TILDA Radverkehr](https://tilda-geo.de/) als CSV eingelesen und mit den dortigen Straßen- und Radinfrastruktur-Daten verknüpft.
@@ -37,7 +39,7 @@ Nun nutzen wir die gleichen Daten auch in dieser Ansicht auf **osm-verkehrswende
 
 ## Hintergrund des Projekts
 
-Vielleicht kommt euch die Seite bekannt vor – an dieser Stelle stand bereits früher ein _Proof of Concept_, der während des [OSM Hackweekends Ende 2023](https://www.fossgis.de/news/2023_10_22_hackweekend_berlin/) entstanden war.
+Vielleicht kommt euch die Seite bekannt vor – an dieser Stelle stand bereits früher ein *Proof of Concept*, der während des [OSM Hackweekends Ende 2023](https://www.fossgis.de/news/2023_10_22_hackweekend_berlin/) entstanden war.
 Der damalige Code ([osmberlin/mapillary-missing-streets](https://github.com/osmberlin/mapillary-missing-streets/)) wurde inzwischen archiviert, da er keine größeren Datenmengen performant verarbeiten konnte.
 
 Beim Hackweekend 2025 wurde das Thema erneut aufgegriffen, und daraus entstand der Ansatz, der nun umgesetzt wurde.

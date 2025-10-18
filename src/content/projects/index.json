@@ -39,6 +39,60 @@
     },
     {
       "name": {
+        "name": "Kameraverleih",
+        "slug": "kameraverleih"
+      },
+      "enabled": true,
+      "externalProjektPage": "https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Kameraverleih",
+      "header": "ProjectHeader",
+      "menus": [],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Kameraverleih - 360°-Panoramakameras für OSM-Mapping",
+        "description": "Verleih von 360°-Panoramakameras für aktive OSM-Mapper:innen zur Verbesserung der Kartendaten",
+        "imageAlt": "360°-Kameraset für OpenStreetMap Mapping",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Mapillary Missing Streets",
+        "slug": "mapillary"
+      },
+      "enabled": true,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Über das Projekt",
+              "href": "/mapillary/"
+            },
+            {
+              "label": "Karte",
+              "href": "/mapillary/map/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [
+        {
+          "label": "Github: Code für die Mapillary Abdeckung",
+          "href": "https://github.com/vizsim/mapillary_coverage"
+        }
+      ],
+      "meta": {
+        "title": "Mapillary Missing Streets",
+        "description": "An easy way to find out which streets in Berlin require fresh 360° images",
+        "image": "/src/content/projects/projects/3/meta/image.png",
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
         "name": "Cycling Quality Index",
         "slug": "cqi"
       },
@@ -85,7 +139,7 @@
       "meta": {
         "title": "Cycling Quality Index",
         "description": "Eine Klassifizierung der Fahrradfreundlichkeit und -eignung des Straßennetzes",
-        "image": "/src/content/projects/projects/2/meta/image.png",
+        "image": "/src/content/projects/projects/4/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -125,7 +179,7 @@
       "meta": {
         "title": "Verkehrszeichen in OpenStreetMap",
         "description": "Kataster, Werkzeuge und Auswertungen zu Verkehrszeichen in OpenStreetMap",
-        "image": "/src/content/projects/projects/3/meta/image.png",
+        "image": "/src/content/projects/projects/5/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -160,7 +214,7 @@
       "meta": {
         "title": "Fahrradstellplätze in OpenStreetMap",
         "description": "Datenabgleich und Statisitik zu Fahradstellplätzen in OpenStreetMap",
-        "image": "/src/content/projects/projects/4/meta/image.png",
+        "image": "/src/content/projects/projects/6/meta/image.png",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
@@ -170,7 +224,7 @@
         "name": "Crowdmap",
         "slug": "crowdmap"
       },
-      "enabled": true,
+      "enabled": false,
       "externalProjektPage": "https://www.osm-berlin.org/crowdmap/",
       "header": "ProjectHeader",
       "menus": [],
@@ -179,44 +233,8 @@
       "meta": {
         "title": "Crowdmap-Experiment zur Prüfung von Gebäude Daten in Berlin",
         "description": "Ein Projekt um die Datenqualität von Geäbuden in OSM für Berlin zu prüfen und zu verbessern.",
-        "image": "/src/content/projects/projects/5/meta/image.png",
+        "image": "/src/content/projects/projects/7/meta/image.png",
         "imageAlt": "Luftbild mit OSM Gebäudedaten und Angaben zur Validierung der Gebäude.",
-        "language": "de"
-      }
-    },
-    {
-      "name": {
-        "name": "Mapillary Missing Streets",
-        "slug": "mapillary"
-      },
-      "enabled": true,
-      "header": "ProjectHeader",
-      "menus": [
-        {
-          "items": [
-            {
-              "label": "Über das Projekt",
-              "href": "/mapillary/"
-            },
-            {
-              "label": "Karte",
-              "href": "/mapillary/map/"
-            }
-          ]
-        }
-      ],
-      "menuNews": true,
-      "additionalFooterLinks": [
-        {
-          "label": "Github: Code für die Mapillary Abdeckung",
-          "href": "https://github.com/vizsim/mapillary_coverage"
-        }
-      ],
-      "meta": {
-        "title": "Mapillary Missing Streets",
-        "description": "An easy way to find out which streets in Berlin require fresh 360° images",
-        "image": "/src/content/projects/projects/6/meta/image.png",
-        "imageAlt": "OpenStreetMap Verkehrswende Community",
         "language": "de"
       }
     },
@@ -243,24 +261,6 @@
         "title": "Bänke in OpenStreetMap",
         "description": "Verzeichnis von Parkbänden und Sitzbänken aus OpenStreetMap",
         "imageAlt": "OpenStreetMap Verkehrswende Community",
-        "language": "de"
-      }
-    },
-    {
-      "name": {
-        "name": "Kameraverleih",
-        "slug": "kameraverleih"
-      },
-      "enabled": true,
-      "externalProjektPage": "https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Kameraverleih",
-      "header": "ProjectHeader",
-      "menus": [],
-      "menuNews": true,
-      "additionalFooterLinks": [],
-      "meta": {
-        "title": "Kameraverleih - 360°-Panoramakameras für OSM-Mapping",
-        "description": "Verleih von 360°-Panoramakameras für aktive OSM-Mapper:innen zur Verbesserung der Kartendaten",
-        "imageAlt": "360°-Kameraset für OpenStreetMap Mapping",
         "language": "de"
       }
     },

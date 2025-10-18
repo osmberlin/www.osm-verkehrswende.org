@@ -57,6 +57,7 @@ export default defineConfig({
       'https://radinfra.de/kampagnen/missing_traffic_sign_vehicle_destination/',
     '/traffic-signs/campaigns/missing_traffic_sign_244/':
       'https://radinfra.de/kampagnen/missing_traffic_sign_244/',
+    '/kameraverleih': 'https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Kameraverleih',
   },
   markdown: { remarkPlugins: [remarkToc] },
   vite: {

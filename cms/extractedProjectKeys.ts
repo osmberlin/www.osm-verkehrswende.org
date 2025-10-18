@@ -1,5 +1,5 @@
 // (!) This file is auto-generated
-// See keystatic/scripts/README.md for more
+// See cms/scripts/README.md for more
 
 export const extractedProjectKeys = [
   'root',
@@ -10,5 +10,6 @@ export const extractedProjectKeys = [
   'crowdmap',
   'mapillary',
   'benches',
+  'kameraverleih',
   'unknown',
 ] as const

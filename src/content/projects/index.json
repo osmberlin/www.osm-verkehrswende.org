@@ -248,6 +248,24 @@
     },
     {
       "name": {
+        "name": "Kameraverleih",
+        "slug": "kameraverleih"
+      },
+      "enabled": true,
+      "externalProjektPage": "https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Kameraverleih",
+      "header": "ProjectHeader",
+      "menus": [],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Kameraverleih - 360°-Panoramakameras für OSM-Mapping",
+        "description": "Verleih von 360°-Panoramakameras für aktive OSM-Mapper:innen zur Verbesserung der Kartendaten",
+        "imageAlt": "360°-Kameraset für OpenStreetMap Mapping",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
         "name": "(FALLBACK)",
         "slug": "unknown"
       },

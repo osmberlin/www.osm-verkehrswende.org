@@ -29,10 +29,7 @@ const fetchMapillaryDate = async () => {
     throw new Error(`Failed to fetch Mapillary date: ${response.statusText}`)
   }
 
-  // Handle malformed JSON with trailing comma
-  const text = await response.text()
-  const cleanedText = text.replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
-  const data = JSON.parse(cleanedText) as MapillaryCoverageMeta
+  const data = (await response.json()) as MapillaryCoverageMeta
 
   // Validate the date format
   if (!validateDateFormat(data.mapillary_coverage_date)) {

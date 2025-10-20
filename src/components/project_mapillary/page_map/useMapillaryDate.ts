@@ -1,28 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 
 type MapillaryCoverageMeta = {
-  mapillary_coverage_date: string
+  // Mapillary Coverage Data From: DateTime String
+  ml_data_from: string
 }
 
 const validateDateFormat = (dateString: string): boolean => {
-  // Validate YYYY-MM-DD format
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
-  if (!dateRegex.test(dateString)) {
-    return false
-  }
-
-  // Validate that it's a real date
+  // Validate ISO timestamp format
   const date = new Date(dateString)
-  return (
-    date instanceof Date &&
-    !isNaN(date.getTime()) &&
-    date.toISOString().split('T')[0] === dateString
-  )
+  return date instanceof Date && !isNaN(date.getTime()) && date.toISOString() === dateString
 }
 
 const fetchMapillaryDate = async () => {
   const response = await fetch(
-    'https://raw.githubusercontent.com/vizsim/mapillary_coverage/refs/heads/main/output/meta.json',
+    'https://raw.githubusercontent.com/vizsim/mapillary_coverage/refs/heads/main/ml_metadata.json',
   )
 
   if (!response.ok) {
@@ -32,15 +23,13 @@ const fetchMapillaryDate = async () => {
   const data = (await response.json()) as MapillaryCoverageMeta
 
   // Validate the date format
-  if (!validateDateFormat(data.mapillary_coverage_date)) {
-    throw new Error(
-      `Invalid date format: ${data.mapillary_coverage_date}. Expected YYYY-MM-DD format.`,
-    )
+  if (!validateDateFormat(data.ml_data_from)) {
+    throw new Error(`Invalid date format: ${data.ml_data_from}. Expected ISO timestamp format.`)
   }
 
-  const date = new Date(data.mapillary_coverage_date)
+  const date = new Date(data.ml_data_from)
   const timestamp = date.getTime()
-  const dateString = data.mapillary_coverage_date // Already in YYYY-MM-DD format
+  const dateString = date.toISOString().split('T')[0] // Convert to YYYY-MM-DD format
   const displayDate = date.toLocaleDateString('de-DE')
 
   return {

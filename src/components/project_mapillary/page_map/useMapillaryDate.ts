@@ -8,7 +8,7 @@ type MapillaryCoverageMeta = {
 const validateDateFormat = (dateString: string): boolean => {
   // Validate ISO timestamp format
   const date = new Date(dateString)
-  return date instanceof Date && !isNaN(date.getTime()) && date.toISOString() === dateString
+  return date instanceof Date && !isNaN(date.getTime())
 }
 
 const fetchMapillaryDate = async () => {

@@ -32,7 +32,7 @@ export const mapSources: MapSource[] = [
   {
     id: 'road-path-classes',
     tiles: ['https://tiles.tilda-geo.de/atlas_generalized_roadspathclasses/{z}/{x}/{y}'],
-    sourceLayer: 'roadPathsClasses',
+    sourceLayer: 'roadsPathClasses',
     lineWidth: LINE_WIDTH_THIN,
   },
   {

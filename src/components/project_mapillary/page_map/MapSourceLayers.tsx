@@ -112,8 +112,8 @@ export const MapSourceLayers = () => {
             }}
             filter={[
               'all',
-              // Only show at zoom 9 and above
-              ['>=', ['zoom'], 9],
+              // Only show at zoom 9 and above (11 for road-path-classes)
+              source.id === 'road-path-classes' ? ['>=', ['zoom'], 11] : ['>=', ['zoom'], 9],
               // Exclude road types (exclude list)
               source?.roadPropertyExclude?.length && source.roadPropertyExclude.length > 0
                 ? ['!', ['in', ['get', 'road'], ['literal', source.roadPropertyExclude]]]

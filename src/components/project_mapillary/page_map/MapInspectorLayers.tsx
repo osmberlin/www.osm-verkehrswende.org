@@ -102,7 +102,11 @@ export const MapInspectorLayers = ({ feature }: Props) => {
               <tr className="border-b border-white/10">
                 <th className="py-1 pr-2 text-left text-xs font-medium text-white/70">Länge</th>
                 <td className="py-1 text-xs">
-                  {props.length ? `${props.length.toFixed(2)} km` : 'Unbekannt'}
+                  {props.length != null
+                    ? props.length >= 1000
+                      ? `${(props.length / 1000).toFixed(2)} km`
+                      : `${props.length.toFixed(2)} m`
+                    : 'Unbekannt'}
                 </td>
               </tr>
               <tr className="border-b border-white/10">

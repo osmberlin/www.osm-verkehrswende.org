@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { de } from 'date-fns/locale'
 import type { MapGeoJSONFeature } from 'react-map-gl/maplibre'
 import { Link } from '../../Link/Link'
+import { buildRoutePlanningUrl } from './routePlanningUrl'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 type Props = {
@@ -40,10 +41,23 @@ export const MapInspectorLayers = ({ feature }: Props) => {
   }
 
   const props = feature.properties
-  // Handle different geometry types - for LineString, coordinates is an array of [lng, lat] pairs
-  const coordinates =
-    feature.geometry?.type === 'LineString' ? feature.geometry.coordinates[0] || [0, 0] : [0, 0]
-  const [lng, lat] = coordinates
+  const geom = feature.geometry
+  // First vertex: LineString -> coordinates[0]; MultiLineString -> coordinates[0][0]
+  const firstCoord =
+    geom?.type === 'MultiLineString'
+      ? geom.coordinates[0]?.[0]
+      : geom?.type === 'LineString'
+        ? geom.coordinates[0]
+        : null
+  const [lng, lat] = firstCoord ?? [0, 0]
+  const zoom = getCurrentZoom()
+  const routePlanningUrl = buildRoutePlanningUrl({
+    zoom,
+    lat,
+    lng,
+    startLat: lat,
+    startLng: lng,
+  })
 
   // Data source from MapLibre feature (source = map source id, sourceLayer = vector tile layer)
   const feat = feature as {
@@ -84,12 +98,22 @@ export const MapInspectorLayers = ({ feature }: Props) => {
         </Link>
 
         <Link
-          to={`https://tilda-geo.de/regionen/radinfra?map=${getCurrentZoom()}/${lat}/${lng}&config=pdqyyt.7h3d.am2gw&osmNotes=true&v=2`}
+          to={`https://tilda-geo.de/regionen/radinfra?map=${zoom}/${lat}/${lng}&config=pdqyyt.7h3d.am2gw&osmNotes=true&v=2`}
           blank
           button
           className="inline-flex items-center"
         >
           TILDA radinfra
+        </Link>
+
+        <Link
+          to={routePlanningUrl}
+          blank
+          button
+          className="inline-flex items-center"
+          rel="noopener noreferrer"
+        >
+          Routenplanung
         </Link>
       </div>
 

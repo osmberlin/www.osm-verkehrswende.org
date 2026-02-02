@@ -2,6 +2,7 @@ import { OverlayDatenstand } from './OverlayDatenstand'
 import { OverlayFilter } from './OverlayFilter'
 import { OverlayFortbewegungsfilter } from './OverlayFortbewegungsfilter'
 import { OverlayLegend } from './OverlayLegend'
+import { OverlayRoutePlanning } from './OverlayRoutePlanning'
 import { OverlayZoomMessage } from './OverlayZoomMessage'
 
 export const Overlay = () => {
@@ -11,6 +12,7 @@ export const Overlay = () => {
       <OverlayDatenstand />
       <OverlayFortbewegungsfilter />
       <OverlayFilter />
+      <OverlayRoutePlanning />
       <OverlayZoomMessage />
     </nav>
   )

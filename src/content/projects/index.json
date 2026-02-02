@@ -72,6 +72,10 @@
             {
               "label": "Karte",
               "href": "/mapillary/map/"
+            },
+            {
+              "label": "Routenplanung",
+              "href": "https://vizsim.github.io/missing_mapillary_gh-routing/"
             }
           ]
         }
@@ -81,6 +85,10 @@
         {
           "label": "Github: Code für die Mapillary Abdeckung",
           "href": "https://github.com/vizsim/mapillary_coverage"
+        },
+        {
+          "label": "Github: Routenplanung",
+          "href": "https://github.com/vizsim/missing_mapillary_gh-routing"
         }
       ],
       "meta": {

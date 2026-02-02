@@ -1,6 +1,6 @@
 import { $searchParams } from '@components/BaseMap/store'
-import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
 import { legendByGroups } from './layers/layers'

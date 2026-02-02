@@ -1,6 +1,6 @@
 import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
-import type { FilterSpecification } from 'maplibre-gl'
 import { useStore } from '@nanostores/react'
+import type { FilterSpecification } from 'maplibre-gl'
 import { Layer, Source } from 'react-map-gl/maplibre'
 import { MAPILLARY_COLORS } from './colors'
 import { BEFORE_CITY_LABELS } from './constants'

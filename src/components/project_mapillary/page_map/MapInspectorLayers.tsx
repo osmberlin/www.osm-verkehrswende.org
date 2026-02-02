@@ -46,7 +46,11 @@ export const MapInspectorLayers = ({ feature }: Props) => {
   const [lng, lat] = coordinates
 
   // Data source from MapLibre feature (source = map source id, sourceLayer = vector tile layer)
-  const feat = feature as { source?: string; sourceLayer?: string; layer?: { source?: string; 'source-layer'?: string } }
+  const feat = feature as {
+    source?: string
+    sourceLayer?: string
+    layer?: { source?: string; 'source-layer'?: string }
+  }
   const dataSourceId = feat.source ?? feat.layer?.source ?? '—'
   const dataSourceLayer = feat.sourceLayer ?? feat.layer?.['source-layer'] ?? '—'
 

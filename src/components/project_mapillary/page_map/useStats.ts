@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/react'
 import { length } from '@turf/turf'
 import { useEffect, useState } from 'react'
 import { useMap } from 'react-map-gl/maplibre'
-import { mapSources } from './MapSourceLayers'
+import { fortbewegungConfig } from './MapSourceLayers'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 export type Stat = { km: number | null; percent: number | null }
@@ -42,8 +42,11 @@ export const useStats = () => {
       return
     }
 
-    // Get all coverage layers for statistics
-    const coverageLayerNames = mapSources.map((source) => `${source.id}-coverage`)
+    // Only query coverage layers that are rendered for current fortbewegung
+    const mode = params?.fortbewegung ?? 'all'
+    const coverageLayerNames = fortbewegungConfig[mode].sourceIds.map(
+      (sourceId) => `${sourceId}-coverage`,
+    )
 
     const features = mainMap.getMap().queryRenderedFeatures({
       layers: coverageLayerNames,
@@ -56,27 +59,8 @@ export const useStats = () => {
     }
     let totalKm = 0
 
-    // Group features by their coverage type
+    // Group features by their coverage type (layer filter already applied road filters)
     for (const feature of features) {
-      // Apply roadPropertyExclude based on source type
-      const layerId = feature.layer.id
-      const sourceId = layerId.replace('-coverage', '')
-      const source = mapSources.find((s) => s.id === sourceId)
-
-      if (source?.roadPropertyExclude || source?.roadPropertyAllow) {
-        const road = feature.properties?.road
-
-        // Skip if road type is in the exclude list
-        if (source.roadPropertyExclude && road && source.roadPropertyExclude.includes(road)) {
-          continue
-        }
-
-        // Skip if road type is NOT in the allow list (only show allowed types)
-        if (source.roadPropertyAllow && road && !source.roadPropertyAllow.includes(road)) {
-          continue
-        }
-      }
-
       // Get the coverage type from the feature properties
       const coverage = feature.properties?.mapillary_coverage
       const featureLength = length(feature, { units: 'kilometers' })
@@ -119,7 +103,7 @@ export const useStats = () => {
 
   useEffect(() => {
     fetchOrUpdateStats()
-  }, [mapLoaded, params.map])
+  }, [mapLoaded, params.map, params.fortbewegung])
 
   useEffect(() => {
     if (!mainMap) return

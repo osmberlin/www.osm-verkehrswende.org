@@ -45,6 +45,11 @@ export const MapInspectorLayers = ({ feature }: Props) => {
     feature.geometry?.type === 'LineString' ? feature.geometry.coordinates[0] || [0, 0] : [0, 0]
   const [lng, lat] = coordinates
 
+  // Data source from MapLibre feature (source = map source id, sourceLayer = vector tile layer)
+  const feat = feature as { source?: string; sourceLayer?: string; layer?: { source?: string; 'source-layer'?: string } }
+  const dataSourceId = feat.source ?? feat.layer?.source ?? '—'
+  const dataSourceLayer = feat.sourceLayer ?? feat.layer?.['source-layer'] ?? '—'
+
   return (
     <div className="prose prose-invert mb-4 max-w-none border-b-1 border-blue-200 pb-4 last:border-b-0">
       <h2 className="text-lg">{props.category || props.road || 'Unbekannte Straße'}</h2>
@@ -87,6 +92,15 @@ export const MapInspectorLayers = ({ feature }: Props) => {
       <details className="mt-4">
         <summary className="cursor-pointer text-sm font-medium">Mehr…</summary>
         <div className="mt-2">
+          <p className="mb-3 text-xs text-white/70">
+            Datenquelle: <span className="font-mono">{dataSourceId}</span>
+            {dataSourceLayer !== '—' && (
+              <>
+                {' '}
+                (<span className="font-mono">{dataSourceLayer}</span>)
+              </>
+            )}
+          </p>
           <table className="w-full text-sm">
             <tbody>
               <tr className="border-b border-white/10">

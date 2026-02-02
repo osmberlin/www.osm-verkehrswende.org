@@ -1,4 +1,5 @@
 import { $searchParams } from '@components/BaseMap/store'
+import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { useStore } from '@nanostores/react'
 import { twJoin } from 'tailwind-merge'
@@ -55,20 +56,13 @@ export const OverlayLegendAndFilter = () => {
       {({ open }) => (
         <>
           <div className="flex items-center justify-between">
-            <DisclosureButton className="flex grow gap-1 px-2 py-2 text-sm hover:font-medium">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
+            <DisclosureButton className="flex grow cursor-pointer gap-1 px-2 py-2 text-sm hover:font-medium">
+              <ChevronRightIcon
                 className={twJoin(
                   'h-5 w-5 transition-transform',
                   open ? 'rotate-90 transform' : '',
                 )}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-              </svg>
+              />
               Legende
             </DisclosureButton>
             {!noUserFilter && (

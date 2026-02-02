@@ -30,6 +30,11 @@ export const MapSourceMapillary = () => {
     return null
   }
 
+  // Hide fresh layer when URL has freshLayer=off
+  if (params?.freshLayer === 'off') {
+    return null
+  }
+
   // Build base filter
   const baseFilter: FilterSpecification = [
     'all',

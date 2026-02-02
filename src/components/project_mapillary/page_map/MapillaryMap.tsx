@@ -1,12 +1,15 @@
+import { $searchParams } from '@components/BaseMap/store'
+import { useStore } from '@nanostores/react'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
 import { BaseMap, type MapInitialViewState } from '../../BaseMap/BaseMap'
 import { MapillaryQueryClient } from './MapillaryQueryClient'
 import { MapInspector } from './MapInspector'
 import { MapSourceBoundaries } from './MapSourceBoundaries'
-import { MapSourceLayers, mapSources } from './MapSourceLayers'
+import { MapSourceLayers, fortbewegungConfig } from './MapSourceLayers'
 import { MAPILLARY_INTERACTIVE_LAYERS, MapSourceMapillary } from './MapSourceMapillary'
 import { Overlay } from './Overlay'
+import type { SearchParamsMapillaryMap } from './storeMapillary'
 
 type Props = {
   maxBounds: MapInitialViewState['maxBounds']
@@ -16,6 +19,10 @@ type Props = {
 }
 
 export const MapillaryMap = ({ maxBounds, minZoom, maxZoom, initialViewState }: Props) => {
+  const params = useStore($searchParams) as SearchParamsMapillaryMap
+  const mode = params?.fortbewegung ?? 'all'
+  const clickTargetLayerIds = fortbewegungConfig[mode].sourceIds.map((id) => `${id}-click-target`)
+
   return (
     <MapillaryQueryClient>
       <BaseMap
@@ -30,10 +37,7 @@ export const MapillaryMap = ({ maxBounds, minZoom, maxZoom, initialViewState }: 
           ...(minZoom ? { minZoom } : {}),
           ...(maxZoom ? { maxZoom } : {}),
         }}
-        interactiveLayerIds={[
-          ...mapSources.map((source) => `${source.id}-coverage`),
-          ...MAPILLARY_INTERACTIVE_LAYERS,
-        ]}
+        interactiveLayerIds={[...clickTargetLayerIds, ...MAPILLARY_INTERACTIVE_LAYERS]}
       >
         <MapSourceBoundaries />
         <MapSourceLayers />

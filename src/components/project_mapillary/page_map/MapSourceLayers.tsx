@@ -1,9 +1,10 @@
 import { $clickedMapData, $searchParams } from '@components/BaseMap/store'
+import type { FilterSpecification } from 'maplibre-gl'
 import { useStore } from '@nanostores/react'
 import { Layer, Source } from 'react-map-gl/maplibre'
 import { MAPILLARY_COLORS } from './colors'
 import { BEFORE_CITY_LABELS } from './constants'
-import type { SearchParamsMapillaryMap } from './storeMapillary'
+import type { FortbewegungMode, SearchParamsMapillaryMap } from './storeMapillary'
 
 const ATTRIBUTION =
   "© OpenStreetMap, <a href='https://tilda-geo.de/regionen/radinfra'>tilda-geo.de</a>; © Mapillary"
@@ -17,10 +18,55 @@ export type MapSource = {
   tiles: string[]
   sourceLayer: string
   lineWidth: number
-  roadPropertyExclude?: string[] // Exclude these road types
-  roadPropertyAllow?: string[] // Only show these road types
-  /** If false, source/layers are defined but not rendered (e.g. until filters are active). */
-  renderByDefault?: boolean
+}
+
+export type SourceRoadFilter = {
+  roadPropertyExclude?: string[]
+  roadPropertyAllow?: string[]
+}
+
+/** Per mode: which source ids to render, and for each source which road filters to apply. */
+export const fortbewegungConfig: Record<
+  FortbewegungMode,
+  { sourceIds: string[]; sourceFilters: Partial<Record<string, SourceRoadFilter>> }
+> = {
+  all: {
+    sourceIds: ['roads', 'road-path-classes', 'bikelanes'],
+    sourceFilters: {
+      roads: { roadPropertyExclude: ['service_road'] },
+      'road-path-classes': {},
+      bikelanes: { roadPropertyAllow: ['cycleway', 'cycleway_crossing'] },
+    },
+  },
+  bike: {
+    sourceIds: ['bikelanes', 'bikeSuitability'],
+    sourceFilters: {
+      bikelanes: {},
+      bikeSuitability: {},
+    },
+  },
+  foot: {
+    sourceIds: ['road-path-classes', 'roads'],
+    sourceFilters: {
+      'road-path-classes': {},
+      roads: { roadPropertyAllow: ['service_road'] },
+    },
+  },
+  bike_foot: {
+    sourceIds: ['bikelanes', 'bikeSuitability', 'road-path-classes', 'roads'],
+    sourceFilters: {
+      bikelanes: {},
+      bikeSuitability: {},
+      'road-path-classes': {},
+      roads: { roadPropertyAllow: ['service_road'] },
+    },
+  },
+  car: {
+    sourceIds: ['roads'],
+    sourceFilters: {
+      roads: { roadPropertyExclude: ['service_road'] },
+    },
+  },
 }
 
 export const mapSources: MapSource[] = [
@@ -29,7 +75,6 @@ export const mapSources: MapSource[] = [
     tiles: ['https://tiles.tilda-geo.de/atlas_generalized_roads/{z}/{x}/{y}'],
     sourceLayer: 'roads',
     lineWidth: LINE_WIDTH,
-    roadPropertyExclude: ['service_road'],
   },
   {
     id: 'road-path-classes',
@@ -42,23 +87,37 @@ export const mapSources: MapSource[] = [
     tiles: ['https://tiles.tilda-geo.de/atlas_generalized_bikelanes/{z}/{x}/{y}'],
     sourceLayer: 'bikelanes',
     lineWidth: LINE_WIDTH_THIN,
-    roadPropertyAllow: ['cycleway', 'cycleway_crossing'],
   },
   {
     id: 'bikeSuitability',
     tiles: ['https://tiles.tilda-geo.de/atlas_generalized_bikesuitability/{z}/{x}/{y}'],
     sourceLayer: 'bikeSuitability',
     lineWidth: LINE_WIDTH_THIN,
-    renderByDefault: false,
   },
 ]
+
+function buildRoadFilter(sourceId: string, mode: FortbewegungMode): FilterSpecification {
+  const filters = fortbewegungConfig[mode].sourceFilters[sourceId]
+  const parts: unknown[] = [
+    sourceId === 'road-path-classes' ? ['>=', ['zoom'], 11] : ['>=', ['zoom'], 9],
+  ]
+  if (filters?.roadPropertyExclude?.length) {
+    parts.push(['!', ['in', ['get', 'road'], ['literal', filters.roadPropertyExclude]]])
+  }
+  if (filters?.roadPropertyAllow?.length) {
+    parts.push(['in', ['get', 'road'], ['literal', filters.roadPropertyAllow]])
+  }
+  return (parts.length === 1 ? parts[0] : ['all', ...parts]) as FilterSpecification
+}
 
 export const MapSourceLayers = () => {
   const params = useStore($searchParams) as SearchParamsMapillaryMap
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.features?.map((feature) => feature.properties?.id) ?? []
 
-  const sourcesToRender = mapSources.filter((s) => s.renderByDefault !== false)
+  const mode: FortbewegungMode = params?.fortbewegung ?? 'all'
+  const sourceIdsForMode = fortbewegungConfig[mode].sourceIds
+  const sourcesToRender = mapSources.filter((s) => sourceIdsForMode.includes(s.id))
 
   return (
     <>
@@ -84,6 +143,29 @@ export const MapSourceLayers = () => {
               'line-opacity': 0.9,
             }}
             filter={['in', 'id', ...mapDataIds]}
+          />
+
+          {/* Transparent click target: 2× main line width for easier clicking */}
+          <Layer
+            id={`${source.id}-click-target`}
+            source={source.id}
+            source-layer={source.sourceLayer}
+            type="line"
+            beforeId={BEFORE_CITY_LABELS}
+            paint={{
+              'line-color': 'transparent',
+              'line-width': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                11,
+                LINE_WIDTH_MIN * 2,
+                14,
+                source.lineWidth * 2,
+              ],
+              'line-opacity': 0,
+            }}
+            filter={buildRoadFilter(source.id, mode)}
           />
 
           {/* Single layer with conditional colors */}
@@ -121,19 +203,7 @@ export const MapSourceLayers = () => {
               ],
               'line-opacity': 0.9,
             }}
-            filter={[
-              'all',
-              // Only show at zoom 9 and above (11 for road-path-classes)
-              source.id === 'road-path-classes' ? ['>=', ['zoom'], 11] : ['>=', ['zoom'], 9],
-              // Exclude road types (exclude list)
-              source?.roadPropertyExclude?.length && source.roadPropertyExclude.length > 0
-                ? ['!', ['in', ['get', 'road'], ['literal', source.roadPropertyExclude]]]
-                : ['literal', true],
-              // Only include road types (allow list)
-              source?.roadPropertyAllow?.length && source.roadPropertyAllow.length > 0
-                ? ['in', ['get', 'road'], ['literal', source.roadPropertyAllow]]
-                : ['literal', true],
-            ]}
+            filter={buildRoadFilter(source.id, mode)}
           />
         </Source>
       ))}

@@ -19,6 +19,8 @@ export type MapSource = {
   lineWidth: number
   roadPropertyExclude?: string[] // Exclude these road types
   roadPropertyAllow?: string[] // Only show these road types
+  /** If false, source/layers are defined but not rendered (e.g. until filters are active). */
+  renderByDefault?: boolean
 }
 
 export const mapSources: MapSource[] = [
@@ -42,6 +44,13 @@ export const mapSources: MapSource[] = [
     lineWidth: LINE_WIDTH_THIN,
     roadPropertyAllow: ['cycleway', 'cycleway_crossing'],
   },
+  {
+    id: 'bikeSuitability',
+    tiles: ['https://tiles.tilda-geo.de/atlas_generalized_bikesuitability/{z}/{x}/{y}'],
+    sourceLayer: 'bikeSuitability',
+    lineWidth: LINE_WIDTH_THIN,
+    renderByDefault: false,
+  },
 ]
 
 export const MapSourceLayers = () => {
@@ -49,9 +58,11 @@ export const MapSourceLayers = () => {
   const mapData = useStore($clickedMapData)
   const mapDataIds = mapData?.features?.map((feature) => feature.properties?.id) ?? []
 
+  const sourcesToRender = mapSources.filter((s) => s.renderByDefault !== false)
+
   return (
     <>
-      {mapSources.map((source) => (
+      {sourcesToRender.map((source) => (
         <Source
           key={source.id}
           id={source.id}

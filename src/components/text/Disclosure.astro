@@ -1,0 +1,39 @@
+---
+import { twJoin } from 'tailwind-merge'
+import { markdocInlineToPhrasingHtml } from '../../utils/markdocInlinePhrasingHtml'
+
+type Props = {
+  title: string
+  defaultOpen?: boolean
+}
+
+const { title, defaultOpen = false } = Astro.props
+
+const titleHtml = markdocInlineToPhrasingHtml(title)
+---
+
+<details
+  class={twJoin(
+    'group my-4',
+    'open:rounded-lg open:border open:border-neutral-200 open:bg-neutral-50/90 open:p-3 open:shadow-sm',
+  )}
+  open={defaultOpen ? true : undefined}
+>
+  <summary
+    class={twJoin(
+      'cursor-pointer list-none',
+      'text-blue-600 decoration-blue-600 underline-offset-2 marker:text-blue-600',
+      'hover:underline',
+    )}
+  >
+    <span set:html={titleHtml} />
+  </summary>
+  <div
+    class={twJoin(
+      'first:prose-headings:mt-0 first:prose-p:mt-0',
+      'mt-2 border-t border-neutral-200/80 pt-2',
+    )}
+  >
+    <slot />
+  </div>
+</details>

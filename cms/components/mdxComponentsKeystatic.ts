@@ -1,4 +1,5 @@
 import { CalloutKeystatic } from '@components/text/Callout.keystatic'
+import { DisclosureKeystatic } from '@components/text/Disclosure.keystatic'
 import { ImageKeystatic } from '@components/text/Image.keystatic'
 import { VideoKeystatic } from '@components/text/Video.keystatic'
 import { keystaticButtonConfig } from './Button/keystatic.button.config'
@@ -11,6 +12,7 @@ export const mdxComponentsKeystatic = (imagePath: string) => {
   return {
     Video: VideoKeystatic,
     Callout: CalloutKeystatic,
+    Disclosure: DisclosureKeystatic,
     Image: ImageKeystatic,
     Button: keystaticButtonConfig,
     ImageSingleHorizontal: keystaticImageSingleHorizontalConfig(imagePath),

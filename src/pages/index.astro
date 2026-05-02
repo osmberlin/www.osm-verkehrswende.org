@@ -4,6 +4,7 @@ import CardWrapper from '@components/text/CardWrapper.astro'
 import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
 import { getProjects } from '@layouts/utils/getProjects'
 import { getRootUrl } from '@layouts/utils/getRootUrl'
+import AcademicCap from 'astro-heroicons/outline/AcademicCap.astro'
 import BookOpen from 'astro-heroicons/outline/BookOpen.astro'
 import Cube from 'astro-heroicons/outline/Cube.astro'
 import DocumentPlus from 'astro-heroicons/outline/DocumentPlus.astro'
@@ -90,6 +91,15 @@ const showcaseProjects = projects
       variant="iconImageGrid"
     >
       <DocumentPlus class="size-14" />
+    </Card>
+    <Card
+      external
+      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Ideenliste-Analysen"
+      text="Ideen für Analysen & Abschlussarbeiten"
+      alt="Offene Ideenliste für Analysen und Projekte rund um Verkehrswende und OSM im Wiki"
+      variant="iconImageGrid"
+    >
+      <AcademicCap class="size-14" />
     </Card>
   </CardWrapper>
 

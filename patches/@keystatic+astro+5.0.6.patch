@@ -1,0 +1,24 @@
+diff --git a/node_modules/@keystatic/astro/dist/keystatic-astro.js b/node_modules/@keystatic/astro/dist/keystatic-astro.js
+index 5bed3e2..f3a032b 100644
+--- a/node_modules/@keystatic/astro/dist/keystatic-astro.js
++++ b/node_modules/@keystatic/astro/dist/keystatic-astro.js
+@@ -18,9 +18,18 @@ function keystatic() {
+               name: 'keystatic',
+               resolveId(id) {
+                 if (id === 'virtual:keystatic-config') {
+-                  return this.resolve('./keystatic.config', './a');
++                  return '\0virtual:keystatic-config';
+                 }
+                 return null;
++              },
++              async load(id) {
++                if (id !== '\0virtual:keystatic-config') return null;
++                const resolved = await this.resolve('./keystatic.config', './a');
++                if (resolved?.id) {
++                  return `export { default } from ${JSON.stringify(resolved.id)};`;
++                }
++                // Fallback keeps build working when Keystatic isn't configured.
++                return 'export default { storage: { kind: "local" }, collections: {}, singletons: {} };';
+               }
+             }],
+             optimizeDeps: {

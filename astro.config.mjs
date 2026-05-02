@@ -14,7 +14,7 @@ import { watchAndRun } from 'vite-plugin-watch-and-run'
 // Which we have to do manually, see https://docs.astro.build/en/guides/configuring-astro/#environment-variables
 //
 // USAGE:
-// `npm run dev` uses hybrid mode and keystatic()
+// `npm run dev` uses server-capable mode and keystatic()
 // `npm run build` (server) is based on .env and has different settings for Netlify (CMS/Keystatic) vs. Github Pages (Static site)
 // `npm run build:local && npm run serve` overwrites the .env settings to have a local test case for what is on Github Pages
 import { loadEnv } from 'vite'
@@ -36,7 +36,7 @@ export default defineConfig({
       filter: (page) => !page.endsWith('README/'),
     }),
   ],
-  // On Netlify and during development we use `hybrid`, on Github Pages we usd `static`.
+  // On Netlify and during development we use `server` (or Astro 6 `static` with SSR islands); on Github Pages we use `static`.
   // Using static makes sure features like Astros redirecting work as expected.
   // Docs https://docs.astro.build/en/basics/rendering-modes/
   output: ASTRO_OUTPUT_MODE,
@@ -80,7 +80,7 @@ export default defineConfig({
   env: {
     schema: {
       ASTRO_OUTPUT_MODE: envField.enum({
-        values: ['static', 'hybrid', 'server'],
+        values: ['static', 'server'],
         access: 'secret',
         context: 'server',
         optional: false,

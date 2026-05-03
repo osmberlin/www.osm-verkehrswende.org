@@ -1,5 +1,6 @@
 import { languages } from '@layouts/languages'
-import { defineCollection, z } from 'astro:content'
+import { z } from 'astro/zod'
+import { defineCollection } from 'astro:content'
 import { extractedProjectKeys } from './extractedProjectKeys'
 import { contentBase } from './postsKeystatic'
 import { loader } from './utils/loader'

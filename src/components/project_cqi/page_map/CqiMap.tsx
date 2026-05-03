@@ -26,7 +26,10 @@ export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
 
   // Guard against invalid "anzeige" param values
   if (!validAnzeigeValues.includes(params.anzeige)) {
-    $searchParams.open({ ...params, ...{ anzeige: 'cqi' } })
+    $searchParams.open({
+      ...params,
+      anzeige: 'cqi',
+    })
   }
 
   // Initialize default filter
@@ -42,7 +45,7 @@ export const CqiMap = ({ maxBounds, minZoom, maxZoom }: Props) => {
           const keyAlreadyFiltered = params?.filters?.includes(key)
           if (!keyAlreadyFiltered) {
             const newFilters = filterParamsStringify([params?.filters, key])
-            const newParams = newFilters ? { ...params, ...{ filters: newFilters } } : params
+            const newParams = newFilters ? { ...params, filters: newFilters } : params
             $searchParams.open(newParams)
           }
         }

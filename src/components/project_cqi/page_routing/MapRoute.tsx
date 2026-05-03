@@ -54,8 +54,8 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
   if (params?.start === undefined || params?.end === undefined) {
     $searchParams.open({
       ...params,
-      ...{ start: pointParamsStringify(initialStartStop.start) },
-      ...{ end: pointParamsStringify(initialStartStop.end) },
+      start: pointParamsStringify(initialStartStop.start),
+      end: pointParamsStringify(initialStartStop.end),
     })
   }
 
@@ -90,8 +90,14 @@ export const MapRoute = ({ graphPath }: GraphPathProp) => {
     // Update marker on map
     $searchParams.open({
       ...params,
-      ...{ start: pointParamsStringify({ lng: start.lng, lat: start.lat }) },
-      ...{ end: pointParamsStringify({ lng: end.lng, lat: end.lat }) },
+      start: pointParamsStringify({
+        lng: start.lng,
+        lat: start.lat,
+      }),
+      end: pointParamsStringify({
+        lng: end.lng,
+        lat: end.lat,
+      }),
     })
   }
 

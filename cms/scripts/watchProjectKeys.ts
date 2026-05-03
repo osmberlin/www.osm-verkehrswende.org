@@ -19,7 +19,7 @@ function runExtract() {
   })
 }
 
-// eslint-disable-next-line no-console
+// oxlint-disable-next-line no-console
 console.error(`[watch-project-keys] ${target}`)
 watch(target, { persistent: true }, () => {
   clearTimeout(debounceTimer)

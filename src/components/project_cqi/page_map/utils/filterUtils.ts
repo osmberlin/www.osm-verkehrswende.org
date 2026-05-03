@@ -19,5 +19,5 @@ export const paramsWithDefaultFilters = (
   if (!defaultFilter) {
     delete params.filters
   }
-  return defaultFilter ? { ...params, ...{ filters: defaultFilter } } : params
+  return defaultFilter ? { ...params, filters: defaultFilter } : params
 }

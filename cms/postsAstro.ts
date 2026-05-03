@@ -28,6 +28,6 @@ export const astroPostsDefinition = defineCollection({
       image: image().nullish(),
       imageAlt: z.string().optional(),
       showToc: z.boolean().optional(), // TODO Do we need this?
-      canonicalUrl: z.string().url().optional(),
+      canonicalUrl: z.url().optional(),
     }),
 })

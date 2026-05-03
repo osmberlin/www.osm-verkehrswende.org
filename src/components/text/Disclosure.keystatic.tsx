@@ -33,7 +33,8 @@ export const DisclosureKeystatic = wrapper({
   schema: {
     title: fields.text({
       label: 'Title',
-      description: 'Click target "Headline". Manual Markdown. Emphasis: **bold**, *italic* (markdown).',
+      description:
+        'Click target "Headline". Manual Markdown. Emphasis: **bold**, *italic* (markdown).',
     }),
     defaultOpen: fields.checkbox({
       label: 'Initially expanded',

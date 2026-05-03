@@ -1,5 +1,4 @@
 import * as turf from '@turf/turf'
-import { exec } from 'child_process'
 import fs from 'fs'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'

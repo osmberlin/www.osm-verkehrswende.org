@@ -6,7 +6,6 @@ import { twJoin } from 'tailwind-merge'
 import { buildRoutePlanningUrl } from './routePlanningUrl'
 import type { SearchParamsMapillaryMap } from './storeMapillary'
 
-const ROUTING_BASE_URL = 'https://vizsim.github.io/missing_mapillary_gh-routing/'
 const ROUTING_GITHUB_URL = 'https://github.com/vizsim/missing_mapillary_gh-routing'
 
 export const OverlayRoutePlanning = () => {

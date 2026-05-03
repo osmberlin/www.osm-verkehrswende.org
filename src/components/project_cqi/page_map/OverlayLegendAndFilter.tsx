@@ -26,17 +26,18 @@ export const OverlayLegendAndFilter = () => {
   const handleClick = (key: string) => {
     const active = filters?.includes(key)
     if (active) {
-      // remove
       const newFilterString = filterParamsStringify(filters?.filter((f) => f !== key))
+      let newParams: CqiMapSearchparams
       if (!newFilterString) {
-        delete params.filters
+        newParams = { ...params }
+        delete newParams.filters
+      } else {
+        newParams = { ...params, filters: newFilterString }
       }
-      const newParams = newFilterString ? { ...params, ...{ filters: newFilterString } } : params
       $searchParams.open(newParams)
     } else {
-      // add
       const filterString = filterParamsStringify([params?.filters, key])
-      const newParams = filterString ? { ...params, ...{ filters: filterString } } : params
+      const newParams = filterString ? { ...params, filters: filterString } : params
       $searchParams.open(newParams)
     }
   }

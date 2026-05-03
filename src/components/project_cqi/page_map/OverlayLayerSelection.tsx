@@ -13,10 +13,10 @@ export const OverlayLayerSelection = () => {
   const [localSelected, setLocalSelected] = useState<CqiMapSearchparams['anzeige']>('cqi')
 
   const setSelected = (value: CqiMapSearchparams['anzeige']) => {
-    params.anzeige = value
-    const curentLegendGroup = legendByGroups[params?.anzeige ?? 'cqi']
+    const next = { ...params, anzeige: value }
+    const curentLegendGroup = legendByGroups[next?.anzeige ?? 'cqi']
     const defaultFilters = defaultFilterByGroup(curentLegendGroup)
-    const newParams = paramsWithDefaultFilters(defaultFilters, params)
+    const newParams = paramsWithDefaultFilters(defaultFilters, next)
     $searchParams.open(newParams)
     setLocalSelected(value)
   }

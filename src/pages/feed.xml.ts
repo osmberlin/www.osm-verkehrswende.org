@@ -5,7 +5,10 @@ import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
   const projects = await getProjects()
-  const rootProject = projects?.find((p) => p.name.slug === 'root')!
+  const rootProject = projects?.find((p) => p.name.slug === 'root')
+  if (!rootProject) {
+    throw new Error('Root project not found in content')
+  }
 
   const posts = await getCollection('posts')
 

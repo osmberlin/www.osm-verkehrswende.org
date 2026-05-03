@@ -14,7 +14,9 @@ We have monthly meetups – usually in German, but we are happy to switch to Eng
 
 ## Development
 
-This project is build with [Astro](https://astro.build/), using `.astro` files whenever possible and Markdown or MDX for blog posts and pages. Dynamic pages like maps are build in React.
+This project is built with [Astro](https://astro.build/), using `.astro` files whenever possible and Markdown or MDX for blog posts and pages. Dynamic pages such as maps are built in React.
+
+Use [Bun](https://bun.sh/) for installs and npm scripts (`bun install`, `bun run dev`, …). GitHub Actions deploy uses Bun explicitly.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)

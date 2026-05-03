@@ -1,4 +1,6 @@
-npm run type-check
-npm run format
-npm run lint
-npm run build:local
+#!/usr/bin/env sh
+
+bun run type-check
+bun run format
+bun run lint
+bun run build:local

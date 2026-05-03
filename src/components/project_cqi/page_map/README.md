@@ -4,4 +4,4 @@ Quelle: https://studio.mapbox.com/styles/osm-verkehrswende/clsx94szl009j01qo7zxt
 
 # Vector Tiles Prozessieren
 
-`npm run updateCqi`
+`bun run updateCqi`

@@ -14,8 +14,8 @@ import { loadEnv } from 'vite'
 //
 // USAGE:
 // `bun run dev` runs Astro plus the sidecar watcher (see package.json scripts)
-// `npm run build` (server) is based on .env and has different settings for Netlify (CMS/Keystatic) vs. Github Pages (Static site)
-// `npm run build:local && npm run serve` overwrites the .env settings to have a local test case for what is on Github Pages
+// `bun run build` (server) is based on .env and has different settings for Netlify (CMS/Keystatic) vs. Github Pages (Static site)
+// `bun run build:local && bun run preview` overwrites the .env settings to have a local test case for what is on Github Pages
 
 const { ASTRO_OUTPUT_MODE, ASTRO_USE_NETLIFY_ADAPTER } = loadEnv(
   process.env.NODE_ENV,

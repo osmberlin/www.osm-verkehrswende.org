@@ -29,7 +29,11 @@ export default defineConfig({
   site: 'https://www.osm-verkehrswende.org/',
   integrations: [
     ASTRO_OUTPUT_MODE === 'static' ? undefined : keystatic(),
-    react(),
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', { target: '19' }]],
+      },
+    }),
     mdx(),
     sitemap({
       filter: (page) => !page.endsWith('README/'),

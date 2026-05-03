@@ -1,12 +1,24 @@
 import eslintPluginAstro from 'eslint-plugin-astro'
+import reactCompiler from 'eslint-plugin-react-compiler'
+import tsParser from '@typescript-eslint/parser'
 
-// An alternative config would be https://github.com/withastro/docs/blob/main/.eslintrc.js
 export default [
   ...eslintPluginAstro.configs.recommended,
   {
+    files: ['**/*.{jsx,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    plugins: {
+      'react-compiler': reactCompiler,
+    },
     rules: {
-      // override/add rules settings here, such as:
-      // "astro/no-set-html-directive": "error"
+      'react-compiler/react-compiler': 'error',
     },
   },
 ]

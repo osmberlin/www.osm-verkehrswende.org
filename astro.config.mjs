@@ -5,19 +5,18 @@ import sitemap from '@astrojs/sitemap'
 import keystatic from '@keystatic/astro'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, envField } from 'astro/config'
-import path from 'path'
 import remarkToc from 'remark-toc'
-import { watchAndRun } from 'vite-plugin-watch-and-run'
+import { loadEnv } from 'vite'
 
 // ABOUT:
 // We have to fetch settings from `.env`
 // Which we have to do manually, see https://docs.astro.build/en/guides/configuring-astro/#environment-variables
 //
 // USAGE:
-// `npm run dev` uses server-capable mode and keystatic()
+// `bun run dev` runs Astro plus the sidecar watcher (see package.json scripts)
 // `npm run build` (server) is based on .env and has different settings for Netlify (CMS/Keystatic) vs. Github Pages (Static site)
 // `npm run build:local && npm run serve` overwrites the .env settings to have a local test case for what is on Github Pages
-import { loadEnv } from 'vite'
+
 const { ASTRO_OUTPUT_MODE, ASTRO_USE_NETLIFY_ADAPTER } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
@@ -63,19 +62,7 @@ export default defineConfig({
   vite: {
     ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: { exclude: ['route-snapper'] },
-    plugins: [
-      tailwindcss(),
-      // See cms/scripts/README.md
-      watchAndRun([
-        {
-          name: 'extract-project-keys',
-          watchKind: ['change'],
-          watch: path.resolve('src/content/projects/index.json'),
-          run: 'npm run extract-project-keys',
-          delay: 300,
-        },
-      ]),
-    ],
+    plugins: [tailwindcss()],
   },
   env: {
     schema: {

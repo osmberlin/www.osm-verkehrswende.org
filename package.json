@@ -7,7 +7,9 @@
     "npm": ">=11"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "bun run --parallel dev:*",
+    "dev:astro": "astro dev",
+    "dev:watch-project-keys": "bun run cms/scripts/watchProjectKeys.ts",
     "start": "npm run dev",
     "build": "astro build",
     "build:local": "ASTRO_OUTPUT_MODE=static astro build",
@@ -90,8 +92,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "vite-plugin-watch-and-run": "^1.7.5"
+    "prettier-plugin-tailwindcss": "^0.7.2"
   },
   "overrides": {
     "@keystatic/astro": {

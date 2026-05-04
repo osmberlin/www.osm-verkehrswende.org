@@ -11,5 +11,7 @@ export const extractedProjectKeys = [
   'bicycle-parking',
   'crowdmap',
   'benches',
+  'schulabgleich',
+  'grenzabgleich',
   'unknown',
 ] as const

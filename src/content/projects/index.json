@@ -274,6 +274,72 @@
     },
     {
       "name": {
+        "name": "Schulabgleich",
+        "slug": "schulabgleich"
+      },
+      "enabled": true,
+      "externalProjektPage": "https://schulabgleich.osm-verkehrswende.org/",
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Zur Anwendung",
+              "href": "https://schulabgleich.osm-verkehrswende.org/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [
+        {
+          "label": "Github: OSM Schulabgleich",
+          "href": "https://github.com/osmberlin/osm-schul-abgleich"
+        }
+      ],
+      "meta": {
+        "title": "OSM Schulabgleich",
+        "description": "OpenStreetMap und offizielle Schuldaten. Diese Anwendung vergleicht pro Bundesland die öffentlichen Schuldaten von jedeschule.codefor.de mit OSM-Daten (amenity=school). Das Ziel ist eine bessere Datenqualität.",
+        "image": "/src/content/projects/projects/9/meta/image.png",
+        "imageAlt": "OSM Schulabgleich — Schuldaten und OpenStreetMap",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
+        "name": "Grenzabgleich",
+        "slug": "grenzabgleich"
+      },
+      "enabled": true,
+      "externalProjektPage": "https://grenzabgleich.osm-verkehrswende.org/",
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Zur Anwendung",
+              "href": "https://grenzabgleich.osm-verkehrswende.org/"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [
+        {
+          "label": "Github: OSM Grenzabgleich",
+          "href": "https://github.com/osmberlin/osm-boundary-checker-germany"
+        }
+      ],
+      "meta": {
+        "title": "OSM Grenzabgleich",
+        "description": "OpenStreetMap und Daten zu amtlichen Grenzen. Diese Anwendung vergleicht verschiedene amtliche Datensätze zu Grenzen und PLZ-Bereichen mit OSM-Daten. Das Ziel ist Transparenz über die Qualität der Daten in OSM und Hilfsmittel zur Verbesserung der Datenqualität.",
+        "image": "/src/content/projects/projects/10/meta/image.png",
+        "imageAlt": "OSM Grenzabgleich — Amtliche Grenzen und OpenStreetMap",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
         "name": "(FALLBACK)",
         "slug": "unknown"
       },

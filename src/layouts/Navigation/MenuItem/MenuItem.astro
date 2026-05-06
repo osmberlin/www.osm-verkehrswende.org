@@ -29,7 +29,7 @@ const active = highlightExactMatch
     itemsStart ? 'min-w-0 items-start' : 'items-center',
   )}
   data-item-active-debugger={active}
-  {...(title ? { title } : {})}
+  {...title ? { title } : {}}
   {...{ rel: external ? 'noopener noreferrer' : undefined }}
   {...{ target: external ? '_blank' : undefined }}
 >

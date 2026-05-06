@@ -12,15 +12,13 @@ const { project } = Astro.props
 
 /** Two-line cross-project news: only on site homepage (`/`), not on `/root/posts/…` or project pages */
 const isHomepageNews =
-  project.name.slug === 'root' &&
-  (Astro.url.pathname === '/' || Astro.url.pathname === '')
+  project.name.slug === 'root' && (Astro.url.pathname === '/' || Astro.url.pathname === '')
 
 const projectsEntry = isHomepageNews ? await getEntry('projects', 'index') : undefined
 const projectLabelBySlug = Object.fromEntries(
-  ((isHomepageNews ? projectsEntry?.data.projects : undefined) ?? []).map((p) => [
-    p.name.slug,
-    p.name.name,
-  ] as const),
+  ((isHomepageNews ? projectsEntry?.data.projects : undefined) ?? []).map(
+    (p) => [p.name.slug, p.name.name] as const,
+  ),
 )
 
 const allPosts = await getCollection('posts')

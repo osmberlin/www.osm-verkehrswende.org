@@ -6,9 +6,13 @@ type Props = {
   href: string
   external?: boolean
   highlightExactMatch?: boolean
+  /** Native tooltip / full headline for truncated nav labels */
+  title?: string
+  /** Top-align content for multi-line rows (e.g. news) */
+  itemsStart?: boolean
 }
 
-const { href, external: _external, highlightExactMatch } = Astro.props
+const { href, external: _external, highlightExactMatch, title, itemsStart } = Astro.props
 const { pathname: currentPathname } = Astro.url
 const external = _external === undefined ? href.startsWith('http') : _external
 const active = highlightExactMatch
@@ -21,9 +25,11 @@ const active = highlightExactMatch
   href={href}
   class={twMerge(
     active ? menuActiveClasses : 'hover:bg-blue-50',
-    'group/item flex items-center justify-between border-b border-gray-200 py-2.5 pr-2 pl-4 leading-tight',
+    'group/item flex justify-between border-b border-gray-200 py-2.5 pr-2 pl-4 leading-tight',
+    itemsStart ? 'min-w-0 items-start' : 'items-center',
   )}
   data-item-active-debugger={active}
+  {...(title ? { title } : {})}
   {...{ rel: external ? 'noopener noreferrer' : undefined }}
   {...{ target: external ? '_blank' : undefined }}
 >

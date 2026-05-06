@@ -10,28 +10,38 @@ type Props = {
 }
 const { project } = Astro.props
 
-const isRootNav = project.name.slug === 'root'
+/** Two-line cross-project news: only on site homepage (`/`), not on `/root/posts/…` or project pages */
+const isHomepageNews =
+  project.name.slug === 'root' &&
+  (Astro.url.pathname === '/' || Astro.url.pathname === '')
 
-const projectsEntry = await getEntry('projects', 'index')
+const projectsEntry = isHomepageNews ? await getEntry('projects', 'index') : undefined
 const projectLabelBySlug = Object.fromEntries(
-  (projectsEntry?.data.projects ?? []).map((p) => [p.name.slug, p.name.name] as const),
+  ((isHomepageNews ? projectsEntry?.data.projects : undefined) ?? []).map((p) => [
+    p.name.slug,
+    p.name.name,
+  ] as const),
 )
 
 const allPosts = await getCollection('posts')
 const sortedPosts = allPosts.sort(
   (postA, postB) => new Date(postB.data.pubDate).valueOf() - new Date(postA.data.pubDate).valueOf(),
 )
-const relevantPosts = isRootNav
+const relevantPosts = isHomepageNews
   ? sortedPosts.filter((post) => post.data.inMenu === true)
   : sortedPosts
       .filter((post) => post.data.project === project.name.slug)
       .filter((post) => post.data.inMenu === true)
 
-const dateChipClass =
+/** Homepage (root) only: date pill right-aligned with optical margin */
+const rootDateChipClass =
   'ml-auto -mr-1.5 inline-flex shrink-0 whitespace-nowrap rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500'
 const projectChipOuterClass =
   'flex max-w-32 min-w-0 shrink items-center overflow-hidden rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500'
 const projectChipTextClass = 'min-w-0 flex-1 truncate'
+/** Project sidebars: original single-line chip */
+const projectPageDateChipClass =
+  'mr-1 -ml-1.5 inline-flex rounded-full bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500'
 ---
 
 {
@@ -41,16 +51,16 @@ const projectChipTextClass = 'min-w-0 flex-1 truncate'
         Neuigkeiten{' '}
         {relevantPosts.length > 0 && <span class="text-gray-500">({relevantPosts.length})</span>}
       </MenuItemHeadline>
-      <MenuItemWrapper allowOverflow>
-        {relevantPosts.map((post) => (
-          <MenuItem
-            href={`/${post.data.project}/posts/${post.id}`}
-            title={post.data.title}
-            itemsStart
-          >
-            <div class="flex min-w-0 flex-1 flex-col gap-1">
-              <div class="-ml-1.5 flex w-full min-w-0 flex-nowrap items-center">
-                {isRootNav && (
+      <MenuItemWrapper allowOverflow={isHomepageNews}>
+        {relevantPosts.map((post) =>
+          isHomepageNews ? (
+            <MenuItem
+              href={`/${post.data.project}/posts/${post.id}`}
+              title={post.data.title}
+              itemsStart
+            >
+              <div class="flex min-w-0 flex-1 flex-col gap-1">
+                <div class="-ml-1.5 flex w-full min-w-0 flex-nowrap items-center">
                   <span
                     class={projectChipOuterClass}
                     title={projectLabelBySlug[post.data.project] ?? post.data.project}
@@ -59,18 +69,28 @@ const projectChipTextClass = 'min-w-0 flex-1 truncate'
                       {projectLabelBySlug[post.data.project] ?? post.data.project}
                     </span>
                   </span>
-                )}
-                <span class={dateChipClass}>
-                  {[
-                    new Date(post.data.pubDate).getFullYear(),
-                    new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
-                  ].join('/')}
-                </span>
+                  <span class={rootDateChipClass}>
+                    {[
+                      new Date(post.data.pubDate).getFullYear(),
+                      new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
+                    ].join('/')}
+                  </span>
+                </div>
+                <span class="text-sm leading-snug text-gray-900">{post.data.menuTitle}</span>
               </div>
-              <span class="text-sm leading-snug text-gray-900">{post.data.menuTitle}</span>
-            </div>
-          </MenuItem>
-        ))}
+            </MenuItem>
+          ) : (
+            <MenuItem href={`/${post.data.project}/posts/${post.id}`} title={post.data.title}>
+              <span class={projectPageDateChipClass}>
+                {[
+                  new Date(post.data.pubDate).getFullYear(),
+                  new Date(post.data.pubDate).toLocaleDateString([], { month: '2-digit' }),
+                ].join('/')}
+              </span>
+              {post.data.menuTitle}
+            </MenuItem>
+          ),
+        )}
       </MenuItemWrapper>
     </>
   ) : (

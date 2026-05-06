@@ -1,0 +1,96 @@
+---
+title: 'Neuer Schulabgleich: Öffentliche Schuldaten mit OpenStreetMap vergleichen'
+menuTitle: Schulabgleich
+project: schulabgleich
+pubDate: 2026-05-04T09:00:00.000Z
+author: Tobias Jordans @tordans
+inMenu: true
+noindex: false
+language: de
+showToc: false
+---
+Seit Kurzem gibt es mit unter [**schulabgleich.osm-verkehrswende.org**](https://schulabgleich.osm-verkehrswende.org/) ein neues Projekt, **mit dem ihr die Datenqualität von Schulen und Bildungseinrichtungen in Deutschland mit öffentlichen Referenzdaten abgleichen könnt.**
+
+Ziel ist es, die Daten in OpenStreetMap zu prüfen, Lücken sichtbar zu machen und die Qualität der vorhandenen Einträge zu verbessern. Als Referenz dienen die Schuldaten der Bundesländer, soweit diese als offene Daten veröffentlicht werden und über [**JedeSchule**](https://jedeschule.codefor.de/) gebündelt verfügbar sind.
+
+Der Schulabgleich richtet sich an alle, die mit OpenStreetMap arbeiten, an Bildungs- und Open-Data-Interessierte und nicht zuletzt an Menschen, die sich mit Fragen der Verkehrswende beschäftigen.
+
+<ImageSingleHorizontal src="/src/content/posts/schulabgleich/schulabgleich-homepage.min.png" alt="Screenshot: Die Startseite bietet den Einstieg in die Bundesländer." imageConfig={{"discriminant":"pano"}} />
+
+## **Was könnt ihr mit dem Schulabgleich tun?**
+
+Mit dem Schulabgleich könnt ihr auf einen Blick erkennen,
+
+* **welche Schulen in den amtlichen Daten vorhanden sind, aber in OpenStreetMap fehlen**,
+* **welche Schulen in OpenStreetMap eingetragen sind, aber keine Entsprechung in den amtlichen Daten haben**,
+* **wo es doppelte oder widersprüchliche Einträge gibt**,
+* und **welche Attribute bei Schulen in OpenStreetMap fehlen oder überprüft werden sollten**.
+
+Besonders praktisch: Die Website bietet auch eine **Editierfunktion**, mit der ihr ausgewählte Attribute direkt aus der Oberfläche heraus in OpenStreetMap ergänzen könnt. Damit wird aus dem Abgleich nicht nur ein Analysewerkzeug, sondern direkt ein Werkzeug zur Datenpflege.
+
+## **Wie ist die Website aufgebaut?**
+
+Die Daten sind **nach Bundesländern gruppiert**, weil auch die Referenzdaten landesweise bereitgestellt werden. Für jedes Bundesland könnt ihr euch anschauen,
+
+* welche Schulen aus OpenStreetMap eine passende Entsprechung in den öffentlichen Daten gefunden haben,
+* wo es **Konflikte** oder **unklare Zuordnungen** gibt,
+* und wo **möglicherweise Dopplungen** vorliegen.
+
+Auf der Übersichtsseite eines Bundeslands findet ihr eine **Liste** sowie eine **facettierte Suche**, mit der ihr die Daten filtern und durchsuchen könnt. Damit könnt ihr euch zum Beispiel gezielt Schulen anzeigen lassen, bei denen bestimmte Attribute fehlen, die einer bestimmten Schulform angehören, oder die für eure Region besonders relevant sind.
+
+Auf der **Detailseite einer Schule** seht ihr dann, welche Datensätze in der Umgebung vorhanden sind — sowohl aus OpenStreetMap als auch aus den amtlichen Referenzdaten. Die Ansicht vergleicht die Attribute der beiden Datensätze, gruppiert sie so weit wie möglich und zeigt **Übereinstimmungen** sowie **Konflikte** übersichtlich an.
+
+Dort findet ihr auch die Funktion, um einzelne Attribute direkt in OpenStreetMap zu ergänzen. Dafür müsst ihr euch oben rechts auf der Seite bei OpenStreetMap anmelden. Anschließend könnt ihr eure Änderungen prüfen und in OpenStreetMap speichern.
+
+## **Warum Schuldaten für die Verkehrswende wichtig sind**
+
+Eine wichtige Motivation für diesen Datenabgleich ist, dass Schulen und Bildungseinrichtungen auch aus Sicht der Verkehrswende ein relevanter Datensatz sind.
+
+Wie so oft ist OpenStreetMap der einfachste Open Data-Quelle, um standortbezogene Informationen deutschlandweit abzufragen und mit anderen Themen zu verknüpfen. Gerade für Analysen im Bereich **Fußverkehr**, **Radverkehr** und **Verkehrssicherheit** ist das ein großer Vorteil. Gleichzeitig können Schuldaten in OpenStreetMap an vielen Stellen noch deutlich besser gepflegt und kuratiert werden.
+
+Ein Beispiel dafür ist die Frage, **wie sich Grundschulen von weiterführenden Schulen unterscheiden lassen**. Solche Informationen sind für viele Auswertungen wichtig, fehlen in OpenStreetMap aber häufig noch oder sind nicht konsistent erfasst. Das Ergänzen solcher Attribute ist eines der Ziele des Projekts.
+
+Für die Verkehrswende sind Schulen besonders interessant, weil sich gute Infrastruktur rund um Schulen oft besonders gut begründen lässt. Sichere und direkte Wege für Kinder und Jugendliche sind ein zentrales Argument für bessere Bedingungen im Rad- und Fußverkehr. Projekte zur **Überprüfung der Schulwegsicherheit** sind ein gutes Beispiel dafür, wie wichtig gut gepflegte Schuldaten in OpenStreetMap sein können. [Dieser Vortrag von Alex auf der FOSSGIS Konferenz 2026](https://pretalx.com/fossgis2026/talk/WBWRFD/) beschreibt ein solches Projekt.
+
+## **Woher kommen die Referenzdaten?**
+
+Der Schulabgleich ist nur möglich dank der tollen Arbeit der Open-Data-Community rund um [**JedeSchule**](https://jedeschule.codefor.de/). Das Projekt bündelt seit Jahren die offenen Schuldaten der Bundesländer, vereinheitlicht sie und stellt sie als deutschlandweiten Datensatz bereit.
+
+Das ist alles andere als trivial. Denn in Deutschland gibt es für Schuldaten **kein einheitliches Format** und auch **keine einheitliche Veröffentlichungsweise**. Jedes Bundesland hat seine eigene Lösung: mal als API, mal als CSV, mal über Geoportale, mal nur über Suchoberflächen. Entsprechend aufwendig ist es, diese Daten überhaupt nutzbar zusammenzuführen.
+
+JedeSchule übernimmt genau diese mühsame Arbeit. Für die verschiedenen Bundesländer wurden Scraper und Datenadapter gebaut, die aus den jeweils verfügbaren Quellen einen möglichst guten, einheitlichen Datensatz erzeugen.
+
+Trotzdem bleibt der resultierende Datenbestand heterogen. Einige Bundesländer veröffentlichen zum Beispiel **keine Geokoordinaten**, andere verwenden unterschiedliche Definitionen dafür, was genau als Schule oder Bildungseinrichtung gezählt wird. Auch die verfügbaren Attribute unterscheiden sich von Land zu Land deutlich. Genau deshalb braucht es im Schulabgleich verschiedene Methoden, um die Datensätze sinnvoll miteinander zu vergleichen.
+
+Wer etwas tiefer in die Ausgangsdaten schauen möchte – zum Beispiel um herauszufinden, wie wir daraus ein einheitliche OSM-tagging ableiten können – findet ein paar [Analysen im Github Repo](https://github.com/osmberlin/osm-schulabgleich/tree/main/analysis/out).
+
+## **Wie funktioniert der Abgleich?**
+
+Der Abgleich erfolgt **immer innerhalb eines Bundeslands**. Das ist sinnvoll, weil sich sowohl Datenstruktur als auch Referenzen zwischen den Ländern unterscheiden.
+
+Vereinfacht gesagt läuft der Vergleich in mehreren Stufen ab:
+
+1. Zunächst werden Schulen verarbeitet, für die **Geokoordinaten** vorliegen.
+2. Danach folgen Schulen, bei denen **keine Geokoordinaten** vorhanden sind.
+3. Zuerst werden Datensätze gematcht, die eine **eindeutige Referenz** (`ref`) teilen.
+4. Danach folgt ein Matching über **räumliche Nähe plus Namensabgleich**.
+5. Schließlich gibt es noch ein Matching über den **Namensabgleich innerhalb des Bundeslands**.
+
+Auf der Detailseite einer Schule könnt ihr jeweils sehen, **auf welcher Grundlage ein Matching zustande gekommen ist**.
+
+Das Matching ist natürlich deutlich einfacher, wenn wir in OSM die amtliche ID hinterlegen können. Einige Schulen haben ein solche, stable ID und für diese ist ein Update der OSM-Daten mit `ref` sehr hilfreich für den Abgleich.
+
+## **Bitte mithelfen**
+
+Der Schulabgleich läuft grundsätzlich **einmal pro Nacht** (es gibt [eine "Status"-Seite](https://schulabgleich.osm-verkehrswende.org/status)). Damit habt ihr eine gute Grundlage, um in eurer Region Schulen zu prüfen, zu ergänzen und zu korrigieren — und eure Änderungen schon am nächsten Tag wieder im aktuellen Abgleich zu sehen.
+
+Wenn ihr also Lust habt, praktisch mitzuhelfen, dann schaut euch eure Region an:
+
+* fehlen Schulen?
+* sind Schulformen unvollständig?
+* gibt es Konflikte zwischen OSM und den Referenzdaten?
+* lassen sich offizielle Referenzen ergänzen?
+
+Genau solche kleinen Verbesserungen machen OpenStreetMap als Datengrundlage stärker — nicht nur für Karten, sondern auch für Analysen rund um Bildung, Erreichbarkeit und Verkehrswende.
+
+Wenn ihr Feedback habt oder Verbesserungsvorschläge für die Anwendung einbringen möchtet, könnt ihr gerne ein Issue im GitHub-Repository anlegen: [**GitHub-Repository**](https://github.com/osmberlin/osm-schulabgleich) | [**Github Issues anlegen**](https://github.com/osmberlin/osm-schulabgleich/issues)

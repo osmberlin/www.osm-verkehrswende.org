@@ -1,0 +1,152 @@
+---
+title: >-
+  OSM-Grenzabgleich für Deutschland: Verwaltungsgrenzen mit amtlichen
+  Datensätzen vergleichen
+menuTitle: Grenzabgleich Launch
+project: grenzabgleich
+pubDate: 2026-06-06T10:00:00.000Z
+author: Tobias Jordans @tordans
+inMenu: true
+noindex: false
+language: de
+showToc: false
+---
+Mit [grenzabgleich.osm-verkehrswende.org](https://osmberlin.github.io/osm-boundary-checker-germany/) gibt es jetzt ein neues Werkzeug, um die Qualität von Grenzdaten in OpenStreetMap für Deutschland besser einschätzen zu können. Das Tool vergleicht Grenzgeometrien aus OpenStreetMap mit amtlichen Datensätzen und berechnet daraus verschiedene Kennzahlen. So lässt sich schneller erkennen, welche Grenzen wahrscheinlich überprüft werden sollten und wo es möglicherweise echte Probleme gibt.
+
+Das Ziel ist dabei ausdrücklich nicht, amtliche Daten blind zu übernehmen. Vielmehr hilft das Tool dabei, Unterschiede sichtbar zu machen, Prioritäten für die Prüfung zu setzen und Grenzdaten in OpenStreetMap gezielt zu prüfen und – wo sinnvoll – zu verbessern.
+
+## Was macht der OSM-Grenzabgleich?
+
+Der Grenzabgleich vergleicht Grenzen aus OpenStreetMap mit amtlichen Verwaltungsdatensätzen und berechnet pro Fläche verschiedene Indikatoren, die die Abweichungen zwischen beiden Datensätzen beschreiben.
+
+Am Ende steht also nicht einfach nur ein „gleich“ oder „ungleich“, sondern eine Einschätzung darüber,
+
+* wie stark sich zwei Grenzverläufe unterscheiden,
+* welche Objekte wahrscheinlich unproblematisch sind,
+* und bei welchen Grenzen eine manuelle Prüfung besonders sinnvoll ist.
+
+## So funktioniert die Software
+
+Mehrmals pro Woche (sonntags, mittwochs, freitags und samstags Nachts; [Status](https://grenzabgleich.osm-verkehrswende.org/status)) wird dafür ein aktueller Datensatz aus OpenStreetMap geladen (Danke Geofabrik) und mit verschiedenen amtlichen, offenen Datenquellen abgeglichen, unter anderem vom BKG sowie weiteren Institutionen.
+
+In der Software sind dafür Filterkriterien und Regeln definiert, anhand derer die Grenzen der beiden Datensätze miteinander verglichen werden. (Die konkret konfigurierten Filtern und Regeln stehen jew. auf den Detailseiten.)
+
+Auf der Startseite könnt ihr zunächst einen Datensatz auswählen. Danach gelangt ihr zu einer Übersichtsseite, auf der die beiden Grenzdatensätze und ihre jeweiligen Bewertungsindikatoren aufgelistet sind. Dort könnt ihr einzelne Grenzen auswählen – zum Beispiel die, die laut Indikator auffällig oder möglicherweise fehlerhaft sind.
+
+Auf der Detailseite lassen sich die Daten einer Grenze genauer vergleichen. Dort seht ihr zum Beispiel, an welchen Stellen sich die beiden Datensätze geometrisch unterscheiden.
+
+Besonders praktisch: Auf der Detailseite gibt es Buttons, mit denen ihr direkt in JOSM oder in den iD-Editor wechseln könnt und dabei den aktuellen, amtlichen Datensatz direkt als Referenzdatensatz in einem eigenen Layer anzeigen lassen könnt. So könnt ihr die OpenStreetMap-Grenze unmittelbar im Editor prüfen und gegebenenfalls präzisieren.
+
+Damit erreichen wir natürlich keine millimetergenaue Präzision. Aber es erlaubt uns, zügig deutliche Verbesserungen bei der geometrischen Genauigkeit zu erreichen.
+
+## Welche Kennzahlen werden berechnet?
+
+Ein wichtiger Teil des Tools sind die verschiedenen Kennzahlen, mit denen Unterschiede zwischen amtlicher Grenze und OSM-Grenze beschrieben werden. Dabei ist wichtig: Keine einzelne Kennzahl allein reicht aus. Erst im Zusammenspiel wird erkennbar, ob ein Fall unkritisch ist, geprüft werden sollte oder tatsächlich problematisch aussieht.
+
+### IoU: Wie stark überlappen sich die Flächen?
+
+Die **IoU** (*Intersection over Union*) misst, wie stark sich die Flächen von amtlicher Grenze und OSM überlappen. Der Wert liegt zwischen **0 (**&#x67;eringe Überlappung) **und 1** (hohe Übereinstimmung).
+
+Technisch ist die IoU der Quotient aus Schnittfläche und Vereinigungsfläche der beiden Polygone. Sie fasst also zusammen, wie viel Fläche beide Datensätze gemeinsam abdecken – im Verhältnis zur gesamten Fläche, die von beiden zusammen abgedeckt wird.
+
+Die Kennzahl ist besonders nützlich, um auf einen Blick zu erkennen, ob zwei Flächen insgesamt gut zusammenpassen. Sie sagt allerdings noch nicht, **wo** die größte Abweichung entlang der Grenze liegt.
+
+### Δ Fläche %: Wie stark weicht die Gesamtfläche ab?
+
+Die Kennzahl "**Δ Fläche %"** zeigt, wie stark sich die von OSM eingeschlossene Fläche von der amtlichen Referenzfläche unterscheidet – in Prozent der amtlichen Fläche.
+
+Dabei wird der **absolute Wert** der Abweichung angezeigt. Es geht also nicht darum, ob OSM größer oder kleiner ist, sondern nur darum, **wie stark** die Abweichung ausfällt.
+
+Eine kleine Prozentzahl bedeutet: Die Gesamtflächen sind annähernd gleich groß. Eine größere Prozentzahl kann aber auch dann auftreten, wenn die Grenzlinien lokal noch relativ nah beieinander liegen – etwa durch unterschiedliche Generalisierung.
+
+Diese Kennzahl ergänzt daher die IoU sinnvoll: Während die IoU die Überlappung betont, zeigt "**Δ Fläche %"** die reine Größenabweichung der Flächen.
+
+### Hausdorff-Abstand: Wo liegt die größte lokale Abweichung?
+
+Der **Hausdorff-Abstand** misst, wie weit die beiden Grenzlinien maximal auseinanderliegen – in Metern, im projizierten Koordinatensystem des Vergleichs. Vereinfacht gesagt sucht dieser Wert die größte „Lücke“ zwischen amtlicher Grenze und OSM-Grenze: An welcher Stelle ist der Abstand zwischen beiden Umrissen am größten?
+
+* **kleine Werte** bedeuten: Die Linien liegen überall nah beieinander.
+* **größere Werte** deuten darauf hin, dass es mindestens eine Stelle mit deutlicher Abweichung gibt.
+
+Der Hausdorff-Abstand ergänzt damit die flächenbezogenen Kennzahlen sehr gut: Während IoU und Flächenabweichung vor allem die Überlappung der Flächen beschreiben, betont der Hausdorff-Abstand den **schlechtesten Punkt entlang der Grenze**.
+
+## Die Bewertungsampel
+
+Zusätzlich zu den einzelnen Kennzahlen gibt es im Tool eine **Bewertungsampel**, die Objekte als "**ok"**, "**review"** oder "**issue"** einstuft. Sie ist **skalensensitiv** aufgebaut und kombiniert mehrere Kennzahlen, darunter:
+
+* **IoU**
+* **symmetrische Differenz**
+* **Flächenabweichung**
+* **robuste Randdistanz** (*Hausdorff P95*)
+* eine **skalierte Distanznorm**
+
+Dadurch wird vermieden, dass große Regionen allein wegen einer hohen absoluten Distanz automatisch als problematisch markiert werden, obwohl sich die Geometrien in der Praxis fast vollständig überlappen.
+
+## Story-Time: Polizei-Software und OSM-Grenzen
+
+Ein kurzer Exkurs, was mich motiviert hat, dieses Projekt genau jetzt angzugehen…
+
+Auf der FOSSGIS-Konferenz 2026 hatten wir [eine Session als Austausch zwischen Verwaltung, Firmen und OpenStreetMap-Community](https://pretalx.com/fossgis2026/talk/T7BY7S/), um Fragen zu klären und Wissen auszutauschen. In dieser Runde berichtete jemand von einer Software, die für die Disposition und Koordination der Polizei eingesetzt wird. Diese Software verwendet offenbar eine OpenStreetMap-basierte Karte und zeigt dort auch Verwaltungsgrenzen aus OSM an.
+
+In der betreffenden Region sind die Verwaltungsgrenzen in OpenStreetMap gegenüber den amtlichen Daten offenbar nicht mehr aktuell. Das führte wohl immer wieder zu Verwirrung bei den Dispatcher:innen.
+
+Ich habe schon früher für Projekte [bei FixMyCity](https://fixmycity.de/tilda/) und [OSM Berlin](https://osm-berlin.org/) festgestellt, dass die Daten zu Grenzen in OSM immer wieder im Detail abweichen und es – im Gegensatz zu vielen anderen Daten – kaum Personen gibt, die sie pflegen. Ich hoffe, diese Software hilft jetzt dabei die Datenpflege anzustoßen und zu vereinfachen.
+
+## Stark LLM-gestützt entwickelt
+
+Dieses Projekt ist sehr stark LLM-gestützt entstanden. Ich habe mehrere Tage daran gearbeitet, mit Unterstützung von [Cursor](https://cursor.com/) als LLM-Umgebung den Datenabgleich aufzubauen, die Verarbeitung zu automatisieren (und ressourcenschonend zu gestalten) und das Frontend zu bauen.
+
+Ich erwähne das hier bewusst, weil in dieser Software Dinge passieren, von denen ich selbst fachlich nur sehr begrenzt Ahnung habe. Insbesondere bei den Vergleichsindikatoren und der dahinterliegenden Mathematik habe ich mich komplett auf das LLM verlassen. Eine Inspiration und Inspiration für das Projekt ist [http://boundaries.osm.ch/](http://boundaries.osm.ch/), was die Indikatoren wie Hausdorff verwendet.
+
+Wenn ihr euch mit solchen Verfahren auskennt, seid ihr deshalb ausdrücklich eingeladen, die Daten stichprobenhaft zu prüfen, den Code zu prüfen und Verbesserungen vorzuschlagen.
+
+## Welche Datensätze gibt es bisher?
+
+Meine erste Motivation war zunächst, [die Grenzen des BKG](https://gdz.bkg.bund.de/index.php/default/solr/search/index/?q=Verwaltungsgebiete) mit OpenStreetMap abzugleichen.
+
+Die Vergleichsmethoden sind aber nicht auf BKG-Daten beschränkt. Sie eignen sich grundsätzlich für unterschiedliche Arten von Grenzen – zum Beispiel auch für Postleitzahlgrenzen oder lokale Verwaltungsgrenzen innerhalb von Städten.
+
+Beispielhaft habe ich deshalb zusätzlich Datensätze aus Berlin, Hamburg und Brandenburg in den Vergleich aufgenommen. Darunter sind sowohl klassische Verwaltungsgrenzen als auch Postleitzahlgrenzen ([Berlin](https://grenzabgleich.osm-verkehrswende.org/berlin-plz), [Brandenburg mit Berlin](https://grenzabgleich.osm-verkehrswende.org/brandenburg-berlin-plz))
+
+## Helft beim Prüfen der Daten
+
+Auf der Startseite gibt es auch einen eigenen Bereich beziehungsweise Menüpunkt, der nur die vom Datenabgleich als problematisch oder prüfungswürdig markierten Grenzen auflistet.
+
+<Button label="Prüfliste öffnen…" href="https://grenzabgleich.osm-verkehrswende.org/review" newWindow />
+
+Wenn ihr also schnell in potenziell fehlerhafte Fälle einsteigen wollt, ist das ein guter Einstieg.
+
+Einige dieser Fälle sind relativ klar: einfache Grenzverschiebungen, die sich nach Prüfung gut übernehmen lassen.
+
+Andere Fälle sind deutlich komplexer. Dort muss erst recherchiert werden,
+
+* woher die Unterschiede überhaupt kommen,
+* ob es sich um Tagging-Konflikte handelt,
+* ob Fehler in der Definition des Datenabgleichs vorliegen,
+* oder ob die Daten in OpenStreetMap tatsächlich aktualisiert werden sollten.
+
+Einige Änderungen an Grenzen sollten nur von sehr erfahrenen Mapper:innen vorgenommen werden.
+
+Und wenn ihr **selbst Datensätze** habt, die ihr gerne in diese Verarbeitung aufnehmen möchtet, dann [schreibt gern einen GitHub-Issue](https://github.com/osmberlin/osm-boundary-checker-germany/issues) und fügt die Details zum Datensatz hinzu (dafür gibt es ein Isssue-Template).
+
+### **Tipp: Regional- und Gemeindeschlüssel-Explorer**
+
+Viele der Datensätze verwenden den Regional- oder Gemeindeschlüssel um die Flächen zuzuordnen. In der Theorie ist das ein toller Wert, der genau für diesen Zweck sehr hilfreich ist. In der Praxis finde ich ihn leider sehr kompliziert zu verstehen und anzuwenden.
+
+Um das einfacher zu machen, habe ich als Unterseite [den **Regional- und Gemeindeschlüssel-Explorer** gebaut](https://grenzabgleich.osm-verkehrswende.org/tools/german-key). Dieser verwendet die OpenData von Destatis um die Schlüssel in seine für OSM relevanten Bestandteile zu zerlegen.
+
+So konnte ich für mich zum Beispiel nachvollziehen, dass [diese Grenze (die jetzt ein Match hat)](https://grenzabgleich.osm-verkehrswende.org/de-gemeinden-rp/feature/071405009112), einen [14 Jahre alten](https://osmlab.github.io/osm-deep-history/#/relation/1190008) und veralteten `de:regionalschluessel=071405006112`. Der Explorer hält dafür die letzten Jahre der alten Daten vor und [kann anzeigen, wenn ein Wert nicht mehr aktuell ist](https://grenzabgleich.osm-verkehrswende.org/tools/german-key?key=071405006112).
+
+## Eure Rückmeldungen sind willkommen
+
+Ich freue mich über Rückmeldungen dazu,
+
+* welche Erkenntnisse ihr aus dem Datenabgleich gewonnen habt,
+* welche Verbesserungen ihr damit in OpenStreetMap vornehmen konntet,
+* und natürlich auch über gute Fehlermeldungen, wenn euch etwas im Tool auffällt, das verbessert werden sollte.
+
+Schaut es euch gern an:
+
+* Tool: [Grenzabgleich](https://osmberlin.github.io/osm-boundary-checker-germany/), [Problem-Kandidaten](https://grenzabgleich.osm-verkehrswende.org/review)
+* Code: [GitHub](https://github.com/osmberlin/osm-boundary-checker-germany)
+* Issues / Feedback: [GitHub Issues](https://github.com/osmberlin/osm-boundary-checker-germany/issues)

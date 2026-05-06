@@ -8,6 +8,9 @@ export type ImageSingleHorizontal = {
   caption?: string
   imageConfig:
     | {
+        discriminant: 'fit'
+      }
+    | {
         discriminant: '3/2'
         value:
           | {
@@ -55,16 +58,18 @@ export const keystaticImageSingleHorizontalConfig = (imagePath: string) =>
         fields.select({
           label: 'Seitenverhältnis',
           description:
-            'Breite Formate (16:9 und 9:4) werden immer über die ganze Breite dargestellt.',
+            'Bei "Vollständig sichtbar" wird das Bild in seiner natürlichen Höhe und maximal in voller Breite dargestellt (kleinere Bilder werden nicht vergrößert). Breite Formate (16:9 und 9:4) werden immer über die ganze Breite dargestellt.',
           options: [
+            { label: 'Vollständig sichtbar', value: 'fit' },
             { label: '3:2', value: '3/2' },
             { label: '4:3', value: '4/3' },
             { label: '9:4', value: '9/4' },
             { label: '16:9', value: 'pano' },
           ],
-          defaultValue: '4/3',
+          defaultValue: 'fit',
         }),
         {
+          fit: fields.empty(),
           '3/2': fields.conditional(
             fields.select({
               label: 'Breite',

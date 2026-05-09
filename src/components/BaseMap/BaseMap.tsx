@@ -74,8 +74,8 @@ export const BaseMap = ({ initialViewState, interactiveLayerIds, boxZoom, childr
         latitude: latLngZoom.latitude || initialViewState.latitude,
         longitude: latLngZoom.longitude || initialViewState.longitude,
       }}
-      // Style: https://cloud.maptiler.com/maps/dataviz/
-      mapStyle="https://api.maptiler.com/maps/dataviz/style.json?key=ur6Yh3ULc6QjatOYBgln"
+      // Style: https://openfreemap.org/ (Positron)
+      mapStyle="https://tiles.openfreemap.org/styles/positron"
       style={{ width: '100%', height: '100%' }}
       boxZoom={boxZoom || true}
       // hash

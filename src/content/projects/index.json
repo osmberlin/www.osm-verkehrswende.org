@@ -340,6 +340,36 @@
     },
     {
       "name": {
+        "name": "Panoramax",
+        "slug": "panoramax"
+      },
+      "enabled": false,
+      "header": "ProjectHeader",
+      "menus": [
+        {
+          "items": [
+            {
+              "label": "Wissenssammlung (Wiki)",
+              "href": "https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Panoramax-Deutschland-Wissenssammlung"
+            },
+            {
+              "label": "Luftbilder aus 360° (OSM Diary)",
+              "href": "https://www.openstreetmap.org/user/tordans/diary/401804"
+            }
+          ]
+        }
+      ],
+      "menuNews": true,
+      "additionalFooterLinks": [],
+      "meta": {
+        "title": "Panoramax",
+        "description": "Blogposts zu einer deutschen Panoramax-Instanz für Straßenraumfotos und OpenStreetMap.",
+        "imageAlt": "OpenStreetMap Verkehrswende Community",
+        "language": "de"
+      }
+    },
+    {
+      "name": {
         "name": "(FALLBACK)",
         "slug": "unknown"
       },

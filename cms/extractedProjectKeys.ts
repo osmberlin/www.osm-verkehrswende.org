@@ -13,5 +13,6 @@ export const extractedProjectKeys = [
   'benches',
   'schulabgleich',
   'grenzabgleich',
+  'panoramax',
   'unknown',
 ] as const

@@ -47,6 +47,7 @@ export default defineConfig({
   redirects: {
     '/mapillary/posts/2023-10-30-mapillary-missing-streets-proof-of-concept/':
       '/mapillary/posts/2025-10-12-mapillary-completeness-map/',
+    '/root/posts/panoramax-bedarf/': '/panoramax/posts/panoramax-bedarf/',
     '/mapswipe': '/crowdmap',
     '/crowdmap': 'https://www.osm-berlin.org/crowdmap/',
     '/crowdmap/xhain': 'https://www.osm-berlin.org/crowdmap/xhain/',

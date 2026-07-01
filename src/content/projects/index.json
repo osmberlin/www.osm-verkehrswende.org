@@ -74,6 +74,10 @@
               "href": "/mapillary/map/"
             },
             {
+              "label": "Abdeckungsanalyse",
+              "href": "https://vizsim.github.io/mapillary_coverage_analysis/viz/"
+            },
+            {
               "label": "Routenplanung",
               "href": "https://vizsim.github.io/missing_mapillary_gh-routing/"
             }
@@ -85,6 +89,14 @@
         {
           "label": "Github: Code für die Mapillary Abdeckung",
           "href": "https://github.com/vizsim/mapillary_coverage"
+        },
+        {
+          "label": "Github: Mapillary Coverage Analysis",
+          "href": "https://github.com/vizsim/mapillary_coverage_analysis"
+        },
+        {
+          "label": "Github: Verkehrszeichen aus Mapillary",
+          "href": "https://github.com/vizsim/mapillary_trafficsigns"
         },
         {
           "label": "Github: Routenplanung",

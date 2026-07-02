@@ -7,10 +7,9 @@ author: Siân Bradley @sian0x0
 inMenu: true
 noindex: false
 language: en
+imageAlt: How we enriched first-pass image annotations with traffic sign classification
 showToc: false
 ---
-*How we enriched first-pass image annotations with traffic sign classification*
-
 Panoramax is an open-source federated street-level imagery platform, launched in France in 2022. Various [regional instances](https://explore.panoramax.fr/en/instances) have since been developed. We are experimenting with an internal [Panoramax](https://docs.panoramax.fr/) stack at [FixMyCity](https://fixmycity.de/) in Berlin, as a step towards the goal of having [a Panoramax server for Germany](https://www.osm-verkehrswende.org/panoramax/posts/panoramax-bedarf/). We want to share insights we gain along the way which may be useful for others setting up instances.
 
 On our Panoramax instance, we wanted to see if it was possible to generate more detailed annotations than those offered in the standard setup, so that we can better use our Panoramax data for mapping. We wanted to do this without modifying the core Panoramax stack that we rely on, and without requiring image contributors to manually annotate or run extra scripts on already-uploaded images.
@@ -29,9 +28,9 @@ Such workflows have drawbacks: uploaders need to know about the extra service, t
 
 ## Adding Classification
 
-<ImageSingleSquare src="/src/content/posts/panoramax-upload-computer-vision-traffic-signs/de_sign_class.jpg" caption="traffic sign classification (image: Christian Quest / Panoramax)" alt="a grid of German road signs with classification scores" imageConfig={{"discriminant":"half","value":"right"}} />
-
 ### Models
+
+<ImageSingleSquare src="/src/content/posts/panoramax-upload-computer-vision-traffic-signs/de_sign_class.jpg" caption="traffic sign classification (image: Christian Quest / Panoramax)" alt="a grid of German road signs with classification scores" imageConfig={{"discriminant":"half","value":"right"}} />
 
 Panoramax offers various YOLO classification models post-trained on the signs of different countries. We used [classify\_de\_road\_signs](https://huggingface.co/Panoramax/classify_de_road_signs), but models have also been released for Belgium, the Netherlands, and, of course, the project’s native France. Unlike detection, these models work on crops of the image containing only the target object, and are small enough to run on CPU. That means it can run inside an always-on service, after the GPU returns its detection results, but before the response goes back to the Panoramax worker, all within a single request/response cycle.
 
@@ -60,17 +59,16 @@ classification_confidence[osm|traffic_sign=DE:205] = 0.94
 
 This follows [Panoramax tag syntax](https://docs.panoramax.fr/tags/syntax/), with qualifier tags in square brackets linking a model name and confidence score metadata to the specific main tag they describe.
 
-<Callout language="en" color="yellow">
-  **Note on multiple tags with the same key:**&#x20;
+**Note on multiple tags with the same key:**
 
-  Panoramax theoretically allows multiple `traffic_sign` tags on one annotation, and we at first kept the original `traffic_sign=yes` from detection alongside the more specific `traffic_sign=DE:205` from classification. Panoramax documentation is slightly contradictory here, in that it recommends replacing the generic tag, but also recommends keeping it for audit purposes. In practice, however, the map overlay sprite renderer (see below) can only show an icon for annotations with a single `traffic_sign` value.
+Panoramax theoretically allows multiple `traffic_sign` tags on one annotation, and we at first kept the original `traffic_sign=yes` from detection alongside the more specific `traffic_sign=DE:205` from classification. Panoramax documentation is slightly contradictory here, in that it recommends replacing the generic tag, but also recommends keeping it for audit purposes. In practice, however, the map overlay sprite renderer (see below) can only show an icon for annotations with a single `traffic_sign` value.
 
-  For this reason, we completely replace the original `=yes` tag with the more specific tag, but apply both the classification model and the original detection model metadata to this new tag (even though the detection model was only responsible for the key and not the value):
+For this reason, we completely replace the original `=yes` tag with the more specific tag, but apply both the classification model and the original detection model metadata to this new tag (even though the detection model was only responsible for the key and not the value):
 
-  ```
-  detection_model[osm|traffic_sign=DE:205] = SGBlur-yolo11m/0.1.0detection_confidence[osm|traffic_sign=DE:205] = 0.78
-  ```
-</Callout>
+```
+detection_model[osm|traffic_sign=DE:205] = SGBlur-yolo11m/0.1.0
+detection_confidence[osm|traffic_sign=DE:205] = 0.78
+```
 
 ## Current status
 

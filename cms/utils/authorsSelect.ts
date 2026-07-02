@@ -1,4 +1,4 @@
-export const authors = ['Tobias Jordans @tordans', 'Alex Seidel @supaplex030'] as const
+export const authors = ['Tobias Jordans @tordans', 'Alex Seidel @supaplex030', 'Siân Bradley @sian0x0'] as const
 
 export const authorsSelect = authors
   .map((authorName) => {

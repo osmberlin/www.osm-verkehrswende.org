@@ -1,0 +1,106 @@
+---
+title: Adding Computer Vision to the Panoramax Upload Pipeline
+menuTitle: Traffic sign recognition
+project: panoramax
+pubDate: 2026-07-02T15:17:00.000Z
+author: Siân Bradley @sian0x0
+inMenu: true
+noindex: false
+language: en
+showToc: false
+---
+*How we enriched first-pass image annotations with traffic sign classification*
+
+Panoramax is an open-source federated street-level imagery platform, launched in France in 2022. Various [regional instances](https://explore.panoramax.fr/en/instances) have since been developed. We are experimenting with an internal [Panoramax](https://docs.panoramax.fr/) stack at [FixMyCity](https://fixmycity.de/) in Berlin, as a step towards the goal of having [a Panoramax server for Germany](https://www.osm-verkehrswende.org/panoramax/posts/panoramax-bedarf/). We want to share insights we gain along the way which may be useful for others setting up instances.
+
+On our Panoramax instance, we wanted to see if it was possible to generate more detailed annotations than those offered in the standard setup, so that we can better use our Panoramax data for mapping. We wanted to do this without modifying the core Panoramax stack that we rely on, and without requiring image contributors to manually annotate or run extra scripts on already-uploaded images.
+
+This post documents how we added German road sign classification on upload on [panoramax.fixmycity.de](https://panoramax.fixmycity.de).
+
+---
+
+## Annotations in the standard upload pipeline
+
+The standard Panoramax upload pipeline runs blurring and sign detection on a separate GPU server. This is the `/blur` service, which first internally calls a `/detect` endpoint to find the parts of the image we are interested in: faces and vehicle registration plates to be obscured, and traffic signs to tag. It returns an HTTP multipart response to the main server containing the blurred image and a metadata JSON object with annotations (image region bounding boxes) for detected traffic signs, tagged with a generic `traffic_sign=yes`.
+
+Annotations can later be enriched by hand, or semi-automated using a second-pass service that downloads each image, runs classification on the detections, and pushes results back to the Panoramax instance API's `/annotations` endpoint. Panoramax offers the [Prolix](https://gitlab.com/panoramax/clients/prolix) CLI tool for traffic signs, and research projects like [HeiGIT's accessible path detector](https://heigit.org/measuring-what-you-never-notice-a-computer-vision-approach-to-accessible-paths/) (October 2025) have also gone this route for recognising surfaces.
+
+Such workflows have drawbacks: uploaders need to know about the extra service, to understand it, and to run it. The goal here was to simplify the process: upload once and get enriched annotations back in the same response.&#x20;
+
+## Adding Classification
+
+<ImageSingleSquare src="/src/content/posts/panoramax-upload-computer-vision-traffic-signs/de_sign_class.jpg" caption="traffic sign classification (image: Christian Quest / Panoramax)" alt="a grid of German road signs with classification scores" imageConfig={{"discriminant":"half","value":"right"}} />
+
+### Models
+
+Panoramax offers various YOLO classification models post-trained on the signs of different countries. We used [classify\_de\_road\_signs](https://huggingface.co/Panoramax/classify_de_road_signs), but models have also been released for Belgium, the Netherlands, and, of course, the project’s native France. Unlike detection, these models work on crops of the image containing only the target object, and are small enough to run on CPU. That means it can run inside an always-on service, after the GPU returns its detection results, but before the response goes back to the Panoramax worker, all within a single request/response cycle.
+
+This was particularly relevant for us because we don't have an always-on GPU to process `/blur` requests, and therefore had already implemented an additional proxy to hold the requests until our cloud GPU could be woken up. This saves on GPU resources and prevents the requests timing out while waiting for the blur server.
+
+### Special setup with proxy
+
+The `blur-proxy` is a FastAPI service that intercepts the `/blur` requests from workers on the instance's main image server when a user uploads images, wakes the GPU before forwarding them, and receives the image and detection results back. It now additionally runs classification on crops of any detected signs. It returns an enriched multipart response that is still consumed normally by the original worker, despite containing much more information.
+
+Classifier steps in detail:
+
+1. Receives the blurred image and detection metadata from the GPU
+2. Crops each detected sign region from the blurred image using the bounding box data.
+3. Runs the model `classify_de_road_signs` on each crop
+4. Maps the model's human-readable class names to standard StVO *Zeichen* numbers (e.g. `"give_way"` → `DE:205`)
+5. Adds the resulting tags to the annotation's semantics
+6. Returns the enriched multipart response to the worker as if nothing had been inserted
+
+The resulting annotation semantics for a classified sign look like this:
+
+```
+osm|traffic_sign = DE:205
+classification_model[osm|traffic_sign=DE:205] = classify_de_road_signs/1.0
+classification_confidence[osm|traffic_sign=DE:205] = 0.94
+```
+
+This follows [Panoramax tag syntax](https://docs.panoramax.fr/tags/syntax/), with qualifier tags in square brackets linking a model name and confidence score metadata to the specific main tag they describe.
+
+<Callout language="en" color="yellow">
+  **Note on multiple tags with the same key:**&#x20;
+
+  Panoramax theoretically allows multiple `traffic_sign` tags on one annotation, and we at first kept the original `traffic_sign=yes` from detection alongside the more specific `traffic_sign=DE:205` from classification. Panoramax documentation is slightly contradictory here, in that it recommends replacing the generic tag, but also recommends keeping it for audit purposes. In practice, however, the map overlay sprite renderer (see below) can only show an icon for annotations with a single `traffic_sign` value.
+
+  For this reason, we completely replace the original `=yes` tag with the more specific tag, but apply both the classification model and the original detection model metadata to this new tag (even though the detection model was only responsible for the key and not the value):
+
+  ```
+  detection_model[osm|traffic_sign=DE:205] = SGBlur-yolo11m/0.1.0detection_confidence[osm|traffic_sign=DE:205] = 0.78
+  ```
+</Callout>
+
+## Current status
+
+Now when a user uploads a sequence of images, German traffic signs are detected, identified, and tagged automatically.
+
+<ImageSingleHorizontal src="/src/content/posts/panoramax-upload-computer-vision-traffic-signs/annotated-signs-on-upload.png" caption="Sign tags in the web frontend" alt="in the web interface, annotation bounding boxes enclose each sign in the image, and an info panel shows the main tag with German sign type and model qualifiers" imageConfig={{"discriminant":"fit"}} />
+
+These annotations can be accessed in the web viewer and via the instance’s API.
+
+## Next steps
+
+### Map Overlays
+
+<ImageSingleHorizontal src="/src/content/posts/panoramax-upload-computer-vision-traffic-signs/overlay-map-signs-sprites.png" caption="Map sprites on panoramax.fr" imageConfig={{"discriminant":"fit"}} />
+
+Panoramax's web viewer supports [semantic overlays](https://docs.panoramax.fr/web-viewer/tutorials/semantics_overlays/): MapLibre symbol layers that display a sign icon on the map for every image/annotation with a matching semantic tag. This is already working for French signs, which have a sprite sheet at `presets.panoramax.fr/sprites/trafficsigns_fr` and a corresponding `FR:xxx` match pattern in the overlay logic.
+
+For German signs, we would need a sprite sheet covering `DE:xxx` codes and an upstream modification to the `addSemanticOverlay` and [server/tagging-presets](https://gitlab.com/panoramax/server/tagging-presets) repositories in the Panoramax web viewer call to match them.
+
+### Improve classify\_de\_road\_signs
+
+`classify_de_road_signs` is early-stage. Some German sign classes are missing, and a few existing classes have accuracy issues. The lookup table we used is a modified version of the one from the `classify_nl_road_signs` repository which also required some manual corrections. We treat the current output as useful but provisional, and will share our findings with the developers.
+
+### Extension: Adding more computer vision?
+
+It could be possible to use this approach to add other computer vision tasks to Panoramax. This could allow us to identify more features useful that are useful for mapping, for example other street furniture or road surface types. Smaller CPU-compatible models could slot in cleanly with the same structure, though traffic signs were the obvious choice for us because this is the only object type currently detected by the blur server.
+
+Other types of tasks may require a different architecture:
+
+* If the task requires a larger model, including adding additional steps to detect other object types, the processing would be better carried out on a GPU server. However, Panoramax’s seamless handling of extra tag information suggests that this could equally be done at the initial upload phase.
+* Any data derivation which requires multiple images rather than per-image processing (for example object positioning as in Prolix) would need to be structured differently, but could possibly still be inserted with the creation of the sequence at upload.
+
+These types of data enrichment could massively benefit open-source mapping and transport planning. Especially since the purchase of the widely-used Mapillary street imagery platform by Facebook in 2020, the open source community needs alternatives to gather up-do-date, standardised information to support its mapping needs.

@@ -3,7 +3,8 @@ import { z } from 'zod'
 
 const OsmcalDateSchema = z.object({
   start: z.string(),
-  end: z.string(),
+  // OSMCal omits `end` for some whole-day / open-ended events.
+  end: z.string().optional(),
   human: z.string().optional(),
   human_short: z.string().optional(),
   whole_day: z.boolean().optional(),
@@ -41,6 +42,10 @@ export const MEETUP_WIKI_URL = 'https://wiki.openstreetmap.org/wiki/Verkehrswend
 const OSMCAL_EVENTS_URL = 'https://osmcal.org/api/v2/events/?in=de'
 const MAX_MONTHS_AHEAD = 3
 
+function eventEndIso(event: OsmcalEvent): string {
+  return event.date.end ?? event.date.start
+}
+
 export function selectNextMeetup(events: OsmcalEvent[], now: Date = new Date()): NextMeetup | null {
   const cutoff = addMonths(now, MAX_MONTHS_AHEAD)
 
@@ -49,8 +54,9 @@ export function selectNextMeetup(events: OsmcalEvent[], now: Date = new Date()):
     .filter((event) => !event.cancelled)
     .map((event) => {
       const start = new Date(event.date.start)
-      const end = new Date(event.date.end)
-      return { event, start, end }
+      const endIso = eventEndIso(event)
+      const end = new Date(endIso)
+      return { event, start, end, endIso }
     })
     .filter(({ start, end }) => Number.isFinite(start.getTime()) && Number.isFinite(end.getTime()))
     // Include the meetup while it is still running; hide once it has ended.
@@ -65,9 +71,21 @@ export function selectNextMeetup(events: OsmcalEvent[], now: Date = new Date()):
     osmcalUrl: next.event.url,
     wikiUrl: MEETUP_WIKI_URL,
     startIso: next.event.date.start,
-    endIso: next.event.date.end,
+    endIso: next.endIso,
     venue: next.event.location?.venue ?? next.event.location?.short ?? null,
   }
+}
+
+function parseOsmcalEvents(json: unknown): OsmcalEvent[] {
+  if (!Array.isArray(json)) {
+    throw new Error('OSMCal response is not an array')
+  }
+
+  // Skip malformed items instead of failing the whole feed.
+  return json.flatMap((item) => {
+    const result = OsmcalEventSchema.safeParse(item)
+    return result.success ? [result.data] : []
+  })
 }
 
 export async function fetchNextMeetupFromOsmcal(
@@ -86,8 +104,7 @@ export async function fetchNextMeetupFromOsmcal(
   }
 
   const json: unknown = await response.json()
-  const parsed = z.array(OsmcalEventSchema).parse(json)
-  return selectNextMeetup(parsed, now)
+  return selectNextMeetup(parseOsmcalEvents(json), now)
 }
 
 export function isMeetupStillRelevant(meetup: NextMeetup, now: Date = new Date()): boolean {

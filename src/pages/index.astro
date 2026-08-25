@@ -1,4 +1,5 @@
 ---
+import { NextMeetupCallout } from '@components/meetup/NextMeetupCallout'
 import Card from '@components/text/Card.astro'
 import CardWrapper from '@components/text/CardWrapper.astro'
 import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
@@ -47,6 +48,8 @@ const showcaseProjects = projects
       </p>
     </div>
   </section>
+
+  <NextMeetupCallout client:only="react" />
 
   <CardWrapper sectionClasses="mt-16">
     <Card

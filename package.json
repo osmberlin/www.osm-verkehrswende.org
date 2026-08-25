@@ -49,6 +49,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/ts-plugin": "^1.10.9",
     "@aws-sdk/client-s3": "^3.1077.0",
+    "@date-fns/tz": "^1.5.0",
     "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
     "@keystatic/astro": "^5.1.0",

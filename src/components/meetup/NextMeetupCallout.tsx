@@ -2,7 +2,9 @@ import { QueryClientRoot } from '@components/QueryClientRoot'
 import { useState } from 'react'
 import { formatMeetupCountdown, formatMeetupDateTime } from './formatMeetupCountdown'
 import { getBrowserTimeZone, TimeZonePicker } from './TimeZonePicker'
-import { MEETUP_WIKI_URL, useNextMeetup } from './useNextMeetup'
+import { useNextMeetup } from './useNextMeetup'
+
+const MEETUP_WIKI_URL = 'https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Meetups'
 
 function NextMeetupCalloutInner() {
   const { data: meetup, isPending } = useNextMeetup()

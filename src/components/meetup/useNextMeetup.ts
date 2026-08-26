@@ -29,8 +29,6 @@ type NextMeetup = {
 }
 
 const MEETUP_TITLE_PREFIX = 'OSM-Verkehrswende'
-export const MEETUP_WIKI_URL = 'https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Meetups'
-
 const OSMCAL_EVENTS_URL = 'https://osmcal.org/api/v2/events/?in=de'
 const MAX_MONTHS_AHEAD = 3
 

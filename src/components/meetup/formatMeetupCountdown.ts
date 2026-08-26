@@ -1,16 +1,14 @@
 import { TZDate } from '@date-fns/tz'
+import type { Duration } from 'date-fns'
 import {
+  addDays,
   differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
   format,
+  formatDuration,
   intervalToDuration,
+  isAfter,
 } from 'date-fns'
 import { de } from 'date-fns/locale'
-
-function pluralDe(count: number, one: string, many: string): string {
-  return `${count} ${count === 1 ? one : many}`
-}
 
 /** e.g. "Dienstag, 22.09.2026 19:30" */
 export function formatMeetupDateTime(startIso: string, timeZone: string): string {
@@ -18,10 +16,37 @@ export function formatMeetupDateTime(startIso: string, timeZone: string): string
   return format(start, 'EEEE, dd.MM.yyyy HH:mm', { locale: de })
 }
 
+type CountdownUnit = 'days' | 'hours' | 'minutes'
+
 /**
- * Relative countdown that gets more precise closer to the event:
- * days → days+hours → hours+minutes → minutes.
- * Returns a live label while the meetup is ongoing.
+ * Pick 1–2 units so the countdown gets more precise closer to the event.
+ * date-fns has no flag for that: formatDistanceStrict is one unit,
+ * formatDuration prints whatever units we pass in `format`.
+ */
+function countdownFormat(duration: Duration): CountdownUnit[] | null {
+  const days = duration.days ?? 0
+  const hours = duration.hours ?? 0
+  const minutes = duration.minutes ?? 0
+
+  if (days >= 2) return ['days']
+  if (days >= 1) return ['days', 'hours']
+  if (hours >= 1) return ['hours', 'minutes']
+  if (minutes >= 1) return ['minutes']
+  return null
+}
+
+function countdownDuration(now: Date, start: Date): Duration {
+  const days = differenceInDays(start, now)
+  const rest = intervalToDuration({ start: addDays(now, days), end: start })
+  return {
+    days,
+    hours: rest.hours ?? 0,
+    minutes: rest.minutes ?? 0,
+  }
+}
+
+/**
+ * Relative countdown: days → days+hours → hours+minutes → minutes.
  */
 export function formatMeetupCountdown(
   startIso: string,
@@ -31,43 +56,19 @@ export function formatMeetupCountdown(
   const start = new Date(startIso)
   const end = new Date(endIso)
 
-  if (!(end.getTime() > now.getTime())) return null
+  if (!isAfter(end, now)) return null
+  if (!isAfter(start, now)) return 'läuft gerade'
 
-  if (!(start.getTime() > now.getTime())) {
-    return 'läuft gerade'
-  }
+  const duration = countdownDuration(now, start)
+  const units = countdownFormat(duration)
+  if (!units) return 'gleich'
 
-  const totalMinutes = differenceInMinutes(start, now)
-  const totalHours = differenceInHours(start, now)
-  const totalDays = differenceInDays(start, now)
+  const formatted = formatDuration(duration, {
+    format: units,
+    delimiter: ', ',
+    locale: de,
+  })
 
-  if (totalDays >= 2) {
-    return `in ${pluralDe(totalDays, 'Tag', 'Tagen')}`
-  }
-
-  if (totalHours >= 24) {
-    const duration = intervalToDuration({ start: now, end: start })
-    const days = duration.days ?? totalDays
-    const hours = duration.hours ?? 0
-    if (hours === 0) {
-      return `in ${pluralDe(days, 'Tag', 'Tagen')}`
-    }
-    return `in ${pluralDe(days, 'Tag', 'Tagen')}, ${pluralDe(hours, 'Stunde', 'Stunden')}`
-  }
-
-  if (totalHours >= 1) {
-    const duration = intervalToDuration({ start: now, end: start })
-    const hours = duration.hours ?? totalHours
-    const minutes = duration.minutes ?? 0
-    if (minutes === 0) {
-      return `in ${pluralDe(hours, 'Stunde', 'Stunden')}`
-    }
-    return `in ${pluralDe(hours, 'Stunde', 'Stunden')}, ${pluralDe(minutes, 'Minute', 'Minuten')}`
-  }
-
-  if (totalMinutes >= 1) {
-    return `in ${pluralDe(totalMinutes, 'Minute', 'Minuten')}`
-  }
-
-  return 'gleich'
+  // formatDuration uses standalone forms (“27 Tage”); dative after “in”.
+  return `in ${formatted.replace(/\bTage\b/g, 'Tagen')}`
 }

@@ -1,4 +1,5 @@
 ---
+import { NextMeetupCallout } from '@components/meetup/NextMeetupCallout'
 import Card from '@components/text/Card.astro'
 import CardWrapper from '@components/text/CardWrapper.astro'
 import LayoutArticlePageAstro from '@layouts/LayoutArticlePageAstro.astro'
@@ -48,26 +49,30 @@ const showcaseProjects = projects
     </div>
   </section>
 
-  <CardWrapper sectionClasses="mt-16">
-    <Card
-      external
-      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup"
-      text="Wiki öffnen…"
-      alt="Verkehrswende Wiki"
-      variant="iconGrid"
-    >
-      <BookOpen class="size-10" />
-    </Card>
-    <Card
-      external
-      href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Meetups"
-      text="Termine anzeigen…"
-      alt="Mtl. online Meetup"
-      variant="iconGrid"
-    >
-      <CalendarDays class="size-10" />
-    </Card>
-  </CardWrapper>
+  <div class="mt-16 flex flex-col gap-4">
+    <NextMeetupCallout client:only="react" />
+
+    <CardWrapper sectionClasses="mt-0">
+      <Card
+        external
+        href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup"
+        text="Wiki öffnen…"
+        alt="Verkehrswende Wiki"
+        variant="iconGrid"
+      >
+        <BookOpen class="size-10" />
+      </Card>
+      <Card
+        external
+        href="https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup#Meetups"
+        text="Alle Termine…"
+        alt="Mtl. online Meetup"
+        variant="iconGrid"
+      >
+        <CalendarDays class="size-10" />
+      </Card>
+    </CardWrapper>
+  </div>
 
   <CardWrapper headline="Ausgewählte Projekte" sectionClasses="mt-16">
     {

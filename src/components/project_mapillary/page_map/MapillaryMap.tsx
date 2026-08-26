@@ -1,9 +1,9 @@
 import { $searchParams } from '@components/BaseMap/store'
+import { QueryClientRoot } from '@components/QueryClientRoot'
 import { useStore } from '@nanostores/react'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { NavigationControl } from 'react-map-gl/maplibre'
 import { BaseMap, type MapInitialViewState } from '../../BaseMap/BaseMap'
-import { MapillaryQueryClient } from './MapillaryQueryClient'
 import { MapInspector } from './MapInspector'
 import { MapSourceBoundaries } from './MapSourceBoundaries'
 import { MapSourceLayers, fortbewegungConfig } from './MapSourceLayers'
@@ -24,7 +24,7 @@ export const MapillaryMap = ({ maxBounds, minZoom, maxZoom, initialViewState }: 
   const clickTargetLayerIds = fortbewegungConfig[mode].sourceIds.map((id) => `${id}-click-target`)
 
   return (
-    <MapillaryQueryClient>
+    <QueryClientRoot>
       <BaseMap
         initialViewState={{
           // Use provided initialViewState or fallback to Germany center
@@ -46,6 +46,6 @@ export const MapillaryMap = ({ maxBounds, minZoom, maxZoom, initialViewState }: 
         <MapInspector />
         <Overlay />
       </BaseMap>
-    </MapillaryQueryClient>
+    </QueryClientRoot>
   )
 }

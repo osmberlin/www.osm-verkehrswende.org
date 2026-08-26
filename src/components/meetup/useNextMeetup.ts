@@ -43,7 +43,9 @@ async function loadNextMeetup(): Promise<NextMeetup | null> {
   if (cached) return cached.meetup
 
   const meetup = await fetchNextMeetupFromOsmcal(now)
-  writeCachedMeetup(meetup)
+  // Only cache successful hits so newly published meetups appear quickly
+  // after a period with no upcoming date.
+  if (meetup) writeCachedMeetup(meetup)
   return meetup
 }
 

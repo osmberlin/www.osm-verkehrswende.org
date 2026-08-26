@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
-import { formatMeetupCountdown, formatMeetupDateTimeRange } from './formatMeetupCountdown'
+import { formatMeetupCountdown, formatMeetupDateTime } from './formatMeetupCountdown'
 import { MeetupQueryClient } from './MeetupQueryClient'
-import {
-  buildTimeZoneOptions,
-  getBrowserTimeZone,
-  readStoredTimeZone,
-  writeStoredTimeZone,
-} from './timezones'
+import { MEETUP_WIKI_URL } from './osmcal'
+import { TimeZonePicker } from './TimeZonePicker'
+import { getBrowserTimeZone, readStoredTimeZone, writeStoredTimeZone } from './timezones'
 import { useNextMeetup } from './useNextMeetup'
 
 function NextMeetupCalloutInner() {
-  const { data: meetup, isPending, isError } = useNextMeetup()
+  const { data: meetup, isPending } = useNextMeetup()
   const [timeZone, setTimeZone] = useState(() => readStoredTimeZone() ?? getBrowserTimeZone())
   const [now, setNow] = useState(() => new Date())
 
@@ -19,73 +16,63 @@ function NextMeetupCalloutInner() {
     return () => window.clearInterval(id)
   }, [])
 
-  if (isPending || isError || !meetup) return null
-
-  const dateTimeLabel = formatMeetupDateTimeRange(meetup.startIso, meetup.endIso, timeZone)
-  const countdown = formatMeetupCountdown(meetup.startIso, meetup.endIso, now)
-  if (!countdown) return null
-
-  const timeZoneOptions = buildTimeZoneOptions(getBrowserTimeZone())
+  const hasMeetup = Boolean(meetup)
+  const countdown =
+    meetup != null ? formatMeetupCountdown(meetup.startIso, meetup.endIso, now) : null
+  const dateLabel = meetup != null ? formatMeetupDateTime(meetup.startIso, timeZone) : null
+  const href = meetup?.osmcalUrl ?? MEETUP_WIKI_URL
 
   return (
     <section
-      className="notice prose-sm mt-16 bg-emerald-100"
+      className="flex items-center gap-2 rounded-sm bg-gray-100 px-4 py-3"
       aria-labelledby="next-meetup-heading"
       data-component="NextMeetupCallout"
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <h2 id="next-meetup-heading" className="mt-0! mb-1 text-base font-semibold text-sky-800">
-            Nächstes Meetup
-          </h2>
-          <p className="m-0! text-lg font-semibold text-gray-900">{meetup.name}</p>
-          <p className="m-0! mt-1 text-gray-800">
-            {dateTimeLabel}
-            {meetup.venue ? ` · ${meetup.venue}` : ''}
-          </p>
-          <p className="m-0! mt-1 font-medium text-emerald-900" aria-live="polite">
-            {countdown}
-          </p>
-          <p className="m-0! mt-2">
+      <div className="min-w-0 grow">
+        <h2 id="next-meetup-heading" className="sr-only">
+          Nächster Termin
+        </h2>
+        {isPending ? (
+          <p className="m-0 text-gray-600">Nächster Termin: …</p>
+        ) : hasMeetup && dateLabel ? (
+          <p className="m-0 text-gray-900">
             <a
-              href={meetup.wikiUrl}
+              href={href}
               target="_blank"
               rel="noreferrer"
               className="font-medium text-sky-800 underline-offset-2 hover:underline"
             >
-              Wiki: Termine und Infos
+              Nächster Termin: {dateLabel}
             </a>
-            <span className="text-gray-500"> · </span>
+            {countdown ? (
+              <span className="ml-2 text-sm font-medium text-emerald-800" aria-live="polite">
+                {countdown}
+              </span>
+            ) : null}
+          </p>
+        ) : (
+          <p className="m-0 text-gray-900">
             <a
-              href={meetup.osmcalUrl}
+              href={MEETUP_WIKI_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-sky-800 underline-offset-2 hover:underline"
+              className="font-medium text-sky-800 underline-offset-2 hover:underline"
             >
-              OSMCal
+              Nächster Termin: Bitte schau im Wiki nach
             </a>
           </p>
-        </div>
-
-        <label className="flex shrink-0 flex-col gap-1 text-sm text-gray-700 sm:items-end">
-          <span className="font-medium">Zeitzone</span>
-          <select
-            className="max-w-full rounded-sm border-gray-300 bg-white py-1.5 pr-8 pl-2 text-sm text-gray-900 shadow-none focus:border-teal-600 focus:ring-teal-600"
-            value={timeZone}
-            onChange={(event) => {
-              const next = event.target.value
-              setTimeZone(next)
-              writeStoredTimeZone(next)
-            }}
-          >
-            {timeZoneOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        )}
       </div>
+
+      {hasMeetup ? (
+        <TimeZonePicker
+          timeZone={timeZone}
+          onChange={(next) => {
+            setTimeZone(next)
+            writeStoredTimeZone(next)
+          }}
+        />
+      ) : null}
     </section>
   )
 }

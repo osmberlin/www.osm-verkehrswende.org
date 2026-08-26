@@ -12,19 +12,10 @@ function pluralDe(count: number, one: string, many: string): string {
   return `${count} ${count === 1 ? one : many}`
 }
 
-export function formatMeetupDateTimeRange(
-  startIso: string,
-  endIso: string,
-  timeZone: string,
-): string {
+/** e.g. "Dienstag, 22.09.2026 19:30" */
+export function formatMeetupDateTime(startIso: string, timeZone: string): string {
   const start = new TZDate(startIso, timeZone)
-  const end = new TZDate(endIso, timeZone)
-
-  const datePart = format(start, 'EEEE, d. MMMM yyyy', { locale: de })
-  const startTime = format(start, 'HH:mm', { locale: de })
-  const endTime = format(end, 'HH:mm', { locale: de })
-
-  return `${datePart} · ${startTime}–${endTime}`
+  return format(start, 'EEEE, dd.MM.yyyy HH:mm', { locale: de })
 }
 
 /**

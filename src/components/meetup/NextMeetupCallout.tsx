@@ -25,13 +25,10 @@ function NextMeetupCalloutInner() {
   return (
     <section
       className="flex items-center justify-between gap-2 rounded-sm bg-gray-100 px-4 py-3"
-      aria-labelledby="next-meetup-heading"
+      aria-label="Nächster Termin"
       data-component="NextMeetupCallout"
     >
       <div className="flex min-h-8 min-w-0 grow items-center">
-        <h2 id="next-meetup-heading" className="sr-only">
-          Nächster Termin
-        </h2>
         {isPending ? (
           <p className="m-0 leading-none text-gray-600">Nächster Termin: …</p>
         ) : hasMeetup && dateLabel ? (

@@ -1,14 +1,12 @@
 import { QueryClientRoot } from '@components/QueryClientRoot'
 import { useState } from 'react'
 import { formatMeetupCountdown, formatMeetupDateTime } from './formatMeetupCountdown'
-import { MEETUP_WIKI_URL } from './osmcal'
-import { TimeZonePicker } from './TimeZonePicker'
-import { getBrowserTimeZone, readStoredTimeZone, writeStoredTimeZone } from './timezones'
-import { useNextMeetup } from './useNextMeetup'
+import { getBrowserTimeZone, TimeZonePicker } from './TimeZonePicker'
+import { MEETUP_WIKI_URL, useNextMeetup } from './useNextMeetup'
 
 function NextMeetupCalloutInner() {
   const { data: meetup, isPending } = useNextMeetup()
-  const [timeZone, setTimeZone] = useState(() => readStoredTimeZone() ?? getBrowserTimeZone())
+  const [timeZone, setTimeZone] = useState(() => getBrowserTimeZone())
 
   const hasMeetup = Boolean(meetup)
   const countdown = meetup != null ? formatMeetupCountdown(meetup.startIso, meetup.endIso) : null
@@ -57,10 +55,7 @@ function NextMeetupCalloutInner() {
       {hasMeetup ? (
         <TimeZonePicker
           timeZone={timeZone}
-          onChange={(next) => {
-            setTimeZone(next)
-            writeStoredTimeZone(next)
-          }}
+          onChange={setTimeZone}
         />
       ) : null}
     </section>

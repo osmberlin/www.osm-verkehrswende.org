@@ -1,6 +1,38 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
-import { buildTimeZoneOptions, getBrowserTimeZone } from './timezones'
+
+type TimeZoneOption = {
+  value: string
+  label: string
+}
+
+/** Meetup is in Berlin; extra zones for visitors. Zurich/Vienna share Berlin’s offset. */
+const EXTRA_TIME_ZONES: TimeZoneOption[] = [
+  { value: 'Europe/Berlin', label: 'Europe/Berlin (MEZ/MESZ)' },
+  { value: 'Europe/Warsaw', label: 'Europe/Warsaw' },
+  { value: 'Europe/London', label: 'Europe/London' },
+  { value: 'America/New_York', label: 'America/New_York' },
+  { value: 'America/Los_Angeles', label: 'America/Los_Angeles' },
+  { value: 'UTC', label: 'UTC' },
+]
+
+export function getBrowserTimeZone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Berlin'
+  } catch {
+    return 'Europe/Berlin'
+  }
+}
+
+function buildTimeZoneOptions(browserTimeZone: string): TimeZoneOption[] {
+  const extras = EXTRA_TIME_ZONES.filter((zone) => zone.value !== browserTimeZone)
+  const options: TimeZoneOption[] = [
+    { value: browserTimeZone, label: `${browserTimeZone} (lokal)` },
+    ...extras,
+  ]
+
+  return options
+}
 
 type Props = {
   timeZone: string

@@ -52,12 +52,7 @@ function NextMeetupCalloutInner() {
         )}
       </div>
 
-      {hasMeetup ? (
-        <TimeZonePicker
-          timeZone={timeZone}
-          onChange={setTimeZone}
-        />
-      ) : null}
+      {hasMeetup ? <TimeZonePicker timeZone={timeZone} onChange={setTimeZone} /> : null}
     </section>
   )
 }

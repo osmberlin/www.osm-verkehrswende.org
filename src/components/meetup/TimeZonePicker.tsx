@@ -13,7 +13,7 @@ export function TimeZonePicker({ timeZone, onChange }: Props) {
   return (
     <Popover className="relative shrink-0">
       <PopoverButton
-        className="rounded-sm p-1.5 text-gray-600 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+        className="flex size-8 items-center justify-center rounded-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
         aria-label={`Zeitzone: ${timeZone}`}
         title={`Zeitzone: ${timeZone}`}
       >

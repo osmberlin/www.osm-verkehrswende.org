@@ -24,18 +24,18 @@ function NextMeetupCalloutInner() {
 
   return (
     <section
-      className="flex items-center gap-2 rounded-sm bg-gray-100 px-4 py-3"
+      className="flex items-center justify-between gap-2 rounded-sm bg-gray-100 px-4 py-3"
       aria-labelledby="next-meetup-heading"
       data-component="NextMeetupCallout"
     >
-      <div className="min-w-0 grow">
+      <div className="flex min-h-8 min-w-0 grow items-center">
         <h2 id="next-meetup-heading" className="sr-only">
           Nächster Termin
         </h2>
         {isPending ? (
-          <p className="m-0 text-gray-600">Nächster Termin: …</p>
+          <p className="m-0 leading-none text-gray-600">Nächster Termin: …</p>
         ) : hasMeetup && dateLabel ? (
-          <p className="m-0 text-gray-900">
+          <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 leading-none text-gray-900">
             <a
               href={href}
               target="_blank"
@@ -45,13 +45,13 @@ function NextMeetupCalloutInner() {
               Nächster Termin: {dateLabel}
             </a>
             {countdown ? (
-              <span className="ml-2 text-sm font-medium text-emerald-800" aria-live="polite">
+              <span className="text-sm font-medium text-emerald-800" aria-live="polite">
                 {countdown}
               </span>
             ) : null}
           </p>
         ) : (
-          <p className="m-0 text-gray-900">
+          <p className="m-0 leading-none text-gray-900">
             <a
               href={MEETUP_WIKI_URL}
               target="_blank"

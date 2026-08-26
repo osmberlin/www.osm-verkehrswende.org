@@ -106,10 +106,3 @@ export async function fetchNextMeetupFromOsmcal(
   const json: unknown = await response.json()
   return selectNextMeetup(parseOsmcalEvents(json), now)
 }
-
-export function isMeetupStillRelevant(meetup: NextMeetup, now: Date = new Date()): boolean {
-  const start = new Date(meetup.startIso)
-  const end = new Date(meetup.endIso)
-  const cutoff = addMonths(now, MAX_MONTHS_AHEAD)
-  return isAfter(end, now) && !isAfter(start, cutoff)
-}

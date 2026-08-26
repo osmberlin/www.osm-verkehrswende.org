@@ -1,6 +1,6 @@
+import { QueryClientRoot } from '@components/QueryClientRoot'
 import { useEffect, useState } from 'react'
 import { formatMeetupCountdown, formatMeetupDateTime } from './formatMeetupCountdown'
-import { MeetupQueryClient } from './MeetupQueryClient'
 import { MEETUP_WIKI_URL } from './osmcal'
 import { TimeZonePicker } from './TimeZonePicker'
 import { getBrowserTimeZone, readStoredTimeZone, writeStoredTimeZone } from './timezones'
@@ -76,8 +76,8 @@ function NextMeetupCalloutInner() {
 
 export function NextMeetupCallout() {
   return (
-    <MeetupQueryClient>
+    <QueryClientRoot>
       <NextMeetupCalloutInner />
-    </MeetupQueryClient>
+    </QueryClientRoot>
   )
 }

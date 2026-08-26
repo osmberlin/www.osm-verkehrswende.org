@@ -1,46 +1,38 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
+import { formatMeetupDateTime } from './formatMeetupCountdown'
 
-type TimeZoneOption = {
-  value: string
-  label: string
-}
-
-/** Meetup is in Berlin; extra zones for visitors. Zurich/Vienna share Berlin’s offset. */
-const EXTRA_TIME_ZONES: TimeZoneOption[] = [
-  { value: 'Europe/Berlin', label: 'Europe/Berlin (MEZ/MESZ)' },
-  { value: 'Europe/Warsaw', label: 'Europe/Warsaw' },
-  { value: 'Europe/London', label: 'Europe/London' },
-  { value: 'America/New_York', label: 'America/New_York' },
-  { value: 'America/Los_Angeles', label: 'America/Los_Angeles' },
-  { value: 'UTC', label: 'UTC' },
-]
+const BERLIN_TIME_ZONE = 'Europe/Berlin'
 
 export function getBrowserTimeZone(): string {
   try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Berlin'
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || BERLIN_TIME_ZONE
   } catch {
-    return 'Europe/Berlin'
+    return BERLIN_TIME_ZONE
   }
 }
 
-function buildTimeZoneOptions(browserTimeZone: string): TimeZoneOption[] {
-  const extras = EXTRA_TIME_ZONES.filter((zone) => zone.value !== browserTimeZone)
-  const options: TimeZoneOption[] = [
-    { value: browserTimeZone, label: `${browserTimeZone} (lokal)` },
-    ...extras,
-  ]
-
-  return options
+function clocksDiffer(startIso: string, a: string, b: string): boolean {
+  return formatMeetupDateTime(startIso, a) !== formatMeetupDateTime(startIso, b)
 }
 
 type Props = {
+  startIso: string
   timeZone: string
   onChange: (timeZone: string) => void
 }
 
-export function TimeZonePicker({ timeZone, onChange }: Props) {
-  const options = buildTimeZoneOptions(getBrowserTimeZone())
+/** Browser zone plus Berlin when that actually changes the shown clock. No curated list. */
+export function TimeZonePicker({ startIso, timeZone, onChange }: Props) {
+  const browserTimeZone = getBrowserTimeZone()
+  const showBerlin = clocksDiffer(startIso, browserTimeZone, BERLIN_TIME_ZONE)
+
+  if (!showBerlin) return null
+
+  const options = [
+    { value: browserTimeZone, label: `${browserTimeZone} (lokal)` },
+    { value: BERLIN_TIME_ZONE, label: 'Europe/Berlin (MEZ/MESZ)' },
+  ]
 
   return (
     <Popover className="relative shrink-0">
@@ -56,7 +48,7 @@ export function TimeZonePicker({ timeZone, onChange }: Props) {
         className="z-50 mt-1 w-72 rounded-sm border border-gray-200 bg-white p-1 shadow-md"
       >
         {({ close }) => (
-          <ul className="max-h-64 overflow-auto py-1 text-sm">
+          <ul className="py-1 text-sm">
             {options.map((option) => {
               const selected = option.value === timeZone
               return (

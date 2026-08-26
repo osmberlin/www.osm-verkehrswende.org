@@ -1,5 +1,5 @@
 import { QueryClientRoot } from '@components/QueryClientRoot'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { formatMeetupCountdown, formatMeetupDateTime } from './formatMeetupCountdown'
 import { MEETUP_WIKI_URL } from './osmcal'
 import { TimeZonePicker } from './TimeZonePicker'
@@ -9,16 +9,9 @@ import { useNextMeetup } from './useNextMeetup'
 function NextMeetupCalloutInner() {
   const { data: meetup, isPending } = useNextMeetup()
   const [timeZone, setTimeZone] = useState(() => readStoredTimeZone() ?? getBrowserTimeZone())
-  const [now, setNow] = useState(() => new Date())
-
-  useEffect(() => {
-    const id = window.setInterval(() => setNow(new Date()), 30_000)
-    return () => window.clearInterval(id)
-  }, [])
 
   const hasMeetup = Boolean(meetup)
-  const countdown =
-    meetup != null ? formatMeetupCountdown(meetup.startIso, meetup.endIso, now) : null
+  const countdown = meetup != null ? formatMeetupCountdown(meetup.startIso, meetup.endIso) : null
   const dateLabel = meetup != null ? formatMeetupDateTime(meetup.startIso, timeZone) : null
   const href = meetup?.osmcalUrl ?? MEETUP_WIKI_URL
 

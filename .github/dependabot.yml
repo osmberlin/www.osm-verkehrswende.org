@@ -7,9 +7,8 @@ updates:
     directories:
       - /
     schedule:
-      interval: weekly
-      day: monday
-      time: '07:00'
+      interval: cron
+      cronjob: '0 7 * * FRI#1'
       timezone: Europe/Berlin
     cooldown:
       default-days: 5
@@ -36,9 +35,8 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: monday
-      time: '07:00'
+      interval: cron
+      cronjob: '0 7 * * FRI#1'
       timezone: Europe/Berlin
     cooldown:
       default-days: 5

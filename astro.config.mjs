@@ -6,8 +6,10 @@ import sitemap from '@astrojs/sitemap'
 import keystatic from '@keystatic/astro'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, envField } from 'astro/config'
+import { homedir } from 'node:os'
+import { join } from 'node:path'
 import remarkToc from 'remark-toc'
-import { loadEnv } from 'vite'
+import { loadEnv, searchForWorkspaceRoot } from 'vite'
 
 // ABOUT:
 // We have to fetch settings from `.env`
@@ -65,6 +67,12 @@ export default defineConfig({
     ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: { exclude: ['route-snapper'] },
     plugins: [tailwindcss()],
+    server: {
+      fs: {
+        // Bun global store (bunfig.toml `globalStore`): packages resolve into ~/.bun/install/cache/links.
+        allow: [searchForWorkspaceRoot(process.cwd()), join(homedir(), '.bun/install/cache/links')],
+      },
+    },
   },
   env: {
     schema: {

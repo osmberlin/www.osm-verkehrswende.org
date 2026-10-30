@@ -19,6 +19,7 @@
         "@heroicons/react": "^2.2.0",
         "@keystatic/astro": "^5.1.0",
         "@keystatic/core": "0.6.9",
+        "@markdoc/markdoc": "^0.4.0",
         "@nanostores/react": "^1.1.0",
         "@nanostores/router": "^1.1.0",
         "@tailwindcss/vite": "^4.3.3",
@@ -47,6 +48,8 @@
         "@tailwindcss/typography": "^0.5.20",
         "@total-typescript/ts-reset": "^0.6.1",
         "@types/bun": "^1.4.4",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
         "eslint-plugin-astro": "^1.7.0",
         "eslint-plugin-react-compiler": "^19.1.0-rc.2",
         "husky": "^9.1.7",
@@ -57,9 +60,15 @@
         "prettier-plugin-astro-organize-imports": "^0.4.14",
         "prettier-plugin-organize-imports": "^4.3.0",
         "prettier-plugin-tailwindcss": "^0.8.1",
+        "vite": "^8.3.5",
       },
     },
   },
+  "trustedDependencies": [
+    "@vis.gl/react-maplibre",
+    "eslint-plugin-astro",
+    "@headlessui/react",
+  ],
   "overrides": {
     "@keystatic/astro": {
       "astro": "^7.4.2",

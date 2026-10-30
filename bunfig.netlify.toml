@@ -1,0 +1,4 @@
+# Copy to project bunfig.netlify.toml — used only by Netlify install via BUN_FLAGS.
+# Intentionally empty: Bun defaults keep packages project-local, so the function zip is complete.
+# No cooldown needed: --frozen-lockfile resolves nothing from the registry.
+# @see references/bun-install.md

@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import react from '@astrojs/react'
@@ -29,11 +30,7 @@ export default defineConfig({
   site: 'https://www.osm-verkehrswende.org/',
   integrations: [
     ASTRO_OUTPUT_MODE === 'static' ? undefined : keystatic(),
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler', { target: '19' }]],
-      },
-    }),
+    react({ compiler: true }),
     mdx(),
     sitemap({
       filter: (page) => !page.endsWith('README/'),
@@ -63,7 +60,7 @@ export default defineConfig({
       'https://radinfra.de/kampagnen/missing_traffic_sign_244/',
     '/kameraverleih': 'https://wiki.openstreetmap.org/wiki/Verkehrswende-Meetup/Kameraverleih',
   },
-  markdown: { remarkPlugins: [remarkToc] },
+  markdown: { processor: unified({ remarkPlugins: [remarkToc] }) },
   vite: {
     ssr: { noExternal: ['route-snapper'] },
     optimizeDeps: { exclude: ['route-snapper'] },

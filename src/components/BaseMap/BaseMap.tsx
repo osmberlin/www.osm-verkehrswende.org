@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/react'
-import maplibregl from 'maplibre-gl'
+import { addProtocol, removeProtocol, setWorkerUrl } from 'maplibre-gl'
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import * as pmtiles from 'pmtiles'
 import { useEffect, useState } from 'react'
@@ -15,6 +16,9 @@ import {
   type BaseMapSearchparams,
 } from './store'
 import { roundPositionForURL } from './utils/roundNumber'
+
+// maplibre-gl 6 ships its worker as a separate file that Vite does not emit by itself.
+setWorkerUrl(workerUrl)
 
 export type MapInitialViewState = BaseMapSeachparamsObject & {
   // https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#setmaxbounds
@@ -35,9 +39,9 @@ type Props = {
 export const BaseMap = ({ initialViewState, interactiveLayerIds, boxZoom, children }: Props) => {
   useEffect(() => {
     const protocol = new pmtiles.Protocol()
-    maplibregl.addProtocol('pmtiles', protocol.tile)
+    addProtocol('pmtiles', protocol.tile)
     return () => {
-      maplibregl.removeProtocol('pmtiles')
+      removeProtocol('pmtiles')
     }
   }, [])
 

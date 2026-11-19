@@ -4,4 +4,6 @@
 
 [build.environment]
   NODE_VERSION = "26"
+  # bun.lock is lockfileVersion 3 (Bun 1.4); Netlify's default Bun 1.3 cannot read it
+  BUN_VERSION = "1.4.4"
   BUN_FLAGS = "--frozen-lockfile --config=bunfig.netlify.toml"
